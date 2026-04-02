@@ -314,7 +314,7 @@ function markDone(){
   var t=TASKS[idx];var cat=CATS[t.cat];
   document.getElementById("doneIcon").textContent=cat.icon;
   document.getElementById("doneTitle").textContent=t.task;
-  document.getElementById("doneSub").textContent="Gut gemacht. Das war ein Schritt Richtung deinem selbstbestimmten Leben ❤️🤩";
+  document.getElementById("doneSub").innerHTML="Gut gemacht. Das war ein Schritt Richtung deinem<br><span style=\"font-family:'Playfair Display',serif;font-size:1.15em;font-style:italic;color:var(--sage);font-weight:600;\">selbstbestimmten Leben</span> ❤️🤩";
   document.getElementById("doneOverlay").classList.add("show");
   updateProgress();renderCompleted();
 }
