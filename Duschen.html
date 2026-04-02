@@ -2,50 +2,52 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Duschen & Fertig</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Duschen</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
+:root{--bg:#faf3e8;--white:#fffdf8;--text:#2e2010;--muted:rgba(20,10,0,0.55);--gold:#c8943a;--sage:#7a9a5a;--lav:#9a7ab8;--border:rgba(180,130,70,0.15);}
+html{font-size:18px;}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',system-ui,sans-serif;background:#F5EEF8;color:#1A0E2E;padding:.75rem;padding-bottom:4rem}
-h1{font-size:1.05rem;font-weight:700;color:#7B5EA7;margin-bottom:.15rem}
-.sub{font-size:.65rem;color:#9b7ec8;margin-bottom:.7rem;letter-spacing:.04em}
-.prog-row{display:flex;justify-content:space-between;font-size:.6rem;color:#9b7ec8;margin-bottom:.2rem}
-.prog-bg{background:rgba(123,94,167,.12);border-radius:3px;height:3px;margin-bottom:.7rem;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,#7B5EA7,#AB47BC);border-radius:3px;transition:width .3s}
-.section{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7B5EA7;margin:.75rem 0 .35rem .05rem}
-.item{background:#fff;border-radius:10px;padding:.55rem .75rem;margin-bottom:.32rem;display:flex;align-items:center;gap:.65rem;cursor:pointer;border:1px solid rgba(123,94,167,.1);transition:all .18s;-webkit-tap-highlight-color:transparent}
+body{font-family:"Cormorant Garamond",Georgia,serif;background:var(--bg);color:var(--text);padding:.85rem;padding-bottom:4rem}
+h1{font-family:"Playfair Display",serif;font-size:22px;font-style:italic;font-weight:400;color:var(--text);margin-bottom:.15rem}
+.sub{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:.8rem}
+.prog-row{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:.2rem}
+.prog-bg{background:var(--border);border-radius:3px;height:3px;margin-bottom:.8rem;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--lav),var(--gold));border-radius:3px;transition:width .3s}
+.section{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:.85rem 0 .4rem .05rem}
+.item{background:var(--white);border-radius:12px;padding:.6rem .85rem;margin-bottom:.35rem;display:flex;align-items:center;gap:.65rem;cursor:pointer;border:1px solid var(--border);transition:all .18s;-webkit-tap-highlight-color:transparent;box-shadow:0 1px 6px rgba(180,120,40,0.04)}
 .item:active{transform:scale(.98)}
 .item.done{opacity:.38}
-.item.done .iname{text-decoration:line-through;color:#999}
-.cb{width:20px;height:20px;border-radius:6px;border:1.5px solid rgba(123,94,167,.3);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
-.item.done .cb{background:#7B5EA7;border-color:#7B5EA7}
+.item.done .iname{text-decoration:line-through;color:var(--muted)}
+.cb{width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(180,130,70,0.3);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:12px;color:#fff}
+.item.done .cb{background:var(--sage);border-color:var(--sage)}
 .cbx{display:none}.item.done .cbx{display:block}
 .ico{font-size:1.1rem;flex-shrink:0}
 .iinfo{flex:1}
-.iname{font-size:.82rem;font-weight:500;line-height:1.3}
-.idesc{font-size:.67rem;color:#7a6a8a;margin-top:.05rem;line-height:1.35}
-.itip{font-size:.6rem;color:#7B5EA7;margin-top:.08rem;font-style:italic}
-.brand{font-size:.58rem;font-weight:700;padding:.05rem .3rem;border-radius:5px;margin-right:.3rem;vertical-align:middle}
-.lavera{background:#E8F5E9;color:#2E7D32}
-.benecos{background:#F3E5F5;color:#6A2E7D}
-.reset-btn{position:fixed;bottom:1rem;right:1rem;background:#7B5EA7;color:#fff;border:none;border-radius:20px;padding:.38rem 1rem;font-size:.72rem;cursor:pointer;font-family:inherit}
-.done-banner{background:linear-gradient(135deg,#7B5EA7,#AB47BC);border-radius:10px;padding:.7rem 1rem;margin-bottom:.7rem;text-align:center;display:none}
+.iname{font-size:16px;font-weight:600;line-height:1.3}
+.idesc{font-size:13px;color:var(--muted);margin-top:.05rem;line-height:1.4;font-style:italic}
+.itip{font-size:12px;color:var(--sage);margin-top:.1rem;font-style:italic}
+.brand{font-size:11px;font-weight:600;padding:.05rem .35rem;border-radius:5px;margin-right:.3rem;vertical-align:middle}
+.lavera{background:rgba(122,154,90,0.12);color:var(--sage)}
+.benecos{background:rgba(154,122,184,0.12);color:var(--lav)}
+.reset-btn{position:fixed;bottom:1rem;right:1rem;background:var(--gold);color:#fff;border:none;border-radius:20px;padding:.4rem 1.1rem;font-size:14px;cursor:pointer;font-family:"Cormorant Garamond",serif}
+.done-banner{background:linear-gradient(135deg,#f5ede0,#faf3e8);border-radius:14px;padding:.8rem 1rem;margin-bottom:.8rem;text-align:center;display:none;border:1px solid var(--border)}
 .done-banner.show{display:block}
-.done-banner p{color:#fff;font-size:.82rem;font-weight:600}
-.done-banner span{color:rgba(255,255,255,.8);font-size:.68rem}
+.done-banner p{color:var(--text);font-family:"Playfair Display",serif;font-size:18px;font-style:italic;font-weight:400}
+.done-banner span{color:var(--muted);font-size:13px;font-style:italic}
 </style>
 </head>
 <body>
-<h1>&#x1F6BF; Duschen &amp; Fertig machen</h1>
-<p class="sub">Volles Programm · Körperpflege + Schminken</p>
+<h1>🚿 Duschen &amp; Fertig</h1>
+<p class="sub">Körperpflege &amp; Haare · mit Liebe und Sorgfalt</p>
 <div class="prog-row"><span id="plbl">0 von 0</span><span id="ppct">0%</span></div>
 <div class="prog-bg"><div class="prog-fill" id="pb" style="width:0%"></div></div>
 <div class="done-banner" id="doneBanner">
   <p>&#x2728; Fertig!</p>
-  <span>Du siehst toll aus!</span>
+  <span>Du strahlst. 🌿</span>
 </div>
 <div id="list"></div>
-<button class="reset-btn" onclick="resetAll()">&#x21BA; Neu</button>
+<button class="reset-btn" onclick="resetAll()">↺ Neu</button>
 <script>
 var L = '<span class="brand lavera">Lavera</span>';
 var B = '<span class="brand benecos">Benecos</span>';
@@ -76,22 +78,7 @@ var SECTIONS = [
       {id:'sonnencreme', ico:'&#x2600;&#xFE0F;', name:'Sonnencreme LSF 30', desc:L+'Anti-Age \u00B7 letzter Schritt \u00B7 T\u00E4glich auch im Winter!'},
     ]
   },
-  {
-    label: "&#x1F484; Make-up",
-    items: [
-      {id:'bb', ico:'&#x1F4D6;', name:'BB Cream / Tinted Moisturizer', desc:L+'Tinted Moisturizer <em>oder</em> '+B+'BB Cream \u00B7 leichte Grundierung'},
-      {id:'concealer', ico:'&#x1F4D6;', name:'Concealer', desc:L+'Natural Concealer \u00B7 unter Augen sanft eintippen \u00B7 '+B+'CC Concealer'},
-      {id:'highlighter', ico:'&#x2728;', name:'Highlighter', desc:L+'Illuminating Powder \u00B7 Jochbein & Nasenr\u00FCcken \u00B7 '+B+'Beauty ID Highlighter'},
-      {id:'brauen', ico:'&#x1F4D6;', name:'Augenbrauen', desc:L+'Brow Styler dunkelbraun \u00B7 haarfeine Striche in Wuchsrichtung'},
-      {id:'lidschatten', ico:'&#x1F4D6;', name:'Lidschatten', desc:L+'Quattro warm tones \u00B7 Bronze/Kupfer/Braun f\u00FCr blaue Augen'},
-      {id:'eyeliner', ico:'&#x1F4D6;', name:'Eyeliner', desc:L+'Eyeliner braun \u00B7 d\u00FCnn \u00B7 nur Oberlid'},
-      {id:'mascara', ico:'&#x1F4D6;', name:'Mascara', desc:L+'Mascara Volume \u00B7 nur Oberwimpern'},
-      {id:'blush', ico:'&#x1F338;', name:'Blush / Rouge', desc:L+'Natural Blush ros\u00E9 \u00B7 Wangen\u00E4pfel \u00B7 l\u00E4cheln beim Auftragen'},
-      {id:'lip_liner', ico:'&#x1F484;', name:'Lip Liner', desc:L+'Lip Liner nude rose \u00B7 Lippenkontur zuerst'},
-      {id:'lipstick', ico:'&#x1F484;', name:'Lippenstift', desc:L+'Natural Lip Colour mauve rose \u00B7 auf Liner auftragen'},
-      {id:'lipgloss', ico:'&#x1F484;', name:'Lip Gloss', desc:L+'Lip Gloss transparent \u00B7 nur Lippenmitte \u00B7 macht voller'},
-    ]
-  },
+
   {
     label: "&#x1F9B1; Haare fertig",
     items: [

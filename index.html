@@ -74,6 +74,26 @@ header{padding:1.2rem 1.2rem .8rem;text-align:center;border-bottom:1px solid var
 .all-done-title{font-family:"Playfair Display",serif;font-size:20px;font-style:italic;color:var(--text);margin-bottom:.4rem;}
 .all-done-text{font-size:14px;color:var(--muted);line-height:1.7;}
 .btn-reset{margin-top:1rem;background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:30px;padding:.45rem 1.1rem;font-size:14px;font-family:"Cormorant Garamond",serif;cursor:pointer;}
+
+/* REFLEXION */
+.reflex-wrap{margin:1rem 1rem 0;}
+.reflex-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;}
+.reflex-title{font-family:"Playfair Display",serif;font-size:17px;font-style:italic;color:var(--text);}
+.reflex-toggle{font-size:12px;color:var(--gold);cursor:pointer;border:none;background:none;font-family:"Cormorant Garamond",serif;padding:0;}
+.reflex-card{background:var(--card);border-radius:16px;border:1px solid var(--border);padding:1rem 1.1rem;box-shadow:0 2px 10px var(--shadow);}
+.reflex-leitfrage{font-size:14px;font-style:italic;color:var(--gold);margin-bottom:.7rem;line-height:1.5;display:flex;align-items:baseline;gap:.4rem;}
+.reflex-textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:.7rem .9rem;font-family:"Cormorant Garamond",serif;font-size:15px;color:var(--text);background:var(--bg);resize:none;min-height:110px;line-height:1.6;}
+.reflex-textarea:focus{outline:none;border-color:var(--gold);}
+.reflex-textarea::placeholder{color:var(--muted);font-style:italic;}
+.reflex-row{display:flex;gap:.5rem;margin-top:.6rem;align-items:center;}
+.reflex-save{background:var(--gold);color:#fff;border:none;border-radius:20px;padding:.4rem 1rem;font-size:14px;font-family:"Cormorant Garamond",serif;cursor:pointer;}
+.reflex-new{background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:20px;padding:.4rem .8rem;font-size:14px;font-family:"Cormorant Garamond",serif;cursor:pointer;}
+.reflex-saved{font-size:12px;color:var(--sage);font-style:italic;margin-left:auto;}
+.reflex-entries{margin-top:.9rem;border-top:1px solid var(--border);padding-top:.8rem;display:flex;flex-direction:column;gap:.6rem;}
+.reflex-entry{font-size:14px;color:var(--text);line-height:1.6;}
+.reflex-entry-date{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem;}
+.reflex-entry-text{font-style:italic;color:var(--text);}
+.reflex-entry-lf{font-size:12px;color:var(--muted);margin-bottom:.15rem;}
 </style>
 </head>
 <body>
@@ -149,9 +169,7 @@ header{padding:1.2rem 1.2rem .8rem;text-align:center;border-bottom:1px solid var
   <div class="app-group">
     <div class="app-group-title">✨ Lehren & Lernen</div>
     <a class="al" href="VHS_Kursvorbereitung.html"><span class="al-icon">📋</span><div><div class="al-text">VHS Kursvorbereitung</div><div class="al-sub">Checklisten & Materialien</div></div><span class="al-arr">›</span></a>
-    <a class="al" href="VHS_Kursabschluss.html"><span class="al-icon">🎓</span><div><div class="al-text">Kursabschluss</div><div class="al-sub">Abschluss mit Würde & Wärme</div></div><span class="al-arr">›</span></a>
     <a class="al" href="Lernplan.html"><span class="al-icon">📚</span><div><div class="al-text">Lernplan</div><div class="al-sub">DaZF — Sandra Hnat-Gerersdorfer</div></div><span class="al-arr">›</span></a>
-    <a class="al" href="Wochenplan.html"><span class="al-icon">📅</span><div><div class="al-text">Wochenplan</div><div class="al-sub">Meine Wochenübersicht</div></div><span class="al-arr">›</span></a>
     <a class="al" href="Einkaufsliste.html"><span class="al-icon">🛒</span><div><div class="al-text">Einkaufsliste</div><div class="al-sub">LP(a)-freundlich & vegetarisch</div></div><span class="al-arr">›</span></a>
   </div>
 
@@ -196,6 +214,23 @@ header{padding:1.2rem 1.2rem .8rem;text-align:center;border-bottom:1px solid var
   </div>
 </div>
 
+<div class="reflex-wrap" id="reflexWrap">
+  <div class="reflex-header">
+    <div class="reflex-title">🌿 Meine Gedanken</div>
+    <button class="reflex-toggle" onclick="toggleReflexEntries()">Einträge anzeigen</button>
+  </div>
+  <div class="reflex-card">
+    <div class="reflex-leitfrage" id="reflexLeitfrage"></div>
+    <textarea class="reflex-textarea" id="reflexText" placeholder="Was bewegt dich gerade? Schreib einfach drauf los..."></textarea>
+    <div class="reflex-row">
+      <button class="reflex-save" onclick="saveReflex()">Speichern</button>
+      <button class="reflex-new" onclick="newLeitfrage()">Andere Frage</button>
+      <span class="reflex-saved" id="reflexSaved" style="display:none">✓ Gespeichert</span>
+    </div>
+    <div class="reflex-entries" id="reflexEntries" style="display:none"></div>
+  </div>
+</div>
+
 <div class="done-overlay" id="doneOverlay">
   <div class="done-icon" id="doneIcon">✓</div>
   <div class="done-title" id="doneTitle"></div>
@@ -222,11 +257,18 @@ var TASKS=[
   {cat:"koerper",task:"Medikamente & Morgenroutine",
    inspo:"Ich starte sanft. Kein Stress, kein Druck.\nDer Tee, das Licht, ein tiefer Atemzug — das bin ich.",inspoLabel:"Mein Morgen gehört mir",
    why:"<strong>Basis für alles:</strong> Nur wenn du gut in den Tag startest, kannst du klar denken und unterrichten."},
-  {cat:"tiere",task:"Lotte spazieren & Katzen füttern",
-   inspo:"Jeder Spaziergang mit ihr ist ein Geschenk.\nSie zeigt mir, wie man wirklich im Moment lebt.",inspoLabel:"Für Lotte mit Liebe",
-   why:"<strong>Ankerpunkt im Alltag:</strong> Regelmäßige Verantwortung strukturiert deinen Tag — genau wie eine Unterrichtsstunde."},
   {cat:"ernaehrung",task:"Frühstück & Tee bewusst genießen",
+   inspo:"Ich nähre mich mit Liebe und Bewusstsein.\nDieser Moment gehört mir — ganz ruhig, ganz präsent.",inspoLabel:"Meine erste Mahlzeit",
    why:"<strong>Energie für den Tag:</strong> Du kannst nur geben, was du hast. Ernährung ist deine Ressource."},
+  {cat:"tiere",task:"Katzen füttern — Rudi & Timmy",
+   inspo:"Sie warten geduldig auf mich.\nIch versorge sie mit Liebe und Sorgfalt.",inspoLabel:"Für Rudi & Timmy",
+   why:"<strong>Ankerpunkt im Alltag:</strong> Regelmäßige Fürsorge strukturiert deinen Tag sanft und rhythmisch."},
+  {cat:"koerper",task:"Bad Früh — Morgenroutine",
+   inspo:"Ich pflege mich mit Achtsamkeit und Freude.\nDieser Moment ist nur für mich.",inspoLabel:"Mein Morgenritual",
+   why:"<strong>Körper wecken:</strong> Die Morgenroutine im Bad gibt dir Struktur und Energie für den Tag."},
+  {cat:"tiere",task:"Mit Lotte spazieren",
+   inspo:"Jeder Spaziergang mit ihr ist ein Geschenk.\nSie zeigt mir, wie man wirklich im Moment lebt.",inspoLabel:"Für Lotte mit Liebe",
+   why:"<strong>Frische Luft & Bewegung:</strong> Der Morgenspaziergang weckt Körper und Geist — für euch beide."},
   {cat:"daz",task:"An der DaZF-Aufgabe weiterarbeiten",
    inspo:"Ich lerne in meinem Rhythmus.\nJeder kleine Schritt zählt — auch der heutige.",inspoLabel:"Sanfte Erinnerung",
    why:"<strong>Direkt zum Ziel:</strong> Jede erledigte Aufgabe bringt dich dem DaZF-Abschluss näher — und dem Job im September 2026."},
@@ -349,6 +391,83 @@ document.getElementById("quoteAuthor").textContent=q[0];
 document.getElementById("quoteBody").textContent=q[1];
 
 updateProgress();renderCurrent();renderCompleted();
+
+// REFLEXION
+var LEITFRAGEN = [
+  "Was bewegt mich gerade?",
+  "Was möchte ich heute loslassen?",
+  "Was brauche ich gerade wirklich?",
+  "Was habe ich heute für mich getan?",
+  "Wofür bin ich dankbar — auch für Kleines?",
+  "Was darf in meinem Leben mehr Platz haben?",
+  "Wo habe ich heute eine Grenze gespürt?",
+  "Was macht mir gerade Freude — auch wenn es klein ist?",
+  "Was ist mein Schluck Leben heute?",
+  "Was würde ich mir selbst raten?",
+  "Wie fühlt sich mein Zuhause gerade an?",
+  "Was stärkt mich? Was schwächt mich?",
+];
+var currentLF = 0;
+
+function loadReflex(){try{return JSON.parse(localStorage.getItem("reflex_v1")||"[]");}catch(e){return[];}}
+function saveReflexData(d){try{localStorage.setItem("reflex_v1",JSON.stringify(d));}catch(e){}}
+
+function initReflex(){
+  currentLF = Math.floor(Math.random()*LEITFRAGEN.length);
+  document.getElementById("reflexLeitfrage").innerHTML = "&#128160; " + LEITFRAGEN[currentLF];
+}
+
+function newLeitfrage(){
+  currentLF = (currentLF+1)%LEITFRAGEN.length;
+  document.getElementById("reflexLeitfrage").innerHTML = "&#128160; " + LEITFRAGEN[currentLF];
+  document.getElementById("reflexText").placeholder = "Was bewegt dich gerade? Schreib einfach drauf los...";
+}
+
+function saveReflex(){
+  var text = document.getElementById("reflexText").value.trim();
+  if(!text) return;
+  var entries = loadReflex();
+  var now = new Date();
+  var dateStr = now.getDate()+"."+(now.getMonth()+1)+"."+now.getFullYear();
+  var timeStr = String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
+  entries.unshift({text:text, lf:LEITFRAGEN[currentLF], date:dateStr, time:timeStr});
+  if(entries.length>50) entries=entries.slice(0,50);
+  saveReflexData(entries);
+  document.getElementById("reflexText").value="";
+  var saved = document.getElementById("reflexSaved");
+  saved.style.display="inline";
+  setTimeout(function(){saved.style.display="none";},2000);
+  newLeitfrage();
+  renderReflexEntries();
+}
+
+function toggleReflexEntries(){
+  var el = document.getElementById("reflexEntries");
+  var btn = document.querySelector(".reflex-toggle");
+  if(el.style.display==="none"){
+    renderReflexEntries();
+    el.style.display="flex";
+    btn.textContent="Einträge ausblenden";
+  } else {
+    el.style.display="none";
+    btn.textContent="Einträge anzeigen";
+  }
+}
+
+function renderReflexEntries(){
+  var entries = loadReflex();
+  var el = document.getElementById("reflexEntries");
+  if(!entries.length){el.innerHTML='<div style="font-size:14px;color:var(--muted);font-style:italic;text-align:center;padding:.5rem 0;">Noch keine Eintr&#228;ge.</div>';return;}
+  el.innerHTML = entries.slice(0,10).map(function(e){
+    return '<div class="reflex-entry">' +
+      '<div class="reflex-entry-date">'+e.date+' &#183; '+e.time+'</div>'+
+      '<div class="reflex-entry-lf">'+e.lf+'</div>'+
+      '<div class="reflex-entry-text">'+e.text+'</div>'+
+    '</div>';
+  }).join('<hr style="border:none;border-top:1px solid var(--border);margin:.3rem 0;">');
+}
+
+initReflex();
 </script>
 </body>
 </html>

@@ -2,62 +2,60 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Bad Früh</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
+:root{--bg:#faf3e8;--white:#fffdf8;--text:#2e2010;--muted:rgba(20,10,0,0.55);--gold:#c8943a;--sage:#7a9a5a;--border:rgba(180,130,70,0.15);}
+html{font-size:18px;}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',system-ui,sans-serif;background:#F0F7F4;color:#1A2E25;padding:.75rem;padding-bottom:4rem}
-h1{font-size:1.05rem;font-weight:700;color:#2E7D4F;margin-bottom:.15rem}
-.sub{font-size:.65rem;color:#5a8a6a;margin-bottom:.7rem;letter-spacing:.04em}
-.prog-row{display:flex;justify-content:space-between;font-size:.6rem;color:#5a8a6a;margin-bottom:.2rem}
-.prog-bg{background:rgba(46,125,79,.12);border-radius:3px;height:3px;margin-bottom:.7rem;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,#2E7D4F,#4CAF50);border-radius:3px;transition:width .3s}
-
-.section{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2E7D4F;margin:.75rem 0 .35rem .05rem}
-
-.item{background:#fff;border-radius:10px;padding:.55rem .75rem;margin-bottom:.32rem;display:flex;align-items:center;gap:.65rem;cursor:pointer;border:1px solid rgba(46,125,79,.1);transition:all .18s;-webkit-tap-highlight-color:transparent}
+body{font-family:"Cormorant Garamond",Georgia,serif;background:var(--bg);color:var(--text);padding:.85rem;padding-bottom:4rem}
+h1{font-family:"Playfair Display",serif;font-size:22px;font-style:italic;font-weight:400;color:var(--text);margin-bottom:.15rem}
+.sub{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:.8rem}
+.prog-row{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:.2rem}
+.prog-bg{background:var(--border);border-radius:3px;height:3px;margin-bottom:.8rem;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--sage),var(--gold));border-radius:3px;transition:width .3s}
+.section{font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:.85rem 0 .4rem .05rem}
+.item{background:var(--white);border-radius:12px;padding:.6rem .85rem;margin-bottom:.35rem;display:flex;align-items:center;gap:.65rem;cursor:pointer;border:1px solid var(--border);transition:all .18s;-webkit-tap-highlight-color:transparent;box-shadow:0 1px 6px rgba(180,120,40,0.04)}
 .item:active{transform:scale(.98)}
 .item.done{opacity:.38}
-.item.done .iname{text-decoration:line-through;color:#999}
-.cb{width:20px;height:20px;border-radius:6px;border:1.5px solid rgba(46,125,79,.3);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
-.item.done .cb{background:#2E7D4F;border-color:#2E7D4F}
+.item.done .iname{text-decoration:line-through;color:var(--muted)}
+.cb{width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(180,130,70,0.3);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:12px;color:#fff}
+.item.done .cb{background:var(--sage);border-color:var(--sage)}
 .cbx{display:none}
 .item.done .cbx{display:block}
 .ico{font-size:1.1rem;flex-shrink:0}
 .iinfo{flex:1}
-.iname{font-size:.82rem;font-weight:500;line-height:1.3}
-.idesc{font-size:.67rem;color:#5a8a6a;margin-top:.05rem;line-height:1.35}
-.itip{font-size:.6rem;color:#2E7D4F;margin-top:.08rem;font-style:italic}
-
-/* App-Link Button */
-.app-item{background:#2E7D4F;border-radius:10px;padding:.55rem .75rem;margin-bottom:.32rem;display:flex;align-items:center;gap:.65rem;cursor:pointer;border:none;width:100%;font-family:inherit;-webkit-tap-highlight-color:transparent}
-.app-item .iname{color:#fff;font-size:.82rem;font-weight:600}
-.app-item .idesc{color:rgba(255,255,255,.75);font-size:.67rem}
+.iname{font-size:16px;font-weight:600;line-height:1.3}
+.idesc{font-size:13px;color:var(--muted);margin-top:.05rem;line-height:1.4;font-style:italic}
+.itip{font-size:12px;color:var(--sage);margin-top:.1rem;font-style:italic}
+.app-item{background:var(--sage);border-radius:12px;padding:.6rem .85rem;margin-bottom:.35rem;display:flex;align-items:center;gap:.65rem;cursor:pointer;border:none;width:100%;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.app-item .iname{color:#fff;font-size:16px;font-weight:400;font-family:"Cormorant Garamond",serif}
+.app-item .idesc{color:rgba(255,255,255,.8);font-size:13px;font-style:italic}
 .app-item .ico{font-size:1.1rem}
-
-.reset-btn{position:fixed;bottom:1rem;right:1rem;background:#2E7D4F;color:#fff;border:none;border-radius:20px;padding:.38rem 1rem;font-size:.72rem;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(46,125,79,.3)}
-.w2w-btn{display:inline-block;margin-top:.3rem;background:#1565C0;color:#fff;border-radius:8px;padding:.25rem .6rem;font-size:.65rem;font-weight:600;text-decoration:none;}
-.done-banner{background:linear-gradient(135deg,#2E7D4F,#388E3C);border-radius:10px;padding:.7rem 1rem;margin-bottom:.7rem;text-align:center;display:none}
+.reset-btn{position:fixed;bottom:1rem;right:1rem;background:var(--gold);color:#fff;border:none;border-radius:20px;padding:.4rem 1.1rem;font-size:14px;cursor:pointer;font-family:"Cormorant Garamond",serif}
+.w2w-btn{display:inline-block;margin-top:.3rem;background:var(--gold);color:#fff;border-radius:20px;padding:.25rem .7rem;font-size:13px;text-decoration:none;}
+.done-banner{background:linear-gradient(135deg,#f5ede0,#faf3e8);border-radius:14px;padding:.8rem 1rem;margin-bottom:.8rem;text-align:center;display:none;border:1px solid var(--border)}
 .done-banner.show{display:block}
-.done-banner p{color:#fff;font-size:.82rem;font-weight:600}
-.done-banner span{color:rgba(255,255,255,.8);font-size:.68rem}
+.done-banner p{color:var(--text);font-family:"Playfair Display",serif;font-size:18px;font-style:italic;font-weight:400}
+.done-banner span{color:var(--muted);font-size:13px;font-style:italic}
 </style>
 </head>
 <body>
-<h1>&#x1F6C1; Bad Früh</h1>
-<p class="sub">Fertig machen · für Lotte &amp; Sport · ~15 Min</p>
+<h1>🛁 Bad Früh</h1>
+<p class="sub">Mein Morgenritual · sanft &amp; bewusst · ~15 Min</p>
 
 <div class="prog-row"><span id="plbl">0 von 0</span><span id="ppct">0%</span></div>
 <div class="prog-bg"><div class="prog-fill" id="pb" style="width:0%"></div></div>
 
 <div class="done-banner" id="doneBanner">
   <p>&#x2728; Fertig!</p>
-  <span>Viel Spaß mit Lotte &amp; beim Sport!</span>
+  <span>Fertig — du strahlst. 🌿</span>
 </div>
 
 <div id="list"></div>
 
-<button class="reset-btn" onclick="resetAll()">&#x21BA; Neu</button>
+<button class="reset-btn" onclick="resetAll()">↺ Neu</button>
 
 <script>
 var SECTIONS = [
@@ -90,6 +88,22 @@ var SECTIONS = [
     items: [
       {id:'haare', ico:'&#x1F9B1;', name:'Haare', desc:'Kämmen · stylen · bei Bedarf binden für Sport'},
       {id:'anziehen', ico:'&#x1F455;', name:'Anziehen', desc:'Fertig! &#x1F4F1;', w2w:true},
+    ]
+  },
+  {
+    label: "&#x1F484; Make-up",
+    items: [
+      {id:'bb', ico:'&#x1F484;', name:'BB Cream / Tinted Moisturizer', desc:'<span style="font-size:11px;background:rgba(122,154,90,0.12);color:#7a9a5a;border-radius:4px;padding:.05rem .3rem;margin-right:.3rem;">Lavera</span>Tinted Moisturizer · oder Benecos BB Cream · leichte Grundierung'},
+      {id:'concealer', ico:'&#x1F484;', name:'Concealer', desc:'<span style="font-size:11px;background:rgba(122,154,90,0.12);color:#7a9a5a;border-radius:4px;padding:.05rem .3rem;margin-right:.3rem;">Lavera</span>Natural Concealer · unter Augen sanft eintippen'},
+      {id:'highlighter', ico:'&#x2728;', name:'Highlighter', desc:'<span style="font-size:11px;background:rgba(122,154,90,0.12);color:#7a9a5a;border-radius:4px;padding:.05rem .3rem;margin-right:.3rem;">Lavera</span>Illuminating Powder · Jochbein &amp; Nasenrücken'},
+      {id:'brauen_mu', ico:'&#x1F484;', name:'Augenbrauen', desc:'<span style="font-size:11px;background:rgba(122,154,90,0.12);color:#7a9a5a;border-radius:4px;padding:.05rem .3rem;margin-right:.3rem;">Lavera</span>Brow Styler dunkelbraun · haarfeine Striche in Wuchsrichtung'},
+      {id:'lidschatten', ico:'&#x1F484;', name:'Lidschatten', desc:'<span style="font-size:11px;background:rgba(122,154,90,0.12);color:#7a9a5a;border-radius:4px;padding:.05rem .3rem;margin-right:.3rem;">Lavera</span>Quattro warm tones · Bronze/Kupfer/Braun für blaue Augen'},
+      {id:'eyeliner', ico:'&#x1F484;', name:'Eyeliner', desc:'<span style="font-size:11px;background:rgba(122,154,90,0.12);color:#7a9a5a;border-radius:4px;padding:.05rem .3rem;margin-right:.3rem;">Lavera</span>Eyeliner braun · dünn · nur Oberlid'},
+      {id:'mascara', ico:'&#x1F484;', name:'Mascara', desc:'<span style="font-size:11px;background:rgba(122,154,90,0.12);color:#7a9a5a;border-radius:4px;padding:.05rem .3rem;margin-right:.3rem;">Lavera</span>Mascara Volume · nur Oberwimpern'},
+      {id:'blush', ico:'&#x1F338;', name:'Blush / Rouge', desc:'<span style="font-size:11px;background:rgba(122,154,90,0.12);color:#7a9a5a;border-radius:4px;padding:.05rem .3rem;margin-right:.3rem;">Lavera</span>Natural Blush rosé · Wangenäpfel · lächeln beim Auftragen'},
+      {id:'lip_liner', ico:'&#x1F484;', name:'Lip Liner', desc:'<span style="font-size:11px;background:rgba(122,154,90,0.12);color:#7a9a5a;border-radius:4px;padding:.05rem .3rem;margin-right:.3rem;">Lavera</span>Lip Liner nude rose · Lippenkontur zuerst'},
+      {id:'lipstick', ico:'&#x1F484;', name:'Lippenstift', desc:'<span style="font-size:11px;background:rgba(122,154,90,0.12);color:#7a9a5a;border-radius:4px;padding:.05rem .3rem;margin-right:.3rem;">Lavera</span>Natural Lip Colour mauve rose · auf Liner auftragen'},
+      {id:'lipgloss', ico:'&#x1F484;', name:'Lip Gloss', desc:'<span style="font-size:11px;background:rgba(122,154,90,0.12);color:#7a9a5a;border-radius:4px;padding:.05rem .3rem;margin-right:.3rem;">Lavera</span>Lip Gloss transparent · nur Lippenmitte · macht voller'},
     ]
   },
 ];
