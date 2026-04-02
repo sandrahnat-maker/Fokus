@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mein Kochbuch 🌿</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf3e8;--white:#fffdf8;--text:#2e2010;
+  --muted:rgba(20,10,0,0.62);--gold:#c8943a;--gold2:#e8b86a;
+  --sage:#7a9a5a;--terra:#c4704a;--rose:#c4807a;
+  --border:rgba(180,130,70,0.15);
+}
+html{font-size:18px;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{background:var(--bg);font-family:'Cormorant Garamond',Georgia,serif;color:var(--text);min-height:100vh;padding-bottom:3rem;}
+
+/* COVER */
+.cover{
+  background:linear-gradient(160deg,#f5ede0 0%,#faf3e8 50%,#f0ede8 100%);
+  padding:2.5rem 1.5rem 2rem;text-align:center;
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.cover::before{
+  content:'🌿';position:absolute;right:-1rem;top:-1rem;
+  font-size:8rem;opacity:.06;pointer-events:none;
+}
+.cover-label{font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);margin-bottom:.5rem;}
+.cover-title{font-family:'Playfair Display',serif;font-size:28px;font-style:italic;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:.4rem;}
+.cover-sub{font-size:14px;color:var(--muted);font-style:italic;line-height:1.6;}
+.cover-divider{width:60px;height:1px;background:var(--gold2);margin:1rem auto;}
+
+/* INHALTSVERZEICHNIS */
+.toc{padding:1.2rem 1rem;}
+.toc-title{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--muted);margin-bottom:1rem;text-align:center;letter-spacing:.05em;}
+.toc-item{
+  display:flex;align-items:center;gap:1rem;
+  background:var(--white);border-radius:14px;
+  margin-bottom:.7rem;padding:.9rem 1.1rem;
+  border:1px solid var(--border);
+  box-shadow:0 2px 10px rgba(180,120,40,0.05);
+  cursor:pointer;transition:all .2s;
+}
+.toc-item:active{transform:scale(.98);}
+.toc-icon{font-size:1.8rem;flex-shrink:0;}
+.toc-text{flex:1;}
+.toc-name{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--text);}
+.toc-count{font-size:13px;color:var(--muted);font-style:italic;margin-top:.1rem;}
+.toc-arr{color:var(--gold2);font-size:1.1rem;}
+
+/* Seele item special */
+.toc-item.seele{background:linear-gradient(135deg,#fdf0e8,#faf3e8);border-color:rgba(196,112,74,.2);}
+.toc-item.seele .toc-name{color:var(--terra);}
+
+/* CHAPTER VIEW */
+.chapter{display:none;padding:0 0 2rem;}
+.chapter.active{display:block;}
+
+.chapter-header{
+  padding:1.3rem 1.2rem 1rem;
+  background:linear-gradient(135deg,#f5ede0,#faf3e8);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:5;
+}
+.back-btn{
+  display:flex;align-items:center;gap:.4rem;
+  font-size:14px;color:var(--gold);cursor:pointer;
+  margin-bottom:.7rem;background:none;border:none;
+  font-family:'Cormorant Garamond',serif;padding:0;
+}
+.chapter-title{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;font-weight:400;}
+.chapter-sub{font-size:13px;color:var(--muted);font-style:italic;margin-top:.2rem;}
+
+.affirmation{
+  margin:.9rem 1rem .4rem;padding:.85rem 1rem;
+  border-radius:13px;font-style:italic;font-size:14px;
+  color:var(--text);line-height:1.65;text-align:center;
+  border-left:3px solid var(--sage);
+  background:linear-gradient(135deg,#edf5e8,#f5f0e8);
+}
+.affirmation.seele-aff{
+  border-left-color:var(--terra);
+  background:linear-gradient(135deg,#fdf0e8,#faf3e8);
+}
+.affirmation-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--sage);margin-bottom:.35rem;font-style:normal;display:block;}
+.affirmation.seele-aff .affirmation-lbl{color:var(--terra);}
+
+/* RECIPE CARDS */
+.recipes{padding:.4rem 1rem;}
+.recipe-card{
+  background:var(--white);border-radius:16px;margin-bottom:.8rem;
+  border:1px solid var(--border);overflow:hidden;
+  box-shadow:0 2px 10px rgba(180,120,40,0.06);
+  padding:1rem 1.1rem;
+}
+.recipe-card.seele-card{
+  background:linear-gradient(135deg,#fffdf8,#fdf6ee);
+  border-color:rgba(196,112,74,.15);
+}
+.recipe-name{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--text);margin-bottom:.3rem;}
+.recipe-card.seele-card .recipe-name{color:var(--terra);}
+.recipe-detail{font-size:13px;color:var(--muted);line-height:1.55;font-style:italic;}
+.recipe-heart{float:right;font-size:1.1rem;margin-left:.5rem;margin-top:.1rem;}
+</style>
+</head>
+<body>
+
+<!-- COVER + INHALTSVERZEICHNIS -->
+<div id="tocView">
+  <div class="cover">
+    <div class="cover-label">Mein persönliches</div>
+    <div class="cover-title">Kochbuch</div>
+    <div class="cover-divider"></div>
+    <div class="cover-sub">vegetarisch · LP(a)-bewusst<br>mit Liebe gekocht</div>
+  </div>
+  <div class="toc">
+    <div class="toc-title">— Inhaltsverzeichnis —</div>
+    <div class="toc-item" onclick="openChapter('frueh')">
+      <div class="toc-icon">🌅</div>
+      <div class="toc-text">
+        <div class="toc-name">Frühstück</div>
+        <div class="toc-count" id="cnt-frueh"></div>
+      </div>
+      <div class="toc-arr">›</div>
+    </div>
+    <div class="toc-item" onclick="openChapter('jause')">
+      <div class="toc-icon">🍎</div>
+      <div class="toc-text">
+        <div class="toc-name">Jause & Snacks</div>
+        <div class="toc-count" id="cnt-jause"></div>
+      </div>
+      <div class="toc-arr">›</div>
+    </div>
+    <div class="toc-item" onclick="openChapter('mittag')">
+      <div class="toc-icon">🌿</div>
+      <div class="toc-text">
+        <div class="toc-name">Mittagessen</div>
+        <div class="toc-count" id="cnt-mittag"></div>
+      </div>
+      <div class="toc-arr">›</div>
+    </div>
+    <div class="toc-item" onclick="openChapter('abend')">
+      <div class="toc-icon">🌙</div>
+      <div class="toc-text">
+        <div class="toc-name">Abendessen</div>
+        <div class="toc-count" id="cnt-abend"></div>
+      </div>
+      <div class="toc-arr">›</div>
+    </div>
+    <div class="toc-item seele" onclick="openChapter('seele')">
+      <div class="toc-icon">🫀</div>
+      <div class="toc-text">
+        <div class="toc-name">Speisen für die Seele</div>
+        <div class="toc-count" id="cnt-seele"></div>
+      </div>
+      <div class="toc-arr">›</div>
+    </div>
+  </div>
+</div>
+
+<!-- CHAPTER VIEWS -->
+<div class="chapter" id="ch-frueh">
+  <div class="chapter-header">
+    <button class="back-btn" onclick="goBack()">‹ Zurück zum Kochbuch</button>
+    <div class="chapter-title">🌅 Frühstück</div>
+    <div class="chapter-sub">Ein sanfter Start in den Tag</div>
+  </div>
+  <div class="affirmation"><span class="affirmation-lbl">Mein Morgen</span>Ich starte meinen Tag mit Fürsorge für mich — nährend, warm und ohne Hast.</div>
+  <div class="recipes" id="recipes-frueh"></div>
+</div>
+
+<div class="chapter" id="ch-jause">
+  <div class="chapter-header">
+    <button class="back-btn" onclick="goBack()">‹ Zurück zum Kochbuch</button>
+    <div class="chapter-title">🍎 Jause & Snacks</div>
+    <div class="chapter-sub">Kleine Auszeiten zwischendurch</div>
+  </div>
+  <div class="affirmation"><span class="affirmation-lbl">Meine Pause</span>Ich gönne mir kleine Momente der Fürsorge — mein Körper freut sich über jeden bewussten Bissen.</div>
+  <div class="recipes" id="recipes-jause"></div>
+</div>
+
+<div class="chapter" id="ch-mittag">
+  <div class="chapter-header">
+    <button class="back-btn" onclick="goBack()">‹ Zurück zum Kochbuch</button>
+    <div class="chapter-title">🌿 Mittagessen</div>
+    <div class="chapter-sub">Die Mitte des Tages — bunt & nährend</div>
+  </div>
+  <div class="affirmation"><span class="affirmation-lbl">Meine Mitte</span>Kochen ist Kunst. Anrichten ist Liebe an mich selbst. Jedes Mittagessen darf eine kleine Feier sein.</div>
+  <div class="recipes" id="recipes-mittag"></div>
+</div>
+
+<div class="chapter" id="ch-abend">
+  <div class="chapter-header">
+    <button class="back-btn" onclick="goBack()">‹ Zurück zum Kochbuch</button>
+    <div class="chapter-title">🌙 Abendessen</div>
+    <div class="chapter-sub">Leicht & wärmend — der Abend gehört mir</div>
+  </div>
+  <div class="affirmation"><span class="affirmation-lbl">Mein Abend</span>Der Abend gehört mir. Ich esse leicht, bewusst und mit Genuss — und lasse den Tag sanft los.</div>
+  <div class="recipes" id="recipes-abend"></div>
+</div>
+
+<div class="chapter" id="ch-seele">
+  <div class="chapter-header">
+    <button class="back-btn" onclick="goBack()">‹ Zurück zum Kochbuch</button>
+    <div class="chapter-title">🫀 Speisen für die Seele</div>
+    <div class="chapter-sub">Wohlfühlküche — weil das Leben auch Genuss braucht</div>
+  </div>
+  <div class="affirmation seele-aff"><span class="affirmation-lbl">Mit Liebe & ohne schlechtes Gewissen</span>Manchmal braucht meine Seele mehr als Nährstoffe. Diese Gerichte dürfen einfach gut tun — warm, tröstlich und mit Freude genossen.</div>
+  <div class="recipes" id="recipes-seele"></div>
+</div>
+
+<script>
+var DATA = {"frueh": [["Haferbrei mit Apfel & Zimt", "1 EL Leinsamen · 1 EL Mandelmus"], ["Joghurt mit Beeren & Haferflocken", "1 EL Leinsamen · 1 TL Hanfsamen"], ["Porridge mit Beeren & Walnüssen", "1 EL Chiasamen · Zimt"], ["Haferbrei mit Birne & Leinsamen", "1 EL Walnüsse · ungesüßt"], ["Haferbrei mit Birne & Walnüssen", "1 EL Leinsamen · Zimt"], ["Joghurt mit Himbeeren & Haferflocken", "1 EL Chiasamen · 1 EL Hanfsamen"], ["Porridge mit Apfel & Chiasamen", "1 EL Mandelmus"], ["Haferbrei mit Apfel & Leinsamen", "1 TL Hanfsamen · ungesüßt"], ["Haferbrei mit Mango & Chiasamen", "1 EL Leinsamen · Kardamom"], ["Porridge mit Birne & Walnüssen", "1 EL Chiasamen · Vanille"], ["Haferbrei mit Beeren & Hanfsamen", "1 EL Leinsamen · Zimt"], ["Haferbrei mit Walnüssen & Leinsamen", "1 Kiwi dazu · ungesüßt"], ["Porridge mit Chiasamen & Aprikose", "1 EL Mandelmus · Zimt"], ["Vegetarisches English Breakfast", "Rührei oder Spiegelei · Baked Beans · gegrillte Tomaten · Champignons · Vollkorntoast"], ["Rührei mit Schnittlauch", "Ei · Schnittlauch · Vollkornbrot · Radieschen"], ["Weichgekochtes Ei mit Toast", "Ei · Vollkorntoast · Butter · Schnittlauch oder Kresse"]], "jause": [["Birne + Walnüsse", ""], ["Apfel + Chiasamen", ""], ["Orange + Mandeln", ""], ["Kiwi + Joghurt", ""], ["Apfel + Mandelmus", ""], ["Beeren + Chiasamen", ""], ["Beeren + Joghurt", ""], ["Orange + Walnüsse", ""], ["Kiwi + Chiasamen", ""], ["Birne + Mandelmus", ""], ["Apfel + Walnüsse", ""], ["Orange + Chiasamen", ""], ["Kiwi + Mandeln", ""], ["Kiwi + Leinsamen", ""], ["Birne + Chiasamen", ""], ["Orange + Leinsamen", ""], ["Birne + Joghurt", ""], ["Apfel + Mandeln", ""]], "mittag": [["Erdäpfelgulasch mit Vollkornbrot", "Kartoffeln · Zwiebel · Paprikapulver · Kümmel · Majoran"], ["Pasta e Fagioli", "Vollkornnudeln · weiße Bohnen · Tomate · Rosmarin · Knoblauch · Olivenöl"], ["Gebratener Gemüsereis", "Vollkornreis · Brokkoli · Karotte · Ei · Ingwer · Sojasoße (wenig) · Sesam"], ["Veggie-Wrap mit schwarzen Bohnen", "Vollkorntortilla · schwarze Bohnen · Mais · Paprika · Tomate · Koriander · Limette"], ["Rotes Linsen-Dal", "Basmati · rote Linsen · Kurkuma · Ingwer · Koriander · Kokosmilch light"], ["Ramen-Suppe (vegetarisch)", "Soba-Nudeln · Tofu · Pak Choi · Ei · Ingwer · Miso-Brühe · Sesam"], ["Käsespätzle (leichte Version)", "Vollkornspätzle · wenig Bergkäse · Röstzwiebeln · grüner Salat"], ["Veggie-Burrito", "Vollkorntortilla · Vollkornreis · Kidneybohnen · Paprika · Mais · Joghurt-Limetten-Sauce"], ["Gnocchi mit Tomatensauce & Spinat", "Kartoffelgnocchi · frische Tomaten · Spinat · Knoblauch · Basilikum"], ["Spinatknödel mit Butterröstzwiebeln", "Spinat · Vollkornbrot · Ei · wenig Käse · Röstzwiebeln · Sauerrahm"], ["Palak Paneer (Spinat-Käse)", "Basmati · Spinat · Paneer · Kurkuma · Ingwer · Garam Masala"], ["Tiroler Gröstl (vegetarisch)", "Bratkartoffeln · Ei · Zwiebel · Kümmel · Petersilie · Radieschen"], ["Vollkorn-Penne Arrabbiata", "Vollkornnudeln · Tomate · Chili · Knoblauch · Olivenöl · Rucola"], ["Thai-Gemüsecurry", "Jasminreis · Süßkartoffel · Brokkoli · Kokosmilch light · grüne Currypaste · Limette"], ["Enchiladas mit Kidneybohnen", "Vollkorntortilla · Kidneybohnen · Paprika · Tomatensauce · wenig Käse · Koriander"], ["Risotto mit Brokkoli & Zitrone", "Vollkornreis · Brokkoli · Parmesan (wenig) · Zitrone · Olivenöl"], ["Pad Thai (vegetarisch)", "Reisnudeln · Tofu · Ei · Sojasprossen · Frühlingszwiebeln · Erdnüsse · Limette"], ["Kartoffelsuppe mit Brot", "Erdäpfel · Sellerie · Karotte · Majoran · Kümmel · Vollkornweckerl"], ["Veggie-Tacos", "Mais-Tortillas · Rote-Bete · schwarze Bohnen · Koriander · Limette · Joghurt"], ["Kaspressknödel auf Salat", "Bergkäseknödel (gebraten) · Feldsalat · Kürbiskernöl · Essig"]], "abend": [["Vogerlsalat mit Kürbiskernöl", "Feldsalat · Kürbiskerne · Apfel · Vollkornweckerl"], ["Bruschetta mit Rucola & Tomate", "Vollkornbrot · Olivenöl · Basilikum · Knoblauch"], ["Miso-Suppe mit Tofu & Wakame", "Frühlingszwiebeln · Reiswafferl"], ["Gemüse-Quesadilla", "Vollkorntortilla · Paprika · Mais · wenig Käse · Joghurt-Dip"], ["Aloo Gobi (Kartoffel-Karfiol)", "Kartoffel · Karfiol · Kreuzkümmel · Kurkuma · Tomate · Vollkornbrot"], ["Erdäpfelsalat mit Kürbiskernöl", "Kartoffeln · Zwiebel · Essig · Kümmel · Schnittlauch"], ["Joghurt mit Walnüssen & Beeren", "1 EL Leinsamen · wenig Honig"], ["Edamame mit Reiscrackern", "Edamame · wenig Sojasoße · Ingwer"], ["Brettljause vegetarisch", "Vollkornbrot · Radieschen · Aufstrich · Gurke · Schnittlauch"], ["Tomaten-Bohnen-Suppe", "Kidneybohnen · Tomate · Paprika · Kreuzkümmel · Vollkornbrot"], ["Caprese mit Vollkornbrot", "Tomate · wenig Mozzarella · Basilikum · Olivenöl"], ["Vollkornweckerl mit Topfenaufstrich", "Kräutertopfen · Radieschen · Schnittlauch · Gurke"], ["Gemischter Salat mit Walnüssen & Ei", "Rucola · Tomate · Gurke · Vollkornbrot"], ["Joghurt mit Beeren & Leinsamen", "wenig Honig"], ["Dhal-Suppe mit Vollkornbrot", "gelbe Linsen · Karotte · Kurkuma · Koriander"], ["Kürbiscremesuppe", "Ingwer · Kurkuma · Kürbiskerne · Vollkornweckerl"], ["Minestrone mit Vollkornbrot", "Bohnen · Zucchini · Tomate · Karotte · Baslikum · Olivenöl"], ["Frühlingsrollen (gebacken)", "Reispapier · Karotte · Gurke · Rucola · Sesam · Erdnusssauce"], ["Hummus mit Gemüsesticks & Vollkornbrot", "Karotte · Gurke · Paprika · Tomate · Limette"], ["Liptauer auf Vollkornbrot", "Topfen · Paprikapulver · Kümmel · Schnittlauch · Radieschen"], ["Zucchini-Tomate-Suppe", "Basilikum · Knoblauch · Olivenöl · Vollkornbrot"], ["Edamame & Reiscracker", "Sesam · Sojasoße (wenig)"], ["Spinat-Ei-Pfanne", "Vollkorntoast · Knoblauch · Olivenöl · Muskatnuss"], ["Rote-Bete-Suppe mit Vollkornbrot", "Ingwer · Kokos light · Koriander"], ["Hummus-Wrap mit Rohkost", "Vollkorntortilla · Hummus · Rucola · Gurke · Paprika · Radieschen"], ["Joghurt-Raita mit Vollkornbrot", "Joghurt · Gurke · Kreuzkümmel · Minze"]], "seele": [["Topfenpalatschinken", "Vollkornmehl · Topfen · Beeren · wenig Honig"], ["Semmelknödel mit Tomatensauce & Spinat", "Vollkorn-Semmelknödel · braune Linsen · Zwiebel · Essig · Lorbeer · Petersilie"], ["Pizza auf Vollkornteig", "Tomatensauce · wenig Mozzarella · Rucola · Basilikum"], ["Ribollita (toskanische Gemüsesuppe)", "weiße Bohnen · Wirsing · Tomate · Knoblauch · Olivenöl · Vollkornbrot"], ["Vollkorntoast mit Mandelmus & Beeren", "1 EL Chiasamen · Hibiskustee"], ["Veggie-Burger", "Vollkornbun · Kichererbsen-Patty · Salat · Tomate · Rote Bete · Joghurt-Sauce"], ["Hafer-Waffeln mit Beeren", "Vollkornmehl · Haferflocken · Leinsamen · wenig Ahornsirup"], ["Kichererbsen-Curry (Chana Masala)", "Basmati · Kichererbsen · Tomate · Zwiebel · Garam Masala · Ingwer · Koriander"], ["Germknödel (leicht)", "Vollkornmehl · Powidl · wenig Mohnbutter · gedämpft"], ["Grüner Salat mit Ei & Weckerl", "Blattsalat · hart gekochtes Ei · Gurke · Radieschen · Kürbiskernöl · Essig"], ["Hafer-Pancakes mit Beeren", "Haferflocken · Ei · Joghurt · wenig Ahornsirup"], ["Black-Bean-Burger", "Vollkornbun · schwarze Bohnen · Mais · Paprika · Joghurt-Sauce · Coleslaw"], ["Masala-Omelette", "Ei · Zwiebel · Chili · Koriander · Kurkuma · Vollkorntoast"], ["Saag Aloo (Spinat-Erdäpfel)", "Kartoffeln · Spinat · Kurkuma · Kreuzkümmel · Knoblauch · Ingwer · Vollkornbrot"], ["Kaiserschmarrn (leicht)", "Vollkornmehl · Ei · Joghurt · Zwetschgenröster · wenig Staubzucker"], ["Tafelspitz-Suppe (vegetarisch)", "Gemüsebrühe · Karotte · Sellerie · Petersilwurzel · Vollkornbrot · Schnittlauch"]]};
+
+var CHAPTER_INFO = {
+  frueh:  {label:'Frühstücksideen',    singular:'Rezept'},
+  jause:  {label:'Snack-Ideen',        singular:'Rezept'},
+  mittag: {label:'Mittagsgerichte',    singular:'Gericht'},
+  abend:  {label:'Abendideen',         singular:'Gericht'},
+  seele:  {label:'Wohlfühlgerichte',   singular:'Gericht'}
+};
+
+function renderCounts() {
+  Object.keys(DATA).forEach(function(cat) {
+    var el = document.getElementById('cnt-' + cat);
+    if(el) {
+      var n = DATA[cat].length;
+      var info = CHAPTER_INFO[cat];
+      el.textContent = n + ' ' + (n===1 ? info.singular : info.label);
+    }
+  });
+}
+
+function renderChapter(cat) {
+  var container = document.getElementById('recipes-' + cat);
+  if(!container) return;
+  container.innerHTML = '';
+  var isSeele = cat === 'seele';
+  DATA[cat].forEach(function(item) {
+    var card = document.createElement('div');
+    card.className = 'recipe-card' + (isSeele ? ' seele-card' : '');
+    var heart = isSeele ? '<span class="recipe-heart">🫀</span>' : '';
+    var name = document.createElement('div');
+    name.className = 'recipe-name';
+    name.textContent = item[0];
+    card.appendChild(name);
+    if(isSeele) {
+      var h = document.createElement('span');
+      h.className = 'recipe-heart';
+      h.textContent = '🫀';
+      name.insertBefore(h, name.firstChild);
+    }
+    if(item[1]) {
+      var det = document.createElement('div');
+      det.className = 'recipe-detail';
+      det.textContent = item[1];
+      card.appendChild(det);
+    }
+    container.appendChild(card);
+  });
+}
+
+function openChapter(cat) {
+  document.getElementById('tocView').style.display = 'none';
+  document.querySelectorAll('.chapter').forEach(function(c){ c.classList.remove('active'); });
+  var ch = document.getElementById('ch-' + cat);
+  if(ch) { ch.classList.add('active'); ch.scrollTop = 0; }
+  window.scrollTo(0,0);
+}
+
+function goBack() {
+  document.querySelectorAll('.chapter').forEach(function(c){ c.classList.remove('active'); });
+  document.getElementById('tocView').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+// Init
+renderCounts();
+['frueh','jause','mittag','abend','seele'].forEach(renderChapter);
+</script>
+</body>
+</html>

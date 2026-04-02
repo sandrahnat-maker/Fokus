@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#faf3e8">
+<title>Mein Fokus</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#faf3e8;--card:#fffdf8;--text:#2e2010;--muted:rgba(46,32,16,0.5);
+  --gold:#c8943a;--gold-light:#e8c97a;--sage:#7a9a5a;--sage-light:#b8d09a;
+  --rose:#c07060;--terra:#c4704a;--border:rgba(180,130,70,0.18);--shadow:rgba(160,100,30,0.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{font-size:17px;}
+body{background:var(--bg);font-family:"Cormorant Garamond",Georgia,serif;color:var(--text);min-height:100vh;padding-bottom:4rem;
+  background-image:radial-gradient(ellipse at 10% 0%,rgba(200,148,58,0.08) 0%,transparent 60%),radial-gradient(ellipse at 90% 100%,rgba(122,154,90,0.07) 0%,transparent 60%);}
+header{padding:1.2rem 1.2rem .8rem;text-align:center;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(255,253,248,0.95),rgba(250,243,232,0.7));}
+.header-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;}
+.goal-text{font-family:"Playfair Display",serif;font-size:15.5px;font-style:italic;color:var(--text);line-height:1.45;}
+.date-line{font-size:11.5px;color:var(--muted);margin-top:.3rem;}
+.progress-wrap{padding:.8rem 1.2rem .35rem;}
+.progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:.3rem;}
+.progress-bar{height:5px;background:var(--border);border-radius:10px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:10px;transition:width .6s ease;}
+.focus-card{margin:.7rem 1rem 0;background:var(--card);border-radius:20px;border:1.5px solid var(--border);box-shadow:0 4px 20px var(--shadow);overflow:hidden;animation:slideUp .4s ease;}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.focus-category{display:flex;align-items:center;gap:.5rem;padding:.75rem 1.1rem .4rem;font-size:11px;letter-spacing:.14em;text-transform:uppercase;}
+.cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.focus-task{padding:.15rem 1.1rem .7rem;font-family:"Playfair Display",serif;font-size:21px;font-style:italic;color:var(--text);line-height:1.35;}
+.focus-inspo{margin:0 1.1rem .5rem;padding:.65rem .9rem;background:rgba(200,148,58,0.06);border-radius:10px;font-size:14px;font-style:italic;color:var(--text);line-height:1.65;text-align:center;}
+.focus-inspo-label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;}
+.focus-why{margin:0 1.1rem .8rem;padding:.6rem .85rem;background:rgba(200,148,58,0.07);border-left:2.5px solid var(--gold);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted);font-style:italic;line-height:1.6;}
+.focus-why strong{color:var(--gold);font-style:normal;font-weight:500;}
+.action-row{display:flex;gap:.6rem;padding:.2rem 1.1rem 1rem;}
+.btn-done{flex:1;background:var(--gold);color:#fff;border:none;border-radius:30px;padding:.65rem 1rem;font-size:15px;font-family:"Cormorant Garamond",serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.4rem;transition:background .2s,transform .1s;}
+.btn-done:active{transform:scale(.97);}
+.btn-skip{background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:30px;padding:.65rem 1rem;font-size:15px;font-family:"Cormorant Garamond",serif;cursor:pointer;white-space:nowrap;}
+.info-bar{margin:.8rem 1rem 0;display:flex;gap:.5rem;}
+.info-tile{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.65rem .75rem;text-align:center;}
+.info-tile-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;}
+.info-tile-main{font-family:"Playfair Display",serif;font-size:14px;font-style:italic;color:var(--text);line-height:1.35;}
+.info-tile-sub{font-size:12px;color:var(--muted);font-style:italic;margin-top:.15rem;}
+.quote-bar{margin:.6rem 1rem 0;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.75rem 1rem;display:flex;gap:.6rem;align-items:flex-start;}
+.quote-icon{font-size:1.3rem;flex-shrink:0;margin-top:.05rem;}
+.quote-author{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem;}
+.quote-body{font-size:14px;font-style:italic;color:var(--text);line-height:1.6;}
+.section-wrap{margin:1rem 1rem 0;}
+.section-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.2rem;}
+.app-group{margin-bottom:.9rem;}
+.app-group-title{font-size:12px;color:var(--gold);font-style:italic;margin-bottom:.35rem;padding-left:.2rem;}
+.al{display:flex;align-items:center;gap:.65rem;padding:.6rem .85rem;background:var(--card);border-radius:11px;margin-bottom:.4rem;text-decoration:none;color:var(--text);border:1px solid var(--border);transition:background .15s;}
+.al:active{background:rgba(200,148,58,0.1);}
+.al-icon{font-size:1.25rem;}
+.al-text{font-size:15px;font-weight:600;flex:1;}
+.al-sub{font-size:12px;color:var(--muted);font-style:italic;}
+.al-arr{color:var(--gold-light);font-size:.9rem;margin-left:auto;}
+.done-overlay{display:none;position:fixed;inset:0;background:rgba(250,243,232,0.97);z-index:100;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.done-overlay.show{display:flex;}
+.done-icon{font-size:50px;margin-bottom:.9rem;}
+.done-title{font-family:"Playfair Display",serif;font-size:22px;font-style:italic;color:var(--text);margin-bottom:.5rem;}
+.done-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:280px;margin-bottom:1.4rem;}
+.btn-next{background:var(--sage);color:#fff;border:none;border-radius:30px;padding:.7rem 1.8rem;font-size:16px;font-family:"Cormorant Garamond",serif;cursor:pointer;}
+.completed-section{margin:1rem 1rem 0;}
+.completed-list{display:flex;flex-direction:column;gap:.35rem;}
+.completed-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.5rem .85rem;display:flex;align-items:center;gap:.6rem;font-size:14px;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--gold-light);}
+.c-icon{font-size:14px;text-decoration:none;display:inline-block;}
+.all-done{display:none;margin:1.2rem 1rem 0;background:var(--card);border-radius:20px;border:1.5px solid var(--sage-light);padding:1.8rem 1.2rem;text-align:center;box-shadow:0 4px 20px rgba(122,154,90,0.12);}
+.all-done.show{display:block;}
+.all-done-icon{font-size:42px;margin-bottom:.7rem;}
+.all-done-title{font-family:"Playfair Display",serif;font-size:20px;font-style:italic;color:var(--text);margin-bottom:.4rem;}
+.all-done-text{font-size:14px;color:var(--muted);line-height:1.7;}
+.btn-reset{margin-top:1rem;background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:30px;padding:.45rem 1.1rem;font-size:14px;font-family:"Cormorant Garamond",serif;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Mein Ziel ❤️🤩</div>
+  <div class="goal-text">Ab September 2026 führe ich als DaZ-Lehrerin und Künstlerin ein selbstbestimmtes Leben, voller Fröhlichkeit und voller Energie!</div>
+  <div class="date-line" id="dateLine"></div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-label"><span id="progressText">0 von 0 erledigt</span><span id="progressPct">0%</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+</div>
+
+<div class="focus-card" id="focusCard">
+  <div class="focus-category" id="focusCat"></div>
+  <div class="focus-task" id="focusTask"></div>
+  <div class="focus-inspo" id="focusInspo" style="display:none">
+    <div class="focus-inspo-label" id="focusInspoLabel"></div>
+    <span id="focusInspoText"></span>
+  </div>
+  <div class="focus-why" id="focusWhy"></div>
+  <div class="action-row">
+    <button class="btn-done" onclick="markDone()">✓ Erledigt</button>
+    <button class="btn-skip" onclick="skipTask()">Später</button>
+  </div>
+</div>
+
+<div class="all-done" id="allDone">
+  <div class="all-done-icon">🌿</div>
+  <div class="all-done-title">Alles erledigt für heute.</div>
+  <div class="all-done-text">Du hast heute alles getan, was du konntest.<br>Jeder Schritt trägt dich näher zu deinem selbstbestimmten Leben ❤️🤩</div>
+  <button class="btn-reset" onclick="resetDay()">↺ Tag neu starten</button>
+</div>
+
+<div class="completed-section" id="completedSection" style="display:none">
+  <div class="section-label">Heute erledigt</div>
+  <div class="completed-list" id="completedList"></div>
+</div>
+
+<div class="info-bar">
+  <div class="info-tile">
+    <div class="info-tile-label">🍵 Tee heute</div>
+    <div class="info-tile-main" id="teaName">—</div>
+    <div class="info-tile-sub" id="teaBen"></div>
+  </div>
+  <div class="info-tile">
+    <div class="info-tile-label">🌤️ Mein Wetter</div>
+    <div id="weatherBtns" style="display:flex;flex-wrap:wrap;gap:.3rem;justify-content:center;margin-top:.2rem;"></div>
+  </div>
+</div>
+
+<div class="quote-bar">
+  <div class="quote-icon">🌿</div>
+  <div class="quote-text">
+    <div class="quote-author" id="quoteAuthor"></div>
+    <div class="quote-body" id="quoteBody"></div>
+  </div>
+</div>
+
+<div class="section-wrap">
+  <div class="section-label">Meine Apps</div>
+
+  <div class="app-group">
+    <div class="app-group-title">🐾 Tiere</div>
+    <a class="al" href="Lotte_Runden.html"><span class="al-icon">🗺️</span><div><div class="al-text">Lotte Runden</div><div class="al-sub">Spaziergänge & Routen</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Medikamente_Tiere.html"><span class="al-icon">💊</span><div><div class="al-text">Medikamentenplan</div><div class="al-sub">Rudi, Timmy & Lotte</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Katzen_Medikamente.html"><span class="al-icon">🐱</span><div><div class="al-text">Katzen Medikamente</div><div class="al-sub">Rudi & Timmy</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Futter_Bestellplaner.html"><span class="al-icon">🛒</span><div><div class="al-text">Futter-Bestellplaner</div><div class="al-sub">Rudi, Timmy & Lotte</div></div><span class="al-arr">›</span></a>
+  </div>
+
+  <div class="app-group">
+    <div class="app-group-title">✨ Lehren & Lernen</div>
+    <a class="al" href="VHS_Kursvorbereitung.html"><span class="al-icon">📋</span><div><div class="al-text">VHS Kursvorbereitung</div><div class="al-sub">Checklisten & Materialien</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="VHS_Kursabschluss.html"><span class="al-icon">🎓</span><div><div class="al-text">Kursabschluss</div><div class="al-sub">Abschluss mit Würde & Wärme</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Lernplan.html"><span class="al-icon">📚</span><div><div class="al-text">Lernplan</div><div class="al-sub">DaZF — Sandra Hnat-Gerersdorfer</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Wochenplan.html"><span class="al-icon">📅</span><div><div class="al-text">Wochenplan</div><div class="al-sub">Meine Wochenübersicht</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Einkaufsliste.html"><span class="al-icon">🛒</span><div><div class="al-text">Einkaufsliste</div><div class="al-sub">LP(a)-freundlich & vegetarisch</div></div><span class="al-arr">›</span></a>
+  </div>
+
+  <div class="app-group">
+    <div class="app-group-title">🏡 Zuhause</div>
+    <a class="al" href="Pflanzen_Galerie.html"><span class="al-icon">🌿</span><div><div class="al-text">Meine Pflanzen</div><div class="al-sub">Galerie & Pflege</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Haushaltsplan.html"><span class="al-icon">🏠</span><div><div class="al-text">Haushaltsplan</div><div class="al-sub">Schritt für Schritt, sanft</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="hausverkauf-guide.html"><span class="al-icon">📋</span><div><div class="al-text">Hausverkauf Guide</div><div class="al-sub">Weidlingbach</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Hausverkauf_Checkliste.html"><span class="al-icon">✅</span><div><div class="al-text">Hausverkauf Checkliste</div><div class="al-sub">Alle Schritte</div></div><span class="al-arr">›</span></a>
+  </div>
+
+  <div class="app-group">
+    <div class="app-group-title">💫 Körper & Bewegung</div>
+    <a class="al" href="Bad_Frueh.html"><span class="al-icon">🌅</span><div><div class="al-text">Bad Früh</div><div class="al-sub">Morgenroutine im Bad</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Bad_Abend.html"><span class="al-icon">🛁</span><div><div class="al-text">Bad Abend Routine</div><div class="al-sub">Mein Abendritual mit Liebe</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Duschen.html"><span class="al-icon">🚿</span><div><div class="al-text">Duschen & Fertig</div><div class="al-sub">Schnell & bewusst</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Koerpergewicht_Training_Audio.html"><span class="al-icon">💪</span><div><div class="al-text">Körpergewicht Training</div><div class="al-sub">Audio-geführt</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Balanceboard_Training_Audio.html"><span class="al-icon">🏄</span><div><div class="al-text">Balance Board Training</div><div class="al-sub">Audio-geführt</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Sonntags_Yoga_Audio.html"><span class="al-icon">🧘</span><div><div class="al-text">Sonntags-Yoga</div><div class="al-sub">Audio-geführt</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Dehnplan.html"><span class="al-icon">🤸</span><div><div class="al-text">Dehnplan</div><div class="al-sub">Persönlicher Dehnplan</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Kalkschulter.html"><span class="al-icon">💪</span><div><div class="al-text">Kalkschulter Training</div><div class="al-sub">Sanfte Schulterübungen</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Beckenboden.html"><span class="al-icon">🌸</span><div><div class="al-text">Beckenboden</div><div class="al-sub">Mit Liebe & Geduld</div></div><span class="al-arr">›</span></a>
+  </div>
+
+  <div class="app-group">
+    <div class="app-group-title">🌿 Pflege & Ernährung</div>
+    <a class="al" href="Naturkosmetik_Tagesplan.html"><span class="al-icon">🌿</span><div><div class="al-text">Naturkosmetik Tagesplan</div><div class="al-sub">Lavera & Benecos</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Koerperpflege_Tagesplan.html"><span class="al-icon">✨</span><div><div class="al-text">Körperpflege Tagesplan</div><div class="al-sub">Vollständige Routine</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Gesichtsyoga.html"><span class="al-icon">😊</span><div><div class="al-text">Gesichtsyoga</div><div class="al-sub">Entspannung & Leuchten</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Kiefer_Bruxismus.html"><span class="al-icon">🫀</span><div><div class="al-text">Kiefer & Kaumuskel</div><div class="al-sub">Sanfte Bruxismus-Übungen</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Haarpflege.html"><span class="al-icon">💆</span><div><div class="al-text">Haarpflege</div><div class="al-sub">Meine Haarpflegeroutine</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Nagelpflege.html"><span class="al-icon">💅</span><div><div class="al-text">Nagelpflege</div><div class="al-sub">Mit Sorgfalt & Freude</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Ernaehrungsplan_4Wochen.html"><span class="al-icon">🥗</span><div><div class="al-text">Ernährungsplan</div><div class="al-sub">4-Wochen, LP(a)-freundlich</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="tee-des-tages.html"><span class="al-icon">🍵</span><div><div class="al-text">Tee des Tages</div><div class="al-sub">Mein 7-Tage-Teeplan</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="Blutdruck.html"><span class="al-icon">❤️</span><div><div class="al-text">Blutdruck Protokoll</div><div class="al-sub">Messung & Verlauf</div></div><span class="al-arr">›</span></a>
+  </div>
+
+  <div class="app-group">
+    <div class="app-group-title">🌊 Seele & Kalender</div>
+    <a class="al" href="index.html"><span class="al-icon">🌿</span><div><div class="al-text">Mein Leben</div><div class="al-sub">Die große Übersicht</div></div><span class="al-arr">›</span></a>
+    <a class="al" href="https://sandrahnat-maker.github.io/Kalender_2203/"><span class="al-icon">📅</span><div><div class="al-text">Kalender</div><div class="al-sub">Mein Tageskalender</div></div><span class="al-arr">›</span></a>
+  </div>
+</div>
+
+<div class="done-overlay" id="doneOverlay">
+  <div class="done-icon" id="doneIcon">✓</div>
+  <div class="done-title" id="doneTitle"></div>
+  <div class="done-sub" id="doneSub"></div>
+  <button class="btn-next" onclick="hideDoneOverlay()">Weiter →</button>
+</div>
+
+<script>
+var DAYS_DE=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+var MONTHS_DE=["Jänner","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+var CATS={
+  daz:{label:"DaZ & Uni",color:"#c8943a",icon:"📚"},
+  vhs:{label:"VHS Unterricht",color:"#b07040",icon:"🏫"},
+  koerper:{label:"Körper & Energie",color:"#7a9a5a",icon:"🌿"},
+  pflege:{label:"Selbstpflege",color:"#c07060",icon:"🌸"},
+  haushalt:{label:"Haushalt",color:"#9a8060",icon:"🏠"},
+  tiere:{label:"Lotte & Katzen",color:"#8a9a6a",icon:"🐾"},
+  ernaehrung:{label:"Ernährung",color:"#7a9a5a",icon:"🥗"},
+  kreativ:{label:"Kreativität",color:"#b06080",icon:"🎨"},
+  abend:{label:"Abendroutine",color:"#6a7aaa",icon:"🌙"},
+  seele:{label:"Seele & Stille",color:"#9a7aaa",icon:"🌊"},
+};
+var TASKS=[
+  {cat:"koerper",task:"Medikamente & Morgenroutine",
+   inspo:"Ich starte sanft. Kein Stress, kein Druck.\nDer Tee, das Licht, ein tiefer Atemzug — das bin ich.",inspoLabel:"Mein Morgen gehört mir",
+   why:"<strong>Basis für alles:</strong> Nur wenn du gut in den Tag startest, kannst du klar denken und unterrichten."},
+  {cat:"tiere",task:"Lotte spazieren & Katzen füttern",
+   inspo:"Jeder Spaziergang mit ihr ist ein Geschenk.\nSie zeigt mir, wie man wirklich im Moment lebt.",inspoLabel:"Für Lotte mit Liebe",
+   why:"<strong>Ankerpunkt im Alltag:</strong> Regelmäßige Verantwortung strukturiert deinen Tag — genau wie eine Unterrichtsstunde."},
+  {cat:"ernaehrung",task:"Frühstück & Tee bewusst genießen",
+   why:"<strong>Energie für den Tag:</strong> Du kannst nur geben, was du hast. Ernährung ist deine Ressource."},
+  {cat:"daz",task:"An der DaZF-Aufgabe weiterarbeiten",
+   inspo:"Ich lerne in meinem Rhythmus.\nJeder kleine Schritt zählt — auch der heutige.",inspoLabel:"Sanfte Erinnerung",
+   why:"<strong>Direkt zum Ziel:</strong> Jede erledigte Aufgabe bringt dich dem DaZF-Abschluss näher — und dem Job im September 2026."},
+  {cat:"vhs",task:"VHS Kursvorbereitung",
+   inspo:"Im Unterricht bin ich ganz ich.\nPräsent, verbunden, lebendig.\nMeine Schüler*innen spüren das.",inspoLabel:"Meine Erinnerung",
+   why:"<strong>Praxis zählt:</strong> Je besser du vorbereitest, desto mehr Erfahrung sammelst du — das überzeugt beim Bewerbungsgespräch."},
+  {cat:"vhs",task:"Unterrichtsmaterialien sortieren",
+   why:"<strong>Professionalität aufbauen:</strong> Strukturierte Materialien zeigen, dass du weißt, was du tust."},
+  {cat:"koerper",task:"Bewegung: Sport, Yoga oder Spaziergang",
+   inspo:"Jede Bewegung ist ein Geschenk an meinen Körper.\nAuch ein kurzer Spaziergang zählt. Auch fünf Minuten.",inspoLabel:"Sanfte Einladung",
+   why:"<strong>Kopf freimachen:</strong> Körperliche Aktivität verbessert Konzentration und Stimmung — danach denkst du klarer."},
+  {cat:"koerper",task:"Meditation oder kurze Stille",
+   why:"<strong>Stressresistenz:</strong> Als Lehrerin brauchst du Ruhe unter Druck. Das übst du jetzt."},
+  {cat:"pflege",task:"Dusche & Körperpflege",
+   inspo:"Ich pflege mich mit Achtsamkeit und Freude.\nLavera & Benecos nähren mich — sanft und natürlich.\nIch bin es wert.",inspoLabel:"Selbstfürsorge mit Liebe",
+   why:"<strong>Selbstrespekt:</strong> Wie du dich um dich kümmerst, spiegelt sich in deiner Präsenz als Lehrerin wider."},
+  {cat:"pflege",task:"Gesichtsyoga oder Kiefer entspannen",
+   why:"<strong>Stimme & Ausdruck:</strong> Als Sprachlehrerin ist dein Körper dein Instrument."},
+  {cat:"haushalt",task:"Wohnung kurz aufräumen",
+   inspo:"Boho-luxe. Warm. Kreativ. Lebendig.\nEin Ort wo ich ganz ich sein darf —\numgeben von Schönheit und Stille.",inspoLabel:"Meine Vision",
+   why:"<strong>Klare Umgebung, klarer Kopf:</strong> Unordnung kostet mentale Energie, die du für die Vorbereitung brauchst."},
+  {cat:"haushalt",task:"Einkauf planen oder erledigen",
+   why:"<strong>Versorgung sichern:</strong> Wenn der Kühlschrank leer ist, denkst du an Essen statt an Unterricht."},
+  {cat:"kreativ",task:"Kunstzeit: zeichnen, malen oder Collage",
+   inspo:"Verbindung nährt mich.\nKreativität hält mich lebendig und\ninspiriert auch mein Unterrichten.",inspoLabel:"Meine Ressource",
+   why:"<strong>Du bist Künstlerin:</strong> Das ist kein Luxus — das ist Teil deiner Identität und deines Ziels."},
+  {cat:"abend",task:"Abendessen mit Thomas genießen",
+   inspo:"Verbindung nährt mich.\nGemeinsame Zeit gibt mir Halt — das trägt mich\ndurch anstrengende Phasen.",inspoLabel:"Abend & Verbindung",
+   why:"<strong>Kraft tanken:</strong> Stabile Beziehungen sind die Grundlage für alles, was du aufbauen willst."},
+  {cat:"abend",task:"Abendroutine im Bad",
+   inspo:"Der Abend gehört mir — ganz allein.\nWarm. Still. Duftend. Für mich.\nIch lasse den Tag los.",inspoLabel:"Mein Abend",
+   why:"<strong>Tag bewusst abschließen:</strong> Eine Abendroutine signalisiert deinem Körper: Jetzt darf ich loslassen und erholen."},
+  {cat:"seele",task:"Tagesreflexion: Was war heute mein Schluck Leben?",
+   inspo:"Was war heute mein Schluck Leben? 🌿\nWofür bin ich dankbar?\nWas darf ich heute loslassen?",inspoLabel:"Drei Fragen für den Abend",
+   why:"<strong>Bewusstsein schärfen:</strong> Wer täglich reflektiert, wächst schneller — auch als Lehrerin."},
+  {cat:"abend",task:"Früh ins Bett — Handy weg 🌙",
+   inspo:"Schlaf ist keine Belohnung für einen guten Tag.\nSchlaf ist die Investition in den morgigen Tag.\nDu schläfst dich in dein Ziel.",inspoLabel:"Warum früh schlafen?",
+   why:"<strong>Dein Gehirn lernt im Schlaf:</strong> Alles, was du heute für DaZF, für den Unterricht, für dich gelernt hast — wird nachts verankert. Schlaf ist der wichtigste Lernschritt des Tages."},
+];
+
+var today=new Date();
+var storageKey="fokus_"+today.toISOString().slice(0,10);
+var state=JSON.parse(localStorage.getItem(storageKey)||"null");
+if(!state){state={tasks:TASKS.map(function(t,i){return{idx:i,done:false,skipped:false};}),order:TASKS.map(function(_,i){return i;})};}
+function saveState(){localStorage.setItem(storageKey,JSON.stringify(state));}
+function getNext(){
+  for(var i=0;i<state.order.length;i++){var idx=state.order[i];if(!state.tasks[idx].done&&!state.tasks[idx].skipped)return idx;}
+  for(var i=0;i<state.order.length;i++){var idx=state.order[i];if(!state.tasks[idx].done)return idx;}
+  return -1;
+}
+function updateProgress(){
+  var done=state.tasks.filter(function(s){return s.done;}).length;
+  var total=state.tasks.length;
+  var pct=Math.round(done/total*100);
+  document.getElementById("progressText").textContent=done+" von "+total+" erledigt";
+  document.getElementById("progressPct").textContent=pct+"%";
+  document.getElementById("progressFill").style.width=pct+"%";
+}
+function renderCurrent(){
+  var idx=getNext();
+  var fc=document.getElementById("focusCard");
+  var ad=document.getElementById("allDone");
+  if(idx===-1){fc.style.display="none";ad.classList.add("show");return;}
+  ad.classList.remove("show");fc.style.display="block";
+  var t=TASKS[idx];var cat=CATS[t.cat];
+  document.getElementById("focusCat").innerHTML='<span class="cat-dot" style="background:'+cat.color+'"></span><span style="color:'+cat.color+'">'+cat.icon+' '+cat.label+'</span>';
+  document.getElementById("focusTask").textContent=t.task;
+  var inspoEl=document.getElementById("focusInspo");
+  if(t.inspo){inspoEl.style.display="block";document.getElementById("focusInspoLabel").textContent=t.inspoLabel||"";document.getElementById("focusInspoText").textContent=t.inspo;}
+  else{inspoEl.style.display="none";}
+  document.getElementById("focusWhy").innerHTML=t.why;
+  fc.style.animation="none";fc.offsetHeight;fc.style.animation="slideUp .35s ease";
+}
+function renderCompleted(){
+  var done=state.tasks.filter(function(s){return s.done;});
+  var section=document.getElementById("completedSection");
+  var list=document.getElementById("completedList");
+  if(done.length===0){section.style.display="none";return;}
+  section.style.display="block";list.innerHTML="";
+  done.forEach(function(s){var t=TASKS[s.idx];var cat=CATS[t.cat];var item=document.createElement("div");item.className="completed-item";item.innerHTML='<span class="c-icon">'+cat.icon+'</span> '+t.task;list.appendChild(item);});
+}
+function markDone(){
+  var idx=getNext();if(idx===-1)return;
+  state.tasks[idx].done=true;saveState();
+  var t=TASKS[idx];var cat=CATS[t.cat];
+  document.getElementById("doneIcon").textContent=cat.icon;
+  document.getElementById("doneTitle").textContent=t.task;
+  document.getElementById("doneSub").textContent="Gut gemacht. Das war ein Schritt Richtung September 2026 ❤️";
+  document.getElementById("doneOverlay").classList.add("show");
+  updateProgress();renderCompleted();
+}
+function hideDoneOverlay(){document.getElementById("doneOverlay").classList.remove("show");renderCurrent();}
+function skipTask(){var idx=getNext();if(idx===-1)return;state.tasks[idx].skipped=true;saveState();renderCurrent();}
+function resetDay(){state.tasks.forEach(function(s){s.done=false;s.skipped=false;});saveState();updateProgress();renderCompleted();renderCurrent();document.getElementById("allDone").classList.remove("show");}
+
+// DATE
+var d=today;
+document.getElementById("dateLine").textContent=DAYS_DE[d.getDay()]+", "+d.getDate()+". "+MONTHS_DE[d.getMonth()]+" "+d.getFullYear();
+
+// TEA
+var teas=[["Hibiskus & Hagebutte","für Blutdruck und Herz 🌺"],["Grüner Tee & Ingwer","für Energie und Cholesterin 🍃"],["Weißdorn","für das Herz und die Seele 🌸"],["Rooibos & Zimt","für Wärme und Ausgeglichenheit ☕"],["Brennnessel & Löwenzahn","für Entgiftung und Kraft 🌿"],["Lavendel & Kamille","für Entspannung und tiefen Schlaf 💜"],["Artischocke & Mariendistel","für Leber und Cholesterin 🌻"]];
+var tea=teas[d.getDay()];
+document.getElementById("teaName").textContent=tea[0];
+document.getElementById("teaBen").textContent=tea[1];
+
+// WEATHER
+var weatherOpts=["☀️ Sonnig","🌤️ Heiter","🌧️ Schwer","⛈️ Aufgewühlt","🌫️ Nebelig","🌈 Nach dem Regen"];
+var wb=document.getElementById("weatherBtns");
+weatherOpts.forEach(function(w){
+  var btn=document.createElement("button");btn.textContent=w;
+  btn.style.cssText="background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:.2rem .5rem;font-size:12px;font-family:'Cormorant Garamond',serif;cursor:pointer;color:var(--text);transition:all .2s;";
+  btn.onclick=function(){wb.querySelectorAll("button").forEach(function(b){b.style.background="var(--bg)";b.style.color="var(--text)";});btn.style.background="var(--gold)";btn.style.color="#fff";};
+  wb.appendChild(btn);
+});
+
+// QUOTE
+var quotes=[["Marc Aurel","Das Glück hängt von der Qualität deiner Gedanken ab."],["Marc Aurel","Handle nie gegen die Natur der Dinge — und gegen dich selbst."],["Epiktet","Verlange nicht, dass die Dinge so geschehen wie du willst — wünsche, dass sie so sind, wie sie sind."],["Seneca","Lebe jetzt. Alles andere ist Aufschub."],["Marc Aurel","Du hast Macht über deinen Geist, nicht über äußere Ereignisse. Erkenne das — und du wirst Stärke finden."],["Laozi","Eine Reise von tausend Meilen beginnt mit einem einzigen Schritt."],["Rumi","Entfalte deine eigene Geschichte."]];
+var q=quotes[d.getDate()%quotes.length];
+document.getElementById("quoteAuthor").textContent=q[0];
+document.getElementById("quoteBody").textContent=q[1];
+
+updateProgress();renderCurrent();renderCompleted();
+</script>
+</body>
+</html>

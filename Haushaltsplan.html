@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mein Zuhause fühlen 🏡</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf3e8;--white:#fffdf8;--text:#2e2010;
+  --muted:rgba(20,10,0,0.58);--gold:#c8943a;--gold2:#e8b86a;
+  --terra:#c4704a;--sage:#7a9a5a;--rose:#c4807a;--lavender:#9a7ab8;
+  --border:rgba(180,130,70,0.15);
+}
+html{font-size:18px;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{background:var(--bg);font-family:'Cormorant Garamond',Georgia,serif;color:var(--text);min-height:100vh;padding-bottom:4rem;}
+
+header{
+  background:linear-gradient(135deg,#f5ede0,#faf3e8);
+  border-bottom:1px solid var(--border);
+  padding:1.1rem 1.2rem .9rem;
+  box-shadow:0 1px 8px rgba(180,120,40,0.07);
+  text-align:center;
+}
+.header-title{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;font-weight:400;color:var(--text);margin-bottom:.2rem;}
+.header-sub{font-size:13px;color:var(--muted);font-style:italic;}
+
+.view{display:none;padding:1.2rem 1rem;}
+.view.active{display:block;}
+
+.room-intro{text-align:center;margin-bottom:1.4rem;}
+.room-intro-text{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--text);line-height:1.6;margin-bottom:.4rem;}
+.room-intro-sub{font-size:14px;color:var(--muted);font-style:italic;}
+
+.rooms-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.room-card{
+  background:var(--white);border-radius:16px;padding:1.2rem 1rem;
+  text-align:center;cursor:pointer;border:1.5px solid var(--border);
+  transition:all .2s;box-shadow:0 2px 10px rgba(180,120,40,0.06);
+}
+.room-card:active{transform:scale(.97);}
+.room-card.selected{border-color:var(--gold);background:linear-gradient(135deg,#fdf6e0,#faf3e8);}
+.room-icon{font-size:2rem;margin-bottom:.5rem;}
+.room-name{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--text);}
+.room-card.selected .room-name{color:var(--gold);}
+
+.q-card{
+  background:var(--white);border-radius:18px;padding:1.4rem 1.2rem;
+  margin-bottom:1rem;border:1px solid var(--border);
+  box-shadow:0 2px 12px rgba(180,120,40,0.07);
+}
+.q-step{font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:.6rem;}
+.q-text{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;font-weight:400;color:var(--text);line-height:1.5;margin-bottom:1.1rem;}
+.q-room-name{color:var(--gold);}
+
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.8rem;}
+.chip{
+  padding:.38rem .9rem;border-radius:20px;font-size:14px;
+  font-family:'Cormorant Garamond',serif;cursor:pointer;
+  border:1.5px solid var(--border);background:var(--bg);
+  color:var(--text);transition:all .2s;
+}
+.chip:active{transform:scale(.96);}
+.chip.on{color:#fff;}
+.chip.on.sage{background:var(--sage);border-color:var(--sage);}
+.chip.on.rose{background:var(--rose);border-color:var(--rose);}
+.chip.on.lavender{background:var(--lavender);border-color:var(--lavender);}
+.chip.on.terra{background:var(--terra);border-color:var(--terra);}
+.chip.on.gold{background:var(--gold);border-color:var(--gold);}
+
+.ta{
+  width:100%;border:1.5px solid var(--border);border-radius:12px;
+  padding:.9rem 1rem;font-family:'Cormorant Garamond',serif;
+  font-size:16px;color:var(--text);background:var(--bg);
+  resize:none;min-height:90px;line-height:1.6;
+}
+.ta::placeholder{color:var(--muted);font-style:italic;}
+.ta:focus{outline:none;border-color:var(--gold);}
+
+.needs-label{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:.6rem;margin-top:.8rem;display:block;}
+
+.affirmation-card{
+  background:linear-gradient(150deg,#f5ede0,#fdf6ee,#f0ede8);
+  border-radius:18px;padding:1.6rem 1.4rem;
+  text-align:center;border:1px solid rgba(200,148,58,0.2);
+  box-shadow:0 4px 20px rgba(180,120,40,0.1);
+  margin-bottom:1rem;
+  animation:fadeIn .5s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.affirmation-icon{font-size:2.5rem;margin-bottom:.8rem;}
+.affirmation-room{font-size:12px;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:.5rem;}
+.affirmation-feeling{font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:var(--text);margin-bottom:.4rem;line-height:1.5;}
+.affirmation-need{font-size:14px;color:var(--muted);font-style:italic;margin-bottom:1rem;line-height:1.6;}
+.affirmation-text{
+  font-family:'Playfair Display',serif;font-size:17px;font-style:italic;
+  color:var(--terra);line-height:1.7;padding:.85rem 1rem;
+  background:rgba(255,253,248,.8);border-radius:12px;
+  border-left:3px solid var(--gold2);text-align:left;
+}
+
+.btn-primary{
+  width:100%;background:var(--gold);color:#fff;border:none;
+  border-radius:30px;padding:.7rem 1.5rem;font-size:16px;
+  font-family:'Cormorant Garamond',serif;cursor:pointer;
+  transition:all .2s;margin-top:.8rem;display:block;
+}
+.btn-primary:active{transform:scale(.98);opacity:.9;}
+.btn-secondary{
+  width:100%;background:transparent;color:var(--muted);
+  border:1.5px solid var(--border);border-radius:30px;
+  padding:.6rem 1.5rem;font-size:15px;font-family:'Cormorant Garamond',serif;
+  cursor:pointer;transition:all .2s;margin-top:.5rem;display:block;
+}
+.btn-secondary:active{transform:scale(.98);}
+
+.nav-dots{display:flex;justify-content:center;gap:.5rem;padding:.6rem 0 1rem;}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;}
+.dot.active{background:var(--gold);width:20px;border-radius:4px;}
+
+.history-title{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--muted);text-align:center;margin-bottom:1rem;}
+.history-empty{text-align:center;font-size:14px;color:var(--muted);font-style:italic;padding:2rem 0;}
+.history-item{
+  background:var(--white);border-radius:14px;padding:.9rem 1rem;
+  margin-bottom:.6rem;border:1px solid var(--border);
+}
+.history-date{font-size:12px;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.06em;}
+.history-room{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--text);}
+.history-details{font-size:13px;color:var(--muted);font-style:italic;margin-top:.25rem;line-height:1.6;}
+
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:var(--white);border-top:1px solid var(--border);
+  display:flex;padding:.5rem 0;
+  box-shadow:0 -2px 12px rgba(180,120,40,0.07);
+}
+.bnav-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  gap:.2rem;background:none;border:none;cursor:pointer;padding:.4rem 0;
+  font-family:'Cormorant Garamond',serif;
+}
+.bnav-icon{font-size:1.3rem;}
+.bnav-label{font-size:11px;color:var(--muted);}
+.bnav-btn.on .bnav-label{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">🏡 Mein Zuhause fühlen</div>
+  <div class="header-sub">Was braucht mein Raum heute?</div>
+</header>
+
+<!-- RAUM WÄHLEN -->
+<div class="view active" id="view-rooms">
+  <div class="room-intro">
+    <div class="room-intro-text">In welchem Raum<br>möchtest du heute innehalten?</div>
+    <div class="room-intro-sub">Wähle einen Raum — und höre hin.</div>
+  </div>
+  <div class="rooms-grid">
+    <div class="room-card" data-room="Wohnzimmer" data-icon="🛋️" onclick="selectRoom(this)">
+      <div class="room-icon">🛋️</div><div class="room-name">Wohnzimmer</div>
+    </div>
+    <div class="room-card" data-room="Küche" data-icon="🍳" onclick="selectRoom(this)">
+      <div class="room-icon">🍳</div><div class="room-name">Küche</div>
+    </div>
+    <div class="room-card" data-room="Schlafzimmer" data-icon="🌙" onclick="selectRoom(this)">
+      <div class="room-icon">🌙</div><div class="room-name">Schlafzimmer</div>
+    </div>
+    <div class="room-card" data-room="Bad" data-icon="🛁" onclick="selectRoom(this)">
+      <div class="room-icon">🛁</div><div class="room-name">Bad</div>
+    </div>
+    <div class="room-card" data-room="Vorzimmer" data-icon="🚪" onclick="selectRoom(this)">
+      <div class="room-icon">🚪</div><div class="room-name">Vorzimmer</div>
+    </div>
+    <div class="room-card" data-room="Atelier" data-icon="🎨" onclick="selectRoom(this)">
+      <div class="room-icon">🎨</div><div class="room-name">Atelier</div>
+    </div>
+    <div class="room-card" data-room="Essplatz" data-icon="🪑" onclick="selectRoom(this)">
+      <div class="room-icon">🪑</div><div class="room-name">Essplatz</div>
+    </div>
+    <div class="room-card" data-room="Vorraum" data-icon="🧹" onclick="selectRoom(this)">
+      <div class="room-icon">🧹</div><div class="room-name">Vorraum</div>
+    </div>
+    <div class="room-card" data-room="Klo" data-icon="🪴" onclick="selectRoom(this)">
+      <div class="room-icon">🪴</div><div class="room-name">Klo</div>
+    </div>
+  </div>
+</div>
+
+<!-- FÜHLEN -->
+<div class="view" id="view-feel">
+  <div class="nav-dots">
+    <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+  <div class="q-card">
+    <div class="q-step">Schritt 1 · Fühlen</div>
+    <div class="q-text">Wie fühlt sich <span class="q-room-name" id="feelRoomName"></span> gerade an?</div>
+    <div class="chips" id="feelChips">
+      <div class="chip" data-color="sage" onclick="toggleChip(this)">🌿 ruhig & stimmig</div>
+      <div class="chip" data-color="gold" onclick="toggleChip(this)">✨ lebendig</div>
+      <div class="chip" data-color="terra" onclick="toggleChip(this)">🍂 schwer & voll</div>
+      <div class="chip" data-color="rose" onclick="toggleChip(this)">🌸 sanft & warm</div>
+      <div class="chip" data-color="lavender" onclick="toggleChip(this)">💜 unruhig</div>
+      <div class="chip" data-color="terra" onclick="toggleChip(this)">🌫️ stagnierend</div>
+      <div class="chip" data-color="sage" onclick="toggleChip(this)">🌬️ frisch & klar</div>
+      <div class="chip" data-color="rose" onclick="toggleChip(this)">🕯️ gemütlich</div>
+    </div>
+    <textarea class="ta" id="feelText" placeholder="Oder beschreibe es mit deinen eigenen Worten..."></textarea>
+  </div>
+  <button class="btn-primary" onclick="goToNeeds()">Weiter →</button>
+  <button class="btn-secondary" onclick="showView('view-rooms')">‹ Zurück</button>
+</div>
+
+<!-- BRAUCHEN -->
+<div class="view" id="view-needs">
+  <div class="nav-dots">
+    <div class="dot"></div><div class="dot active"></div><div class="dot"></div>
+  </div>
+  <div class="q-card">
+    <div class="q-step">Schritt 2 · Lauschen</div>
+    <div class="q-text">Was braucht <span class="q-room-name" id="needRoomName"></span> gerade von mir?</div>
+    <div class="chips" id="needChips">
+      <div class="chip" data-color="sage" onclick="toggleChip(this)">🌬️ Luft & Lüften</div>
+      <div class="chip" data-color="gold" onclick="toggleChip(this)">🕯️ Licht & Wärme</div>
+      <div class="chip" data-color="terra" onclick="toggleChip(this)">🧹 leichtes Aufräumen</div>
+      <div class="chip" data-color="rose" onclick="toggleChip(this)">🌸 ein schönes Detail</div>
+      <div class="chip" data-color="sage" onclick="toggleChip(this)">🌱 Pflanzen gießen</div>
+      <div class="chip" data-color="lavender" onclick="toggleChip(this)">✨ Energie reinigen</div>
+      <div class="chip" data-color="terra" onclick="toggleChip(this)">📦 etwas weggeben</div>
+      <div class="chip" data-color="gold" onclick="toggleChip(this)">🛋️ nichts — es ist gut so</div>
+      <div class="chip" data-color="rose" onclick="toggleChip(this)">🎨 einen kreativen Touch</div>
+      <div class="chip" data-color="sage" onclick="toggleChip(this)">🔇 Stille & Ruhe</div>
+    </div>
+    <span class="needs-label">Noch etwas das du spürst oder weißt?</span>
+    <textarea class="ta" id="needText" placeholder="Ein Gedanke, eine Idee, ein Gefühl..."></textarea>
+  </div>
+  <button class="btn-primary" onclick="saveAndShow()">🌿 Speichern & Innehalten</button>
+  <button class="btn-secondary" onclick="showView('view-feel')">‹ Zurück</button>
+</div>
+
+<!-- AFFIRMATION -->
+<div class="view" id="view-affirm">
+  <div class="nav-dots">
+    <div class="dot"></div><div class="dot"></div><div class="dot active"></div>
+  </div>
+  <div class="affirmation-card">
+    <div class="affirmation-icon" id="affirmIcon"></div>
+    <div class="affirmation-room" id="affirmRoom"></div>
+    <div class="affirmation-feeling" id="affirmFeeling"></div>
+    <div class="affirmation-need" id="affirmNeed"></div>
+    <div class="affirmation-text" id="affirmText"></div>
+  </div>
+  <button class="btn-primary" onclick="showView('view-history')" style="margin-top:0">Alle Räume ansehen →</button>
+  <button class="btn-secondary" onclick="startNew()">Neuen Raum fühlen</button>
+</div>
+
+<!-- VERLAUF -->
+<div class="view" id="view-history">
+  <div class="history-title">Meine Raumgefühle</div>
+  <div id="historyList"></div>
+  <button class="btn-primary" onclick="startNew()">🌿 Neuen Raum fühlen</button>
+</div>
+
+<div class="bottom-nav">
+  <button class="bnav-btn on" id="bnav-home" onclick="startNew()">
+    <div class="bnav-icon">🏡</div>
+    <div class="bnav-label">Fühlen</div>
+  </button>
+  <button class="bnav-btn" id="bnav-hist" onclick="openHistory()">
+    <div class="bnav-icon">🌿</div>
+    <div class="bnav-label">Verlauf</div>
+  </button>
+</div>
+
+<script>
+var currentRoom = '';
+var currentIcon = '';
+
+var AFFIRMATIONS = {
+  'ruhig':    'Dieser Raum trägt mich. Ich darf hier einfach sein.',
+  'lebendig': 'Leben strömt durch diesen Raum — und durch mich.',
+  'schwer':   'Ich erkenne, was der Raum trägt. Leichter werden darf ein sanfter Prozess sein.',
+  'warm':     'Wärme und Geborgenheit — ich habe mir einen schönen Ort geschaffen.',
+  'unruhig':  'Ich atme tief. Der Raum darf zur Ruhe kommen — ich auch.',
+  'stagnierend': 'Neues kann nur entstehen, wenn altes Platz macht. Ich beginne sanft.',
+  'klar':     'Klarheit im Raum — Klarheit in mir. Ich schätze dieses Geschenk.',
+  'gemütlich':'Hier ist mein Zuhause. Warm, mein, lebendig.',
+  'gut so':   'Manchmal ist das Schönste, innezuhalten und zu erkennen: Es ist gut so.',
+  'default':  'Ich sorge für meinen Raum mit Liebe — und mein Raum sorgt für mich.'
+};
+
+function showView(id) {
+  document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  document.getElementById('bnav-home').classList.toggle('on', id !== 'view-history');
+  document.getElementById('bnav-hist').classList.toggle('on', id === 'view-history');
+  window.scrollTo(0,0);
+}
+
+function selectRoom(card) {
+  document.querySelectorAll('.room-card').forEach(function(c){ c.classList.remove('selected'); });
+  card.classList.add('selected');
+  currentRoom = card.getAttribute('data-room');
+  currentIcon = card.getAttribute('data-icon');
+  document.querySelectorAll('.chip').forEach(function(c){
+    c.classList.remove('on','sage','rose','lavender','terra','gold');
+  });
+  document.getElementById('feelText').value = '';
+  document.getElementById('needText').value = '';
+  document.getElementById('feelRoomName').textContent = currentRoom;
+  document.getElementById('needRoomName').textContent = currentRoom;
+  setTimeout(function(){ showView('view-feel'); }, 150);
+}
+
+function toggleChip(chip) {
+  var color = chip.getAttribute('data-color') || 'gold';
+  if (chip.classList.contains('on')) {
+    chip.classList.remove('on','sage','rose','lavender','terra','gold');
+  } else {
+    chip.classList.add('on', color);
+  }
+}
+
+function getSelected(containerId) {
+  var chips = document.querySelectorAll('#' + containerId + ' .chip.on');
+  return Array.from(chips).map(function(c){ return c.textContent.trim(); });
+}
+
+function goToNeeds() {
+  showView('view-needs');
+}
+
+function getAffirmation(feelings, needs) {
+  var all = feelings.concat(needs).join(' ').toLowerCase();
+  for (var key in AFFIRMATIONS) {
+    if (key !== 'default' && all.indexOf(key) >= 0) return AFFIRMATIONS[key];
+  }
+  return AFFIRMATIONS['default'];
+}
+
+function saveAndShow() {
+  var feelings = getSelected('feelChips');
+  var feelExtra = document.getElementById('feelText').value.trim();
+  if (feelExtra) feelings.push(feelExtra);
+
+  var needs = getSelected('needChips');
+  var needExtra = document.getElementById('needText').value.trim();
+  if (needExtra) needs.push(needExtra);
+
+  var feelText = feelings.length ? feelings.join(', ') : 'still beobachtend';
+  var needText = needs.length ? needs.join(', ') : 'einfach innehalten';
+  var affirmText = getAffirmation(feelings, needs);
+
+  document.getElementById('affirmIcon').textContent = currentIcon;
+  document.getElementById('affirmRoom').textContent = currentRoom;
+  document.getElementById('affirmFeeling').textContent = '"' + feelText + '"';
+  document.getElementById('affirmNeed').textContent = 'Es braucht: ' + needText;
+  document.getElementById('affirmText').textContent = affirmText;
+
+  try {
+    var entries = JSON.parse(localStorage.getItem('raumgefuehl_v1') || '[]');
+    entries.unshift({room:currentRoom, icon:currentIcon, feelings:feelings, needs:needs, date:new Date().toISOString()});
+    if (entries.length > 50) entries = entries.slice(0,50);
+    localStorage.setItem('raumgefuehl_v1', JSON.stringify(entries));
+  } catch(e) {}
+
+  showView('view-affirm');
+}
+
+function renderHistory() {
+  var entries = [];
+  try { entries = JSON.parse(localStorage.getItem('raumgefuehl_v1') || '[]'); } catch(e) {}
+  var el = document.getElementById('historyList');
+  if (!entries.length) {
+    el.innerHTML = '<div class="history-empty">Noch kein Raum gefühlt.<br>Beginne heute 🌿</div>';
+    return;
+  }
+  var days = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+  var months = ['Jän','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+  el.innerHTML = entries.slice(0,20).map(function(e) {
+    var d = new Date(e.date);
+    var dateStr = days[d.getDay()]+', '+d.getDate()+'. '+months[d.getMonth()]+' · '+
+      String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+' Uhr';
+    return '<div class="history-item">' +
+      '<div class="history-date">'+dateStr+'</div>' +
+      '<div class="history-room">'+e.icon+' '+e.room+'</div>' +
+      '<div class="history-details">' +
+        (e.feelings&&e.feelings.length ? '💭 '+e.feelings.join(' · ')+'<br>' : '') +
+        (e.needs&&e.needs.length ? '🌿 '+e.needs.join(' · ') : '') +
+      '</div></div>';
+  }).join('');
+}
+
+function openHistory() {
+  renderHistory();
+  showView('view-history');
+}
+
+function startNew() {
+  document.querySelectorAll('.room-card').forEach(function(c){ c.classList.remove('selected'); });
+  showView('view-rooms');
+}
+</script>
+</body>
+</html>
