@@ -6,65 +6,67 @@
 <title>Beckenboden</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',system-ui,sans-serif;background:#FDF0F8;color:#2a0a1e;min-height:100vh;display:flex;flex-direction:column}
-.hdr{background:linear-gradient(135deg,#9C27B0,#CE93D8);padding:.75rem 1rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+body{font-family:'Cormorant Garamond',serif;background:#faf3e8;color:#2a0a1e;min-height:100vh;display:flex;flex-direction:column}
+.hdr{background:#2e2010;padding:.75rem 1rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .hdr h1{color:#fff;font-size:.95rem;font-weight:700}
 .hdr p{color:rgba(255,255,255,.8);font-size:.6rem;margin-top:.05rem}
 .reset-btn{background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:8px;padding:.3rem .6rem;font-size:.65rem;cursor:pointer;font-family:inherit}
 .prog-bar{height:3px;background:rgba(156,39,176,.1);flex-shrink:0}
-.prog-fill{height:100%;background:linear-gradient(90deg,#9C27B0,#CE93D8);transition:width .4s}
+.prog-fill{height:100%;background:linear-gradient(90deg,#c8943a,#c8943a);transition:width .4s}
 
 .intro{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.2rem;gap:.7rem;text-align:center}
 .intro-ico{font-size:3.2rem}
-.intro-title{font-size:1.05rem;font-weight:700;color:#4a0a5e}
-.intro-info{font-size:.73rem;color:#7a4a8a;line-height:1.6;max-width:280px}
+.intro-title{font-size:1.05rem;font-weight:700;color:#2e2010}
+.intro-info{font-size:.73rem;color:#c8943a;line-height:1.6;max-width:280px}
 .ex-list{width:100%;max-width:300px;text-align:left}
-.ex-list-item{display:flex;align-items:center;gap:.6rem;padding:.3rem 0;border-bottom:1px solid #f0d0f8;font-size:.73rem;color:#4a0a5e}
+.ex-list-item{display:flex;align-items:center;gap:.6rem;padding:.3rem 0;border-bottom:1px solid rgba(180,130,70,0.18);font-size:.73rem;color:#2e2010}
 .ex-list-item:last-child{border:none}
-.ex-dur{font-size:.62rem;color:#9C27B0;margin-left:auto;font-weight:700}
-.start-btn{background:linear-gradient(135deg,#9C27B0,#CE93D8);color:#fff;border:none;border-radius:12px;padding:.7rem 2rem;font-size:.92rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%;max-width:280px;margin-top:.3rem}
+.ex-dur{font-size:.62rem;color:#c8943a;margin-left:auto;font-weight:700}
+.start-btn{background:#2e2010;color:#fff;border:none;border-radius:12px;padding:.7rem 2rem;font-size:.92rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%;max-width:280px;margin-top:.3rem}
 
 .ex-card{flex:1;display:flex;flex-direction:column;padding:.9rem;gap:.65rem;overflow-y:auto}
-.illus{background:#fff;border-radius:14px;border:1px solid #f0d0f8;padding:.9rem;text-align:center;flex-shrink:0}
+.illus{background:#fff;border-radius:14px;border:1px solid rgba(180,130,70,0.18);padding:.9rem;text-align:center;flex-shrink:0}
 .ex-ico{font-size:3.8rem;display:block;margin-bottom:.3rem}
-.ex-zone{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#CE93D8;margin-bottom:.2rem}
-.ex-name{font-size:1.05rem;font-weight:700;color:#4a0a5e}
-.ex-reps{font-size:.72rem;font-weight:700;color:#9C27B0;background:#F8E8FF;padding:.18rem .5rem;border-radius:6px;display:inline-block;margin-top:.25rem}
+.ex-zone{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c8943a;margin-bottom:.2rem}
+.ex-name{font-size:1.05rem;font-weight:700;color:#2e2010}
+.ex-reps{font-size:.72rem;font-weight:700;color:#c8943a;background:#faf3e8;padding:.18rem .5rem;border-radius:6px;display:inline-block;margin-top:.25rem}
 
 /* Grosser Puls-Timer für Beckenboden */
 .pulse-wrap{display:flex;flex-direction:column;align-items:center;gap:.4rem;flex-shrink:0}
-.pulse-circle{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#9C27B0,#CE93D8);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(156,39,176,.3);transition:transform .15s,box-shadow .15s}
+.pulse-circle{width:110px;height:110px;border-radius:50%;background:#2e2010;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(156,39,176,.3);transition:transform .15s,box-shadow .15s}
 .pulse-circle.squeeze{transform:scale(1.12);box-shadow:0 8px 30px rgba(156,39,176,.5)}
 .pulse-circle.release{transform:scale(.92);box-shadow:0 2px 10px rgba(156,39,176,.15)}
 .pulse-num{font-size:2rem;font-weight:700;color:#fff;line-height:1}
 .pulse-lbl{font-size:.55rem;color:rgba(255,255,255,.85);letter-spacing:.08em;text-transform:uppercase;margin-top:.1rem}
-.phase-txt{font-size:.9rem;font-weight:700;color:#4a0a5e;text-align:center}
-.phase-sub{font-size:.68rem;color:#7a4a8a;text-align:center}
+.phase-txt{font-size:.9rem;font-weight:700;color:#2e2010;text-align:center}
+.phase-sub{font-size:.68rem;color:#c8943a;text-align:center}
 
-.instruction{background:#fff;border-radius:12px;border:1px solid #f0d0f8;padding:.75rem .9rem;flex-shrink:0}
-.inst-title{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#CE93D8;margin-bottom:.4rem}
+.instruction{background:#fff;border-radius:12px;border:1px solid rgba(180,130,70,0.18);padding:.75rem .9rem;flex-shrink:0}
+.inst-title{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c8943a;margin-bottom:.4rem}
 .inst-steps{list-style:none}
 .inst-steps li{font-size:.78rem;color:#2a0a1e;line-height:1.5;padding:.1rem 0;display:flex;gap:.45rem}
-.inst-steps li::before{content:"→";color:#CE93D8;flex-shrink:0}
-.inst-tip{font-size:.65rem;color:#7a4a8a;margin-top:.35rem;font-style:italic;line-height:1.4}
+.inst-steps li::before{content:"→";color:#c8943a;flex-shrink:0}
+.inst-tip{font-size:.65rem;color:#c8943a;margin-top:.35rem;font-style:italic;line-height:1.4}
 
-.btns{display:flex;gap:.5rem;padding:.7rem .9rem;flex-shrink:0;background:#FDF0F8}
-.btn-prev{background:#fff;color:#9C27B0;border:1.5px solid #CE93D8;border-radius:10px;padding:.55rem;font-size:.82rem;cursor:pointer;font-family:inherit;flex:0 0 2.6rem}
-.btn-main{flex:1;background:linear-gradient(135deg,#9C27B0,#CE93D8);color:#fff;border:none;border-radius:10px;padding:.55rem;font-size:.85rem;cursor:pointer;font-family:inherit;font-weight:700}
-.btn-main.paused{background:linear-gradient(135deg,#CE93D8,#e8b0f8)}
-.btn-skip{background:#fff;color:#9C27B0;border:1.5px solid #CE93D8;border-radius:10px;padding:.55rem;font-size:.82rem;cursor:pointer;font-family:inherit;flex:0 0 2.6rem}
+.btns{display:flex;gap:.5rem;padding:.7rem .9rem;flex-shrink:0;background:#faf3e8}
+.btn-prev{background:#fff;color:#c8943a;border:1.5px solid #c8943a;border-radius:10px;padding:.55rem;font-size:.82rem;cursor:pointer;font-family:inherit;flex:0 0 2.6rem}
+.btn-main{flex:1;background:#2e2010;color:#fff;border:none;border-radius:10px;padding:.55rem;font-size:.85rem;cursor:pointer;font-family:inherit;font-weight:700}
+.btn-main.paused{background:linear-gradient(135deg,#c8943a,#e8b0f8)}
+.btn-skip{background:#fff;color:#c8943a;border:1.5px solid #c8943a;border-radius:10px;padding:.55rem;font-size:.82rem;cursor:pointer;font-family:inherit;flex:0 0 2.6rem}
 .dots{display:flex;gap:.28rem;justify-content:center;padding:.3rem .9rem;flex-shrink:0;flex-wrap:wrap}
 .dot{width:8px;height:8px;border-radius:50%;background:rgba(156,39,176,.15);cursor:pointer;transition:all .2s}
-.dot.done{background:#CE93D8}.dot.active{background:#9C27B0;transform:scale(1.35)}
+.dot.done{background:#c8943a}.dot.active{background:#c8943a;transform:scale(1.35)}
 
 .done-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;gap:.8rem}
 .done-ico{font-size:3.5rem}
-.done-title{font-size:1.15rem;font-weight:700;color:#4a0a5e}
-.done-sub{font-size:.75rem;color:#7a4a8a;line-height:1.6;max-width:260px}
-.done-again{background:linear-gradient(135deg,#9C27B0,#CE93D8);color:#fff;border:none;border-radius:12px;padding:.6rem 1.5rem;font-size:.88rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:.5rem}
+.done-title{font-size:1.15rem;font-weight:700;color:#2e2010}
+.done-sub{font-size:.75rem;color:#c8943a;line-height:1.6;max-width:260px}
+.done-again{background:#2e2010;color:#fff;border:none;border-radius:12px;padding:.6rem 1.5rem;font-size:.88rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:.5rem}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+<a style="display:inline-flex;align-items:center;gap:.3rem;font-size:13px;color:#c8943a;text-decoration:none;padding:1rem 1.2rem .3rem;opacity:.8;" href="index.html">← Mein Fokus</a>
 <div class="hdr">
   <div><h1>🌸 Beckenboden</h1><p id="hdrSub">5 Übungen · ca. 3 Minuten</p></div>
   <button class="reset-btn" onclick="goIntro()">↺ Neu</button>

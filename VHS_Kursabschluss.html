@@ -6,21 +6,20 @@
 <title>Kursabschluss</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Georgia,'Times New Roman',serif;background:#f5f0e8;min-height:100vh}
-header{background:#2c2416;color:#f5f0e8;padding:1.2rem 1.2rem 1rem;border-bottom:4px solid #c4a265}
-.label{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#c4a265;margin-bottom:.25rem}
+body{font-family:'Cormorant Garamond',serif;background:#faf3e8;min-height:100vh}
+header{background:#faf3e8;color:#2e2010;padding:1.2rem 1.2rem 1rem;border-bottom:1.5px solid rgba(180,130,70,0.3)}
+.label{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#c8943a;margin-bottom:.25rem}
 h1{font-size:1.5rem;font-weight:normal}
 .tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.9rem;align-items:center}
-.tab{padding:.32rem .8rem;border:2px solid #5a4a30;border-radius:2px;background:transparent;color:#c4a265;font-size:.72rem;letter-spacing:.05em;cursor:pointer;font-family:Georgia,serif;transition:all .15s}
-.tab.active{border-color:#c4a265;background:#c4a265;color:#2c2416}
-.reset{margin-left:auto;padding:.32rem .8rem;border:2px solid #5a4a30;border-radius:2px;background:transparent;color:#8a7a60;font-size:.7rem;cursor:pointer;font-family:Georgia,serif}
-.reset:active{background:#5a4a30;color:#f5f0e8}
+.tab{padding:.32rem .8rem;border:2px solid rgba(180,130,70,0.35);border-radius:2px;background:transparent;color:#c8943a;font-size:.72rem;letter-spacing:.05em;cursor:pointer;font-family:'Cormorant Garamond',serif;transition:all .15s}
+.tab.active{border-color:#c8943a;background:#c8943a;color:#2e2010}
+.reset{margin-left:auto;padding:.32rem .8rem;border:2px solid rgba(180,130,70,0.35);border-radius:2px;background:transparent;color:#8a7a60;font-size:.7rem;cursor:pointer;font-family:'Cormorant Garamond',serif;color:#2e2010}
 main{max-width:860px;margin:0 auto;padding:1.2rem}
 .cards{display:grid;gap:1rem}
-.card{background:#fff;border:2px solid #ddd5c5;border-radius:4px;overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.card{background:#fffdf8;border:2px solid #ddd5c5;border-radius:4px;overflow:hidden;transition:border-color .3s,box-shadow .3s}
 .card-header{padding:.8rem 1.2rem;display:flex;align-items:center;gap:.8rem;transition:background .3s}
 .card-icon{font-size:.68rem;letter-spacing:.1em;font-weight:bold;flex-shrink:0}
-.card-title{font-weight:bold;font-size:.95rem;color:#2c2416}
+.card-title{font-weight:bold;font-size:.95rem;color:#2e2010}
 .card-subtitle{font-size:.75rem;color:#6b5a3e}
 .card-count{text-align:right;flex-shrink:0}
 .count-num{font-size:1.2rem;font-weight:bold;line-height:1}
@@ -32,13 +31,15 @@ main{max-width:860px;margin:0 auto;padding:1.2rem}
 .task-item:last-child{border:none}
 .task-item:active{background:#f0ebe088}
 .checkbox{width:20px;height:20px;border:2px solid #c5b99a;border-radius:2px;background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
-.task-label{font-size:.86rem;color:#2c2416;font-family:Georgia,serif;transition:all .2s;line-height:1.35}
+.task-label{font-size:.86rem;color:#2e2010;font-family:'Cormorant Garamond',serif;transition:all .2s;line-height:1.35}
 .task-label.done-text{text-decoration:line-through;color:#8a7a60}
 footer{text-align:center;font-size:.7rem;color:#a09070;letter-spacing:.05em;padding:1.2rem;margin-top:.5rem}
-.all-done-banner{display:none;background:#2c2416;color:#c4a265;text-align:center;padding:.6rem;font-size:.82rem;letter-spacing:.1em;border-top:2px solid #c4a265}
+.all-done-banner{display:none;background:#faf3e8;color:#c8943a;text-align:center;padding:.6rem;font-size:.82rem;letter-spacing:.1em;border-top:2px solid #c8943a}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+<a style="display:inline-flex;align-items:center;gap:.3rem;font-size:13px;color:#c8943a;text-decoration:none;padding:.8rem 1.2rem .3rem;opacity:.8;" href="index.html">← Mein Fokus</a>
 <header>
   <div class="label">Volkshochschule</div>
   <h1>Kursabschluss</h1>
@@ -64,7 +65,7 @@ var courses = {
     {id:'di1', name:'Johannagasse', subtitle:'Abschluss online', color:'#d8e6f0', accent:'#4a7aa8', icon:'&#x2460;'}
   ],
   mi: [
-    {id:'mi1', name:'Singrienergasse', subtitle:'Gruppe 1 / 2', color:'#f0e4c8', accent:'#c4a265', icon:'&#x2460; &#x2461;'},
+    {id:'mi1', name:'Singrienergasse', subtitle:'Gruppe 1 / 2', color:'#f0e4c8', accent:'#c8943a', icon:'&#x2460; &#x2461;'},
     {id:'mi2', name:'Singrienergasse', subtitle:'Gruppe 3', color:'#dcecd8', accent:'#5a9e52', icon:'&#x2462;'}
   ],
   do: [
@@ -189,7 +190,7 @@ function render(){
     totalAll += total; doneAll += done;
 
     var hbg = allDone ? course.accent : course.color;
-    var tc  = allDone ? '#fff' : '#2c2416';
+    var tc  = allDone ? '#fff' : '#2e2010';
     var sc  = allDone ? '#ffffffbb' : '#6b5a3e';
     var ic  = allDone ? '#ffffffcc' : course.accent;
     var cc  = allDone ? '#fff' : course.accent;

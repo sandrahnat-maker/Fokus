@@ -4,74 +4,85 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Meine Pflanzen</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',system-ui,sans-serif;background:#f0f7f0;color:#1a3020;padding:.7rem;padding-bottom:3rem}
-h1{font-size:1.05rem;font-weight:700;color:#2E7D32;margin-bottom:.3rem}
-.sub{font-size:.72rem;color:#5a8a5a;margin-bottom:.7rem}
-.tip{background:#E8F5E9;border-left:3px solid #4CAF50;border-radius:8px;padding:.45rem .7rem;margin-bottom:.7rem;font-size:.72rem;color:#2E7D32;line-height:1.5}
-.counter{font-size:.68rem;color:#5a8a5a;text-align:right;margin-bottom:.5rem}
-.plant{background:#fff;border-radius:12px;margin-bottom:.45rem;border:1px solid #c8e6c9;overflow:hidden}
-.plant.done{opacity:.45}
-.plant-top{display:flex;align-items:center;gap:.5rem;padding:.55rem .7rem;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.plant-icon{font-size:1.4rem;flex-shrink:0}
-.plant-info{flex:1;min-width:0}
-.plant-name{font-size:.85rem;font-weight:700;color:#1a3020;line-height:1.2}
-.plant.done .plant-name{text-decoration:line-through;color:#888}
-.plant-latin{font-size:.68rem;color:#5a8a5a;font-style:italic;margin-top:.08rem}
-.plant-giessen{font-size:.7rem;color:#2E7D32;margin-top:.1rem;font-weight:600}
-.plant-check{width:26px;height:26px;border-radius:50%;border:2px solid #66BB6A;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;transition:all .15s;background:transparent}
-.plant.done .plant-check{background:#2E7D32;border-color:#2E7D32;color:#fff}
-.plant-note{font-size:.7rem;color:#5a8a5a;padding:0 .7rem .5rem 2.9rem;line-height:1.45}
-.reset{position:fixed;bottom:1rem;right:1rem;background:#2E7D32;color:#fff;border:none;border-radius:20px;padding:.4rem 1rem;font-size:.75rem;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(46,125,50,.3)}
+:root{--bg:#faf3e8;--card:#fffdf8;--text:#2e2010;--muted:rgba(46,32,16,0.5);--gold:#c8943a;--gold-light:#e8c97a;--sage:#7a9a5a;--border:rgba(180,130,70,0.18);--shadow:rgba(160,100,30,0.10);}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{font-size:17px;}
+body{background:var(--bg);font-family:"Cormorant Garamond",serif;color:var(--text);min-height:100vh;padding-bottom:4rem;background-image:radial-gradient(ellipse at 10% 0%,rgba(200,148,58,0.08) 0%,transparent 60%),radial-gradient(ellipse at 90% 100%,rgba(122,154,90,0.07) 0%,transparent 60%);}
+.back{display:inline-flex;align-items:center;gap:.3rem;font-size:13px;color:var(--gold);text-decoration:none;padding:1rem 1.2rem .2rem;opacity:.8;}
+header{padding:.2rem 1.2rem .9rem;border-bottom:1px solid var(--border);}
+.lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem;}
+.ttl{font-family:"Playfair Display",serif;font-size:1.5rem;font-style:italic;font-weight:400;}
+.sub{font-size:13px;color:var(--muted);font-style:italic;margin-top:.2rem;}
+.info-box{margin:.8rem 1rem .4rem;padding:.6rem .9rem;background:rgba(122,154,90,0.08);border-left:2.5px solid var(--sage);border-radius:0 10px 10px 0;font-size:13px;font-style:italic;color:var(--muted);line-height:1.5;}
+.counter{font-size:11px;color:var(--muted);text-align:right;padding:.2rem 1.2rem .4rem;letter-spacing:.05em;}
+.plant{background:var(--card);border-radius:16px;margin:.3rem 1rem;border:1.5px solid var(--border);box-shadow:0 2px 10px var(--shadow);overflow:hidden;transition:opacity .2s;}
+.plant.done{opacity:.4;}
+.plant-top{display:flex;align-items:center;gap:.65rem;padding:.75rem .9rem;cursor:pointer;}
+.plant-icon{font-size:1.4rem;flex-shrink:0;}
+.plant-info{flex:1;min-width:0;}
+.plant-name{font-family:"Playfair Display",serif;font-size:1rem;font-style:italic;font-weight:400;color:var(--text);line-height:1.2;}
+.plant.done .plant-name{text-decoration:line-through;text-decoration-color:var(--gold-light);}
+.plant-latin{font-size:11px;color:var(--muted);font-style:italic;margin-top:.08rem;}
+.plant-freq{font-size:11px;color:var(--sage);margin-top:.1rem;}
+.plant-check{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+.plant.done .plant-check{background:var(--sage);border-color:var(--sage);}
+.plant.done .plant-check::after{content:"✓";color:#fff;font-size:12px;}
+.plant-note{font-size:12px;font-style:italic;color:var(--muted);padding:.1rem .9rem .65rem 3.9rem;line-height:1.5;border-top:1px solid var(--border);}
+.reset{position:fixed;bottom:1.2rem;right:1.2rem;background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:30px;padding:.4rem 1rem;font-size:13px;font-family:"Cormorant Garamond",serif;cursor:pointer;}
 </style>
 </head>
 <body>
-<h1>&#x1F33F; Meine Pflanzen giessen</h1>
-<p class="sub">Antippen = gegossen &#x2713;</p>
-<div class="tip">&#x1F4A7; Faustregel: Finger in die Erde &ndash; trocken? Dann giessen! Staunaesse vermeiden.</div>
+<a class="back" href="index.html">← Mein Fokus</a>
+<header>
+  <div class="lbl">Zuhause & Natur</div>
+  <div class="ttl">Meine Pflanzen</div>
+  <div class="sub">Antippen = gegossen ✓</div>
+</header>
+<div class="info-box">💧 Finger in die Erde — trocken? Dann gießen. Staunässe vermeiden.</div>
 <div class="counter" id="counter"></div>
 <div id="list"></div>
-<button class="reset" onclick="resetAll()">&#x21BA; Alle zuruecksetzen</button>
+<button class="reset" onclick="resetAll()">↺ Alle neu</button>
 <script>
-var PLANTS = [
-  {icon:'&#x1F332;',name:'Gummibaum',latin:'Ficus elastica',giessen:'alle 7-10 Tage',note:'Helles indirektes Licht \u00B7 Blaetter abwischen \u00B7 im Winter weniger giessen'},
-  {icon:'&#x1F333;',name:'Birkenfeige',latin:'Ficus benjamina',giessen:'wenn Erde oben trocken',note:'Standort nie wechseln! \u00B7 Apr-Sept duengen \u00B7 zieht bei Zugluft Blaetter ein'},
-  {icon:'&#x1F331;',name:'Einblatt',latin:'Spathiphyllum',giessen:'alle 5-7 Tage',note:'Haengende Blaetter = zu trocken \u00B7 Halbschatten geeignet \u00B7 entgiftet Luft'},
-  {icon:'&#x1FAB4;',name:'Efeutute',latin:'Epipremnum aureum',giessen:'alle 7 Tage',note:'Sehr pflegeleicht \u00B7 auch im Halbschatten \u00B7 haengende Ranken schneiden wenn noetig'},
-  {icon:'&#x1F335;',name:'Kaktus',latin:'Cactaceae',giessen:'alle 2-3 Wochen',note:'Im Winter kaum giessen \u00B7 volle Sonne \u00B7 sehr trockenresistent'},
-  {icon:'&#x1F940;',name:'Orchidee',latin:'Phalaenopsis',giessen:'alle 7-10 Tage (tauchen)',note:'Wurzeln gruenlich = gut bewaessert \u00B7 nach Bluete kurzschneiden \u00B7 keine Staundaesse'},
-  {icon:'&#x1F33C;',name:'Margerite / Bluetenstaude',latin:'Leucanthemum',giessen:'alle 3-4 Tage',note:'Regelmaessig duengen im Fruehling \u00B7 verwelkte Bluetenkoepfe abschneiden'},
-  {icon:'&#x1F343;',name:'Drachenbaumchen',latin:'Dracaena marginata',giessen:'alle 10-14 Tage',note:'Vertraegt Trockenheit gut \u00B7 kein Kalkwasser \u00B7 Blattspitzen braun = zu trockene Luft'},
-  {icon:'&#x1F490;',name:'Zamioculcas',latin:'Zamioculcas zamiifolia',giessen:'alle 14 Tage',note:'Extrem trockenresistent \u00B7 kein direktes Sonnenlicht \u00B7 sehr pflegeleicht'},
-  {icon:'&#x1F33A;',name:'Hibiskus',latin:'Hibiscus rosa-sinensis',giessen:'alle 3-4 Tage',note:'Viel Licht \u00B7 regelmaessig duengen Mai-Sept \u00B7 Blueteknospen nicht versetzen'},
+var PLANTS=[
+  {icon:'🌲',name:'Gummibaum',latin:'Ficus elastica',freq:'alle 7–10 Tage',note:'Helles indirektes Licht · Blätter abwischen · im Winter weniger'},
+  {icon:'🌳',name:'Birkenfeige',latin:'Ficus benjamina',freq:'wenn Erde oben trocken',note:'Standort nie wechseln! · Apr–Sept düngen · zieht bei Zugluft Blätter ein'},
+  {icon:'🌱',name:'Einblatt',latin:'Spathiphyllum',freq:'alle 5–7 Tage',note:'Hängende Blätter = zu trocken · Halbschatten geeignet · reinigt die Luft'},
+  {icon:'🪴',name:'Efeutute',latin:'Epipremnum aureum',freq:'alle 7 Tage',note:'Sehr pflegeleicht · auch im Halbschatten · Ranken bei Bedarf kürzen'},
+  {icon:'🌵',name:'Kaktus',latin:'Cactaceae',freq:'alle 2–3 Wochen',note:'Im Winter kaum gießen · volle Sonne · sehr trockenresistent'},
+  {icon:'🌸',name:'Orchidee',latin:'Phalaenopsis',freq:'alle 7–10 Tage (tauchen)',note:'Wurzeln grünlich = gut bewässert · nach Blüte kurzschneiden · keine Staunässe'},
+  {icon:'🌼',name:'Margerite',latin:'Leucanthemum',freq:'alle 3–4 Tage',note:'Regelmäßig düngen im Frühling · verwelkte Blütenköpfe abschneiden'},
+  {icon:'🌿',name:'Drachenbäumchen',latin:'Dracaena marginata',freq:'alle 10–14 Tage',note:'Verträgt Trockenheit gut · kein Kalkwasser · braune Spitzen = zu trockene Luft'},
+  {icon:'🪷',name:'Zamioculcas',latin:'Zamioculcas zamiifolia',freq:'alle 14 Tage',note:'Extrem trockenresistent · kein direktes Sonnenlicht · sehr pflegeleicht'},
+  {icon:'🌺',name:'Hibiskus',latin:'Hibiscus rosa-sinensis',freq:'alle 3–4 Tage',note:'Viel Licht · regelmäßig düngen Mai–Sept · Blüteknospen nicht versetzen'},
 ];
-var done = {};
-try { done = JSON.parse(localStorage.getItem('pflanzen_v2') || '{}'); } catch(e){}
-function save(){ try { localStorage.setItem('pflanzen_v2', JSON.stringify(done)); } catch(e){} }
+var done={};
+try{done=JSON.parse(localStorage.getItem('pflanzen_v3')||'{}');}catch(e){}
+function save(){try{localStorage.setItem('pflanzen_v3',JSON.stringify(done));}catch(e){}}
 function render(){
-  var h = '';
-  var cnt = Object.values(done).filter(Boolean).length;
-  document.getElementById('counter').textContent = cnt + ' / ' + PLANTS.length + ' gegossen';
-  PLANTS.forEach(function(p, i){
-    var d = !!done[i];
-    h += '<div class="plant' + (d?' done':'') + '" id="p'+i+'">' +
-      '<div class="plant-top" onclick="toggle('+i+')">' +
-        '<span class="plant-icon">'+p.icon+'</span>' +
-        '<div class="plant-info">' +
-          '<div class="plant-name">'+p.name+'</div>' +
-          '<div class="plant-latin">'+p.latin+'</div>' +
-          '<div class="plant-giessen">&#x1F4A7; '+p.giessen+'</div>' +
-        '</div>' +
-        '<div class="plant-check">'+(d?'&#x2713;':'')+'</div>' +
-      '</div>' +
-      '<div class="plant-note">'+p.note+'</div>' +
-    '</div>';
+  var cnt=Object.values(done).filter(Boolean).length;
+  document.getElementById('counter').textContent=cnt+' von '+PLANTS.length+' gegossen';
+  var h='';
+  PLANTS.forEach(function(p,i){
+    var d=!!done[i];
+    h+='<div class="plant'+(d?' done':'')+'" id="p'+i+'">'
+      +'<div class="plant-top" onclick="toggle('+i+')">'
+      +'<span class="plant-icon">'+p.icon+'</span>'
+      +'<div class="plant-info">'
+      +'<div class="plant-name">'+p.name+'</div>'
+      +'<div class="plant-latin">'+p.latin+'</div>'
+      +'<div class="plant-freq">💧 '+p.freq+'</div>'
+      +'</div>'
+      +'<div class="plant-check"></div>'
+      +'</div>'
+      +'<div class="plant-note">'+p.note+'</div>'
+      +'</div>';
   });
-  document.getElementById('list').innerHTML = h;
+  document.getElementById('list').innerHTML=h;
 }
-function toggle(i){ done[i] = !done[i]; save(); render(); }
-function resetAll(){ done = {}; save(); render(); }
+function toggle(i){done[i]=!done[i];save();render();}
+function resetAll(){done={};save();render();}
 render();
 </script>
 </body>

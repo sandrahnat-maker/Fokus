@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🍖 Futter-Bestellplaner – Rudi, Timmy & Lotte</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --rudi: #2563a8;
@@ -21,12 +21,12 @@
     --danger-light: #fee2e2;
     --bg: #faf9f7;
     --card: #ffffff;
-    --text: #1c1917;
-    --muted: #78716c;
-    --border: #e7e5e4;
+    --text: #2e2010;
+    --muted: rgba(46,32,16,0.5);
+    --border: rgba(180,130,70,0.2);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  body { font-family: 'Cormorant Garamond', serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
   header {
     background: var(--text);
@@ -43,7 +43,7 @@
     background: rgba(255,255,255,0.04);
   }
   .header-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
-  header h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+  header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; letter-spacing: -0.02em; margin-bottom: 0.25rem; }
   header p { font-size: 0.875rem; color: rgba(255,255,255,0.55); font-weight: 300; }
 
   .tabs {
@@ -53,7 +53,7 @@
   }
   .tabs-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 0; }
   .tab {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 0.85rem;
     font-weight: 600;
     padding: 0.9rem 1.25rem;
@@ -117,7 +117,7 @@
   .stat-value { font-size: 0.85rem; font-weight: 600; }
 
   .big-number {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 2.2rem;
     line-height: 1;
     margin: 0.5rem 0 0.25rem;
@@ -129,7 +129,7 @@
   /* Monthly summary table */
   .summary-section { margin-top: 1.5rem; }
   .section-title {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1.2rem;
     margin-bottom: 0.75rem;
   }
@@ -248,8 +248,10 @@
     .overview-grid { grid-template-columns: 1fr; }
   }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+<a style="display:inline-flex;align-items:center;gap:.3rem;font-size:13px;color:#c8943a;text-decoration:none;padding:.8rem 1.2rem .3rem;opacity:.8;" href="index.html">← Mein Fokus</a>
 
 <header>
   <div class="header-inner">

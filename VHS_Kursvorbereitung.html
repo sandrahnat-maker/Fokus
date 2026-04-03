@@ -9,15 +9,15 @@
 
     body {
       min-height: 100vh;
-      background: #f5f0e8;
-      font-family: Georgia, 'Times New Roman', serif;
+      background: #faf3e8;
+      font-family:'Cormorant Garamond',serif;
     }
 
     header {
-      background: #2c2416;
-      color: #f5f0e8;
+      background: #faf3e8;
+      color: #2e2010;
       padding: 2rem 2rem 1.5rem;
-      border-bottom: 4px solid #c4a265;
+      border-bottom: 1.5px solid rgba(180,130,70,0.3);
     }
 
     .header-inner { max-width: 860px; margin: 0 auto; }
@@ -26,7 +26,7 @@
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #c4a265;
+      color: #c8943a;
       margin-bottom: 0.4rem;
     }
 
@@ -46,34 +46,34 @@
 
     .tab-btn {
       padding: 0.4rem 1rem;
-      border: 2px solid #5a4a30;
+      border: 2px solid rgba(180,130,70,0.35);
       border-radius: 2px;
       background: transparent;
-      color: #c4a265;
+      color: #c8943a;
       font-size: 0.78rem;
       letter-spacing: 0.08em;
       cursor: pointer;
-      font-family: Georgia, serif;
+      font-family:'Cormorant Garamond',serif;
       transition: all 0.15s;
     }
 
     .tab-btn.active {
-      border-color: #c4a265;
-      background: #c4a265;
-      color: #2c2416;
+      border-color: #c8943a;
+      background: #c8943a;
+      color: #2e2010;
     }
 
     .reset-btn {
       margin-left: auto;
       padding: 0.4rem 1rem;
-      border: 2px solid #5a4a30;
+      border: 2px solid rgba(180,130,70,0.35);
       border-radius: 2px;
       background: transparent;
       color: #8a7a60;
       font-size: 0.75rem;
       letter-spacing: 0.08em;
       cursor: pointer;
-      font-family: Georgia, serif;
+      font-family:'Cormorant Garamond',serif;
     }
 
     main {
@@ -85,7 +85,7 @@
     .cards { display: grid; gap: 1.5rem; }
 
     .card {
-      background: #fff;
+      background: #fffdf8;
       border: 2px solid #ddd5c5;
       border-radius: 4px;
       overflow: hidden;
@@ -108,7 +108,7 @@
       font-weight: bold;
     }
 
-    .card-title { font-weight: bold; font-size: 1.05rem; color: #2c2416; transition: color 0.3s; }
+    .card-title { font-weight: bold; font-size: 1.05rem; color: #2e2010; transition: color 0.3s; }
     .card-subtitle { font-size: 0.82rem; color: #6b5a3e; transition: color 0.3s; }
     .card-count { text-align: right; }
     .count-num { font-size: 1.4rem; font-weight: bold; line-height: 1; transition: color 0.3s; }
@@ -155,8 +155,8 @@
 
     .task-label {
       font-size: 0.9rem;
-      color: #2c2416;
-      font-family: Georgia, serif;
+      color: #2e2010;
+      font-family:'Cormorant Garamond',serif;
       transition: all 0.2s;
     }
 
@@ -174,8 +174,10 @@
       padding-bottom: 2rem;
     }
   </style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+<a style="display:inline-flex;align-items:center;gap:.3rem;font-size:13px;color:#c8943a;text-decoration:none;padding:.8rem 1.2rem .3rem;opacity:.8;" href="index.html">← Mein Fokus</a>
 
 <header>
   <div class="header-inner">
@@ -196,7 +198,7 @@
 
 <script>
   const courses = [
-    { id: 1, name: "Singrienergasse", subtitle: "Gruppe 1 / 2", color: "#e8d5b7", accent: "#c4a265", icon: "\u2460 \u2461" },
+    { id: 1, name: "Singrienergasse", subtitle: "Gruppe 1 / 2", color: "#e8d5b7", accent: "#c8943a", icon: "\u2460 \u2461" },
     { id: 2, name: "Singrienergasse", subtitle: "Gruppe 3",    color: "#d4e8d0", accent: "#5a9e52", icon: "\u2462" },
     { id: 3, name: "Rosasgasse",      subtitle: "Gruppe 1 \u2013 4",color: "#d0dde8", accent: "#4a7aa8", icon: "\u2460 \u2461 \u2462 \u2463" },
     { id: 4, name: "Johann Hoffmann Platz", subtitle: "Gruppe 1 / 2", color: "#e8d0d8", accent: "#a8476a", icon: "\u2460 \u2461" },
@@ -264,7 +266,7 @@
       if (allDone) card.style.boxShadow = `0 2px 12px ${course.accent}55`;
 
       const headerBg = allDone ? course.accent : course.color;
-      const titleColor = allDone ? "#fff" : "#2c2416";
+      const titleColor = allDone ? "#fff" : "#2e2010";
       const subtitleColor = allDone ? "#ffffffbb" : "#6b5a3e";
       const iconColor = allDone ? "#fff8" : course.accent;
       const countColor = allDone ? "#fff" : course.accent;

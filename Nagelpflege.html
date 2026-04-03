@@ -1,41 +1,97 @@
-<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>&#128133; Nagelpflege</title><style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;background:#f7f3ee;color:#2c2416;padding:.8rem;padding-bottom:3rem}
-h1{font-size:1.1rem;font-weight:700;color:#8B6A3E;margin-bottom:.8rem;padding-bottom:.4rem;border-bottom:2px solid #e8ddd0}
-.item{display:flex;align-items:flex-start;gap:.7rem;padding:.6rem .7rem;background:#fff;border-radius:10px;margin-bottom:.4rem;border:1px solid #ede4d8;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.item.done{opacity:.45}.item.done .nm{text-decoration:line-through}
-.cb{width:22px;height:22px;border-radius:6px;border:2px solid #c4a06a;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;margin-top:.05rem;color:#fff}
-.item.done .cb{background:#8B6A3E;border-color:#8B6A3E}
-.nm{font-size:.88rem;font-weight:600;line-height:1.3}
-.sb{font-size:.75rem;color:#9A7A50;margin-top:.12rem;line-height:1.4}
-.sec{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#b8956a;margin:.8rem 0 .3rem .2rem}
-.info{font-size:.72rem;color:#b8956a;background:#fdf5ec;border-radius:8px;padding:.4rem .6rem;margin-bottom:.5rem;line-height:1.5}
-.reset{position:fixed;bottom:1rem;right:1rem;background:#8B6A3E;color:#fff;border:none;border-radius:20px;padding:.45rem 1.1rem;font-size:.78rem;cursor:pointer;box-shadow:0 2px 8px rgba(139,106,62,.3);font-family:inherit}
-</style></head><body>
-<h1>&#128133; Nagelpflege</h1>
+<title>Nagelpflege</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf3e8;--card:#fffdf8;--text:#2e2010;--muted:rgba(46,32,16,0.5);--gold:#c8943a;--gold-light:#e8c97a;--sage:#7a9a5a;--border:rgba(180,130,70,0.18);--shadow:rgba(160,100,30,0.10);}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{background:var(--bg);font-family:"Cormorant Garamond",serif;color:var(--text);min-height:100vh;padding-bottom:4rem;background-image:radial-gradient(ellipse at 10% 0%,rgba(200,148,58,0.08) 0%,transparent 60%),radial-gradient(ellipse at 90% 100%,rgba(122,154,90,0.07) 0%,transparent 60%);}
+.back{display:inline-flex;align-items:center;gap:.3rem;font-size:13px;color:var(--gold);text-decoration:none;padding:1rem 1.2rem .2rem;opacity:.8;}
+header{padding:.2rem 1.2rem .9rem;border-bottom:1px solid var(--border);}
+.lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem;}
+.ttl{font-family:"Playfair Display",serif;font-size:1.5rem;font-style:italic;font-weight:400;line-height:1.2;}
+.sub{font-size:13px;color:var(--muted);font-style:italic;margin-top:.2rem;}
+.progress-wrap{padding:.6rem 1.2rem .2rem;}
+.progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:.3rem;}
+.progress-bar{height:3px;background:var(--border);border-radius:10px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:10px;transition:width .5s ease;}
+.sec{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);padding:.9rem 1.2rem .2rem;}
+.info-box{margin:.3rem 1rem .5rem;padding:.6rem .9rem;background:rgba(200,148,58,0.07);border-left:2.5px solid var(--gold);border-radius:0 10px 10px 0;font-size:13px;font-style:italic;color:var(--muted);line-height:1.6;}
+.card{background:var(--card);border-radius:16px;border:1.5px solid var(--border);box-shadow:0 3px 16px var(--shadow);margin:.2rem 1rem .5rem;overflow:hidden;}
+.item{display:flex;align-items:flex-start;gap:.65rem;padding:.7rem .9rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;}
+.item:last-child{border-bottom:none;}
+.item:active{background:rgba(200,148,58,0.06);}
+.item.done{opacity:.42;}
+.item.done .nm{text-decoration:line-through;text-decoration-color:var(--gold-light);}
+.check{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.item.done .check{background:var(--sage);border-color:var(--sage);}
+.item.done .check::after{content:"✓";color:#fff;font-size:11px;}
+.nm{font-size:15px;color:var(--text);line-height:1.3;}
+.sb{font-size:12px;font-style:italic;color:var(--muted);margin-top:2px;line-height:1.4;}
+.reset{position:fixed;bottom:1.2rem;right:1.2rem;background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:30px;padding:.4rem 1rem;font-size:13px;font-family:"Cormorant Garamond",serif;cursor:pointer;}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← Mein Fokus</a>
+<header>
+  <div class="lbl">Pflege & Schönheit</div>
+  <div class="ttl">Nagelpflege</div>
+  <div class="sub">Täglich, wöchentlich & bei Christina</div>
+</header>
+<div class="progress-wrap">
+  <div class="progress-label"><span id="pTxt">0 erledigt</span><span id="pPct">0%</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="pFill" style="width:0%"></div></div>
+</div>
 <div id="L"></div>
-<button class="reset" onclick="rst()">&#8634; Zur&#252;cksetzen</button>
+<button class="reset" onclick="rst()">↺ Neu beginnen</button>
 <script>
-var D=[{"info": "T\u00E4glich: Nagel\u00F6l + Handcreme \u00B7 So: Nagelpflege-Ritual \u00B7 3\u00D7 j\u00E4hrl: Christina"}, {"sec": "T\u00E4glich"}, {"n": "Nagel\u00F6l auftragen", "s": "Jojoba-\u00D6l \u2013 Nagelhaut sanft einmassieren"}, {"n": "Handcreme", "s": "Lavera Basis Sensitiv Handcreme"}, {"sec": "W\u00F6chentlich \u2013 So: Nagelpflege-Ritual"}, {"n": "Oliven\u00F6l-Bad", "s": "10 Min \u2013 Finger & Zehen einweichen"}, {"n": "Nagelhaut zur\u00FCckschieben", "s": "Sanft mit Orangenholzst\u00E4bchen \u2013 nie schneiden"}, {"n": "N\u00E4gel feilen", "s": "Nur in eine Richtung \u2013 leicht oval"}, {"n": "Nagel\u00F6l einmassieren", "s": "Jojoba-\u00D6l \u2013 Nagelhaut & Nagelbett"}, {"n": "Handcreme abschlie\u00DFend", "s": "Lavera Basis Sensitiv"}, {"sec": "F\u00FC\u00DFe \u2013 w\u00F6chentlich So"}, {"n": "Hornhaut bearbeiten", "s": "Bimsstein oder Hornhautfeile \u2013 nach dem Bad"}, {"n": "Fersen eincremen", "s": "Lavera Fu\u00DFcreme mit Bio-Sanddorn \u2013 dick auftragen"}, {"n": "Fu\u00DFn\u00E4gel feilen", "s": "Gerade feilen \u2013 nicht zu kurz"}, {"sec": "Monatlich"}, {"n": "N\u00E4gel schneiden (H\u00E4nde)", "s": "Gerade schneiden, dann formen"}, {"n": "N\u00E4gel schneiden (F\u00FC\u00DFe)", "s": "Gerade \u2013 Einwachsen vermeiden"}, {"sec": "Bei Christina \u2013 3\u00D7 j\u00E4hrlich"}, {"n": "Manik\u00FCre & Pedik\u00FCre", "s": "Apr / Jul / Okt \u00B7 0690/104 949 26"}];
+var D=[
+  {info:"Täglich: Nagelöl + Handcreme · So: Nagelpflege-Ritual · 3× jährl: Christina"},
+  {sec:"Täglich"},
+  {n:"Nagelöl auftragen",s:"Jojobaöl — Nagelhaut sanft einmassieren"},
+  {n:"Handcreme",s:"Lavera Basis Sensitiv"},
+  {sec:"Wöchentlich — Sonntag"},
+  {n:"Olivenöl-Bad",s:"10 Min — Finger & Zehen einweichen"},
+  {n:"Nagelhaut zurückschieben",s:"Sanft mit Orangenholzstäbchen — nie schneiden"},
+  {n:"Nägel feilen",s:"Nur in eine Richtung — leicht oval"},
+  {n:"Nagelöl einmassieren",s:"Jojobaöl — Nagelhaut & Nagelbett"},
+  {n:"Handcreme abschließend",s:"Lavera Basis Sensitiv"},
+  {sec:"Füße — wöchentlich"},
+  {n:"Hornhaut bearbeiten",s:"Bimsstein oder Hornhautfeile — nach dem Bad"},
+  {n:"Fersen eincremen",s:"Lavera Fußcreme mit Bio-Sanddorn — dick auftragen"},
+  {n:"Fußnägel feilen",s:"Gerade feilen — nicht zu kurz"},
+  {sec:"Monatlich"},
+  {n:"Nägel schneiden (Hände)",s:"Gerade schneiden, dann formen"},
+  {n:"Nägel schneiden (Füße)",s:"Gerade — Einwachsen vermeiden"},
+  {sec:"Bei Christina — 3× jährlich"},
+  {n:"Maniküre & Pediküre",s:"Apr / Jul / Okt · 0690/104 949 26"}
+];
 var S={};
-function tog(i){if(D[i]&&D[i].sec)return;S[i]=!S[i];rnd()}
-function rst(){S={};rnd()}
+var items=D.filter(function(d){return !d.sec&&!d.info;});
+function count(){return Object.keys(S).filter(function(k){return S[k];}).length;}
+function prog(){var n=count(),t=items.length,p=t?Math.round(n/t*100):0;document.getElementById('pTxt').textContent=n+' von '+t+' erledigt';document.getElementById('pPct').textContent=p+'%';document.getElementById('pFill').style.width=p+'%';}
+function tog(i){if(!D[i]||D[i].sec||D[i].info)return;S[i]=!S[i];rnd();}
+function rst(){S={};rnd();}
 function rnd(){
-  var html='';
+  var html='',inCard=false;
   for(var i=0;i<D.length;i++){
     var it=D[i];
-    if(it.sec){html+='<div class="sec">'+it.sec+'</div>';continue;}
-    if(it.info){html+='<div class="info">'+it.info+'</div>';continue;}
+    if(it.info){if(inCard){html+='</div>';inCard=false;}html+='<div class="info-box">'+it.info+'</div>';continue;}
+    if(it.sec){if(inCard){html+='</div>';inCard=false;}html+='<div class="sec">'+it.sec+'</div><div class="card">';inCard=true;continue;}
     var d=!!S[i];
-    html+='<div class="item'+(d?' done':'')+'" onclick="tog('+i+')">';
-    html+='<div class="cb">'+(d?'&#10003;':'')+'</div>';
-    html+='<div><div class="nm">'+it.n+'</div>';
-    if(it.s)html+='<div class="sb">'+it.s+'</div>';
-    html+='</div></div>';
+    html+='<div class="item'+(d?' done':'')+'\" onclick="tog('+i+')">'
+      +'<div class="check"></div>'
+      +'<div><div class="nm">'+it.n+'</div>'+(it.s?'<div class="sb">'+it.s+'</div>':'')+'</div>'
+      +'</div>';
   }
+  if(inCard)html+='</div>';
   document.getElementById('L').innerHTML=html;
+  prog();
 }
 rnd();
-</script></body></html>
+</script>
+</body>
+</html>
