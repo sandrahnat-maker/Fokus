@@ -39,14 +39,14 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
 /* ── RHYTHMUS ── */
 .rhythmus-wrap{margin:.8rem 1rem 0;}
 .rhythmus-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.2rem;}
-.waves{display:flex;gap:.5rem;}
-.wave{flex:1;background:var(--card);border-radius:16px;border:1.5px solid var(--border);padding:.75rem .7rem;text-align:center;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.waves{display:flex;gap:.3rem;}
+.wave{flex:1;background:var(--card);border-radius:14px;border:1.5px solid var(--border);padding:.6rem .3rem;text-align:center;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
 .wave.active{border-color:var(--gold);box-shadow:0 2px 16px rgba(200,148,58,0.15);}
 .wave.active::before{content:'';position:absolute;inset:0;background:rgba(200,148,58,0.04);}
-.wave-icon{font-size:1.3rem;margin-bottom:.3rem;}
-.wave-name{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.wave-icon{font-size:1.1rem;margin-bottom:.2rem;}
+.wave-name{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
 .wave.active .wave-name{color:var(--gold);}
-.wave-time{font-size:11px;color:var(--muted);font-style:italic;margin-top:.15rem;}
+.wave-time{font-size:10px;color:var(--muted);font-style:italic;margin-top:.1rem;}
 
 /* ── PHASE CONTENT ── */
 .phase-content{margin:.6rem 1rem 0;animation:fadeIn .35s ease;}
@@ -102,6 +102,7 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
 <header>
   <div class="date-line" id="dateLine"></div>
   <div class="goal-text" style="font-family:'Playfair Display',serif;font-size:18px;font-style:italic;font-weight:600;color:var(--terra);line-height:1.45;">Das ist mein selbstbestimmtes Leben: Im Flow, voller Fröhlichkeit und Phantasie!</div>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--muted);margin-top:.45rem;line-height:1.5;">Ich will heute so leben, wie ich mein ganzes Leben leben will.</div>
 </header>
 
 <!-- INTENTION -->
@@ -123,17 +124,27 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
     <div class="wave" id="wave-morgen" onclick="showPhase('morgen')">
       <div class="wave-icon">🌅</div>
       <div class="wave-name">Morgen</div>
-      <div class="wave-time">bis 11h</div>
+      <div class="wave-time">bis 9h</div>
+    </div>
+    <div class="wave" id="wave-vormittag" onclick="showPhase('vormittag')">
+      <div class="wave-icon">☀️</div>
+      <div class="wave-name">Vormittag</div>
+      <div class="wave-time">9–12h</div>
     </div>
     <div class="wave" id="wave-mittag" onclick="showPhase('mittag')">
       <div class="wave-icon">🌿</div>
       <div class="wave-name">Mittag</div>
-      <div class="wave-time">11–17h</div>
+      <div class="wave-time">12–15h</div>
+    </div>
+    <div class="wave" id="wave-nachmittag" onclick="showPhase('nachmittag')">
+      <div class="wave-icon">🍂</div>
+      <div class="wave-name">Nachmittag</div>
+      <div class="wave-time">15–18h</div>
     </div>
     <div class="wave" id="wave-abend" onclick="showPhase('abend')">
       <div class="wave-icon">🌙</div>
       <div class="wave-name">Abend</div>
-      <div class="wave-time">ab 17h</div>
+      <div class="wave-time">ab 18h</div>
     </div>
   </div>
 </div>
@@ -250,6 +261,16 @@ var PHASES={
       {name:"Tiermedikamente",note:"Lotte + Rudi",cat:"tiere"},
     ]
   },
+  vormittag:{
+    mood:"Der Vormittag trägt dich in den Tag hinein — frisch, klar, lebendig. Ich will diesen Vormittag so leben, wie ich mein ganzes Leben leben will.",
+    tasks:[
+      {name:"Frische Luft & Bewegung",note:"Spaziergang, Wald, oder kurz raus",cat:"körper"},
+      {name:"Kreative Aufgabe",note:"DaZF, Atelier, oder etwas Eigenes",cat:"lernen"},
+      {name:"Tee & bewusste Pause",note:"nicht nebenbei — wirklich genießen",cat:"seele"},
+      {name:"Lotte — Vormittagsrunde",note:"in Ruhe, ohne Hetze",cat:"tiere"},
+      {name:"Eine Sache erledigen",note:"die sich schon länger wartet",cat:"arbeit"},
+    ]
+  },
   mittag:{
     mood:"Die Mitte des Tages — du bist unterwegs, lehrst, lernst, schaffst. Alles fließt durch dich hindurch.",
     tasks:[
@@ -258,6 +279,16 @@ var PHASES={
       {name:"Gabapentin (Rudi)",note:"nach dem Mittagessen",cat:"tiere"},
       {name:"Bewegung oder frische Luft",note:"auch 10 Min. zählen",cat:"körper"},
       {name:"DaZF-Aufgabe",note:"ein kleiner Schritt genügt",cat:"lernen"},
+    ]
+  },
+  nachmittag:{
+    mood:"Der Nachmittag — eine zweite Chance, ganz bei dir zu sein. Ich will diesen Nachmittag so leben, wie ich mein ganzes Leben leben will.",
+    tasks:[
+      {name:"Mittagessen nachhallen lassen",note:"kein sofortiger Weiterstart",cat:"seele"},
+      {name:"Körperpflege oder Bad",note:"Weleda, Wärme, für mich",cat:"pflege"},
+      {name:"DaZF oder Vorbereitung",note:"ruhig & fokussiert",cat:"lernen"},
+      {name:"Kreativzeit",note:"Atelier, Zeichnen, Lesen",cat:"seele"},
+      {name:"Lotte — Nachmittagsrunde",note:"gemütlich, keine Eile",cat:"tiere"},
     ]
   },
   abend:{
@@ -281,15 +312,16 @@ var currentPhase=null;
 
 function getPhaseByTime(){
   var h=today.getHours();
-  if(h<11)return'morgen';
-  if(h<17)return'mittag';
+  if(h<9)return'morgen';
+  if(h<12)return'vormittag';
+  if(h<15)return'mittag';
+  if(h<18)return'nachmittag';
   return'abend';
 }
 
 function showPhase(p){
   currentPhase=p;
-  // Wellen aktivieren
-  ['morgen','mittag','abend'].forEach(function(w){
+  ['morgen','vormittag','mittag','nachmittag','abend'].forEach(function(w){
     document.getElementById('wave-'+w).className='wave'+(w===p?' active':'');
   });
   var phase=PHASES[p];
