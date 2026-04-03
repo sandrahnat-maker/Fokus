@@ -14,95 +14,95 @@
   --rose:#c07060;--terra:#c4704a;--border:rgba(180,130,70,0.18);--shadow:rgba(160,100,30,0.10);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html{font-size:16px;}
+html{font-size:26px;}
 body{background:var(--bg);font-family:"Cormorant Garamond",Georgia,serif;color:var(--text);min-height:100vh;padding-bottom:5rem;
   background-image:radial-gradient(ellipse at 10% 0%,rgba(200,148,58,0.08) 0%,transparent 60%),
                    radial-gradient(ellipse at 90% 100%,rgba(122,154,90,0.07) 0%,transparent 60%);}
 
 /* ── HEADER ── */
 header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
-.date-line{font-size:15px;color:var(--muted);letter-spacing:.04em;margin-bottom:.4rem;}
-.goal-text{font-family:"Playfair Display",serif;font-size:16px;font-style:italic;color:var(--text);line-height:1.5;}
+.date-line{font-size:16px;color:var(--muted);letter-spacing:.08em;margin-bottom:.3rem;}
+.goal-text{font-family:"Playfair Display",serif;font-size:24px;font-style:italic;color:var(--text);line-height:1.5;}
 
 /* ── INTENTION ── */
 .intention-wrap{margin:1rem 1rem 0;background:var(--card);border-radius:20px;border:1.5px solid var(--border);box-shadow:0 4px 20px var(--shadow);overflow:hidden;}
 .intention-top{padding:.9rem 1.1rem .5rem;display:flex;align-items:center;gap:.5rem;}
 .intention-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 3s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
-.intention-label{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
-.intention-text{padding:.2rem 1.1rem 1rem;font-family:"Playfair Display",serif;font-size:22px;font-style:italic;color:var(--text);line-height:1.5;min-height:56px;}
-.intention-text.loading{color:var(--muted);font-size:15px;font-family:"Cormorant Garamond",serif;}
+.intention-label{font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
+.intention-text{padding:.2rem 1.1rem 1rem;font-family:"Playfair Display",serif;font-size:27px;font-style:italic;color:var(--text);line-height:1.5;min-height:56px;}
+.intention-text.loading{color:var(--muted);font-size:22px;font-family:"Cormorant Garamond",serif;}
 .intention-refresh{display:flex;align-items:center;justify-content:flex-end;padding:.2rem 1.1rem .7rem;}
-.refresh-btn{font-size:16px;font-style:italic;color:var(--muted);background:none;border:none;cursor:pointer;font-family:"Cormorant Garamond",serif;opacity:.85;}
+.refresh-btn{font-size:18px;font-style:italic;color:var(--muted);background:none;border:none;cursor:pointer;font-family:"Cormorant Garamond",serif;opacity:.7;}
 .refresh-btn:hover{opacity:1;color:var(--gold);}
 
 /* ── RHYTHMUS ── */
 .rhythmus-wrap{margin:.8rem 1rem 0;}
-.rhythmus-label{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;padding-left:.2rem;}
+.rhythmus-label{font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.2rem;}
 .waves{display:flex;gap:.3rem;}
 .wave{flex:1;background:var(--card);border-radius:14px;border:1.5px solid var(--border);padding:.6rem .3rem;text-align:center;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
 .wave.active{border-color:var(--gold);box-shadow:0 2px 16px rgba(200,148,58,0.15);}
 .wave.active::before{content:'';position:absolute;inset:0;background:rgba(200,148,58,0.04);}
 .wave-icon{font-size:1.1rem;margin-bottom:.2rem;}
-.wave-name{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+.wave-name{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
 .wave.active .wave-name{color:var(--gold);}
-.wave-time{font-size:10px;color:var(--muted);font-style:italic;margin-top:.1rem;}
+.wave-time{font-size:15px;color:var(--muted);font-style:italic;margin-top:.1rem;}
 
 /* ── PHASE CONTENT ── */
 .phase-content{margin:.6rem 1rem 0;animation:fadeIn .35s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .phase-card{background:var(--card);border-radius:16px;border:1.5px solid var(--border);box-shadow:0 3px 14px var(--shadow);padding:.8rem 1rem;}
-.phase-mood{font-size:16px;font-style:italic;color:rgba(46,32,16,0.75);line-height:1.65;margin-bottom:.7rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
+.phase-mood{font-size:20px;font-style:italic;color:var(--muted);line-height:1.65;margin-bottom:.7rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
 
 /* Aufgaben — sanft, fast unsichtbar */
 .task-item{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem .2rem;border-bottom:1px solid rgba(180,130,70,0.1);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .2s;}
 .task-item:last-child{border-bottom:none;}
 .task-item.done{opacity:.3;}
 .task-item.done .task-name{text-decoration:line-through;text-decoration-color:rgba(200,148,58,0.4);}
-.task-check{width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(180,130,70,0.5);flex-shrink:0;margin-top:2px;transition:all .2s;}
+.task-check{width:16px;height:16px;border-radius:50%;border:1px solid rgba(180,130,70,0.4);flex-shrink:0;margin-top:2px;transition:all .2s;}
 .task-item.done .task-check{background:var(--sage-light);border-color:var(--sage-light);}
-.task-name{font-size:18px;color:var(--text);line-height:1.4;font-weight:400;}
-.task-note{font-size:15px;font-style:italic;color:rgba(46,32,16,0.65);margin-top:2px;}
-.task-cat{font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-left:auto;flex-shrink:0;padding-top:3px;opacity:.75;}
+.task-name{font-size:21px;color:var(--text);line-height:1.35;font-weight:300;}
+.task-note{font-size:16px;font-style:italic;color:var(--muted);margin-top:1px;}
+.task-cat{font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-left:auto;flex-shrink:0;padding-top:3px;opacity:.5;}
 
 /* ── APPS ── */
 .section-wrap{margin:1rem 1rem 0;}
-.section-label{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.2rem;}
+.section-label{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.2rem;}
 .app-group{margin-bottom:.9rem;}
-.app-group-title{font-size:16px;color:var(--gold);font-style:italic;margin-bottom:.35rem;padding-left:.2rem;}
+.app-group-title{font-size:18px;color:var(--gold);font-style:italic;margin-bottom:.35rem;padding-left:.2rem;}
 .al{display:flex;align-items:center;gap:.65rem;padding:.6rem .85rem;background:var(--card);border-radius:11px;margin-bottom:.4rem;text-decoration:none;color:var(--text);border:1px solid var(--border);transition:background .15s;}
 .al:active{background:rgba(200,148,58,0.08);}
 .al-icon{font-size:1.2rem;}
-.al-text{font-size:18px;font-weight:400;flex:1;}
-.al-sub{font-size:15px;color:rgba(46,32,16,0.6);font-style:italic;}
+.al-text{font-size:22px;font-weight:400;flex:1;}
+.al-sub{font-size:18px;color:var(--muted);font-style:italic;}
 .al-arr{color:var(--gold-light);font-size:.85rem;margin-left:auto;}
 
 /* ── REFLEXION ── */
 .reflex-wrap{margin:1rem 1rem 0;}
 .reflex-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;}
-.reflex-title{font-family:"Playfair Display",serif;font-size:20px;font-style:italic;color:var(--text);}
-.reflex-toggle{font-size:16px;color:var(--gold);cursor:pointer;border:none;background:none;font-family:"Cormorant Garamond",serif;font-style:italic;}
+.reflex-title{font-family:"Playfair Display",serif;font-size:26px;font-style:italic;color:var(--text);}
+.reflex-toggle{font-size:18px;color:var(--gold);cursor:pointer;border:none;background:none;font-family:"Cormorant Garamond",serif;font-style:italic;}
 .reflex-card{background:var(--card);border-radius:16px;border:1px solid var(--border);padding:1rem 1.1rem;box-shadow:0 2px 10px var(--shadow);}
-.reflex-leitfrage{font-size:17px;font-style:italic;color:var(--gold);margin-bottom:.7rem;line-height:1.5;}
-.reflex-textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:.7rem .9rem;font-family:"Cormorant Garamond",serif;font-size:18px;color:var(--text);background:var(--bg);resize:none;min-height:100px;line-height:1.6;outline:none;}
+.reflex-leitfrage{font-size:21px;font-style:italic;color:var(--gold);margin-bottom:.7rem;line-height:1.5;}
+.reflex-textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:.7rem .9rem;font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--text);background:var(--bg);resize:none;min-height:100px;line-height:1.6;outline:none;}
 .reflex-textarea:focus{border-color:var(--gold);}
 .reflex-textarea::placeholder{color:var(--muted);font-style:italic;}
 .reflex-row{display:flex;gap:.5rem;margin-top:.6rem;align-items:center;}
-.reflex-save{background:var(--gold);color:#fff;border:none;border-radius:20px;padding:.4rem 1rem;font-size:14px;font-family:"Cormorant Garamond",serif;cursor:pointer;}
-.reflex-new{background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:20px;padding:.4rem .8rem;font-size:14px;font-family:"Cormorant Garamond",serif;cursor:pointer;}
-.reflex-saved{font-size:12px;color:var(--sage);font-style:italic;margin-left:auto;}
+.reflex-save{background:var(--gold);color:#fff;border:none;border-radius:20px;padding:.4rem 1rem;font-size:21px;font-family:"Cormorant Garamond",serif;cursor:pointer;}
+.reflex-new{background:transparent;border:1.5px solid var(--border);color:var(--muted);border-radius:20px;padding:.4rem .8rem;font-size:21px;font-family:"Cormorant Garamond",serif;cursor:pointer;}
+.reflex-saved{font-size:18px;color:var(--sage);font-style:italic;margin-left:auto;}
 .reflex-entries{margin-top:.9rem;border-top:1px solid var(--border);padding-top:.8rem;display:flex;flex-direction:column;gap:.6rem;}
-.reflex-entry-date{font-size:11px;color:var(--gold);letter-spacing:.08em;margin-bottom:.15rem;}
-.reflex-entry-lf{font-size:12px;color:var(--muted);margin-bottom:.1rem;}
-.reflex-entry-text{font-size:14px;font-style:italic;color:var(--text);line-height:1.6;}
+.reflex-entry-date{font-size:16px;color:var(--gold);letter-spacing:.08em;margin-bottom:.15rem;}
+.reflex-entry-lf{font-size:18px;color:var(--muted);margin-bottom:.1rem;}
+.reflex-entry-text{font-size:21px;font-style:italic;color:var(--text);line-height:1.6;}
 </style>
 </head>
 <body>
 
 <header>
   <div class="date-line" id="dateLine"></div>
-  <div class="goal-text" style="font-family:'Playfair Display',serif;font-size:18px;font-style:italic;font-weight:600;color:var(--terra);line-height:1.45;">Das ist mein selbstbestimmtes Leben: Im Flow, voller Fröhlichkeit und Phantasie!</div>
-  <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--muted);margin-top:.45rem;line-height:1.5;">Ich will heute so leben, wie ich mein ganzes Leben leben will.</div>
+  <div style="font-family:'Playfair Display',serif;font-size:27px;font-style:italic;font-weight:600;color:var(--terra);line-height:1.45;">Ich will heute so leben, wie ich mein ganzes Leben leben will.</div>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--muted);margin-top:.5rem;line-height:1.5;">Das ist mein selbstbestimmtes Leben: Im Flow, voller Fröhlichkeit und Phantasie.</div>
 </header>
 
 <!-- INTENTION -->
@@ -128,7 +128,7 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
     </div>
     <div class="wave" id="wave-vormittag" onclick="showPhase('vormittag')">
       <div class="wave-icon">☀️</div>
-      <div class="wave-name">Vorm.</div>
+      <div class="wave-name">Vormittag</div>
       <div class="wave-time">9–12h</div>
     </div>
     <div class="wave" id="wave-mittag" onclick="showPhase('mittag')">
@@ -138,7 +138,7 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
     </div>
     <div class="wave" id="wave-nachmittag" onclick="showPhase('nachmittag')">
       <div class="wave-icon">🍂</div>
-      <div class="wave-name">Nachm.</div>
+      <div class="wave-name">Nachmittag</div>
       <div class="wave-time">15–18h</div>
     </div>
     <div class="wave" id="wave-abend" onclick="showPhase('abend')">
@@ -399,7 +399,7 @@ function initReflex(){currentLF=Math.floor(Math.random()*LEITFRAGEN.length);docu
 function newLeitfrage(){currentLF=(currentLF+1)%LEITFRAGEN.length;document.getElementById("reflexLeitfrage").textContent="🌸 "+LEITFRAGEN[currentLF];}
 function saveReflex(){var text=document.getElementById("reflexText").value.trim();if(!text)return;var entries=loadReflex();var now=new Date();entries.unshift({text:text,lf:LEITFRAGEN[currentLF],date:now.getDate()+"."+(now.getMonth()+1)+"."+now.getFullYear(),time:String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0")});if(entries.length>50)entries=entries.slice(0,50);saveReflexData(entries);document.getElementById("reflexText").value="";var s=document.getElementById("reflexSaved");s.style.display="inline";setTimeout(function(){s.style.display="none";},2000);newLeitfrage();renderReflexEntries();}
 function toggleReflexEntries(){var el=document.getElementById("reflexEntries");var btn=document.querySelector(".reflex-toggle");if(el.style.display==="none"){renderReflexEntries();el.style.display="flex";btn.textContent="ausblenden";}else{el.style.display="none";btn.textContent="Einträge anzeigen";}}
-function renderReflexEntries(){var entries=loadReflex();var el=document.getElementById("reflexEntries");if(!entries.length){el.innerHTML='<div style="font-size:13px;color:var(--muted);font-style:italic;text-align:center;">Noch keine Einträge.</div>';return;}el.innerHTML=entries.slice(0,10).map(function(e){return'<div><div class="reflex-entry-date">'+e.date+' · '+e.time+'</div><div class="reflex-entry-lf">'+e.lf+'</div><div class="reflex-entry-text">'+e.text+'</div></div>';}).join('<hr style="border:none;border-top:1px solid var(--border);margin:.3rem 0;">');}
+function renderReflexEntries(){var entries=loadReflex();var el=document.getElementById("reflexEntries");if(!entries.length){el.innerHTML='<div style="font-size:20px;color:var(--muted);font-style:italic;text-align:center;">Noch keine Einträge.</div>';return;}el.innerHTML=entries.slice(0,10).map(function(e){return'<div><div class="reflex-entry-date">'+e.date+' · '+e.time+'</div><div class="reflex-entry-lf">'+e.lf+'</div><div class="reflex-entry-text">'+e.text+'</div></div>';}).join('<hr style="border:none;border-top:1px solid var(--border);margin:.3rem 0;">');}
 
 // ── NOTIZEN ──
 function saveNotiz(){
