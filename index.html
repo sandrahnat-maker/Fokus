@@ -123,27 +123,27 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
   <div class="waves">
     <div class="wave" id="wave-morgen" onclick="showPhase('morgen')">
       <div class="wave-icon">🌅</div>
-      <div class="wave-name">Mo</div>
+      <div class="wave-name">Morgen</div>
       <div class="wave-time">bis 9h</div>
     </div>
     <div class="wave" id="wave-vormittag" onclick="showPhase('vormittag')">
       <div class="wave-icon">☀️</div>
-      <div class="wave-name">Vm</div>
+      <div class="wave-name">Vormittag</div>
       <div class="wave-time">9–12h</div>
     </div>
     <div class="wave" id="wave-mittag" onclick="showPhase('mittag')">
       <div class="wave-icon">🌿</div>
-      <div class="wave-name">Mi</div>
+      <div class="wave-name">Mittag</div>
       <div class="wave-time">12–15h</div>
     </div>
     <div class="wave" id="wave-nachmittag" onclick="showPhase('nachmittag')">
       <div class="wave-icon">🍂</div>
-      <div class="wave-name">Nm</div>
+      <div class="wave-name">Nachmittag</div>
       <div class="wave-time">15–18h</div>
     </div>
     <div class="wave" id="wave-abend" onclick="showPhase('abend')">
       <div class="wave-icon">🌙</div>
-      <div class="wave-name">Ab</div>
+      <div class="wave-name">Abend</div>
       <div class="wave-time">ab 18h</div>
     </div>
   </div>
@@ -176,7 +176,6 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
   </div>
   <div class="app-group">
     <div class="app-group-title">💫 Körper & Bewegung</div>
-    <a class="al" href="Aufwaermen.html"><span class="al-icon">☀️</span><div><div class="al-text">Aufwärmen</div><div class="al-sub">Sonnengruß mit Mady Morrison</div></div><span class="al-arr">›</span></a>
     <a class="al" href="morgenroutine.html"><span class="al-icon">🌅</span><div><div class="al-text">Morgenroutine</div><div class="al-sub">Sanft in den Tag</div></div><span class="al-arr">›</span></a>
     <a class="al" href="Bad_Frueh.html"><span class="al-icon">🪥</span><div><div class="al-text">Bad Früh</div><div class="al-sub">Morgenroutine im Bad</div></div><span class="al-arr">›</span></a>
     <a class="al" href="Bad_Abend.html"><span class="al-icon">🛁</span><div><div class="al-text">Bad Abend Routine</div><div class="al-sub">Mein Abendritual mit Liebe</div></div><span class="al-arr">›</span></a>
@@ -260,13 +259,11 @@ var PHASES={
       {name:"Bad Früh",note:"Weleda-Ritual",cat:"pflege"},
       {name:"Lotte raus",note:"erste Runde",cat:"tiere"},
       {name:"Tiermedikamente",note:"Lotte + Rudi",cat:"tiere"},
-      {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
     ]
   },
   vormittag:{
     mood:"Der Vormittag trägt dich in den Tag hinein — frisch, klar, lebendig. Ich will diesen Vormittag so leben, wie ich mein ganzes Leben leben will.",
     tasks:[
-      {name:"Aufwärmen",note:"Sonnengruß mit Mady Morrison",cat:"sport",link:"Aufwaermen.html"},
       {name:"Frische Luft & Bewegung",note:"Spaziergang, Wald, oder kurz raus",cat:"körper"},
       {name:"Kreative Aufgabe",note:"DaZF, Atelier, oder etwas Eigenes",cat:"lernen"},
       {name:"Tee & bewusste Pause",note:"nicht nebenbei — wirklich genießen",cat:"seele"},
@@ -282,7 +279,6 @@ var PHASES={
       {name:"Gabapentin (Rudi)",note:"nach dem Mittagessen",cat:"tiere"},
       {name:"Bewegung oder frische Luft",note:"auch 10 Min. zählen",cat:"körper"},
       {name:"DaZF-Aufgabe",note:"ein kleiner Schritt genügt",cat:"lernen"},
-      {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
     ]
   },
   nachmittag:{
@@ -304,7 +300,6 @@ var PHASES={
       {name:"Kreativzeit oder Stille",note:"Atelier, Lesen, Zeichnen",cat:"seele"},
       {name:"Bad Abend Routine",note:"Weleda, warm, für mich",cat:"pflege"},
       {name:"Handy weg — früh schlafen",note:"Schlaf ist die Investition",cat:"seele"},
-      {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
     ]
   }
 };
@@ -334,19 +329,11 @@ function showPhase(p){
   phase.tasks.forEach(function(t,i){
     var key=p+'_'+i;
     var done=!!taskState[key];
-    if(t.link){
-      html+='<a href="'+t.link+'" class="task-item'+(done?' done':'')+'" style="text-decoration:none;">'
-        +'<div class="task-check"></div>'
-        +'<div><div class="task-name">'+t.name+' ›</div><div class="task-note">'+t.note+'</div></div>'
-        +'<div class="task-cat">'+t.cat+'</div>'
-        +'</a>';
-    } else {
-      html+='<div class="task-item'+(done?' done':'')+'\" onclick="toggleTask(\''+p+'\','+i+')">'
-        +'<div class="task-check"></div>'
-        +'<div><div class="task-name">'+t.name+'</div><div class="task-note">'+t.note+'</div></div>'
-        +'<div class="task-cat">'+t.cat+'</div>'
-        +'</div>';
-    }
+    html+='<div class="task-item'+(done?' done':'')+'\" onclick="toggleTask(\''+p+'\','+i+')">'
+      +'<div class="task-check"></div>'
+      +'<div><div class="task-name">'+t.name+'</div><div class="task-note">'+t.note+'</div></div>'
+      +'<div class="task-cat">'+t.cat+'</div>'
+      +'</div>';
   });
   html+='</div>';
   document.getElementById('phaseContent').innerHTML=html;
@@ -398,22 +385,7 @@ Schreib einen einzigen poetischen Satz als Tages-Intention — wie ein Atemzug, 
     el.textContent=text;
     el.className='intention-text';
   }catch(e){
-    var fallbacks=[
-      'Alles fließt — auch dieser Tag.',
-      'Der Morgen kennt kein Gestern.',
-      'Heute gehört dir — ganz.',
-      'Atme tief. Du bist genau richtig hier.',
-      'Was wäre, wenn heute alles leicht wäre?',
-      'Dein Leben wartet nicht — es ist jetzt.',
-      'Kleine Dinge tragen das Große.',
-      'Geh langsam. Fühl mehr.',
-      'Heute darf es einfach sein.',
-      'Der Tag trägt dich — wenn du es lässt.',
-      'Freiheit beginnt im nächsten Atemzug.',
-      'Du weißt, wie du leben willst.',
-    ];
-    var idx=Math.floor(Math.random()*fallbacks.length);
-    el.textContent=fallbacks[idx];
+    el.textContent='Alles fließt — auch dieser Tag.';
     el.className='intention-text';
   }
 }
