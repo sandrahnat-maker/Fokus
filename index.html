@@ -64,6 +64,9 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
 .task-name{font-size:21px;color:var(--text);line-height:1.35;font-weight:300;}
 .task-note{font-size:16px;font-style:italic;color:var(--muted);margin-top:1px;}
 .task-cat{font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-left:auto;flex-shrink:0;padding-top:3px;opacity:.5;}
+.task-links{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.35rem;}
+.task-link{font-size:13px;font-style:italic;color:var(--gold);text-decoration:none;background:rgba(200,148,58,0.08);border:1px solid rgba(200,148,58,0.2);border-radius:10px;padding:.1rem .5rem;white-space:nowrap;}
+.task-link:active{background:rgba(200,148,58,0.18);}
 
 /* ── APPS ── */
 .section-wrap{margin:1rem 1rem 0;}
@@ -271,63 +274,67 @@ document.getElementById("dateLine").textContent=
   DAYS_DE[today.getDay()]+", "+today.getDate()+". "+MONTHS_DE[today.getMonth()]+" "+today.getFullYear();
 
 // ── PHASEN ──
+// links: Array von {href, label} — erscheinen als kleine Buttons beim Task
 var PHASES={
   morgen:{
     mood:"Der Morgen gehört dir — noch vor allem anderen. Kein Lärm, kein Druck. Nur du, dein Tee, das Licht. Ich will diesen Morgen so leben, wie ich mein ganzes Leben leben will.",
     tasks:[
       {name:"Euthyrox & Rückenübungen",note:"noch im Bett",cat:"körper"},
       {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere"},
-      {name:"Blutdruck & Gewicht",note:"nüchtern, ruhig",cat:"körper"},
+      {name:"Blutdruck & Gewicht",note:"nüchtern, ruhig",cat:"körper",links:[{href:"Blutdruck.html",label:"Blutdruck"},{href:"Wiegen.html",label:"Gewicht"}]},
       {name:"Knirscherschiene raus",note:"spülen",cat:"körper"},
-      {name:"Wasser · Tee · Frühstück",note:"bewusst genießen",cat:"ernährung"},
+      {name:"Wasser · Tee · Frühstück",note:"bewusst genießen",cat:"ernährung",links:[{href:"tee-des-tages.html",label:"Tee"},{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"}]},
       {name:"Medikamente",note:"zum Frühstück",cat:"körper"},
       {name:"Rudi & Timmy",note:"Futter & Schmusezeit",cat:"tiere"},
-      {name:"Bad Früh",note:"Weleda-Ritual",cat:"pflege"},
-      {name:"Lotte raus",note:"erste Runde",cat:"tiere"},
-      {name:"Tiermedikamente",note:"Lotte + Rudi",cat:"tiere"},
+      {name:"Bad Früh",note:"Weleda-Ritual",cat:"pflege",links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
+      {name:"Lotte raus",note:"erste Runde",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+      {name:"Tiermedikamente",note:"Lotte + Rudi",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"}]},
       {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
     ]
   },
   vormittag:{
     mood:"Der Vormittag trägt dich in den Tag hinein — frisch, klar, lebendig. Ich will diesen Vormittag so leben, wie ich mein ganzes Leben leben will.",
     tasks:[
-      {name:"Aufwärmen",note:"Sonnengruß mit Mady Morrison",cat:"sport",link:"Aufwaermen.html"},
+      {name:"VHS Vorbereitung",note:"Checklisten & Materialien",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"}]},
+      {name:"Kreative Aufgabe & Lernplan",note:"DaZF, Atelier, oder etwas Eigenes",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
+      {name:"Hausverkauf",note:"einen Schritt weiter",cat:"arbeit",links:[{href:"hausverkauf-guide.html",label:"Guide"},{href:"Hausverkauf_Checkliste.html",label:"Checkliste"}]},
+      {name:"Futter bestellen",note:"wenn nötig",cat:"tiere",links:[{href:"Futter_Bestellplaner.html",label:"Bestellplaner"}]},
+      {name:"Tee & bewusste Pause",note:"nicht nebenbei — wirklich genießen",cat:"seele",links:[{href:"tee-des-tages.html",label:"Tee"}]},
       {name:"Frische Luft & Bewegung",note:"Spaziergang, Wald, oder kurz raus",cat:"körper"},
-      {name:"Kreative Aufgabe",note:"DaZF, Atelier, oder etwas Eigenes",cat:"lernen"},
-      {name:"Tee & bewusste Pause",note:"nicht nebenbei — wirklich genießen",cat:"seele"},
-      {name:"Lotte — Vormittagsrunde",note:"in Ruhe, ohne Hetze",cat:"tiere"},
       {name:"Eine Sache erledigen",note:"die sich schon länger wartet",cat:"arbeit"},
     ]
   },
   mittag:{
     mood:"Die Mitte des Tages — du bist unterwegs, lehrst, lernst, schaffst. Alles fließt durch dich hindurch. Ich will diesen Mittag so leben, wie ich mein ganzes Leben leben will.",
     tasks:[
-      {name:"VHS oder Atelier",note:"ganz präsent sein",cat:"arbeit"},
-      {name:"Mittagessen bewusst",note:"LP(a)-freundlich",cat:"ernährung"},
-      {name:"Gabapentin (Rudi)",note:"nach dem Mittagessen",cat:"tiere"},
+      {name:"VHS oder Atelier",note:"ganz präsent sein",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"}]},
+      {name:"Mittagessen bewusst",note:"LP(a)-freundlich",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährungsplan"},{href:"Einkaufsliste.html",label:"Einkauf"}]},
+      {name:"Gabapentin (Rudi)",note:"nach dem Mittagessen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
       {name:"Bewegung oder frische Luft",note:"auch 10 Min. zählen",cat:"körper"},
-      {name:"DaZF-Aufgabe",note:"ein kleiner Schritt genügt",cat:"lernen"},
+      {name:"DaZF-Aufgabe",note:"ein kleiner Schritt genügt",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
       {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
     ]
   },
   nachmittag:{
     mood:"Der Nachmittag — eine zweite Chance, ganz bei dir zu sein. Ich will diesen Nachmittag so leben, wie ich mein ganzes Leben leben will.",
     tasks:[
-      {name:"Mittagessen nachhallen lassen",note:"kein sofortiger Weiterstart",cat:"seele"},
-      {name:"Körperpflege oder Bad",note:"Weleda, Wärme, für mich",cat:"pflege"},
-      {name:"DaZF oder Vorbereitung",note:"ruhig & fokussiert",cat:"lernen"},
+      {name:"Sport",note:"aufwärmen, trainieren, dehnen",cat:"sport",links:[{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Koerpergewicht_Training_Audio.html",label:"Kraft"},{href:"Balanceboard_Training_Audio.html",label:"Balance"},{href:"Sonntags_Yoga_Audio.html",label:"Yoga"},{href:"Dehnplan.html",label:"Dehnen"},{href:"Kalkschulter.html",label:"Schulter"},{href:"Beckenboden.html",label:"Beckenboden"}]},
+      {name:"Duschen & Körperpflege",note:"Weleda, Wärme, für mich",cat:"pflege",links:[{href:"Duschen.html",label:"Duschen"},{href:"Koerperpflege_Tagesplan.html",label:"Körperpflege"},{href:"Haarpflege.html",label:"Haarpflege"},{href:"Nagelpflege.html",label:"Nagelpflege"}]},
+      {name:"DaZF oder Vorbereitung",note:"ruhig & fokussiert",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"},{href:"VHS_Kursvorbereitung.html",label:"VHS abschließen"}]},
+      {name:"Wohnung & Zuhause",note:"Pflanzen, Haushalt, Einkauf, Kosmetik",cat:"zuhause",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Pflanzen_Galerie.html",label:"Pflanzen"},{href:"Haushaltsplan.html",label:"Haushalt"},{href:"Naturkosmetik_Tagesplan.html",label:"Naturkosmetik"},{href:"Futter_Bestellplaner.html",label:"Futter"}]},
       {name:"Kreativzeit",note:"Atelier, Zeichnen, Lesen",cat:"seele"},
-      {name:"Lotte — Nachmittagsrunde",note:"gemütlich, keine Eile",cat:"tiere"},
+      {name:"Lotte — Nachmittagsrunde",note:"gemütlich, keine Eile",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
     ]
   },
   abend:{
     mood:"Der Abend trägt dich nach Hause — in dich selbst. Alles darf jetzt langsamer werden. Ich will diesen Abend so leben, wie ich mein ganzes Leben leben will.",
     tasks:[
-      {name:"Lotte — Abendrunde",note:"in Ruhe, kein Hetzen",cat:"tiere"},
-      {name:"Tiermedikamente Abend",note:"Rudi & Timmy",cat:"tiere"},
-      {name:"Abendessen",note:"mit Thomas oder allein, schön",cat:"ernährung"},
+      {name:"Lotte — Abendrunde",note:"in Ruhe, kein Hetzen",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+      {name:"Tiermedikamente Abend",note:"Rudi & Timmy",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Katzen_Medikamente.html",label:"Katzen"}]},
+      {name:"Abendessen",note:"mit Thomas oder allein, schön",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"}]},
       {name:"Kreativzeit oder Stille",note:"Atelier, Lesen, Zeichnen",cat:"seele"},
-      {name:"Bad Abend Routine",note:"Weleda, warm, für mich",cat:"pflege"},
+      {name:"Bad Abend Routine",note:"Weleda, warm, für mich",cat:"pflege",links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
+      {name:"Eine Sache erledigen",note:"die sich schon länger wartet",cat:"arbeit",links:[{href:"#notizen",label:"Meine Notizen"}]},
       {name:"Handy weg — früh schlafen",note:"Schlaf ist die Investition",cat:"seele"},
       {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
     ]
@@ -359,22 +366,36 @@ function showPhase(p){
   phase.tasks.forEach(function(t,i){
     var key=p+'_'+i;
     var done=!!taskState[key];
-    if(t.link){
-      html+='<a href="'+t.link+'" class="task-item'+(done?' done':'')+'" style="text-decoration:none;">'
-        +'<div class="task-check"></div>'
-        +'<div><div class="task-name">'+t.name+' ›</div><div class="task-note">'+t.note+'</div></div>'
-        +'<div class="task-cat">'+t.cat+'</div>'
-        +'</a>';
-    } else {
-      html+='<div class="task-item'+(done?' done':'')+'\" onclick="toggleTask(\''+p+'\','+i+')">'
-        +'<div class="task-check"></div>'
-        +'<div><div class="task-name">'+t.name+'</div><div class="task-note">'+t.note+'</div></div>'
-        +'<div class="task-cat">'+t.cat+'</div>'
-        +'</div>';
+    var linksHtml='';
+    if(t.links&&t.links.length){
+      linksHtml='<div class="task-links">';
+      t.links.forEach(function(l){
+        if(l.href==='#notizen'){
+          linksHtml+='<a class="task-link" href="#" onclick="scrollToNotizen(event)">'+l.label+' ›</a>';
+        } else {
+          linksHtml+='<a class="task-link" href="'+l.href+'">'+l.label+' ›</a>';
+        }
+      });
+      linksHtml+='</div>';
     }
+    html+='<div class="task-item'+(done?' done':'')+'" onclick="toggleTask(\''+p+'\','+i+')">'
+      +'<div class="task-check"></div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div class="task-name">'+t.name+'</div>'
+      +'<div class="task-note">'+t.note+'</div>'
+      +linksHtml
+      +'</div>'
+      +'<div class="task-cat">'+t.cat+'</div>'
+      +'</div>';
   });
   html+='</div>';
   document.getElementById('phaseContent').innerHTML=html;
+}
+
+function scrollToNotizen(e){
+  e.preventDefault();e.stopPropagation();
+  var el=document.getElementById('notizText');
+  if(el){el.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){el.focus();},400);}
 }
 
 function toggleTask(p,i){
