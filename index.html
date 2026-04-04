@@ -95,9 +95,83 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
 .reflex-entry-date{font-size:16px;color:var(--gold);letter-spacing:.08em;margin-bottom:.15rem;}
 .reflex-entry-lf{font-size:18px;color:var(--muted);margin-bottom:.1rem;}
 .reflex-entry-text{font-size:21px;font-style:italic;color:var(--text);line-height:1.6;}
+
+/* ── INNERE PRAXIS OVERLAY ── */
+#praxis-overlay{
+  position:fixed;inset:0;z-index:999;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:2rem 1.5rem;
+  animation:overlayIn .5s ease;
+}
+@keyframes overlayIn{from{opacity:0}to{opacity:1}}
+#praxis-overlay.leaving{animation:overlayOut .4s ease forwards;}
+@keyframes overlayOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-12px)}}
+
+.praxis-tradition{
+  font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.2rem;opacity:.8;
+}
+.praxis-text{
+  font-family:"Playfair Display",serif;font-size:26px;font-style:italic;
+  color:var(--text);line-height:1.65;text-align:center;
+  margin-bottom:1.6rem;max-width:320px;
+}
+.praxis-uebung{
+  font-family:"Cormorant Garamond",serif;font-size:18px;font-style:italic;
+  color:var(--muted);line-height:1.7;text-align:center;
+  margin-bottom:2rem;max-width:300px;
+  padding:.8rem 1rem;
+  background:rgba(122,154,90,0.07);
+  border-left:2px solid var(--sage);
+  border-radius:0 12px 12px 0;
+}
+.praxis-weiter{
+  background:transparent;border:1.5px solid var(--border);
+  color:var(--muted);border-radius:30px;
+  padding:.55rem 1.4rem;font-size:18px;
+  font-family:"Cormorant Garamond",serif;font-style:italic;
+  cursor:pointer;transition:all .2s;
+}
+.praxis-weiter:active{background:rgba(200,148,58,0.08);border-color:var(--gold);color:var(--gold);}
+.praxis-deko{
+  font-size:2.2rem;margin-bottom:1.4rem;opacity:.7;
+}
+
+/* ── LEBEN-TOAST beim Abhaken ── */
+#leben-toast{
+  position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:20px;padding:.55rem 1.2rem;
+  font-family:"Cormorant Garamond",serif;font-size:18px;font-style:italic;
+  color:var(--gold);box-shadow:0 4px 20px var(--shadow);
+  opacity:0;transition:opacity .3s,transform .3s;
+  pointer-events:none;white-space:nowrap;z-index:500;
+}
+#leben-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* Glow-Animation auf der Task-Karte */
+@keyframes cardGlow{
+  0%{box-shadow:0 3px 14px var(--shadow);}
+  40%{box-shadow:0 0 0 3px rgba(200,148,58,0.18),0 4px 20px rgba(200,148,58,0.12);}
+  100%{box-shadow:0 3px 14px var(--shadow);}
+}
+.phase-card.glow{animation:cardGlow 1.2s ease;}
 </style>
 </head>
 <body>
+
+<!-- INNERE PRAXIS OVERLAY -->
+<div id="praxis-overlay">
+  <div class="praxis-tradition" id="praxis-tradition"></div>
+  <div class="praxis-deko" id="praxis-deko"></div>
+  <div class="praxis-text" id="praxis-text"></div>
+  <div class="praxis-uebung" id="praxis-uebung"></div>
+  <button class="praxis-weiter" onclick="closeOverlay()">weiter in den Tag →</button>
+</div>
+
+<!-- LEBEN TOAST -->
+<div id="leben-toast"></div>
 
 <header>
   <div class="date-line" id="dateLine"></div>
@@ -356,7 +430,48 @@ function toggleTask(p,i){
   var key=p+'_'+i;
   taskState[key]=!taskState[key];
   saveTaskState();
+  if(taskState[key]) showLebenMoment();
   showPhase(p);
+}
+
+// ── LEBEN-MOMENT beim Abhaken ──
+var LEBEN_SAETZE=[
+  'Das ist mein geliebtes Leben.',
+  'Jeder Schritt — meiner.',
+  'Ich lebe, wie ich leben will.',
+  'Das gehört mir.',
+  'Genau das. Genau jetzt.',
+  'Schön, dass ich das tue.',
+  'Das ist Fürsorge — für mich.',
+  'Ein kleiner Atemzug meines Lebens.',
+  'Ich bin dabei.',
+  'Das zählt.',
+  'Mit Freude — oder zumindest mit Würde.',
+  'Mein Leben, Schritt für Schritt.',
+  'Das tue ich mit Liebe.',
+  'Hier bin ich.',
+  'Das ist genug — und es ist schön.',
+];
+var lebenIdx=0;
+var lebenTimer=null;
+
+function showLebenMoment(){
+  var toast=document.getElementById('leben-toast');
+  var card=document.querySelector('.phase-card');
+  // Satz wählen — immer der nächste
+  toast.textContent=LEBEN_SAETZE[lebenIdx%LEBEN_SAETZE.length];
+  lebenIdx++;
+  // Glow auf der Karte
+  if(card){
+    card.classList.remove('glow');
+    void card.offsetWidth; // reflow
+    card.classList.add('glow');
+    setTimeout(function(){card.classList.remove('glow');},1200);
+  }
+  // Toast einblenden
+  if(lebenTimer) clearTimeout(lebenTimer);
+  toast.classList.add('show');
+  lebenTimer=setTimeout(function(){toast.classList.remove('show');},2200);
 }
 
 // ── INTENTION via Claude ──
@@ -446,6 +561,128 @@ function loadNotiz(){
   document.getElementById('notizText').value=text;
   document.getElementById('notizClear').style.display=text?'inline':'none';
 }
+
+// ── INNERE PRAXIS OVERLAY ──
+var PRAXIS=[
+  // Stoisch
+  {tradition:'Stoizismus',deko:'🏛️',
+   text:'Was könnte heute schwierig werden?',
+   uebung:'Denk es ruhig durch — nicht um dich zu ängstigen, sondern um es zu entzaubern. Dann: Kann ich damit leben? Ja. Gut. Fertig.'},
+  {tradition:'Stoizismus',deko:'🌅',
+   text:'Was liegt in deiner Macht — und was nicht?',
+   uebung:'Nur eines gehört dir wirklich: deine Haltung. Alles andere ist Gast. Atme einmal tief und lass die Gäste sein, was sie sind.'},
+  {tradition:'Stoizismus',deko:'⚖️',
+   text:'Marcus schrieb jeden Morgen an sich selbst.',
+   uebung:'Was würdest du dir heute schreiben? Einen Satz. Nicht als Aufgabe — als Begleitung. Lass ihn kommen.'},
+  {tradition:'Stoizismus',deko:'🌿',
+   text:'Heute wirst du Menschen begegnen, die schwierig sind.',
+   uebung:'Das ist keine Drohung — es ist eine Vorbereitung. Wer vorbereitet ist, kann offen bleiben. Du bist vorbereitet.'},
+  {tradition:'Stoizismus',deko:'🕯️',
+   text:'Was wäre das Schlimmste, das heute passieren könnte?',
+   uebung:'Denk es zu Ende. Wirklich. Dann frag: Würde ich überleben? Würde ich weitermachen? Meistens: ja. Das ist genug.'},
+
+  // Buddhistisch
+  {tradition:'Buddhismus',deko:'☁️',
+   text:'Deine Gedanken sind Wolken.',
+   uebung:'Du bist der Himmel — weit, still, unveränderlich. Schau zu, wie ein Gedanke zieht. Du musst nicht mitziehen. Drei Atemzüge lang einfach schauen.'},
+  {tradition:'Buddhismus',deko:'🌸',
+   text:'Möge ich ruhig sein. Möge ich fröhlich sein.',
+   uebung:'Das ist Metta — liebende Güte für dich selbst. Sag es einmal leise, als echter Wunsch. Dann schick denselben Wunsch einer Person, die dir wichtig ist. Lotte zählt.'},
+  {tradition:'Buddhismus',deko:'🍂',
+   text:'Anicca — alles verändert sich.',
+   uebung:'Auch das Schwierige zieht weiter. Auch das Schöne. Nichts festhalten, nichts wegstoßen. Nur einen Atemzug lang dabei sein, wie es gerade ist.'},
+  {tradition:'Buddhismus',deko:'🪷',
+   text:'Dieser Moment — genau dieser — ist vollständig.',
+   uebung:'Bevor du aufstehst oder losgehst: fünf Sekunden lang nur wahrnehmen. Was hörst du? Was spürst du? Kein Bewerten. Nur da sein.'},
+  {tradition:'Buddhismus',deko:'🌊',
+   text:'Möge alles, was lebt, glücklich sein.',
+   uebung:'Metta für alle: Denk an Thomas, Flo, Lotte, Rudi, Timmy, deine Schüler*innen. Ein stiller Wunsch für jeden. Das dauert eine Minute und verändert die Stimmung des ganzen Tages.'},
+
+  // ACT
+  {tradition:'ACT',deko:'🔭',
+   text:'Ich bemerke, dass da ein Gedanke ist.',
+   uebung:'Nicht: "Ich bin gestresst." Sondern: "Ich bemerke, dass da ein Gedanke von Stress ist." Der kleine Abstand ist alles. Probier es mit einem Gedanken, der dich heute beschäftigt.'},
+  {tradition:'ACT',deko:'🌱',
+   text:'Was ist dir wirklich wichtig — heute, ganz konkret?',
+   uebung:'Nicht was du erledigen musst. Was dir wichtig ist. Ein Wert, eine Qualität, eine Art zu sein. Danach: Eine kleine Handlung, die dazu passt.'},
+  {tradition:'ACT',deko:'🫧',
+   text:'Lass den Gedanken schwimmen.',
+   uebung:'Stell dir vor, dein schwierigster Gedanke sitzt auf einem Blatt, das einen Bach hinuntertreibt. Du schaust vom Ufer zu. Er schwimmt. Du bleibst.'},
+  {tradition:'ACT',deko:'🧭',
+   text:'Wer willst du sein — unabhängig davon, wie du dich fühlst?',
+   uebung:'ACT fragt nicht "Wie geht es dir?" sondern "Wer bist du?" Du kannst müde und trotzdem fürsorglich sein. Du kannst unsicher und trotzdem kreativ sein. Beides gleichzeitig.'},
+  {tradition:'ACT',deko:'💨',
+   text:'Ein Atemzug als Anker.',
+   uebung:'Einatmen — vier Sekunden. Halten — vier Sekunden. Ausatmen — sechs Sekunden. Einmal reicht. Das Nervensystem hört zu.'},
+];
+
+function showOverlay(){
+  document.getElementById('praxis-overlay').style.display='flex';
+  // Lade zuerst statischen Platzhalter während Claude antwortet
+  var dayIndex=Math.floor(Date.now()/86400000)%PRAXIS.length;
+  var p=PRAXIS[dayIndex];
+  document.getElementById('praxis-tradition').textContent='…';
+  document.getElementById('praxis-deko').textContent='🌿';
+  document.getElementById('praxis-text').textContent='Einen Moment …';
+  document.getElementById('praxis-uebung').textContent='Die heutige Übung wird vorbereitet.';
+
+  // Hole letzte Reflexionseinträge
+  var entries=[];
+  try{entries=JSON.parse(localStorage.getItem('reflex_v1')||'[]');}catch(e){}
+  var recentEntries=entries.slice(0,5);
+
+  if(!recentEntries.length){
+    // Kein Eintrag — statisch anzeigen
+    document.getElementById('praxis-tradition').textContent=p.tradition;
+    document.getElementById('praxis-deko').textContent=p.deko;
+    document.getElementById('praxis-text').textContent=p.text;
+    document.getElementById('praxis-uebung').textContent=p.uebung;
+    return;
+  }
+
+  var entriesText=recentEntries.map(function(e){
+    return '"'+e.lf+'" — '+e.text;
+  }).join('\n');
+
+  var h=today.getHours();
+  var tageszeit=h<11?'Morgen':h<17?'Mittag':'Abend';
+
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:300,
+      system:'Du bist Sandras stiller innerer Begleiter. Sandra ist DaZ-Lehrerin und Künstlerin in Wien, lebt mit Lotte (Hund), Rudi & Timmy (Katzen). Sie arbeitet mit Stoizismus, Buddhismus und ACT.\n\nAntworte NUR mit einem JSON-Objekt, kein Markdown, keine Erklärung:\n{"tradition":"Stoizismus|Buddhismus|ACT","deko":"ein einzelnes Emoji","text":"ein kurzer poetischer Satz (max 12 Wörter) der auf ihre Einträge eingeht","uebung":"eine konkrete kleine Übung (2-3 Sätze) die direkt auf ihre Einträge reagiert"}\n\nDie Übung soll sich anfühlen als hätte jemand ihre Worte wirklich gelesen.',
+      messages:[{role:'user',content:'Tageszeit: '+tageszeit+'\n\nSandras letzte Reflexionseinträge:\n'+entriesText}]
+    })
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var text=data.content&&data.content[0]&&data.content[0].text||'';
+    text=text.trim().replace(/```json|```/g,'').trim();
+    var parsed=JSON.parse(text);
+    document.getElementById('praxis-tradition').textContent=parsed.tradition||p.tradition;
+    document.getElementById('praxis-deko').textContent=parsed.deko||p.deko;
+    document.getElementById('praxis-text').textContent=parsed.text||p.text;
+    document.getElementById('praxis-uebung').textContent=parsed.uebung||p.uebung;
+  })
+  .catch(function(){
+    // Fallback auf statische Übung
+    document.getElementById('praxis-tradition').textContent=p.tradition;
+    document.getElementById('praxis-deko').textContent=p.deko;
+    document.getElementById('praxis-text').textContent=p.text;
+    document.getElementById('praxis-uebung').textContent=p.uebung;
+  });
+}
+
+function closeOverlay(){
+  var el=document.getElementById('praxis-overlay');
+  el.classList.add('leaving');
+  setTimeout(function(){el.style.display='none';},400);
+}
+
+showOverlay();
 
 // ── INIT ──
 loadIntention(false);
