@@ -182,8 +182,14 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
 <div id="leben-toast"></div>
 
 <header>
-  <div class="date-line" id="dateLine"></div>
-  <div style="font-family:'Playfair Display',serif;font-size:27px;font-style:italic;font-weight:600;color:var(--terra);line-height:1.45;">Ich will heute so leben, wie ich mein ganzes Leben leben will.</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;">
+    <div class="date-line" id="dateLine"></div>
+    <div id="dateNav" style="display:flex;gap:.4rem;flex-shrink:0;">
+      <button id="btnVortag" onclick="switchDay(-1)" style="font-size:14px;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--muted);background:none;border:1px solid var(--border);border-radius:12px;padding:.15rem .55rem;cursor:pointer;">← Vortag</button>
+      <button id="btnHeute" onclick="switchDay(0)" style="display:none;font-size:14px;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);background:none;border:1px solid rgba(200,148,58,0.3);border-radius:12px;padding:.15rem .55rem;cursor:pointer;">Heute</button>
+    </div>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:27px;font-style:italic;font-weight:600;color:var(--terra);line-height:1.45;" id="headerMotto">Ich will heute so leben, wie ich mein ganzes Leben leben will.</div>
   <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--muted);margin-top:.5rem;line-height:1.5;">Dieses Leben wähle ich — in fröhlicher Gelassenheit.</div>
 </header>
 
@@ -277,13 +283,44 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
 <script>
 var DAYS_DE=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
 var MONTHS_DE=["Jänner","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
-var today=new Date();
+var today=new Date(); // immer das echte Heute (für Tageszeit etc.)
 
-// ── DATUM ──
-document.getElementById("dateLine").textContent=
-  DAYS_DE[today.getDay()]+", "+today.getDate()+". "+MONTHS_DE[today.getMonth()]+" "+today.getFullYear();
+// ── DATUM-NAVIGATION ──
+var viewOffset=0; // 0 = heute, -1 = gestern
 
-// ── PHASEN ──
+function getViewDate(){
+  var d=new Date(today);
+  d.setDate(d.getDate()+viewOffset);
+  return d;
+}
+
+function updateDateDisplay(){
+  var d=getViewDate();
+  var isToday=viewOffset===0;
+  document.getElementById('dateLine').textContent=
+    DAYS_DE[d.getDay()]+', '+d.getDate()+'. '+MONTHS_DE[d.getMonth()]+' '+d.getFullYear()
+    +(isToday?'':' · Vortag');
+  document.getElementById('headerMotto').textContent=
+    isToday
+      ? 'Ich will heute so leben, wie ich mein ganzes Leben leben will.'
+      : 'Was war gestern schön? Was darf ich noch nachtragen?';
+  document.getElementById('btnVortag').style.display=isToday?'inline':'none';
+  document.getElementById('btnHeute').style.display=isToday?'none':'inline';
+}
+
+function switchDay(offset){
+  viewOffset=offset;
+  storageKey='tasks_'+getViewDate().toISOString().slice(0,10);
+  taskState=JSON.parse(localStorage.getItem(storageKey)||'{}');
+  updateDateDisplay();
+  showPhase(currentPhase||getPhaseByTime());
+  updateWaveDoneBadges();
+}
+
+updateDateDisplay();
+
+var storageKey='tasks_'+today.toISOString().slice(0,10);
+var taskState=JSON.parse(localStorage.getItem(storageKey)||'{}');
 // links: Array von {href, label} — erscheinen als kleine Buttons beim Task
 var PHASES={
   morgen:{
@@ -351,8 +388,6 @@ var PHASES={
   }
 };
 
-var storageKey="tasks_"+today.toISOString().slice(0,10);
-var taskState=JSON.parse(localStorage.getItem(storageKey)||"{}");
 function saveTaskState(){localStorage.setItem(storageKey,JSON.stringify(taskState));}
 
 function updateWaveDoneBadges(){
