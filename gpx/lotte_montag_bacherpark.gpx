@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gpx version="1.1" creator="Lottes Runden" xmlns="http://www.topografix.com/GPX/1/1">
-  <metadata><n>Bacherpark-Runde (Montag)</n></metadata>
+  <metadata><name>Bacherpark-Runde (Montag)</name></metadata>
   <rte>
-    <n>Bacherpark-Runde</n>
-    <rtept lat="48.19580" lon="16.35640"><n>Start: Magdalenenstraße 4</n></rtept>
-    <rtept lat="48.19520" lon="16.35520"><n>Mittelgasse</n></rtept>
-    <rtept lat="48.19350" lon="16.35480"><n>Reinprechtsdorfer Straße</n></rtept>
-    <rtept lat="48.19280" lon="16.35600"><n>Bacherpark</n></rtept>
-    <rtept lat="48.19360" lon="16.35760"><n>Ramperstorffergasse</n></rtept>
-    <rtept lat="48.19460" lon="16.35820"><n>Siebenbrunnenfeldgasse</n></rtept>
-    <rtept lat="48.19550" lon="16.35780"><n>Arbeitergasse</n></rtept>
-    <rtept lat="48.19580" lon="16.35640"><n>Ziel: Magdalenenstraße 4</n></rtept>
+    <name>Bacherpark-Runde</name>
+    <rtept lat="48.19580" lon="16.35640"><name>Start: Magdalenenstraße 4</name></rtept>
+    <rtept lat="48.19520" lon="16.35520"><name>Mittelgasse</name></rtept>
+    <rtept lat="48.19350" lon="16.35480"><name>Reinprechtsdorfer Straße</name></rtept>
+    <rtept lat="48.19280" lon="16.35600"><name>Bacherpark</name></rtept>
+    <rtept lat="48.19360" lon="16.35760"><name>Ramperstorffergasse</name></rtept>
+    <rtept lat="48.19460" lon="16.35820"><name>Siebenbrunnenfeldgasse</name></rtept>
+    <rtept lat="48.19550" lon="16.35780"><name>Arbeitergasse</name></rtept>
+    <rtept lat="48.19580" lon="16.35640"><name>Ziel: Magdalenenstraße 4</name></rtept>
   </rte>
 </gpx>

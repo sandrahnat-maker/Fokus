@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Lottes Runden" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>Zentagasse-Runde (Donnerstag)</name></metadata>
+  <rte>
+    <name>Zentagasse-Runde</name>
+    <rtept lat="48.19580" lon="16.35640"><name>Start: Magdalenenstraße 4</name></rtept>
+    <rtept lat="48.19650" lon="16.35500"><name>Stiegengasse</name></rtept>
+    <rtept lat="48.19490" lon="16.35560"><name>Zentagasse</name></rtept>
+    <rtept lat="48.19420" lon="16.35450"><name>Grohgasse</name></rtept>
+    <rtept lat="48.19380" lon="16.35580"><name>Margaretenstraße</name></rtept>
+    <rtept lat="48.19360" lon="16.35760"><name>Ramperstorffergasse</name></rtept>
+    <rtept lat="48.19280" lon="16.35600"><name>Bacherpark</name></rtept>
+    <rtept lat="48.19580" lon="16.35640"><name>Ziel: Magdalenenstraße 4</name></rtept>
+  </rte>
+</gpx>

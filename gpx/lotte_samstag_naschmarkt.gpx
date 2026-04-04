@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Lottes Runden" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>Naschmarkt-Runde (Samstag)</name></metadata>
+  <rte>
+    <name>Naschmarkt-Runde</name>
+    <rtept lat="48.19580" lon="16.35640"><name>Start: Magdalenenstraße 4</name></rtept>
+    <rtept lat="48.19680" lon="16.35580"><name>Schleifmühlgasse</name></rtept>
+    <rtept lat="48.19820" lon="16.35700"><name>Naschmarkt Promenade</name></rtept>
+    <rtept lat="48.19900" lon="16.35820"><name>Linke Wienzeile</name></rtept>
+    <rtept lat="48.19720" lon="16.35380"><name>Pilgramgasse</name></rtept>
+    <rtept lat="48.19490" lon="16.35700"><name>Hamburgerstraße</name></rtept>
+    <rtept lat="48.19580" lon="16.35640"><name>Ziel: Magdalenenstraße 4</name></rtept>
+  </rte>
+</gpx>

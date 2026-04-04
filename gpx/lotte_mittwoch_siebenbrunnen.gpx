@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Lottes Runden" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>Siebenbrunnen-Runde (Mittwoch)</name></metadata>
+  <rte>
+    <name>Siebenbrunnen-Runde</name>
+    <rtept lat="48.19580" lon="16.35640"><name>Start: Magdalenenstraße 4</name></rtept>
+    <rtept lat="48.19490" lon="16.35700"><name>Hamburgerstraße</name></rtept>
+    <rtept lat="48.19380" lon="16.35680"><name>Siebenbrunnengasse</name></rtept>
+    <rtept lat="48.19280" lon="16.35730"><name>Siebenbrunnenplatz</name></rtept>
+    <rtept lat="48.19340" lon="16.35860"><name>Einsiedlergasse</name></rtept>
+    <rtept lat="48.19480" lon="16.35850"><name>Laurenzgasse</name></rtept>
+    <rtept lat="48.19580" lon="16.35640"><name>Ziel: Magdalenenstraße 4</name></rtept>
+  </rte>
+</gpx>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Lottes Runden" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>Große Sonntagsrunde (Sonntag)</name></metadata>
+  <rte>
+    <name>Große Sonntagsrunde</name>
+    <rtept lat="48.19580" lon="16.35640"><name>Start: Magdalenenstraße 4</name></rtept>
+    <rtept lat="48.19650" lon="16.35500"><name>Stiegengasse</name></rtept>
+    <rtept lat="48.19280" lon="16.35600"><name>Bacherpark</name></rtept>
+    <rtept lat="48.19350" lon="16.35480"><name>Reinprechtsdorfer Straße</name></rtept>
+    <rtept lat="48.19380" lon="16.35680"><name>Siebenbrunnengasse</name></rtept>
+    <rtept lat="48.19280" lon="16.35730"><name>Siebenbrunnenplatz</name></rtept>
+    <rtept lat="48.19340" lon="16.35860"><name>Einsiedlergasse</name></rtept>
+    <rtept lat="48.19380" lon="16.35580"><name>Margaretenstraße</name></rtept>
+    <rtept lat="48.19720" lon="16.35380"><name>Pilgramgasse</name></rtept>
+    <rtept lat="48.19580" lon="16.35640"><name>Ziel: Magdalenenstraße 4</name></rtept>
+  </rte>
+</gpx>

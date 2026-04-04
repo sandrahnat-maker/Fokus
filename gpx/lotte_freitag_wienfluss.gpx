@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Lottes Runden" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>Wienfluss-Runde (Freitag)</name></metadata>
+  <rte>
+    <name>Wienfluss-Runde</name>
+    <rtept lat="48.19580" lon="16.35640"><name>Start: Magdalenenstraße 4</name></rtept>
+    <rtept lat="48.19640" lon="16.35720"><name>Steggasse</name></rtept>
+    <rtept lat="48.19740" lon="16.35820"><name>Rechte Wienzeile</name></rtept>
+    <rtept lat="48.19820" lon="16.35950"><name>Wienfluss-Promenade</name></rtept>
+    <rtept lat="48.19760" lon="16.36100"><name>Kettenbrückengasse</name></rtept>
+    <rtept lat="48.19650" lon="16.36050"><name>Nikolsdorfer Gasse</name></rtept>
+    <rtept lat="48.19580" lon="16.35640"><name>Ziel: Magdalenenstraße 4</name></rtept>
+  </rte>
+</gpx>
