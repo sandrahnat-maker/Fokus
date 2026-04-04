@@ -47,6 +47,11 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
 .wave-name{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
 .wave.active .wave-name{color:var(--gold);}
 .wave-time{font-size:15px;color:var(--muted);font-style:italic;margin-top:.1rem;}
+.wave-done-badge{font-size:13px;color:var(--sage);margin-top:.2rem;opacity:0;transition:opacity .4s;}
+.wave.done-all .wave-done-badge{opacity:1;}
+.wave.done-all{border-color:var(--sage-light);}
+.wave.done-all::before{content:'';position:absolute;inset:0;background:rgba(122,154,90,0.06);}
+.wave.done-all .wave-name{color:var(--sage);}
 
 /* ── PHASE CONTENT ── */
 .phase-content{margin:.6rem 1rem 0;animation:fadeIn .35s ease;}
@@ -202,26 +207,31 @@ header{padding:1.4rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
       <div class="wave-icon">🌅</div>
       <div class="wave-name">Mo</div>
       <div class="wave-time">bis 9h</div>
+      <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-vormittag" onclick="showPhase('vormittag')">
       <div class="wave-icon">☀️</div>
       <div class="wave-name">Vm</div>
       <div class="wave-time">9–12h</div>
+      <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-mittag" onclick="showPhase('mittag')">
       <div class="wave-icon">🌿</div>
       <div class="wave-name">Mi</div>
       <div class="wave-time">12–15h</div>
+      <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-nachmittag" onclick="showPhase('nachmittag')">
       <div class="wave-icon">🍂</div>
       <div class="wave-name">Nm</div>
       <div class="wave-time">15–18h</div>
+      <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-abend" onclick="showPhase('abend')">
       <div class="wave-icon">🌙</div>
       <div class="wave-name">Ab</div>
       <div class="wave-time">ab 18h</div>
+      <div class="wave-done-badge">✓</div>
     </div>
   </div>
 </div>
@@ -345,6 +355,21 @@ var storageKey="tasks_"+today.toISOString().slice(0,10);
 var taskState=JSON.parse(localStorage.getItem(storageKey)||"{}");
 function saveTaskState(){localStorage.setItem(storageKey,JSON.stringify(taskState));}
 
+function updateWaveDoneBadges(){
+  ['morgen','vormittag','mittag','nachmittag','abend'].forEach(function(p){
+    var tasks=PHASES[p].tasks;
+    var total=tasks.length;
+    if(total===0)return;
+    var done=tasks.filter(function(_,i){return !!taskState[p+'_'+i];}).length;
+    var waveEl=document.getElementById('wave-'+p);
+    if(done===total){
+      waveEl.classList.add('done-all');
+    } else {
+      waveEl.classList.remove('done-all');
+    }
+  });
+}
+
 var currentPhase=null;
 
 function getPhaseByTime(){
@@ -404,6 +429,7 @@ function toggleTask(p,i){
   saveTaskState();
   if(taskState[key]) showLebenMoment();
   showPhase(p);
+  updateWaveDoneBadges();
 }
 
 // ── LEBEN-MOMENT beim Abhaken ──
@@ -586,30 +612,69 @@ var PRAXIS=[
   {tradition:'ACT',deko:'💨',
    text:'Ein Atemzug als Anker.',
    uebung:'Einatmen — vier Sekunden. Halten — vier Sekunden. Ausatmen — sechs Sekunden. Einmal reicht. Das Nervensystem hört zu.'},
+  {tradition:'Stoizismus',deko:'🌾',
+   text:'Epiktet hatte nichts außer seiner Haltung. Das war genug.',
+   uebung:'Was würdest du behalten wollen, wenn du alles andere abgeben müsstest? Das ist dein Kern. Trag ihn heute bewusst mit dir.'},
+  {tradition:'Stoizismus',deko:'⏳',
+   text:'Memento mori — nicht als Drohung, sondern als Einladung.',
+   uebung:'Dieser Tag ist ein Geschenk. Kein Drama, kein Pathos — nur: Was möchte ich heute wirklich tun? Was würde ich bereuen, nicht getan zu haben?'},
+  {tradition:'Stoizismus',deko:'🪨',
+   text:'Seneca: Die Zeit ist das Einzige, das man wirklich stehlen kann.',
+   uebung:'Schau auf den heutigen Tag: Was würdest du gerne nicht als verschwendet bezeichnen? Eine Sache. Nur eine. Und dann — tu sie.'},
+  {tradition:'Stoizismus',deko:'🌬️',
+   text:'Dinge außerhalb von dir: Wetter, Meinungen, Zufälle.',
+   uebung:'Nenne einen Gedanken, der dich beschäftigt, aber außerhalb deiner Kontrolle liegt. Atme ihn aus. Er darf da sein. Du musst ihn nicht lösen.'},
+  {tradition:'Buddhismus',deko:'🫶',
+   text:'Mitgefühl beginnt bei dir selbst.',
+   uebung:'Leg eine Hand auf dein Herz. Sag innerlich: „Das ist schwer. Viele Menschen fühlen das. Ich bin nicht allein damit." Das ist kein Selbstmitleid — das ist Würde.'},
+  {tradition:'Buddhismus',deko:'🌀',
+   text:'Anfängergeist: jeder Tag ist der erste.',
+   uebung:'Was wäre, wenn du deinen Morgen so erleben könntest, als hättest du ihn noch nie erlebt? Den Kaffee, das Licht, den ersten Schritt. Versuche es für einen Moment.'},
+  {tradition:'Buddhismus',deko:'🕊️',
+   text:'Dukkha — das Unbehagen — gehört zum Leben. Es ist kein Fehler.',
+   uebung:'Was fühlt sich gerade nicht gut an? Nenn es ruhig beim Namen. Nicht um es zu lösen — nur um es anzuerkennen. Das allein kann schon erleichtern.'},
+  {tradition:'ACT',deko:'🎭',
+   text:'Auch unangenehme Gefühle dürfen mitfahren.',
+   uebung:'Stell dir dein Leben als Bus vor. Du fährst. Manchmal sitzen laute Passagiere hinten. Sie dürfen mitfahren — du wählst die Richtung. Wer fährt heute mit?'},
+  {tradition:'ACT',deko:'🌟',
+   text:'Handeln nach Werten — auch wenn Gefühle dagegen sprechen.',
+   uebung:'Denk an einen deiner tiefsten Werte (Fürsorge, Kreativität, Lernen…). Gibt es eine kleine Handlung heute — auch eine winzige — die diesem Wert entspricht? Dann tu genau die.'},
+  {tradition:'ACT',deko:'🔓',
+   text:'Du bist nicht deine Geschichte über dich.',
+   uebung:'Welchen Satz über dich selbst erzählst du dir immer wieder? Schreib ihn auf — und dann: „Ich bemerke, dass ich mir erzähle, dass …" Das ist Defusion. Das schafft Raum.'},
+  {tradition:'Zen',deko:'🍵',
+   text:'Tu eine Sache. Vollständig. Dann die nächste.',
+   uebung:'Heute beim Teetrinken: nur Tee trinken. Kein Handy, kein Planen. Nur der Tee, die Wärme, die Tasse in deinen Händen. Zwei Minuten Zen.'},
+  {tradition:'Ikigai',deko:'🌺',
+   text:'Was liebst du? Was bist du gut darin? Was braucht die Welt?',
+   uebung:'Heute nur eine Frage: Was macht dich lebendig — ganz persönlich, ganz ehrlich? Du musst die Antwort nicht laut sagen. Nur einen Moment damit sitzen.'},
+  {tradition:'Logotherapie',deko:'🕯️',
+   text:'Viktor Frankl: Zwischen Reiz und Reaktion liegt ein Raum.',
+   uebung:'Heute, wenn etwas Schwieriges passiert — bevor du reagierst, atme einmal. Nur einen Atemzug. Das ist der Raum. Da bist du. Da ist deine Freiheit.'},
+  {tradition:'Achtsamkeit',deko:'👣',
+   text:'Jeder Schritt kann ein Ankommen sein.',
+   uebung:'Wenn du heute gehst — ob mit Lotte, zur U-Bahn, durch die Wohnung — spür einen Schritt bewusst. Ferse, Mitte, Zehen. Du bist angekommen. Hier.'},
 ];
 
+// Täglicher Index: wechselt jeden Tag, aber bleibt den ganzen Tag gleich
 function showOverlay(){
   document.getElementById('praxis-overlay').style.display='flex';
-  // Lade zuerst statischen Platzhalter während Claude antwortet
-  var dayIndex=Math.floor(Date.now()/86400000)%PRAXIS.length;
+  // Jedes Mal beim Öffnen eine andere Weisheit
+  var dayIndex=Math.floor(Math.random()*PRAXIS.length);
   var p=PRAXIS[dayIndex];
-  document.getElementById('praxis-tradition').textContent='…';
-  document.getElementById('praxis-deko').textContent='🌿';
-  document.getElementById('praxis-text').textContent='Einen Moment …';
-  document.getElementById('praxis-uebung').textContent='Die heutige Übung wird vorbereitet.';
+  // Sofort die tägliche Weisheit anzeigen (kein Laden-Placeholder mehr)
+  document.getElementById('praxis-tradition').textContent=p.tradition;
+  document.getElementById('praxis-deko').textContent=p.deko;
+  document.getElementById('praxis-text').textContent=p.text;
+  document.getElementById('praxis-uebung').textContent=p.uebung;
 
-  // Hole letzte Reflexionseinträge
+  // Hole letzte Reflexionseinträge — wenn vorhanden, Claude personalisiert die Übung
   var entries=[];
   try{entries=JSON.parse(localStorage.getItem('reflex_v1')||'[]');}catch(e){}
   var recentEntries=entries.slice(0,5);
 
   if(!recentEntries.length){
-    // Kein Eintrag — statisch anzeigen
-    document.getElementById('praxis-tradition').textContent=p.tradition;
-    document.getElementById('praxis-deko').textContent=p.deko;
-    document.getElementById('praxis-text').textContent=p.text;
-    document.getElementById('praxis-uebung').textContent=p.uebung;
-    return;
+    return; // Kein Eintrag — statische Weisheit bleibt
   }
 
   var entriesText=recentEntries.map(function(e){
@@ -741,6 +806,7 @@ showPhase=function(p){
 // ── INIT ──
 loadIntention(false);
 showPhase(getPhaseByTime());
+updateWaveDoneBadges();
 initReflex();
 loadNotiz();
 </script>
