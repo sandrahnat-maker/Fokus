@@ -3,199 +3,309 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Mein Zuhause fühlen 🏡</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<title>🎪 Sandras Haushalts-Zirkus</title>
+<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#faf3e8;--white:#fffdf8;--text:#2e2010;
-  --muted:rgba(20,10,0,0.58);--gold:#c8943a;--gold2:#e8b86a;
-  --terra:#c4704a;--sage:#7a9a5a;--rose:#c4807a;--lavender:#9a7ab8;
-  --border:rgba(180,130,70,0.15);
+  --red:#d42b2b;--red2:#e84040;--cream:#fff8e7;--gold:#f5c518;--gold2:#ffd84a;
+  --navy:#1a1040;--teal:#00a8a8;--pink:#e8478a;--purple:#7b3fa0;
+  --text:#1a1040;--muted:#7a6a9a;--white:#fffdf5;
 }
-html{font-size:18px;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-body{background:var(--bg);font-family:'Cormorant Garamond',Georgia,serif;color:var(--text);min-height:100vh;padding-bottom:4rem;}
-
-header{
-  background:linear-gradient(135deg,#f5ede0,#faf3e8);
-  border-bottom:1px solid var(--border);
-  padding:1.1rem 1.2rem .9rem;
-  box-shadow:0 1px 8px rgba(180,120,40,0.07);
-  text-align:center;
+html{font-size:16px;}
+body{
+  background:var(--cream);
+  font-family:'Nunito',sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  padding-bottom:5rem;
+  overflow-x:hidden;
+  position:relative;
 }
-.header-title{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;font-weight:400;color:var(--text);margin-bottom:.2rem;}
-.header-sub{font-size:13px;color:var(--muted);font-style:italic;}
-
-.view{display:none;padding:1.2rem 1rem;}
+body::before{
+  content:'';
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:repeating-linear-gradient(
+    -45deg,
+    rgba(212,43,43,0.04) 0px,rgba(212,43,43,0.04) 20px,
+    transparent 20px,transparent 40px
+  );
+  pointer-events:none;z-index:0;
+}
+.confetti-wrap{position:fixed;top:0;left:0;right:0;height:100vh;pointer-events:none;z-index:0;overflow:hidden;}
+.cdot{position:absolute;animation:cfall linear infinite;opacity:.6;}
+@keyframes cfall{
+  0%{transform:translateY(-20px) rotate(0deg);opacity:.7;}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0;}
+}
+/* HEADER */
+header{position:relative;z-index:10;background:var(--red);overflow:hidden;box-shadow:0 4px 0 #8b0000,0 6px 20px rgba(0,0,0,.3);}
+.tent-stripe{
+  height:10px;
+  background:repeating-linear-gradient(90deg,var(--red) 0,var(--red) 20px,var(--cream) 20px,var(--cream) 40px);
+}
+.header-inner{padding:1rem 1rem .8rem;text-align:center;background:var(--red);}
+.header-stars{font-size:.95rem;letter-spacing:.35em;margin-bottom:.2rem;color:var(--gold);animation:twinkle 2s ease-in-out infinite alternate;}
+@keyframes twinkle{from{opacity:.6;}to{opacity:1;}}
+.header-title{font-family:'Fredoka One',cursive;font-size:25px;color:var(--gold);text-shadow:2px 2px 0 #8b0000,0 0 20px rgba(245,197,24,.5);line-height:1.1;}
+.header-sub{font-size:12px;color:rgba(255,248,231,.75);letter-spacing:.07em;margin-top:.25rem;font-weight:700;}
+/* VIEWS */
+.view{display:none;padding:1rem;position:relative;z-index:2;}
 .view.active{display:block;}
-
-.room-intro{text-align:center;margin-bottom:1.4rem;}
-.room-intro-text{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--text);line-height:1.6;margin-bottom:.4rem;}
-.room-intro-sub{font-size:14px;color:var(--muted);font-style:italic;}
-
-.rooms-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+/* SECTION BANNER */
+.section-banner{
+  background:var(--navy);border-radius:16px;padding:.7rem 1rem;
+  text-align:center;margin-bottom:1rem;position:relative;overflow:hidden;
+  box-shadow:0 4px 0 rgba(0,0,0,.3);
+}
+.section-banner::before{content:'★ ★ ★';position:absolute;top:50%;left:.5rem;transform:translateY(-50%);color:var(--gold);font-size:.55rem;letter-spacing:.2em;opacity:.4;}
+.section-banner::after{content:'★ ★ ★';position:absolute;top:50%;right:.5rem;transform:translateY(-50%);color:var(--gold);font-size:.55rem;letter-spacing:.2em;opacity:.4;}
+.section-banner-text{font-family:'Fredoka One',cursive;font-size:17px;color:var(--gold);}
+.section-banner-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:.1rem;}
+/* ROOM GRID */
+.rooms-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
 .room-card{
-  background:var(--white);border-radius:16px;padding:1.2rem 1rem;
-  text-align:center;cursor:pointer;border:1.5px solid var(--border);
-  transition:all .2s;box-shadow:0 2px 10px rgba(180,120,40,0.06);
+  background:var(--white);border-radius:16px;padding:1.1rem .8rem;
+  text-align:center;cursor:pointer;
+  border:3px solid rgba(26,16,64,.12);
+  transition:all .15s;
+  box-shadow:0 4px 0 rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.07);
+  position:relative;overflow:hidden;
 }
-.room-card:active{transform:scale(.97);}
-.room-card.selected{border-color:var(--gold);background:linear-gradient(135deg,#fdf6e0,#faf3e8);}
-.room-icon{font-size:2rem;margin-bottom:.5rem;}
-.room-name{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--text);}
-.room-card.selected .room-name{color:var(--gold);}
-
+.room-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;}
+.room-card:nth-child(1)::before{background:var(--red);}
+.room-card:nth-child(2)::before{background:var(--teal);}
+.room-card:nth-child(3)::before{background:var(--pink);}
+.room-card:nth-child(4)::before{background:var(--purple);}
+.room-card:nth-child(5)::before{background:var(--gold);}
+.room-card:nth-child(6)::before{background:var(--red2);}
+.room-card:nth-child(7)::before{background:var(--teal);}
+.room-card:nth-child(8)::before{background:var(--pink);}
+.room-card:active{transform:scale(.95) translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.1);}
+.room-card.selected{border:3px solid var(--gold);background:linear-gradient(135deg,#fffbe0,#fff8e7);box-shadow:0 4px 0 rgba(245,197,24,.4),0 0 20px rgba(245,197,24,.2);}
+.room-icon{font-size:2.2rem;margin-bottom:.4rem;display:block;}
+.room-name{font-family:'Fredoka One',cursive;font-size:15px;color:var(--text);}
+.room-card.selected .room-name{color:var(--red);}
+/* Q CARD */
 .q-card{
-  background:var(--white);border-radius:18px;padding:1.4rem 1.2rem;
-  margin-bottom:1rem;border:1px solid var(--border);
-  box-shadow:0 2px 12px rgba(180,120,40,0.07);
+  background:var(--white);border-radius:20px;padding:1.4rem 1.2rem;
+  margin-bottom:1rem;border:3px solid var(--navy);
+  box-shadow:5px 5px 0 var(--navy);
 }
-.q-step{font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:.6rem;}
-.q-text{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;font-weight:400;color:var(--text);line-height:1.5;margin-bottom:1.1rem;}
-.q-room-name{color:var(--gold);}
-
-.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.8rem;}
+.q-step{font-family:'Fredoka One',cursive;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--red);margin-bottom:.5rem;}
+.q-text{font-family:'Fredoka One',cursive;font-size:20px;color:var(--text);line-height:1.4;margin-bottom:1rem;}
+.q-room-name{color:var(--red);}
+/* CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem;}
 .chip{
-  padding:.38rem .9rem;border-radius:20px;font-size:14px;
-  font-family:'Cormorant Garamond',serif;cursor:pointer;
-  border:1.5px solid var(--border);background:var(--bg);
-  color:var(--text);transition:all .2s;
+  padding:.35rem .8rem;border-radius:20px;font-size:13px;
+  font-family:'Nunito',sans-serif;font-weight:700;cursor:pointer;
+  border:2px solid var(--navy);background:var(--white);
+  color:var(--text);transition:all .15s;
 }
-.chip:active{transform:scale(.96);}
-.chip.on{color:#fff;}
-.chip.on.sage{background:var(--sage);border-color:var(--sage);}
-.chip.on.rose{background:var(--rose);border-color:var(--rose);}
-.chip.on.lavender{background:var(--lavender);border-color:var(--lavender);}
-.chip.on.terra{background:var(--terra);border-color:var(--terra);}
-.chip.on.gold{background:var(--gold);border-color:var(--gold);}
-
+.chip:active{transform:scale(.94);}
+.chip.on{color:#fff;transform:scale(1.05);}
+.chip.on.sage{background:#2a9a5a;border-color:#2a9a5a;}
+.chip.on.rose{background:var(--pink);border-color:var(--pink);}
+.chip.on.lavender{background:var(--purple);border-color:var(--purple);}
+.chip.on.terra{background:var(--red);border-color:var(--red);}
+.chip.on.gold{background:#c4960e;border-color:#c4960e;}
+/* TEXTAREA */
 .ta{
-  width:100%;border:1.5px solid var(--border);border-radius:12px;
-  padding:.9rem 1rem;font-family:'Cormorant Garamond',serif;
-  font-size:16px;color:var(--text);background:var(--bg);
-  resize:none;min-height:90px;line-height:1.6;
+  width:100%;border:2px solid var(--navy);border-radius:12px;
+  padding:.8rem 1rem;font-family:'Nunito',sans-serif;
+  font-size:15px;color:var(--text);background:var(--white);
+  resize:none;min-height:80px;line-height:1.6;
 }
-.ta::placeholder{color:var(--muted);font-style:italic;}
-.ta:focus{outline:none;border-color:var(--gold);}
-
-.needs-label{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:.6rem;margin-top:.8rem;display:block;}
-
+.ta:focus{outline:none;border-color:var(--red);}
+.needs-label{font-size:11px;color:var(--muted);font-weight:800;margin-bottom:.5rem;margin-top:.7rem;display:block;text-transform:uppercase;letter-spacing:.07em;}
+/* NAV DOTS */
+.nav-dots{display:flex;justify-content:center;gap:.4rem;padding:.5rem 0 .8rem;}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(26,16,64,.15);transition:all .3s;}
+.dot.active{background:var(--red);width:24px;border-radius:5px;}
+/* AFFIRMATION */
 .affirmation-card{
-  background:linear-gradient(150deg,#f5ede0,#fdf6ee,#f0ede8);
-  border-radius:18px;padding:1.6rem 1.4rem;
-  text-align:center;border:1px solid rgba(200,148,58,0.2);
-  box-shadow:0 4px 20px rgba(180,120,40,0.1);
-  margin-bottom:1rem;
-  animation:fadeIn .5s ease;
+  background:var(--navy);border-radius:20px;padding:1.6rem 1.4rem;
+  text-align:center;box-shadow:5px 5px 0 var(--red),0 10px 30px rgba(26,16,64,.3);
+  margin-bottom:1rem;animation:popIn .4s cubic-bezier(.175,.885,.32,1.275);
+  position:relative;overflow:hidden;
 }
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.affirmation-icon{font-size:2.5rem;margin-bottom:.8rem;}
-.affirmation-room{font-size:12px;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:.5rem;}
-.affirmation-feeling{font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:var(--text);margin-bottom:.4rem;line-height:1.5;}
-.affirmation-need{font-size:14px;color:var(--muted);font-style:italic;margin-bottom:1rem;line-height:1.6;}
+@keyframes popIn{from{opacity:0;transform:scale(.8) rotate(-3deg);}to{opacity:1;transform:scale(1) rotate(0);}}
+.affirmation-card::before{content:'🎪';position:absolute;top:-10px;right:-10px;font-size:5rem;opacity:.08;transform:rotate(15deg);}
+.affirmation-icon{font-size:3rem;margin-bottom:.6rem;display:block;animation:bounce 1s ease infinite alternate;}
+@keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-6px);}}
+.affirmation-room{font-family:'Fredoka One',cursive;font-size:12px;letter-spacing:.15em;color:var(--gold);margin-bottom:.4rem;text-transform:uppercase;}
+.affirmation-feeling{font-family:'Fredoka One',cursive;font-size:18px;color:var(--white);margin-bottom:.3rem;line-height:1.4;}
+.affirmation-need{font-size:13px;color:rgba(255,248,231,.65);margin-bottom:1rem;line-height:1.5;}
 .affirmation-text{
-  font-family:'Playfair Display',serif;font-size:17px;font-style:italic;
-  color:var(--terra);line-height:1.7;padding:.85rem 1rem;
-  background:rgba(255,253,248,.8);border-radius:12px;
-  border-left:3px solid var(--gold2);text-align:left;
+  font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;
+  color:var(--gold);line-height:1.6;padding:.8rem 1rem;
+  background:rgba(255,255,255,.07);border-radius:12px;
+  border-left:4px solid var(--gold);text-align:left;
 }
-
+/* BUTTONS */
 .btn-primary{
-  width:100%;background:var(--gold);color:#fff;border:none;
-  border-radius:30px;padding:.7rem 1.5rem;font-size:16px;
-  font-family:'Cormorant Garamond',serif;cursor:pointer;
-  transition:all .2s;margin-top:.8rem;display:block;
+  width:100%;background:var(--red);color:var(--gold);
+  border:3px solid var(--navy);border-radius:50px;
+  padding:.75rem 1.5rem;font-size:17px;font-family:'Fredoka One',cursive;
+  cursor:pointer;transition:all .15s;margin-top:.8rem;display:block;
+  box-shadow:4px 4px 0 var(--navy);letter-spacing:.03em;
 }
-.btn-primary:active{transform:scale(.98);opacity:.9;}
+.btn-primary:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--navy);}
 .btn-secondary{
   width:100%;background:transparent;color:var(--muted);
-  border:1.5px solid var(--border);border-radius:30px;
-  padding:.6rem 1.5rem;font-size:15px;font-family:'Cormorant Garamond',serif;
-  cursor:pointer;transition:all .2s;margin-top:.5rem;display:block;
+  border:2px solid rgba(26,16,64,.2);border-radius:50px;
+  padding:.6rem 1.5rem;font-size:15px;font-family:'Nunito',sans-serif;font-weight:700;
+  cursor:pointer;transition:all .15s;margin-top:.5rem;display:block;
 }
-.btn-secondary:active{transform:scale(.98);}
-
-.nav-dots{display:flex;justify-content:center;gap:.5rem;padding:.6rem 0 1rem;}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;}
-.dot.active{background:var(--gold);width:20px;border-radius:4px;}
-
-.history-title{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--muted);text-align:center;margin-bottom:1rem;}
-.history-empty{text-align:center;font-size:14px;color:var(--muted);font-style:italic;padding:2rem 0;}
+.btn-secondary:active{transform:scale(.97);}
+/* HISTORY */
+.history-title{font-family:'Fredoka One',cursive;font-size:20px;color:var(--red);text-align:center;margin-bottom:1rem;}
+.history-empty{text-align:center;font-size:14px;color:var(--muted);padding:2.5rem 0;}
 .history-item{
-  background:var(--white);border-radius:14px;padding:.9rem 1rem;
-  margin-bottom:.6rem;border:1px solid var(--border);
+  background:var(--white);border-radius:16px;padding:.9rem 1rem;
+  margin-bottom:.6rem;border:2px solid rgba(26,16,64,.1);
+  border-left:5px solid var(--red);box-shadow:3px 3px 0 rgba(0,0,0,.07);
 }
-.history-date{font-size:12px;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.06em;}
-.history-room{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--text);}
-.history-details{font-size:13px;color:var(--muted);font-style:italic;margin-top:.25rem;line-height:1.6;}
-
+.history-date{font-size:11px;color:var(--muted);margin-bottom:.3rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;}
+.history-room{font-family:'Fredoka One',cursive;font-size:17px;color:var(--text);}
+.history-details{font-size:13px;color:var(--muted);margin-top:.25rem;line-height:1.6;}
+/* BOTTOM NAV */
 .bottom-nav{
   position:fixed;bottom:0;left:0;right:0;
-  background:var(--white);border-top:1px solid var(--border);
-  display:flex;padding:.5rem 0;
-  box-shadow:0 -2px 12px rgba(180,120,40,0.07);
+  background:var(--navy);border-top:4px solid var(--gold);
+  display:flex;z-index:100;box-shadow:0 -4px 20px rgba(26,16,64,.4);
 }
 .bnav-btn{
   flex:1;display:flex;flex-direction:column;align-items:center;
-  gap:.2rem;background:none;border:none;cursor:pointer;padding:.4rem 0;
-  font-family:'Cormorant Garamond',serif;
+  gap:.15rem;background:none;border:none;cursor:pointer;
+  padding:.55rem 0 .45rem;font-family:'Nunito',sans-serif;
+  position:relative;
 }
-.bnav-icon{font-size:1.3rem;}
-.bnav-label{font-size:11px;color:var(--muted);}
+.bnav-btn::after{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:0;height:3px;background:var(--gold);border-radius:0 0 3px 3px;transition:width .2s;
+}
+.bnav-btn.on::after{width:60%;}
+.bnav-icon{font-size:1.4rem;}
+.bnav-label{font-size:10px;color:rgba(255,248,231,.45);font-weight:800;letter-spacing:.04em;}
 .bnav-btn.on .bnav-label{color:var(--gold);}
+/* TAGESPLAN */
+.day-header{
+  background:var(--red);border-radius:20px;padding:1.2rem;
+  margin-bottom:1rem;border:3px solid var(--navy);
+  box-shadow:5px 5px 0 var(--navy);position:relative;overflow:hidden;
+}
+.day-header::after{content:'🎡';position:absolute;right:-5px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:.1;}
+.day-label{font-family:'Fredoka One',cursive;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.3rem;}
+.day-title{font-family:'Fredoka One',cursive;font-size:22px;color:var(--white);margin-bottom:.2rem;text-shadow:1px 1px 0 rgba(0,0,0,.3);}
+.day-sub{font-size:13px;color:rgba(255,248,231,.7);font-weight:600;}
+.day-focus{
+  background:var(--white);border-radius:20px;padding:1.1rem;
+  margin-bottom:1rem;border:3px solid var(--navy);box-shadow:5px 5px 0 var(--navy);
+}
+.focus-label{font-family:'Fredoka One',cursive;font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:var(--teal);margin-bottom:.4rem;}
+.focus-room{font-family:'Fredoka One',cursive;font-size:18px;color:var(--red);margin-bottom:.8rem;}
+/* TASKS */
+.task-list{list-style:none;padding:0;margin:0;}
+.task-item{
+  display:flex;align-items:flex-start;gap:.7rem;
+  padding:.7rem .3rem;border-bottom:2px dashed rgba(26,16,64,.1);
+  cursor:pointer;transition:background .15s;border-radius:8px;
+}
+.task-item:last-child{border-bottom:none;}
+.task-item:active{background:rgba(212,43,43,.05);}
+.task-check{
+  width:26px;height:26px;border-radius:50%;
+  border:3px solid var(--navy);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1px;transition:all .2s;background:var(--white);
+}
+.task-item.done .task-check{background:var(--teal);border-color:var(--teal);animation:checkPop .3s cubic-bezier(.175,.885,.32,1.275);}
+@keyframes checkPop{from{transform:scale(0);}to{transform:scale(1);}}
+.task-item.done .task-check::after{content:'✓';color:#fff;font-weight:900;font-size:14px;}
+.task-item.done .task-text{text-decoration:line-through;color:var(--muted);}
+.task-text{font-size:14px;line-height:1.6;color:var(--text);flex:1;font-weight:600;}
+.task-time{font-size:11px;font-weight:900;color:var(--white);background:var(--navy);padding:.15rem .4rem;border-radius:8px;flex-shrink:0;margin-top:2px;white-space:nowrap;}
+/* PROGRESS */
+.progress-wrap{margin-top:.8rem;}
+.progress-bar{height:10px;background:rgba(26,16,64,.1);border-radius:5px;overflow:hidden;border:2px solid var(--navy);}
+.progress-fill{
+  height:100%;
+  background:repeating-linear-gradient(90deg,var(--teal) 0,var(--teal) 10px,#00c8c8 10px,#00c8c8 20px);
+  border-radius:3px;transition:width .4s cubic-bezier(.175,.885,.32,1.275);
+}
+.progress-text{font-size:12px;font-weight:800;color:var(--muted);margin-top:.3rem;text-align:right;font-family:'Fredoka One',cursive;}
+/* BIG TASKS */
+.big-section-title{font-family:'Fredoka One',cursive;font-size:16px;color:var(--navy);margin:1.2rem 0 .6rem;display:flex;align-items:center;gap:.5rem;}
+.big-task-item{
+  background:var(--white);border-radius:16px;padding:.85rem 1rem;
+  margin-bottom:.5rem;border:2px solid rgba(26,16,64,.12);
+  display:flex;align-items:flex-start;gap:.7rem;cursor:pointer;
+  transition:all .15s;box-shadow:3px 3px 0 rgba(0,0,0,.08);
+}
+.big-task-item:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(0,0,0,.08);}
+.big-task-item.done{opacity:.4;background:#f0f0f0;}
+.big-task-item.done .task-text{text-decoration:line-through;}
+.big-task-check{width:26px;height:26px;border-radius:6px;border:3px solid var(--navy);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .2s;}
+.big-task-item.done .big-task-check{background:var(--pink);border-color:var(--pink);}
+.big-task-item.done .big-task-check::after{content:'✓';color:#fff;font-weight:900;font-size:14px;}
+.big-task-room-tag{font-family:'Fredoka One',cursive;font-size:11px;color:var(--red);display:block;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.06em;}
 </style>
 </head>
 <body>
 
+<div class="confetti-wrap" id="confetti"></div>
+
 <header>
-  <div class="header-title">🏡 Mein Zuhause fühlen</div>
-  <div class="header-sub">Was braucht mein Raum heute?</div>
+  <div class="tent-stripe"></div>
+  <div class="header-inner">
+    <div class="header-stars">★ ✦ ★ ✦ ★</div>
+    <div class="header-title">🎪 Sandras Haushalts-Zirkus 🎪</div>
+    <div class="header-sub">Manege frei — für ein aufgeräumtes Zuhause!</div>
+  </div>
+  <div class="tent-stripe"></div>
 </header>
 
-<!-- RAUM WÄHLEN -->
+<!-- RÄUME -->
 <div class="view active" id="view-rooms">
-  <div class="room-intro">
-    <div class="room-intro-text">In welchem Raum<br>möchtest du heute innehalten?</div>
-    <div class="room-intro-sub">Wähle einen Raum — und höre hin.</div>
+  <div class="section-banner">
+    <div class="section-banner-text">🤹 In welchem Raum heute?</div>
+    <div class="section-banner-sub">Wähle deinen Auftrittsort</div>
   </div>
   <div class="rooms-grid">
     <div class="room-card" data-room="Wohnzimmer" data-icon="🛋️" onclick="selectRoom(this)">
-      <div class="room-icon">🛋️</div><div class="room-name">Wohnzimmer</div>
+      <span class="room-icon">🛋️</span><div class="room-name">Wohnzimmer</div>
     </div>
     <div class="room-card" data-room="Küche" data-icon="🍳" onclick="selectRoom(this)">
-      <div class="room-icon">🍳</div><div class="room-name">Küche</div>
+      <span class="room-icon">🍳</span><div class="room-name">Küche</div>
     </div>
     <div class="room-card" data-room="Schlafzimmer" data-icon="🌙" onclick="selectRoom(this)">
-      <div class="room-icon">🌙</div><div class="room-name">Schlafzimmer</div>
+      <span class="room-icon">🌙</span><div class="room-name">Schlafzimmer</div>
     </div>
     <div class="room-card" data-room="Bad" data-icon="🛁" onclick="selectRoom(this)">
-      <div class="room-icon">🛁</div><div class="room-name">Bad</div>
+      <span class="room-icon">🛁</span><div class="room-name">Bad</div>
     </div>
     <div class="room-card" data-room="Vorzimmer" data-icon="🚪" onclick="selectRoom(this)">
-      <div class="room-icon">🚪</div><div class="room-name">Vorzimmer</div>
+      <span class="room-icon">🚪</span><div class="room-name">Vorzimmer</div>
     </div>
     <div class="room-card" data-room="Atelier" data-icon="🎨" onclick="selectRoom(this)">
-      <div class="room-icon">🎨</div><div class="room-name">Atelier</div>
+      <span class="room-icon">🎨</span><div class="room-name">Atelier</div>
     </div>
     <div class="room-card" data-room="Essplatz" data-icon="🪑" onclick="selectRoom(this)">
-      <div class="room-icon">🪑</div><div class="room-name">Essplatz</div>
+      <span class="room-icon">🪑</span><div class="room-name">Essplatz</div>
     </div>
-    <div class="room-card" data-room="Vorraum" data-icon="🧹" onclick="selectRoom(this)">
-      <div class="room-icon">🧹</div><div class="room-name">Vorraum</div>
-    </div>
-    <div class="room-card" data-room="Klo" data-icon="🪴" onclick="selectRoom(this)">
-      <div class="room-icon">🪴</div><div class="room-name">Klo</div>
+    <div class="room-card" data-room="Klo" data-icon="🚽" onclick="selectRoom(this)">
+      <span class="room-icon">🚽</span><div class="room-name">Klo</div>
     </div>
   </div>
 </div>
 
 <!-- FÜHLEN -->
 <div class="view" id="view-feel">
-  <div class="nav-dots">
-    <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
-  </div>
+  <div class="nav-dots"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
   <div class="q-card">
-    <div class="q-step">Schritt 1 · Fühlen</div>
+    <div class="q-step">🎭 Akt 1 · Fühlen</div>
     <div class="q-text">Wie fühlt sich <span class="q-room-name" id="feelRoomName"></span> gerade an?</div>
     <div class="chips" id="feelChips">
       <div class="chip" data-color="sage" onclick="toggleChip(this)">🌿 ruhig & stimmig</div>
@@ -207,20 +317,18 @@ header{
       <div class="chip" data-color="sage" onclick="toggleChip(this)">🌬️ frisch & klar</div>
       <div class="chip" data-color="rose" onclick="toggleChip(this)">🕯️ gemütlich</div>
     </div>
-    <textarea class="ta" id="feelText" placeholder="Oder beschreibe es mit deinen eigenen Worten..."></textarea>
+    <textarea class="ta" id="feelText" placeholder="Oder mit eigenen Worten..."></textarea>
   </div>
-  <button class="btn-primary" onclick="goToNeeds()">Weiter →</button>
-  <button class="btn-secondary" onclick="showView('view-rooms')">‹ Zurück</button>
+  <button class="btn-primary" onclick="goToNeeds()">Weiter → Akt 2</button>
+  <button class="btn-secondary" onclick="showView('view-rooms');setNav('bnav-home')">‹ Zurück</button>
 </div>
 
 <!-- BRAUCHEN -->
 <div class="view" id="view-needs">
-  <div class="nav-dots">
-    <div class="dot"></div><div class="dot active"></div><div class="dot"></div>
-  </div>
+  <div class="nav-dots"><div class="dot"></div><div class="dot active"></div><div class="dot"></div></div>
   <div class="q-card">
-    <div class="q-step">Schritt 2 · Lauschen</div>
-    <div class="q-text">Was braucht <span class="q-room-name" id="needRoomName"></span> gerade von mir?</div>
+    <div class="q-step">🎪 Akt 2 · Lauschen</div>
+    <div class="q-text">Was braucht <span class="q-room-name" id="needRoomName"></span> gerade?</div>
     <div class="chips" id="needChips">
       <div class="chip" data-color="sage" onclick="toggleChip(this)">🌬️ Luft & Lüften</div>
       <div class="chip" data-color="gold" onclick="toggleChip(this)">🕯️ Licht & Wärme</div>
@@ -233,174 +341,260 @@ header{
       <div class="chip" data-color="rose" onclick="toggleChip(this)">🎨 einen kreativen Touch</div>
       <div class="chip" data-color="sage" onclick="toggleChip(this)">🔇 Stille & Ruhe</div>
     </div>
-    <span class="needs-label">Noch etwas das du spürst oder weißt?</span>
-    <textarea class="ta" id="needText" placeholder="Ein Gedanke, eine Idee, ein Gefühl..."></textarea>
+    <span class="needs-label">Noch etwas das du spürst?</span>
+    <textarea class="ta" id="needText" placeholder="Ein Gedanke, eine Idee..."></textarea>
   </div>
-  <button class="btn-primary" onclick="saveAndShow()">🌿 Speichern & Innehalten</button>
+  <button class="btn-primary" onclick="saveAndShow()">🎊 Speichern & Vorhang!</button>
   <button class="btn-secondary" onclick="showView('view-feel')">‹ Zurück</button>
 </div>
 
 <!-- AFFIRMATION -->
 <div class="view" id="view-affirm">
-  <div class="nav-dots">
-    <div class="dot"></div><div class="dot"></div><div class="dot active"></div>
-  </div>
+  <div class="nav-dots"><div class="dot"></div><div class="dot"></div><div class="dot active"></div></div>
   <div class="affirmation-card">
-    <div class="affirmation-icon" id="affirmIcon"></div>
+    <span class="affirmation-icon" id="affirmIcon"></span>
     <div class="affirmation-room" id="affirmRoom"></div>
     <div class="affirmation-feeling" id="affirmFeeling"></div>
     <div class="affirmation-need" id="affirmNeed"></div>
     <div class="affirmation-text" id="affirmText"></div>
   </div>
-  <button class="btn-primary" onclick="showView('view-history')" style="margin-top:0">Alle Räume ansehen →</button>
-  <button class="btn-secondary" onclick="startNew()">Neuen Raum fühlen</button>
+  <button class="btn-primary" onclick="openHistory()">🌿 Alle Räume ansehen</button>
+  <button class="btn-secondary" onclick="startNew()">Neue Vorstellung 🎪</button>
 </div>
 
 <!-- VERLAUF -->
 <div class="view" id="view-history">
-  <div class="history-title">Meine Raumgefühle</div>
+  <div class="history-title">🎭 Meine Raumgefühle</div>
   <div id="historyList"></div>
-  <button class="btn-primary" onclick="startNew()">🌿 Neuen Raum fühlen</button>
+  <button class="btn-primary" onclick="startNew()">🎪 Neue Vorstellung</button>
 </div>
 
+<!-- TAGESPLAN -->
+<div class="view" id="view-tagesplan" style="padding-bottom:5rem;">
+  <div class="day-header">
+    <div class="day-label" id="tp-wochentag"></div>
+    <div class="day-title" id="tp-motto"></div>
+    <div class="day-sub">30 Minuten · ein Fokus · ganz konkrete Schritte</div>
+  </div>
+  <div class="day-focus">
+    <div class="focus-label">⏱ Heute's Nummer im Programm</div>
+    <div class="focus-room" id="tp-focus-room"></div>
+    <ul class="task-list" id="tp-daily-tasks"></ul>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="tp-progress-fill" style="width:0%"></div></div>
+      <div class="progress-text" id="tp-progress-text">0 von 0 erledigt</div>
+    </div>
+  </div>
+  <div class="big-section-title">🗂 Große Nummern <span style="font-size:12px;font-family:Nunito,sans-serif;font-weight:700;color:var(--muted);margin-left:.3rem">(wann immer du kannst)</span></div>
+  <div id="tp-big-tasks"></div>
+</div>
+
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
   <button class="bnav-btn on" id="bnav-home" onclick="startNew()">
-    <div class="bnav-icon">🏡</div>
-    <div class="bnav-label">Fühlen</div>
+    <div class="bnav-icon">🎪</div><div class="bnav-label">FÜHLEN</div>
+  </button>
+  <button class="bnav-btn" id="bnav-plan" onclick="openTagesplan()">
+    <div class="bnav-icon">📋</div><div class="bnav-label">TAGESPLAN</div>
   </button>
   <button class="bnav-btn" id="bnav-hist" onclick="openHistory()">
-    <div class="bnav-icon">🌿</div>
-    <div class="bnav-label">Verlauf</div>
+    <div class="bnav-icon">🌿</div><div class="bnav-label">VERLAUF</div>
   </button>
 </div>
 
 <script>
-var currentRoom = '';
-var currentIcon = '';
+(function(){
+  var colors=['#d42b2b','#f5c518','#00a8a8','#e8478a','#7b3fa0','#fff8e7','#e84040'];
+  var wrap=document.getElementById('confetti');
+  for(var i=0;i<20;i++){
+    var d=document.createElement('div');d.className='cdot';
+    d.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;'+
+      'background:'+colors[Math.floor(Math.random()*colors.length)]+';'+
+      'animation-duration:'+(7+Math.random()*10)+'s;'+
+      'animation-delay:'+Math.random()*8+'s;'+
+      'width:'+(5+Math.random()*8)+'px;height:'+(5+Math.random()*8)+'px;'+
+      'border-radius:'+(Math.random()>.5?'50%':'3px')+';';
+    wrap.appendChild(d);
+  }
+})();
 
-var AFFIRMATIONS = {
-  'ruhig':    'Dieser Raum trägt mich. Ich darf hier einfach sein.',
-  'lebendig': 'Leben strömt durch diesen Raum — und durch mich.',
-  'schwer':   'Ich erkenne, was der Raum trägt. Leichter werden darf ein sanfter Prozess sein.',
-  'warm':     'Wärme und Geborgenheit — ich habe mir einen schönen Ort geschaffen.',
-  'unruhig':  'Ich atme tief. Der Raum darf zur Ruhe kommen — ich auch.',
-  'stagnierend': 'Neues kann nur entstehen, wenn altes Platz macht. Ich beginne sanft.',
-  'klar':     'Klarheit im Raum — Klarheit in mir. Ich schätze dieses Geschenk.',
+var currentRoom='',currentIcon='';
+
+var AFFIRMATIONS={
+  'ruhig':'Dieser Raum trägt mich. Ich darf hier einfach sein.',
+  'lebendig':'Leben strömt durch diesen Raum — und durch mich.',
+  'schwer':'Ich erkenne, was der Raum trägt. Leichter werden darf ein sanfter Prozess sein.',
+  'warm':'Wärme und Geborgenheit — ich habe mir einen schönen Ort geschaffen.',
+  'unruhig':'Ich atme tief. Der Raum darf zur Ruhe kommen — ich auch.',
+  'stagnierend':'Neues kann nur entstehen, wenn altes Platz macht. Ich beginne sanft.',
+  'klar':'Klarheit im Raum — Klarheit in mir.',
   'gemütlich':'Hier ist mein Zuhause. Warm, mein, lebendig.',
-  'gut so':   'Manchmal ist das Schönste, innezuhalten und zu erkennen: Es ist gut so.',
-  'default':  'Ich sorge für meinen Raum mit Liebe — und mein Raum sorgt für mich.'
+  'gut so':'Manchmal ist das Schönste: innehalten und erkennen — es ist gut so.',
+  'default':'Ich sorge für meinen Raum mit Liebe — und mein Raum sorgt für mich.'
 };
 
-function showView(id) {
-  document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
-  document.getElementById(id).classList.add('active');
-  document.getElementById('bnav-home').classList.toggle('on', id !== 'view-history');
-  document.getElementById('bnav-hist').classList.toggle('on', id === 'view-history');
-  window.scrollTo(0,0);
-}
-
-function selectRoom(card) {
-  document.querySelectorAll('.room-card').forEach(function(c){ c.classList.remove('selected'); });
+function showView(id){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function setNav(activeId){['bnav-home','bnav-plan','bnav-hist'].forEach(function(id){document.getElementById(id).classList.toggle('on',id===activeId);});}
+function selectRoom(card){
+  document.querySelectorAll('.room-card').forEach(function(c){c.classList.remove('selected');});
   card.classList.add('selected');
-  currentRoom = card.getAttribute('data-room');
-  currentIcon = card.getAttribute('data-icon');
-  document.querySelectorAll('.chip').forEach(function(c){
-    c.classList.remove('on','sage','rose','lavender','terra','gold');
-  });
-  document.getElementById('feelText').value = '';
-  document.getElementById('needText').value = '';
-  document.getElementById('feelRoomName').textContent = currentRoom;
-  document.getElementById('needRoomName').textContent = currentRoom;
-  setTimeout(function(){ showView('view-feel'); }, 150);
+  currentRoom=card.getAttribute('data-room');
+  currentIcon=card.getAttribute('data-icon');
+  document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on','sage','rose','lavender','terra','gold');});
+  document.getElementById('feelText').value='';document.getElementById('needText').value='';
+  document.getElementById('feelRoomName').textContent=currentRoom;
+  document.getElementById('needRoomName').textContent=currentRoom;
+  setTimeout(function(){showView('view-feel');},150);
 }
-
-function toggleChip(chip) {
-  var color = chip.getAttribute('data-color') || 'gold';
-  if (chip.classList.contains('on')) {
-    chip.classList.remove('on','sage','rose','lavender','terra','gold');
-  } else {
-    chip.classList.add('on', color);
-  }
+function toggleChip(chip){
+  var color=chip.getAttribute('data-color')||'gold';
+  if(chip.classList.contains('on')){chip.classList.remove('on','sage','rose','lavender','terra','gold');}
+  else{chip.classList.add('on',color);}
 }
-
-function getSelected(containerId) {
-  var chips = document.querySelectorAll('#' + containerId + ' .chip.on');
-  return Array.from(chips).map(function(c){ return c.textContent.trim(); });
-}
-
-function goToNeeds() {
-  showView('view-needs');
-}
-
-function getAffirmation(feelings, needs) {
-  var all = feelings.concat(needs).join(' ').toLowerCase();
-  for (var key in AFFIRMATIONS) {
-    if (key !== 'default' && all.indexOf(key) >= 0) return AFFIRMATIONS[key];
-  }
+function getSelected(id){return Array.from(document.querySelectorAll('#'+id+' .chip.on')).map(function(c){return c.textContent.trim();});}
+function goToNeeds(){showView('view-needs');}
+function getAffirmation(f,n){
+  var all=f.concat(n).join(' ').toLowerCase();
+  for(var k in AFFIRMATIONS){if(k!=='default'&&all.indexOf(k)>=0)return AFFIRMATIONS[k];}
   return AFFIRMATIONS['default'];
 }
-
-function saveAndShow() {
-  var feelings = getSelected('feelChips');
-  var feelExtra = document.getElementById('feelText').value.trim();
-  if (feelExtra) feelings.push(feelExtra);
-
-  var needs = getSelected('needChips');
-  var needExtra = document.getElementById('needText').value.trim();
-  if (needExtra) needs.push(needExtra);
-
-  var feelText = feelings.length ? feelings.join(', ') : 'still beobachtend';
-  var needText = needs.length ? needs.join(', ') : 'einfach innehalten';
-  var affirmText = getAffirmation(feelings, needs);
-
-  document.getElementById('affirmIcon').textContent = currentIcon;
-  document.getElementById('affirmRoom').textContent = currentRoom;
-  document.getElementById('affirmFeeling').textContent = '"' + feelText + '"';
-  document.getElementById('affirmNeed').textContent = 'Es braucht: ' + needText;
-  document.getElementById('affirmText').textContent = affirmText;
-
-  try {
-    var entries = JSON.parse(localStorage.getItem('raumgefuehl_v1') || '[]');
-    entries.unshift({room:currentRoom, icon:currentIcon, feelings:feelings, needs:needs, date:new Date().toISOString()});
-    if (entries.length > 50) entries = entries.slice(0,50);
-    localStorage.setItem('raumgefuehl_v1', JSON.stringify(entries));
-  } catch(e) {}
-
+function saveAndShow(){
+  var feelings=getSelected('feelChips');var fe=document.getElementById('feelText').value.trim();if(fe)feelings.push(fe);
+  var needs=getSelected('needChips');var ne=document.getElementById('needText').value.trim();if(ne)needs.push(ne);
+  document.getElementById('affirmIcon').textContent=currentIcon;
+  document.getElementById('affirmRoom').textContent=currentRoom;
+  document.getElementById('affirmFeeling').textContent='"'+(feelings.length?feelings.join(', '):'still beobachtend')+'"';
+  document.getElementById('affirmNeed').textContent='Es braucht: '+(needs.length?needs.join(', '):'einfach innehalten');
+  document.getElementById('affirmText').textContent=getAffirmation(feelings,needs);
+  try{var e=JSON.parse(localStorage.getItem('raumgefuehl_v1')||'[]');e.unshift({room:currentRoom,icon:currentIcon,feelings:feelings,needs:needs,date:new Date().toISOString()});if(e.length>50)e=e.slice(0,50);localStorage.setItem('raumgefuehl_v1',JSON.stringify(e));}catch(ex){}
   showView('view-affirm');
 }
-
-function renderHistory() {
-  var entries = [];
-  try { entries = JSON.parse(localStorage.getItem('raumgefuehl_v1') || '[]'); } catch(e) {}
-  var el = document.getElementById('historyList');
-  if (!entries.length) {
-    el.innerHTML = '<div class="history-empty">Noch kein Raum gefühlt.<br>Beginne heute 🌿</div>';
-    return;
-  }
-  var days = ['So','Mo','Di','Mi','Do','Fr','Sa'];
-  var months = ['Jän','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
-  el.innerHTML = entries.slice(0,20).map(function(e) {
-    var d = new Date(e.date);
-    var dateStr = days[d.getDay()]+', '+d.getDate()+'. '+months[d.getMonth()]+' · '+
-      String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+' Uhr';
-    return '<div class="history-item">' +
-      '<div class="history-date">'+dateStr+'</div>' +
-      '<div class="history-room">'+e.icon+' '+e.room+'</div>' +
-      '<div class="history-details">' +
-        (e.feelings&&e.feelings.length ? '💭 '+e.feelings.join(' · ')+'<br>' : '') +
-        (e.needs&&e.needs.length ? '🌿 '+e.needs.join(' · ') : '') +
-      '</div></div>';
+function renderHistory(){
+  var entries=[];try{entries=JSON.parse(localStorage.getItem('raumgefuehl_v1')||'[]');}catch(e){}
+  var el=document.getElementById('historyList');
+  if(!entries.length){el.innerHTML='<div class="history-empty">🎪 Noch keine Vorstellung gegeben.<br>Beginne heute!</div>';return;}
+  var days=['So','Mo','Di','Mi','Do','Fr','Sa'],months=['Jän','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+  el.innerHTML=entries.slice(0,20).map(function(e){
+    var d=new Date(e.date);
+    return '<div class="history-item"><div class="history-date">'+days[d.getDay()]+', '+d.getDate()+'. '+months[d.getMonth()]+' · '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+' Uhr</div>'+
+    '<div class="history-room">'+e.icon+' '+e.room+'</div>'+
+    '<div class="history-details">'+(e.feelings&&e.feelings.length?'💭 '+e.feelings.join(' · ')+'<br>':'')+(e.needs&&e.needs.length?'🌿 '+e.needs.join(' · '):'')+
+    '</div></div>';
   }).join('');
 }
+function openHistory(){renderHistory();showView('view-history');setNav('bnav-hist');}
+function startNew(){document.querySelectorAll('.room-card').forEach(function(c){c.classList.remove('selected');});showView('view-rooms');setNav('bnav-home');}
+function openTagesplan(){renderTagesplan();showView('view-tagesplan');setNav('bnav-plan');}
 
-function openHistory() {
-  renderHistory();
-  showView('view-history');
+var TAGESPLAN={
+  1:{motto:'Montag · Küche',room:'🍳 Küche',tasks:[
+    {text:'🧴 Essigreiniger + Schwamm (rauer Teil): Herdplatten und den Bereich rund um die Knöpfe abreiben. Hartnäckiges kurz einweichen lassen.',min:7},
+    {text:'🧻 Küchenpapier oder Microfasertuch: Arbeitsplatte links und rechts vom Herd komplett leer räumen, abwischen, alles wieder zurück – aber nur was wirklich dort hingehört.',min:6},
+    {text:'🍽️ Abwasch oder Geschirrspüler: alles Schmutzige rein, nix liegenlassen. Wenn Spüler voll: einschalten.',min:5},
+    {text:'🗑️ Mülleimer im Küchenkasterl prüfen: voll? Rausnehmen, neuen Sack einlegen.',min:4},
+    {text:'🧹 Handfeger + Kehrschaufel: Küchenboden fegen – besonders unter dem Tisch und vor dem Herd.',min:5},
+    {text:'💧 Feuchtes Tuch: Esstisch komplett leer räumen, abwischen. Nur das Nötigste wieder drauf (Salz, Pfeffer, Servietten).',min:3},
+  ]},
+  2:{motto:'Dienstag · Bad & WC',room:'🛁 Bad & WC',tasks:[
+    {text:'🧴 WC-Reiniger (z.B. Domestos oder Essigreiniger): in die Kloschüssel schütten, kurz einwirken lassen. Dann WC-Bürste: innen schrubben, spülen.',min:4},
+    {text:'🧻 Feuchtes Tuch oder Küchenrolle mit Allzweckreiniger: WC-Außenseite abwischen – Sitz oben + unten, Rand, Spülkasten, Boden drumherum.',min:5},
+    {text:'🪥 Zahnputzbecher, Seifenspender, alles vom Waschbecken nehmen. Waschbecken + Armatur mit Essigreiniger + Schwamm schrubben, trocken wischen.',min:6},
+    {text:'🪞 Glasreiniger (oder Essigwasser) + Zeitungspapier oder Microfasertuch: Spiegel wischen bis keine Schlieren da sind.',min:4},
+    {text:'🛁 Fenstersims Bad: jede Flasche einzeln in die Hand nehmen – leer? Weg damit. Danach Sims mit feuchtem Tuch abwischen, alles geordnet zurück.',min:6},
+    {text:'🧹 Besen oder Sauger: Badboden fegen/saugen. Dann feuchter Wischmopp oder Bodentuch: Boden aufwischen.',min:5},
+  ]},
+  3:{motto:'Mittwoch · Vorzimmer & Flur',room:'🚪 Vorzimmer & Flur',tasks:[
+    {text:'📬 Sideboard/Ablage: alles in die Hand nehmen. Bei jedem Ding: Kommt das woanders hin? Kann das weg? Nur was wirklich hierher gehört, bleibt.',min:8},
+    {text:'👟 Schuhe: maximal 2 Paar direkt beim Eingang. Alle anderen in den Schrank oder Kiste. Schmutzige Schuhe säubern oder wegräumen.',min:5},
+    {text:'🧥 Garderobe: ein Kleidungsstück abnehmen das dort schon zu lange hängt – einräumen, waschen oder weggeben.',min:3},
+    {text:'🧹 Handfeger + Kehrschaufel ODER Staubsauger: Flurboden komplett – Katzenhaare, Erde von Schuhen, Papier vom Boden (grüßt Rudi! 😄).',min:6},
+    {text:'💧 Feuchtes Tuch: Türrahmen, Lichtschalter, Türklinke abwischen – wird fast nie gemacht und ist oft sehr schmutzig.',min:4},
+    {text:'📄 Post am Sideboard: 3 Stapel – erledigt/weg, muss ich lesen, muss ich abheften. Sofort verarbeiten was geht.',min:4},
+  ]},
+  4:{motto:'Donnerstag · Wohnzimmer',room:'🛋️ Wohnzimmer',tasks:[
+    {text:'🛋️ Couch: ALLES runter (Kleidung, Kissen, Decken). Polster abklopfen oder Handstaubsauger. Decken falten, Kissen aufstellen, Kleidung WEG von der Couch.',min:7},
+    {text:'☕ Couchtisch (türkiser Tisch): alles drauf nehmen, Tisch mit feuchtem Tuch abwischen. Nur 3 Dinge dürfen zurück: Fernbedienung, eine Kerze, eine Schale.',min:5},
+    {text:'🔍 5-Dinge-Runde: durch den Raum gehen und 5 Dinge finden die woanders hingehören – Gläser in die Küche, Jacken zur Garderobe. Sofort wegtragen.',min:6},
+    {text:'🪣 Staubtuch oder feuchtes Microfasertuch: Sideboard, Fensterbrett, TV-Möbel abwischen. Besonders wo Lotte liegt ist oft Staub + Haare.',min:5},
+    {text:'🧹 Staubsauger: Wohnzimmerboden saugen – unter dem Couchtisch, vor der Couch, Ecken. Lottehaare!',min:7},
+  ]},
+  5:{motto:'Freitag · Atelier & Schreibtisch',room:'🎨 Atelier',tasks:[
+    {text:'📄 Boden: ALLE Papiere vom Boden aufheben. Nicht lesen, nicht sortieren – alle in einen Stapel auf den Schreibtisch. Ziel: Boden frei.',min:6},
+    {text:'🗂️ Papierberg-Timer: Handy auf 8 Minuten. Stapel durchgehen: weg (Mistkübel direkt daneben!), abheften, oder "muss ich noch lesen". Kein Grübeln – wenn unklar: Stapel "später".',min:8},
+    {text:'🖊️ Stifte und Pinsel: alle Behälter anschauen. Was ist leer/kaputt? Weg damit. Nur was benutzt wird, bleibt auf dem Tisch.',min:5},
+    {text:'🟡 Rolltisch (gelber Ikea-Wagen): eine Etage komplett leeren, Zeug verräumen, Etage abwischen.',min:6},
+    {text:'🧹 Besen: Atelierboden fegen (Papierschnipsel, Katzenhaare, Farbreste).',min:5},
+  ]},
+  6:{motto:'Samstag · Schlafzimmer & Wäsche',room:'🌙 Schlafzimmer',tasks:[
+    {text:'🛏️ Bett machen: Bettdecken aufschütteln, Polster aufstellen, Bettzeug glatt ziehen. Kleidung auf dem Bett – sofort woanders hin, nicht auf den Boden!',min:5},
+    {text:'👕 Kleidung auf Boden/Stuhl/Bett: jedes Teil in die Hand nehmen. Frisch? → einräumen. Getragen? → Wäschekorb. Kein "vielleicht noch mal tragen"-Stapel.',min:10},
+    {text:'🧴 Nachtkästchen: alles runter, mit feuchtem Tuch abwischen. Nur das Nötigste zurück (Lampe, Buch, Wasser).',min:4},
+    {text:'👚 Wäscheständer: Was ist trocken? Zusammenlegen und sofort einräumen. Nasse Wäsche umhängen damit sie trocknen kann.',min:7},
+    {text:'🌬️ Fenster 5 Minuten öffnen, Boden saugen oder fegen.',min:4},
+  ]},
+  0:{motto:'Sonntag · Pflanzen & Wochenabschluss',room:'🌱 Pflanzen',tasks:[
+    {text:'🪴 Gießkanne füllen. Alle Zimmerpflanzen einzeln anfassen: Erde trocken? → gießen. Noch feucht? → stehen lassen. Verwelkte Blätter abzupfen.',min:8},
+    {text:'🌿 Balkon: Töpfe kontrollieren. Erde eingetrocknet? Gießen. Schimmelige Erde oder tote Pflanzen entfernen. Samentöpfe prüfen.',min:7},
+    {text:'🧹 Einen Ort der Woche wählen der besonders schlimm ist – 5 Minuten nur dort aufräumen. Kein Anspruch, nur 5 Minuten.',min:5},
+    {text:'📋 Kurzer Wochenrückblick: Was hat gut funktioniert? Was war zu viel? Plan für nächste Woche anpassen.',min:5},
+    {text:'🛒 Einkaufsliste prüfen: Was brauchen Rudi und Timmy? Was fehlt in der Küche? Kurz notieren.',min:5},
+  ]}
+};
+
+var BIG_TASKS=[
+  {room:'🎨 Atelier',text:'PAPIERBERG SCHREIBTISCH (1h): Alle Papiere in Stapel: Uni, VHS, privat, weg. Dann jeden Stapel abheften oder entsorgen. Braucht einen freien Nachmittag.',done:false},
+  {room:'🎨 Atelier',text:'BODEN ATELIER: Alle Mappen, Ordner, losen Papiere vom Boden – einen Heimplatz für jede Kategorie finden. Ordner beschriften.',done:false},
+  {room:'🎨 Atelier',text:'WANDKASTEN (oben im Atelier): Öffnen, alles raus, schauen was da drin ist, neu sortieren. Was kann weg?',done:false},
+  {room:'🚪 Vorzimmer',text:'ABLAGEBANK: Komplett leeren. Jeden Gegenstand bewusst entscheiden: hat dieser Platz einen Sinn hier? Nur "Ausgangs-Dinge" gehören dort hin.',done:false},
+  {room:'🚪 Vorzimmer',text:'GARDEROBE KOMPLETT: Jeden Mantel/jede Jacke durchgehen. Was wurde letztes Jahr nicht getragen? Weggeben-Sackerl befüllen.',done:false},
+  {room:'🛋️ Wohnzimmer',text:"BÜCHERWAND (Thomas' Bereich): Staubwischen hinter Büchern, eine Reihe neu ordnen.",done:false},
+  {room:'🍳 Küche',text:'OBERSCHRÄNKE: Einen Schrank komplett ausräumen. Abgelaufenes entsorgen, neu gruppieren (Gewürze / Konserven / Backzeug).',done:false},
+  {room:'🍳 Küche',text:'KÜHLSCHRANK KOMPLETT: Alles raus, alle Fächer mit Essigreiniger + Schwamm abwischen, trocken wischen, neu einräumen.',done:false},
+  {room:'🛁 Bad',text:'BADEWANNENRAND + FUGEN: Schimmelentferner (z.B. Domestos Gel direkt auf Fugen), 10 Min einwirken, alte Zahnbürste zum Schrubben der Fugen.',done:false},
+  {room:'🛁 Bad',text:'FENSTERSIMS BAD KOMPLETT: Alle Produkte raus, jeden einzeln anschauen (leer? kaputt? abgelaufen?), Sims abwischen, sinnvoll neu stellen.',done:false},
+  {room:'🌙 Schlafzimmer',text:'WÄSCHE SORTIEREN: Alle Wäschestapel zusammentragen. Falten, einräumen. Was passt nicht mehr? Weggeben-Stapel machen.',done:false},
+  {room:'🗃️ Allgemein',text:'WEGGEBEN-SACKERL: Durch die ganze Wohnung gehen, einen großen Sack befüllen. Kleidung → Caritas. Bücher → Bücherschrank Mariahilf.',done:false},
+  {room:'🌱 Balkon',text:'BALKON-REGAL: Alle Töpfe und Geräte raus, Regal abwischen, Töpfe mit Frühjahrspflanzen neu bepflanzen oder lagern.',done:false},
+];
+
+function loadBigTasks(){try{var s=JSON.parse(localStorage.getItem('big_tasks_v1')||'null');if(s&&s.length===BIG_TASKS.length)for(var i=0;i<BIG_TASKS.length;i++)BIG_TASKS[i].done=s[i];}catch(e){}}
+function saveBigTasks(){try{localStorage.setItem('big_tasks_v1',JSON.stringify(BIG_TASKS.map(function(t){return t.done;})));}catch(e){}}
+function loadDailyProgress(k){try{return(JSON.parse(localStorage.getItem('daily_v1')||'{}'))[k]||[];}catch(e){return[];}}
+function saveDailyProgress(k,c){try{var s=JSON.parse(localStorage.getItem('daily_v1')||'{}');var ks=Object.keys(s);if(ks.length>6)delete s[ks[0]];s[k]=c;localStorage.setItem('daily_v1',JSON.stringify(s));}catch(e){}}
+
+function renderTagesplan(){
+  loadBigTasks();
+  var today=new Date(),dow=today.getDay(),plan=TAGESPLAN[dow];
+  var dayKey=today.toISOString().slice(0,10),checkedArr=loadDailyProgress(dayKey);
+  var wt=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  document.getElementById('tp-wochentag').textContent=wt[dow]+',  '+today.getDate()+'.'+(today.getMonth()+1)+'.'+today.getFullYear();
+  document.getElementById('tp-motto').textContent=plan.motto;
+  document.getElementById('tp-focus-room').textContent=plan.room;
+  var ul=document.getElementById('tp-daily-tasks');ul.innerHTML='';
+  plan.tasks.forEach(function(task,i){
+    var isDone=checkedArr.indexOf(i)>=0,li=document.createElement('li');
+    li.className='task-item'+(isDone?' done':'');
+    li.innerHTML='<div class="task-check"></div><span class="task-text">'+task.text+'</span><span class="task-time">~'+task.min+'m</span>';
+    li.addEventListener('click',function(){
+      li.classList.toggle('done');
+      var idx=checkedArr.indexOf(i);if(idx>=0)checkedArr.splice(idx,1);else checkedArr.push(i);
+      saveDailyProgress(dayKey,checkedArr);updateProgress(plan.tasks.length,checkedArr.length);
+    });
+    ul.appendChild(li);
+  });
+  updateProgress(plan.tasks.length,checkedArr.length);
+  var container=document.getElementById('tp-big-tasks');container.innerHTML='';
+  BIG_TASKS.forEach(function(task){
+    var div=document.createElement('div');div.className='big-task-item'+(task.done?' done':'');
+    div.innerHTML='<div class="big-task-check"></div><div><span class="big-task-room-tag">'+task.room+'</span><span class="task-text">'+task.text+'</span></div>';
+    div.addEventListener('click',function(){task.done=!task.done;div.classList.toggle('done',task.done);saveBigTasks();});
+    container.appendChild(div);
+  });
 }
-
-function startNew() {
-  document.querySelectorAll('.room-card').forEach(function(c){ c.classList.remove('selected'); });
-  showView('view-rooms');
+function updateProgress(total,done){
+  var pct=total>0?Math.round(done/total*100):0;
+  document.getElementById('tp-progress-fill').style.width=pct+'%';
+  document.getElementById('tp-progress-text').textContent=done+' von '+total+' Nummern geschafft'+(done===total&&total>0?' 🎊':'');
 }
 </script>
 </body>
