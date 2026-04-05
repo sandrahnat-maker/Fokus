@@ -4,25 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Tee des Tages</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf3e8;
-    --surface: #fffdf8;
-    --border: rgba(180,130,70,0.15);
-    --accent: #7a9a5a;
-    --accent2: #c8943a;
-    --text: #2e2010;
-    --muted: rgba(20,10,0,0.72);
-    --gold: #c8943a;
-    --terra: #c4704a;
+    --bg: #fdf6ee;
+    --surface: #fffbf5;
+    --border: rgba(184,41,74,0.13);
+    --accent: #5e8a5a;
+    --accent2: #c9893a;
+    --crimson: #b8294a;
+    --crimson-l: rgba(184,41,74,0.10);
+    --navy: #1a2744;
+    --text: #1e1208;
+    --muted: rgba(30,18,8,0.45);
+    --gold: #c9893a;
+    --shadow: rgba(30,18,8,0.07);
   }
   html { font-size: 18px; }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Raleway', sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
@@ -31,18 +33,13 @@
     align-items: center;
     padding: 0 0 40px 0;
     overflow-x: hidden;
-  }
-
-  /* Background texture */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 20%, rgba(200,148,58,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 80%, rgba(196,112,74,0.05) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
+    background-image: repeating-linear-gradient(
+      -6deg,
+      rgba(184,41,74,0.018) 0px, rgba(184,41,74,0.018) 28px,
+      transparent 28px, transparent 56px,
+      rgba(201,137,58,0.014) 56px, rgba(201,137,58,0.014) 84px,
+      transparent 84px, transparent 112px
+    );
   }
 
   .container {
@@ -53,43 +50,79 @@
     z-index: 1;
   }
 
-  /* Header */
   header {
     text-align: center;
-    padding: 32px 0 20px;
+    padding: 20px 0 16px;
     position: relative;
     z-index: 1;
+    width: 100%;
   }
 
+  /* Back-Link */
+  .back {
+    display: inline-block;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--crimson);
+    text-decoration: none;
+    opacity: .7;
+    padding: .4rem 0 .6rem;
+    align-self: flex-start;
+  }
+  .back:active { opacity: 1; }
+
   .date-label {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--muted);
     margin-bottom: 6px;
-    opacity: 0.8;
+    opacity: 0.7;
   }
 
   .main-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    font-weight: 300;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--muted);
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--crimson);
+  }
+
+  /* Wimpel-Linie unter dem Titel */
+  .title-wimpel {
+    font-size: 9px; letter-spacing: .28em;
+    color: var(--gold); opacity: .5;
+    margin-top: 4px;
   }
 
   /* Tea card */
   .tea-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    box-shadow: 0 2px 16px rgba(180,120,40,0.08);
+    border-radius: 4px 4px 16px 16px;
+    box-shadow: 0 3px 16px var(--shadow);
     overflow: hidden;
-    margin: 0 0 16px 0;
-    animation: fadeUp 0.6s ease both;
+    margin: 0 0 14px 0;
+    animation: fadeUp 0.5s ease both;
+    position: relative;
+  }
+  /* Zirkus-Dachstreifen */
+  .tea-card::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--crimson) 0%, var(--crimson) 20%,
+      var(--gold) 20%, var(--gold) 40%,
+      var(--navy) 40%, var(--navy) 60%,
+      #6a3f7a 60%, #6a3f7a 80%,
+      var(--accent) 80%, var(--accent) 100%
+    );
+    opacity: .65;
   }
 
   @keyframes fadeUp {
@@ -98,54 +131,47 @@
   }
 
   .tea-hero {
-    padding: 28px 24px 22px;
+    padding: 22px 22px 18px;
     position: relative;
     border-bottom: 1px solid var(--border);
   }
 
-  .tea-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0.06;
-    background-size: cover;
-    background-position: center;
-  }
-
   .day-tag {
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--accent2);
+    color: var(--crimson);
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: block;
+    font-family: 'Raleway', sans-serif;
+    opacity: .75;
   }
 
   .tea-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 38px;
-    font-weight: 300;
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 700;
+    font-style: italic;
     line-height: 1.1;
     color: var(--text);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .tea-tagline {
-    font-size: 12px;
+    font-family: 'IM Fell English', serif;
+    font-size: 14px;
+    font-style: italic;
     color: var(--muted);
-    font-weight: 300;
-    letter-spacing: 0.5px;
     line-height: 1.5;
   }
 
   .tea-emoji {
     position: absolute;
-    top: 24px;
-    right: 24px;
-    font-size: 42px;
-    opacity: 0.6;
-    filter: saturate(0.7);
+    top: 20px;
+    right: 20px;
+    font-size: 40px;
+    opacity: 0.65;
   }
 
   /* Stats row */
@@ -163,122 +189,118 @@
   .stat:last-child { border-right: none; }
 
   .stat-label {
-    font-size: 8px;
+    font-size: 9px;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--muted);
     margin-bottom: 4px;
     display: block;
+    font-family: 'Raleway', sans-serif;
   }
 
   .stat-value {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 18px;
-    font-weight: 400;
-    color: var(--accent);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--crimson);
     line-height: 1;
   }
 
   .stat-unit {
-    font-size: 9px;
+    font-family: 'IM Fell English', serif;
+    font-size: 10px;
+    font-style: italic;
     color: var(--muted);
     display: block;
     margin-top: 2px;
-    font-weight: 300;
   }
 
   /* Details */
-  .details {
-    padding: 18px 24px;
-  }
+  .details { padding: 16px 22px; }
 
   .detail-row {
     display: flex;
     gap: 12px;
     align-items: flex-start;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .detail-row:last-child { margin-bottom: 0; }
-
-  .detail-icon {
-    font-size: 14px;
-    width: 20px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
+  .detail-icon { font-size: 14px; width: 20px; flex-shrink: 0; margin-top: 2px; }
   .detail-text {
+    font-family: 'IM Fell English', serif;
     font-size: 15px;
+    font-style: italic;
     line-height: 1.6;
-    color: rgba(20,10,0,0.72);
-    font-weight: 300;
+    color: var(--muted);
   }
-
-  .detail-text strong {
-    color: var(--text);
-    font-weight: 600;
-  }
+  .detail-text strong { color: var(--text); font-style: normal; }
 
   /* Benefits */
   .benefits-card {
-    background: linear-gradient(135deg,#edf5e8,#f5f0e8);
-    border: 1px solid rgba(122,154,90,0.2);
-    border-radius: 16px;
-    padding: 18px 24px;
-    margin-bottom: 16px;
-    animation: fadeUp 0.6s 0.15s ease both;
+    background: rgba(94,138,90,0.06);
+    border: 1px solid rgba(94,138,90,0.2);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    animation: fadeUp 0.5s 0.15s ease both;
   }
 
   .section-label {
     font-size: 9px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--accent2);
+    color: var(--gold);
     font-weight: 500;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     display: block;
+    font-family: 'Raleway', sans-serif;
   }
 
   .benefit-item {
     display: flex;
     gap: 10px;
     align-items: flex-start;
-    margin-bottom: 10px;
+    margin-bottom: 9px;
   }
   .benefit-item:last-child { margin-bottom: 0; }
 
   .benefit-dot {
-    width: 4px;
-    height: 4px;
+    width: 5px; height: 5px;
     border-radius: 50%;
-    background: var(--accent2);
-    margin-top: 6px;
+    background: var(--crimson);
+    margin-top: 7px;
     flex-shrink: 0;
+    opacity: .6;
   }
 
   .benefit-text {
+    font-family: 'IM Fell English', serif;
     font-size: 15px;
+    font-style: italic;
     line-height: 1.6;
-    color: rgba(20,10,0,0.72);
-    font-weight: 300;
+    color: var(--muted);
   }
 
   /* Week nav */
   .week-nav {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 16px 20px;
-    animation: fadeUp 0.6s 0.3s ease both;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    animation: fadeUp 0.5s 0.3s ease both;
   }
 
   .week-label {
     font-size: 9px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--accent2);
+    color: var(--gold);
     margin-bottom: 12px;
     display: block;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
   }
 
   .days-grid {
@@ -292,55 +314,46 @@
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    padding: 8px 4px;
+    padding: 7px 3px;
     border: 1px solid transparent;
-    border-radius: 2px;
+    border-radius: 8px;
     background: transparent;
     cursor: pointer;
     transition: all 0.2s;
     color: var(--muted);
   }
-
-  .day-btn:hover {
-    border-color: var(--border);
-    color: var(--text);
-  }
-
+  .day-btn:active { border-color: var(--border); }
   .day-btn.active {
-    border-color: var(--accent);
-    background: rgba(143,196,154,0.08);
-    color: var(--accent);
+    border-color: var(--crimson);
+    background: var(--crimson-l);
+    color: var(--crimson);
   }
-
   .day-abbr {
-    font-size: 8px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 500;
+    font-size: 8px; letter-spacing: 1px;
+    text-transform: uppercase; font-weight: 500;
+    font-family: 'Raleway', sans-serif;
   }
-
-  .day-emoji {
-    font-size: 16px;
-  }
+  .day-emoji { font-size: 16px; }
 
   /* Timer */
   .timer-section {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 18px 24px;
-    margin-top: 16px;
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-top: 0;
     text-align: center;
-    animation: fadeUp 0.6s 0.45s ease both;
+    animation: fadeUp 0.5s 0.45s ease both;
   }
 
   .timer-display {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 52px;
-    font-weight: 300;
-    color: var(--accent);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--crimson);
     line-height: 1;
-    margin: 12px 0;
+    margin: 10px 0;
     letter-spacing: 4px;
   }
 
@@ -349,13 +362,14 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     display: block;
+    font-family: 'Raleway', sans-serif;
   }
 
   .timer-progress {
     height: 2px;
-    background: rgba(143,196,154,0.15);
+    background: rgba(184,41,74,0.1);
     border-radius: 1px;
     margin: 12px 0;
     overflow: hidden;
@@ -363,88 +377,69 @@
 
   .timer-bar {
     height: 100%;
-    background: var(--accent2);
+    background: var(--crimson);
     border-radius: 1px;
     transition: width 1s linear;
     width: 0%;
+    opacity: .7;
   }
 
   .timer-btns {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 14px;
+    display: flex; gap: 8px;
+    justify-content: center; margin-top: 12px;
   }
 
   .btn {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 500;
-    padding: 9px 20px;
+    font-family: 'IM Fell English', serif;
+    font-size: 14px; font-style: italic;
+    padding: 8px 22px;
     border: 1px solid var(--border);
     background: transparent;
-    color: var(--text);
+    color: var(--muted);
     cursor: pointer;
     border-radius: 20px;
     transition: all 0.2s;
   }
-
-  .btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .btn.primary {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .btn.primary:hover {
-    background: rgba(143,196,154,0.12);
-  }
-
-  .btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
+  .btn:active { border-color: var(--crimson); color: var(--crimson); }
+  .btn.primary { border-color: var(--crimson); color: var(--crimson); }
+  .btn.primary:active { background: var(--crimson-l); }
+  .btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
   .timer-phase {
-    font-size: 11px;
-    color: var(--accent2);
-    letter-spacing: 1px;
-    margin-top: 8px;
-    min-height: 16px;
+    font-family: 'IM Fell English', serif;
+    font-size: 13px; font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    margin-top: 8px; min-height: 18px;
   }
 
   /* Temp note */
   .temp-note {
-    font-size: 14px;
-    color: var(--muted);
-    font-style: italic;
-    margin-top: 6px;
-    line-height: 1.5;
+    font-family: 'IM Fell English', serif;
+    font-size: 14px; font-style: italic;
+    color: var(--muted); margin-top: 6px; line-height: 1.5;
   }
 
-  /* Steaming animation on emoji */
   @keyframes steam {
-    0%, 100% { transform: translateY(0) scaleY(1); opacity: 0.6; }
-    50% { transform: translateY(-4px) scaleY(1.05); opacity: 0.4; }
+    0%, 100% { transform: translateY(0); opacity: 0.65; }
+    50% { transform: translateY(-4px); opacity: 0.45; }
   }
   .tea-emoji { animation: steam 3s ease-in-out infinite; }
-
-  .transition-fade {
-    animation: fadeUp 0.4s ease both;
+  .transition-fade { animation: fadeUp 0.4s ease both; }
   }
+
+  .transition-fade { animation: fadeUp 0.4s ease both; }
 </style>
 </head>
 <body>
 
 <div class="container">
+  <a class="back" href="index.html">← Mein Fokus</a>
+
   <header>
     <div class="date-label" id="todayDate"></div>
-    <div class="main-title" style="font-family:'Playfair Display',serif;font-size:22px;font-style:italic;font-weight:400;color:var(--text);">🍵 Mein Tee des Tages</div>
+    <div class="main-title">🍵 Mein Tee des Tages</div>
+    <div class="title-wimpel">✦ · ✦ · ✦ · ✦ · ✦</div>
   </header>
 
   <div id="teaCard" class="tea-card">
