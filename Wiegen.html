@@ -229,6 +229,14 @@ main{padding:.8rem 1rem;animation:fadeIn .35s ease-out;}
 }
 .hist-del:hover{color:var(--crimson);}
 .hist-more{font-size:12px;color:var(--muted);text-align:center;padding:.4rem;font-style:italic;font-family:"IM Fell English",serif;}
+.backup-card{background:var(--card);border-radius:14px;border:1px solid var(--border);box-shadow:0 3px 18px var(--shadow);padding:.75rem .9rem;margin-top:.8rem;}
+.backup-card-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:.6rem;}
+.backup-row{display:flex;gap:.5rem;align-items:center;}
+.backup-btn{flex:1;background:none;border:1.5px solid var(--border);border-radius:20px;padding:.42rem .5rem;font-size:12px;font-family:"Raleway",sans-serif;font-weight:500;color:var(--text);cursor:pointer;transition:all .2s;text-align:center;}
+.backup-btn:hover{border-color:var(--gold);color:var(--gold);}
+.backup-btn.import-btn{position:relative;overflow:hidden;}
+.backup-btn.import-btn input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0;}
+.import-status{font-size:12px;color:var(--sage);font-style:italic;font-family:"IM Fell English",serif;margin-top:.4rem;min-height:1.2em;}
 </style>
 </head><body>
 
@@ -322,6 +330,19 @@ main{padding:.8rem 1rem;animation:fadeIn .35s ease-out;}
   <div id="histList"></div>
 </div>
 
+<!-- BACKUP -->
+<div class="backup-card">
+  <div class="backup-card-title">Datensicherung</div>
+  <div class="backup-row">
+    <button class="backup-btn" onclick="exportData()">⬇ Exportieren</button>
+    <label class="backup-btn import-btn">
+      ⬆ Importieren
+      <input type="file" accept=".json" onchange="importData(this.files[0])">
+    </label>
+  </div>
+  <div class="import-status" id="importStatus"></div>
+</div>
+
 </main>
 
 <script>
@@ -330,21 +351,59 @@ var entries = [];
 var currentDays = 7;
 
 // ── STORAGE ──────────────────────────────────────────────────────────────────
+var BACKUP_KEY = 'wg_backup_v1';
+
 function loadData() {
-  try {
-    var raw = localStorage.getItem(KEY);
-    entries = raw ? JSON.parse(raw) : [];
-  } catch(e) { entries = []; }
-  window.addEventListener('message', function(e) {
-    if (e.data && e.data.type === 'wg_data') { entries = e.data.entries || []; render(); }
-    if (e.data && e.data.type === 'wg_request') { window.parent.postMessage({type:'wg_response', entries: entries}, '*'); }
-  });
-  try { window.parent.postMessage({type:'wg_load'}, '*'); } catch(e){}
+  // Primär: localStorage
+  var raw = null;
+  try { raw = localStorage.getItem(KEY); } catch(e){}
+  // Fallback: Backup-Key
+  if (!raw) { try { raw = localStorage.getItem(BACKUP_KEY); } catch(e){} }
+  try { entries = raw ? JSON.parse(raw) : []; } catch(e) { entries = []; }
+  // Sicherstellen dass entries ein Array ist
+  if (!Array.isArray(entries)) entries = [];
 }
 
 function saveData() {
-  try { localStorage.setItem(KEY, JSON.stringify(entries)); } catch(e){}
-  try { window.parent.postMessage({type:'wg_save', entries: entries}, '*'); } catch(e){}
+  var json = JSON.stringify(entries);
+  // Doppelt speichern – zwei Keys als Sicherheitsnetz
+  try { localStorage.setItem(KEY, json); } catch(e){}
+  try { localStorage.setItem(BACKUP_KEY, json); } catch(e){}
+}
+
+function exportData() {
+  var json = JSON.stringify(entries, null, 2);
+  var blob = new Blob([json], {type: 'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'gewicht_backup_' + today() + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(file) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var imported = JSON.parse(e.target.result);
+      if (!Array.isArray(imported)) throw new Error();
+      // Merge: importierte Einträge hinzufügen, bestehende behalten
+      imported.forEach(function(imp) {
+        if (!imp.d || typeof imp.w !== 'number') return;
+        var idx = entries.findIndex(function(ex){ return ex.d === imp.d; });
+        if (idx < 0) entries.push(imp);
+      });
+      entries.sort(function(a,b){ return a.d < b.d ? 1 : -1; });
+      saveData();
+      render();
+      document.getElementById('importStatus').textContent = imported.length + ' Einträge importiert ✓';
+      setTimeout(function(){ document.getElementById('importStatus').textContent = ''; }, 3000);
+    } catch(err) {
+      alert('Fehler beim Importieren.');
+    }
+  };
+  reader.readAsText(file);
 }
 
 // ── HELPERS ──────────────────────────────────────────────────────────────────
