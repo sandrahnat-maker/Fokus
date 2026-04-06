@@ -126,7 +126,13 @@ main{padding:.8rem 1rem;animation:fadeIn .35s ease-out;}
   margin-bottom:.8rem;
 }
 .input-card-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--crimson);font-weight:500;margin-bottom:.7rem;}
-.input-date{font-family:"IM Fell English",serif;font-size:13px;color:var(--muted);font-style:italic;text-align:center;margin-top:.55rem;}
+.input-date{font-family:"IM Fell English",serif;font-size:13px;color:var(--muted);font-style:italic;}
+.date-row{display:flex;align-items:center;justify-content:space-between;margin-top:.55rem;margin-bottom:.1rem;}
+.date-toggle{background:none;border:none;font-size:12px;color:var(--gold);cursor:pointer;font-family:"Raleway",sans-serif;font-weight:500;letter-spacing:.05em;text-decoration:underline;text-underline-offset:2px;opacity:.8;}
+.date-toggle:hover{opacity:1;}
+.date-toggle.active{color:var(--crimson);}
+.date-picker{width:100%;margin:.5rem 0 .2rem;padding:.45rem .7rem;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);font-family:"Raleway",sans-serif;font-size:14px;color:var(--text);outline:none;}
+.date-picker:focus{border-color:var(--crimson);}
 
 /* ── DRUM ── */
 .drum-row{display:flex;align-items:center;justify-content:center;gap:.3rem;}
@@ -278,14 +284,18 @@ main{padding:.8rem 1rem;animation:fadeIn .35s ease-out;}
 
 <!-- INPUT -->
 <div class="input-card">
-  <div class="input-card-label">Heute eintragen</div>
+  <div class="input-card-label">Eintragen</div>
   <div class="drum-row">
     <div class="drum" id="drumKg"></div>
     <div class="drum-sep">,</div>
     <div class="drum" id="drumDez" style="width:52px"></div>
     <div class="drum-unit">kg</div>
   </div>
-  <div class="input-date" id="inputDate"></div>
+  <div class="date-row">
+    <span class="input-date" id="inputDate"></span>
+    <button class="date-toggle" onclick="toggleDatePicker()" id="dateToggleBtn">Datum ändern</button>
+  </div>
+  <input type="date" id="datePicker" class="date-picker" onchange="onDateChange(this.value)" style="display:none">
   <button class="save-btn" onclick="saveWeight()">✓ Eintragen</button>
 </div>
 
@@ -502,9 +512,49 @@ function makeDrum(id, min, max, initVal, onChange) {
 }
 
 // ── SAVE ─────────────────────────────────────────────────────────────────────
+var selectedDate = null; // null = today
+
+function toggleDatePicker() {
+  var picker = document.getElementById('datePicker');
+  var btn = document.getElementById('dateToggleBtn');
+  if (picker.style.display === 'none') {
+    picker.style.display = 'block';
+    picker.value = selectedDate || today();
+    btn.textContent = '✕ Schließen';
+    btn.classList.add('active');
+  } else {
+    picker.style.display = 'none';
+    btn.textContent = 'Datum ändern';
+    btn.classList.remove('active');
+    if (!selectedDate) updateInputDate();
+  }
+}
+
+function onDateChange(val) {
+  selectedDate = val;
+  updateInputDate();
+  // Load existing entry for that date if any
+  var existing = entries.find(function(e){ return e.d === val; });
+  if (existing && _drumKgObj && _drumDezObj) {
+    var kg = Math.floor(existing.w);
+    var dez = Math.round((existing.w - kg) * 10) % 10;
+    drumKgVal = kg; drumDezVal = dez;
+    _drumKgObj.scrollTo(kg, true);
+    _drumDezObj.scrollTo(dez, true);
+  }
+}
+
+function updateInputDate() {
+  var d = selectedDate || today();
+  var parts = d.split('-');
+  var isToday = d === today();
+  document.getElementById('inputDate').textContent =
+    (isToday ? 'Heute, ' : 'Nachtrag: ') + parts[2]+'.'+parts[1]+'.'+parts[0].slice(2);
+}
+
 function saveWeight() {
   var v = drumKgVal + drumDezVal / 10;
-  var t = today();
+  var t = selectedDate || today();
   var idx = entries.findIndex(function(e){ return e.d === t; });
   if (idx >= 0) entries[idx].w = v;
   else entries.push({d: t, w: v});
@@ -681,9 +731,7 @@ function delEntry(btn) {
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
-var now = new Date();
-document.getElementById('inputDate').textContent =
-  'Für heute, ' + p2(now.getDate())+'.'+p2(now.getMonth()+1)+'.'+now.getFullYear();
+updateInputDate();
 
 loadData();
 render();
