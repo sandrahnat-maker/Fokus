@@ -215,6 +215,8 @@ header{
 .wave-time{font-size:13px;color:var(--muted);font-style:italic;margin-top:.1rem;font-family:"IM Fell English",serif;}
 .wave-tea{font-size:10px;color:var(--crimson);margin-top:.1rem;opacity:.75;font-style:italic;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
 .wave-done-badge{font-size:12px;color:var(--sage);margin-top:.15rem;opacity:0;transition:opacity .4s;}
+.wave-musik{display:block;font-size:11px;color:var(--crimson);opacity:.5;margin-top:.1rem;text-decoration:none;line-height:1;}
+.wave-musik:active{opacity:1;}
 .wave.done-all .wave-done-badge{opacity:1;}
 .wave.done-all{border-color:rgba(94,138,90,0.4);}
 .wave.done-all::before{background:repeating-linear-gradient(90deg,var(--sage) 0%,var(--sage) 50%,rgba(94,138,90,0.5) 50%,rgba(94,138,90,0.5) 100%);opacity:.55;}
@@ -532,6 +534,7 @@ header{
       <div class="wave-name">Mo</div>
       <div class="wave-time">bis 9h</div>
       <div class="wave-tea" id="wave-tea-morgen"></div>
+      <a class="wave-musik" href="https://open.spotify.com/playlist/15IrSSIrPD2qqi6JJmV6w2" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-vormittag" onclick="showPhase('vormittag')">
@@ -539,6 +542,7 @@ header{
       <div class="wave-name">Vm</div>
       <div class="wave-time">9–12h</div>
       <div class="wave-tea" id="wave-tea-vormittag"></div>
+      <a class="wave-musik" href="https://open.spotify.com/playlist/0opVmEHbkHkRkWvS5oqCo3" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-mittag" onclick="showPhase('mittag')">
@@ -546,6 +550,7 @@ header{
       <div class="wave-name">Mi</div>
       <div class="wave-time">12–15h</div>
       <div class="wave-tea" id="wave-tea-mittag"></div>
+      <a class="wave-musik" href="https://open.spotify.com/playlist/2SpuRwlVHhNX7nLnVdmsxg" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-nachmittag" onclick="showPhase('nachmittag')">
@@ -553,6 +558,7 @@ header{
       <div class="wave-name">Nm</div>
       <div class="wave-time">15–18h</div>
       <div class="wave-tea" id="wave-tea-nachmittag"></div>
+      <a class="wave-musik" href="https://open.spotify.com/playlist/4DBCMLQqUPGen2CmRqwhkh" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-abend" onclick="showPhase('abend')">
@@ -560,6 +566,7 @@ header{
       <div class="wave-name">Ab</div>
       <div class="wave-time">ab 18h</div>
       <div class="wave-tea" id="wave-tea-abend"></div>
+      <a class="wave-musik" href="https://open.spotify.com/playlist/3Ds8mQlNzLFSNHzSn5N6aL" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
   </div>
@@ -734,15 +741,14 @@ var PHASES={
   abend:{
     mood:"Der Abend trägt dich nach Hause — in dich selbst. Alles darf jetzt langsamer werden. Ich will diesen Abend so leben, wie ich mein ganzes Leben leben will.",
     tasks:[
-      {name:"Katzen füttern",note:"Rudi & Timmy — Abendfutter",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen"}]},
-      {name:"Abendessen",note:"mit Thomas oder allein, schön",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"}]},
-      {name:"Eine Sache erledigen",note:"die sich schon länger wartet",cat:"arbeit",links:[{href:"#notizen",label:"Meine Notizen"}]},
-      {name:"Kreatives oder Stille",note:"Atelier, Lesen, Zeichnen",cat:"seele"},
       {name:"Lotte — Abendrunde",note:"in Ruhe, kein Hetzen",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
       {name:"Tiermedikamente Abend",note:"Rudi & Timmy",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Katzen_Medikamente.html",label:"Katzen"}]},
+      {name:"Abendessen",note:"mit Thomas oder allein, schön",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"}]},
+      {name:"Kreativzeit oder Stille",note:"Atelier, Lesen, Zeichnen",cat:"seele"},
       {name:"Bad Abend Routine",note:"Weleda, warm, für mich",cat:"pflege",links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
+      {name:"Eine Sache erledigen",note:"die sich schon länger wartet",cat:"arbeit",links:[{href:"#notizen",label:"Meine Notizen"}]},
+      {name:"Handy weg — früh schlafen",note:"Schlaf ist die Investition",cat:"seele"},
       {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
-      {name:"Lesen & schlafen",note:"Handy weg — Schlaf ist die Investition",cat:"seele"},
     ]
   }
 };
