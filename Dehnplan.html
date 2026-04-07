@@ -2,44 +2,45 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Mein Dehnplan</title>
-
+<meta name="theme-color" content="#fdf6ee">
+<title>Dehnplan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #faf3e8;
-  --surface: #fffdf8;
-  --surface2: #EDE8E0;
-  --ink: #2e2010;
-  --muted: rgba(28,22,17,.45);
-  --border: rgba(28,22,17,.1);
+@keyframes wimpel-swing{0%,100%{transform:rotate(-4deg) skewX(2deg);}50%{transform:rotate(4deg) skewX(-2deg);}}
+@keyframes wimpel-swing2{0%,100%{transform:rotate(3deg) skewX(-1deg);}50%{transform:rotate(-3deg) skewX(1deg);}}
+@keyframes wimpel-swing3{0%,100%{transform:rotate(-2deg);}50%{transform:rotate(5deg);}}
+@keyframes rope-sway{0%,100%{transform:scaleX(1);}50%{transform:scaleX(1.008);}}
+@keyframes tier-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
+@keyframes spotlight{0%{left:-100%;}60%,100%{left:220%;}}
+:root{--bg:#fdf6ee;--card:#fffbf5;--text:#1e1208;--muted:rgba(30,18,8,0.45);--crimson:#b8294a;--crimson-l:rgba(184,41,74,0.10);--gold:#c9893a;--gold-l:rgba(201,137,58,0.13);--navy:#1a2744;--sage:#5e8a5a;--sage-l:rgba(94,138,90,0.12);--violet:#6a3f7a;--border:rgba(184,41,74,0.13);--shadow:rgba(30,18,8,0.08);}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{font-size:16px;}
+body{background:var(--bg);font-family:"Raleway",sans-serif;color:var(--text);min-height:100vh;padding-bottom:4rem;background-image:repeating-linear-gradient(-6deg,rgba(184,41,74,0.022) 0px,rgba(184,41,74,0.022) 28px,transparent 28px,transparent 56px,rgba(201,137,58,0.018) 56px,rgba(201,137,58,0.018) 84px,transparent 84px,transparent 112px);}
+.wimpelkette{position:relative;width:100%;height:40px;overflow:hidden;display:block;background:var(--bg);}
+.wimpelkette svg{width:100%;height:40px;overflow:visible;animation:rope-sway 5s ease-in-out infinite;}
+.wimpel-1{animation:wimpel-swing 2.8s ease-in-out infinite;}
+.wimpel-2{animation:wimpel-swing2 3.2s ease-in-out infinite 0.3s;}
+.wimpel-3{animation:wimpel-swing3 2.5s ease-in-out infinite 0.6s;}
+.wimpel-4{animation:wimpel-swing 3.0s ease-in-out infinite 0.9s;}
+.wimpel-5{animation:wimpel-swing2 2.7s ease-in-out infinite 1.2s;}
+.wimpel-6{animation:wimpel-swing3 3.4s ease-in-out infinite 1.5s;}
+.wimpel-7{animation:wimpel-swing 2.9s ease-in-out infinite 1.8s;}
+.wimpel-8{animation:wimpel-swing2 2.6s ease-in-out infinite 2.1s;}
+.wimpel-9{animation:wimpel-swing3 3.1s ease-in-out infinite 2.4s;}
+.zirkus-header{padding:0.8rem 1.2rem 0.85rem;border-bottom:2px solid var(--border);background:rgba(255,251,245,0.92);}
+.back-btn{display:inline-flex;align-items:center;gap:.3rem;font-family:"IM Fell English",serif;font-style:italic;font-size:14px;color:var(--crimson);text-decoration:none;opacity:.7;margin-bottom:.4rem;background:none;border:none;cursor:pointer;padding:0;}
+.back-btn:active{opacity:1;}
+.header-eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem;font-weight:500;}
+.header-title{font-family:"Playfair Display",serif;font-size:22px;font-style:italic;color:var(--text);line-height:1.2;}
+.header-sub{font-family:"IM Fell English",serif;font-size:14px;font-style:italic;color:var(--muted);margin-top:.15rem;}
+.rainbow-stripe{height:5px;background:repeating-linear-gradient(90deg,var(--crimson) 0%,var(--crimson) 20%,var(--gold) 20%,var(--gold) 40%,var(--navy) 40%,var(--navy) 60%,var(--violet) 60%,var(--violet) 80%,var(--sage) 80%,var(--sage) 100%);opacity:.6;margin-bottom:.2rem;}
+</style>
+<style>
+html,
 
-  --kraft:  #2E6B3A; /* Muskeltraining – grün */
-  --surf:   #2058A0; /* Balanceboard – blau */
-  --yoga:   #7B3C98; /* Yoga – lila */
-  --walk:   #A05820; /* Spaziergang – ocker */
-  --kalk:   #B03030; /* Kalkschulter – rot */
-  --ruhe:   #888888; /* Ruhetag */
 
-  --kraft-pale: #EAF5EC;
-  --surf-pale:  #E8F1FB;
-  --yoga-pale:  #F4EAF9;
-  --walk-pale:  #FBF0E8;
-  --kalk-pale:  #FBE8E8;
-}
-
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-html,body { height:100%; overflow:hidden; }
-
-body {
-  background: var(--bg);
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--ink);
-  display: flex;
-  flex-direction: column;
-  height: 100dvh;
-}
 
 /* ── HEADER ── */
 .header {
@@ -108,7 +109,7 @@ body {
   z-index: 0;
 }
 
-.today-banner > * { position: relative; z-index: 1; }
+.today-banner > 
 
 .tb-emoji { font-size: 2.2rem; flex-shrink: 0; }
 
@@ -206,13 +207,9 @@ body {
 .sc-chevron { color: var(--muted); font-size: .8rem; transition: transform .3s; flex-shrink: 0; }
 .stretch-card.open .sc-chevron { transform: rotate(180deg); }
 
-.sc-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .4s ease;
-}
+.sc-
 
-.stretch-card.open .sc-body { max-height: 1200px; }
+.stretch-card.open .sc-
 
 .sc-inner { padding: 0 14px 16px 14px; }
 
@@ -376,15 +373,7 @@ body {
   cursor: pointer;
 }
 
-.ov-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem 1.2rem;
-  gap: .8rem;
-}
+.ov-
 
 .ov-ex-num {
   font-size: .6rem;
@@ -555,10 +544,16 @@ body {
   .header-title { font-size:.88rem; }
 }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-<a style="display:inline-flex;align-items:center;gap:.3rem;font-size:13px;color:#c8943a;text-decoration:none;padding:.8rem 1.2rem .3rem;opacity:.8;" href="index.html">← Mein Fokus</a>
+<div class="wimpelkette" aria-hidden="true"><svg viewBox="0 0 400 44" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,7 Q50,11 100,9 Q150,7 200,10 Q250,13 300,9 Q350,7 400,9" stroke="#1a2744" stroke-width="1" fill="none" opacity="0.3"/><g class="wimpel-1" transform-origin="30 9"><polygon points="23,9 37,9 30,28" fill="#b8294a" opacity="0.8"/></g><g class="wimpel-2" transform-origin="67 9"><polygon points="60,9 74,9 67,28" fill="#c9893a" opacity="0.8"/></g><g class="wimpel-3" transform-origin="104 9"><polygon points="97,9 111,9 104,28" fill="#1a2744" opacity="0.75"/></g><g class="wimpel-4" transform-origin="141 9"><polygon points="134,9 148,9 141,28" fill="#6a3f7a" opacity="0.75"/></g><g class="wimpel-5" transform-origin="178 10"><polygon points="171,10 185,10 178,29" fill="#b8294a" opacity="0.8"/></g><g class="wimpel-6" transform-origin="215 9"><polygon points="208,9 222,9 215,28" fill="#5e8a5a" opacity="0.7"/></g><g class="wimpel-7" transform-origin="252 10"><polygon points="245,10 259,10 252,29" fill="#c9893a" opacity="0.8"/></g><g class="wimpel-8" transform-origin="289 9"><polygon points="282,9 296,9 289,28" fill="#b8294a" opacity="0.8"/></g><g class="wimpel-9" transform-origin="326 9"><polygon points="319,9 333,9 326,28" fill="#1a2744" opacity="0.75"/></g><g class="wimpel-1" transform-origin="363 9"><polygon points="356,9 370,9 363,28" fill="#6a3f7a" opacity="0.75"/></g></svg></div>
+<div class="zirkus-header">
+<a class="back-btn" href="index.html">‹ zurück zu Mein Leben</a>
+<div class="rainbow-stripe"></div>
+<div class="header-eyebrow">Körper & Bewegung</div>
+<div class="header-title">Dehnplan</div>
+<div class="header-sub">Persönlicher Dehnplan</div>
+</div>
 
 <!-- HEADER -->
 <div class="header">
@@ -775,10 +770,10 @@ function today() { return new Date().getDay(); } // 0=Sun
 
 function speak(text, cb) {
   if (!voiceOn || !window.speechSynthesis) { if (cb) cb(); return; }
-  window.speechSynthesis.cancel();
+  window.speechSynthesis && window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'de-DE'; u.rate = 0.9; u.pitch = 1.0; u.volume = 1;
-  const voices = speechSynthesis.getVoices();
+  const voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
   const pref = ['Anna','Helena','Katrin','Marlene','Google Deutsch'];
   for (const p of pref) {
     const v = voices.find(v => v.name.includes(p) || v.lang.startsWith('de'));
@@ -791,13 +786,13 @@ function speak(text, cb) {
     document.getElementById('vtext').textContent = 'Bereit';
     if (cb) cb();
   };
-  setTimeout(() => speechSynthesis.speak(u), 80);
+  setTimeout(() => window.speechSynthesis && speechSynthesis.speak(u), 80);
 }
 
 function toggleVoice() {
   voiceOn = !voiceOn;
   document.getElementById('voiceTog').classList.toggle('on', voiceOn);
-  if (!voiceOn) { speechSynthesis.cancel(); document.getElementById('vdot').classList.remove('on'); }
+  if (!voiceOn) { (window.speechSynthesis && window.speechSynthesis && speechSynthesis.cancel()); document.getElementById('vdot').classList.remove('on'); }
   else speak('Sprachansage aktiv.');
 }
 
@@ -1028,20 +1023,20 @@ function exDone() {
 
 function skipEx() {
   clearInterval(sessionTimer);
-  speechSynthesis.cancel();
+  window.speechSynthesis && speechSynthesis.cancel();
   exDone();
 }
 
 function togglePause() {
   sessionPaused = !sessionPaused;
   document.getElementById('ovBtnMain').textContent = sessionPaused ? '▶ Weiter' : '⏸ Pause';
-  if (sessionPaused) speechSynthesis.cancel();
+  if (sessionPaused) window.speechSynthesis && speechSynthesis.cancel();
   else speak('Weiter!');
 }
 
 function closeSession() {
   clearInterval(sessionTimer);
-  speechSynthesis.cancel();
+  window.speechSynthesis && speechSynthesis.cancel();
   sessionRunning = false;
   document.getElementById('overlay').classList.remove('show');
   document.getElementById('transFlash').classList.remove('show');
@@ -1071,7 +1066,7 @@ function confirmClose() {
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
-if (speechSynthesis.onvoiceschanged !== undefined) {
+if(window.speechSynthesis && speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = () => {};
 }
 
