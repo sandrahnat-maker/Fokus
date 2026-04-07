@@ -2,83 +2,26 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#fdf6ee">
-<title>Haushaltsplan</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🎪 Sandras Haushalts-Zirkus</title>
+<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-@keyframes wimpel-swing{0%,100%{transform:rotate(-4deg) skewX(2deg);}50%{transform:rotate(4deg) skewX(-2deg);}}
-@keyframes wimpel-swing2{0%,100%{transform:rotate(3deg) skewX(-1deg);}50%{transform:rotate(-3deg) skewX(1deg);}}
-@keyframes wimpel-swing3{0%,100%{transform:rotate(-2deg);}50%{transform:rotate(5deg);}}
-@keyframes rope-sway{0%,100%{transform:scaleX(1);}50%{transform:scaleX(1.008);}}
-@keyframes tier-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
-@keyframes spotlight{0%{left:-100%;}60%,100%{left:220%;}}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 :root{
-  --bg:#fdf6ee;--card:#fffbf5;--text:#1e1208;--muted:rgba(30,18,8,0.45);
-  --crimson:#b8294a;--crimson-l:rgba(184,41,74,0.10);
-  --gold:#c9893a;--gold-l:rgba(201,137,58,0.13);
-  --navy:#1a2744;--navy-l:rgba(26,39,68,0.07);
-  --sage:#5e8a5a;--sage-l:rgba(94,138,90,0.12);
-  --violet:#6a3f7a;
-  --border:rgba(184,41,74,0.13);--shadow:rgba(30,18,8,0.08);
+  --red:#d42b2b;--red2:#e84040;--cream:#fff8e7;--gold:#f5c518;--gold2:#ffd84a;
+  --navy:#1a1040;--teal:#00a8a8;--pink:#e8478a;--purple:#7b3fa0;
+  --text:#1a1040;--muted:#7a6a9a;--white:#fffdf5;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html{font-size:16px;}
 body{
-  background:var(--bg);font-family:"Raleway",sans-serif;color:var(--text);
-  min-height:100vh;padding-bottom:4rem;
-  background-image:repeating-linear-gradient(-6deg,rgba(184,41,74,0.022) 0px,rgba(184,41,74,0.022) 28px,transparent 28px,transparent 56px,rgba(201,137,58,0.018) 56px,rgba(201,137,58,0.018) 84px,transparent 84px,transparent 112px);
+  background:var(--cream);
+  font-family:'Nunito',sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  padding-bottom:5rem;
+  overflow-x:hidden;
+  position:relative;
 }
-.wimpelkette{position:relative;width:100%;height:40px;overflow:hidden;display:block;background:var(--bg);}
-.wimpelkette svg{width:100%;height:40px;overflow:visible;animation:rope-sway 5s ease-in-out infinite;}
-.wimpel-1{animation:wimpel-swing 2.8s ease-in-out infinite;}
-.wimpel-2{animation:wimpel-swing2 3.2s ease-in-out infinite 0.3s;}
-.wimpel-3{animation:wimpel-swing3 2.5s ease-in-out infinite 0.6s;}
-.wimpel-4{animation:wimpel-swing 3.0s ease-in-out infinite 0.9s;}
-.wimpel-5{animation:wimpel-swing2 2.7s ease-in-out infinite 1.2s;}
-.wimpel-6{animation:wimpel-swing3 3.4s ease-in-out infinite 1.5s;}
-.wimpel-7{animation:wimpel-swing 2.9s ease-in-out infinite 1.8s;}
-.wimpel-8{animation:wimpel-swing2 2.6s ease-in-out infinite 2.1s;}
-.wimpel-9{animation:wimpel-swing3 3.1s ease-in-out infinite 2.4s;}
-header{padding:1rem 1.2rem .85rem;border-bottom:2px solid var(--border);background:rgba(255,251,245,0.92);backdrop-filter:blur(3px);position:relative;}
-.back-btn{display:inline-flex;align-items:center;gap:.3rem;font-family:"IM Fell English",serif;font-style:italic;font-size:14px;color:var(--crimson);text-decoration:none;opacity:.7;margin-bottom:.4rem;background:none;border:none;cursor:pointer;padding:0;}
-.back-btn:active{opacity:1;}
-.header-eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem;font-weight:500;}
-.header-title{font-family:"Playfair Display",serif;font-size:22px;font-style:italic;color:var(--text);line-height:1.2;}
-.header-sub{font-family:"IM Fell English",serif;font-size:14px;font-style:italic;color:var(--muted);margin-top:.15rem;}
-.rainbow-stripe{height:5px;background:repeating-linear-gradient(90deg,var(--crimson) 0%,var(--crimson) 20%,var(--gold) 20%,var(--gold) 40%,var(--navy) 40%,var(--navy) 60%,var(--violet) 60%,var(--violet) 80%,var(--sage) 80%,var(--sage) 100%);opacity:.6;margin-bottom:.2rem;}
-.z-card{background:var(--card);border-radius:12px;border:1px solid var(--border);box-shadow:0 3px 16px var(--shadow);margin:.5rem 1rem;overflow:hidden;position:relative;}
-.z-card::after{content:'';position:absolute;top:0;left:-100%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.055),transparent);animation:spotlight 10s ease-in-out infinite;pointer-events:none;}
-.z-item{display:flex;align-items:flex-start;gap:.6rem;padding:.55rem .9rem;border-bottom:1px solid rgba(184,41,74,0.07);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .2s;}
-.z-item:last-child{border-bottom:none;}
-.z-item.done{opacity:.28;}
-.z-item.done .z-name{text-decoration:line-through;text-decoration-color:rgba(184,41,74,0.3);}
-.z-check{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(184,41,74,0.3);flex-shrink:0;margin-top:2px;transition:all .2s;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;}
-.z-item.done .z-check{background:var(--sage-l);border-color:var(--sage);color:var(--sage);}
-.z-item.done .z-check::after{content:"✦";}
-.z-name{font-size:16px;color:var(--text);line-height:1.35;}
-.z-sub{font-size:13px;font-style:italic;color:var(--muted);margin-top:1px;font-family:"IM Fell English",serif;}
-.z-sec{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--crimson);padding:.7rem 1rem .2rem;opacity:.8;font-weight:500;}
-.z-info{margin:.3rem 1rem .4rem;padding:.5rem .8rem;background:var(--gold-l);border-left:2px solid var(--gold);font-family:"IM Fell English",serif;font-style:italic;font-size:14px;color:var(--muted);line-height:1.6;}
-.section-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:.8rem 1rem .3rem;padding-left:.2rem;font-weight:500;}
-.z-progress{margin:.4rem 1rem .2rem;}
-.z-progress-row{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:.3rem;}
-.z-progress-bar{height:3px;background:var(--border);border-radius:10px;overflow:hidden;}
-.z-progress-fill{height:100%;background:linear-gradient(90deg,var(--crimson),var(--gold));border-radius:10px;transition:width .4s ease;}
-.z-reset{position:fixed;bottom:1.2rem;right:1.2rem;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:20px;padding:.4rem 1rem;font-size:13px;font-family:"IM Fell English",serif;font-style:italic;cursor:pointer;}
-.z-reset:active{background:var(--crimson-l);color:var(--crimson);}
-.tier-zeile{display:flex;align-items:center;justify-content:center;gap:.2rem;padding:.3rem 1rem;user-select:none;pointer-events:none;overflow:hidden;}
-.tier-zeile .tier{display:inline-block;animation:tier-float 3s ease-in-out infinite;opacity:.5;font-size:.9rem;}
-.tier-zeile .tier:nth-child(2){animation-delay:.4s;}.tier-zeile .tier:nth-child(3){animation-delay:.8s;}.tier-zeile .tier:nth-child(4){animation-delay:1.2s;}.tier-zeile .tier:nth-child(5){animation-delay:1.6s;}
-.tier-linie{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(184,41,74,0.2),transparent);}
-.manege-line{display:flex;align-items:center;gap:.5rem;padding:.1rem 1rem;color:var(--crimson);opacity:.3;font-size:11px;letter-spacing:.3em;user-select:none;}
-.manege-line::before,.manege-line::after{content:'';flex:1;height:1px;background:currentColor;}
-</style>
-
-<style>
-/* App-spezifisches CSS */
 body::before{
   content:'';
   position:fixed;top:0;left:0;right:0;bottom:0;
@@ -308,20 +251,95 @@ header{position:relative;z-index:10;background:var(--red);overflow:hidden;box-sh
 .big-task-item.done .big-task-check{background:var(--pink);border-color:var(--pink);}
 .big-task-item.done .big-task-check::after{content:'✓';color:#fff;font-weight:900;font-size:14px;}
 .big-task-room-tag{font-family:'Fredoka One',cursive;font-size:11px;color:var(--red);display:block;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.06em;}
+
+/* ══ MINIMUM-TAG ══ */
+.min-hero{
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  border-radius:22px;padding:1.3rem 1.2rem 1rem;
+  margin-bottom:1rem;border:3px solid var(--navy);
+  box-shadow:5px 5px 0 var(--navy);
+  text-align:center;position:relative;overflow:hidden;
+}
+.min-hero::before{content:'🌟';position:absolute;left:-8px;top:-8px;font-size:4rem;opacity:.12;transform:rotate(-20deg);}
+.min-hero::after{content:'🌟';position:absolute;right:-8px;bottom:-8px;font-size:4rem;opacity:.12;transform:rotate(20deg);}
+.min-hero-date{font-family:'Fredoka One',cursive;font-size:11px;letter-spacing:.18em;color:rgba(255,255,255,.7);margin-bottom:.3rem;text-transform:uppercase;}
+.min-hero-title{font-family:'Fredoka One',cursive;font-size:24px;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.2);margin-bottom:.2rem;}
+.min-hero-sub{font-size:13px;color:rgba(255,255,255,.8);font-weight:700;}
+.min-streak{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(255,255,255,.2);border-radius:20px;
+  padding:.3rem .8rem;margin-top:.6rem;
+  font-family:'Fredoka One',cursive;font-size:14px;color:#fff;
+}
+.min-items{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem;}
+.min-item{
+  background:var(--white);border-radius:18px;
+  padding:.85rem 1rem;
+  border:3px solid var(--navy);
+  box-shadow:4px 4px 0 var(--navy);
+  display:flex;align-items:center;gap:.75rem;
+  cursor:pointer;transition:all .15s;
+  position:relative;overflow:hidden;
+}
+.min-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:5px;
+  background:var(--item-color,var(--teal));
+  border-radius:3px 0 0 3px;
+}
+.min-item:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--navy);}
+.min-item.done{background:#f0faf5;border-color:#b0d8c0;}
+.min-item.done::before{background:#b0d8c0;}
+.min-item.done .min-item-text{text-decoration:line-through;color:var(--muted);}
+.min-item.done .min-item-sub{text-decoration:line-through;}
+.min-check{
+  width:30px;height:30px;border-radius:50%;
+  border:3px solid var(--navy);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;transition:all .25s;background:var(--white);
+}
+.min-item.done .min-check{
+  background:var(--teal);border-color:var(--teal);
+  animation:checkPop .3s cubic-bezier(.175,.885,.32,1.275);
+  font-size:.85rem;
+}
+.min-item-body{flex:1;}
+.min-item-text{font-family:'Fredoka One',cursive;font-size:16px;color:var(--text);line-height:1.2;}
+.min-item-sub{font-size:12px;color:var(--muted);font-weight:600;line-height:1.4;margin-top:.15rem;}
+.min-item-time{font-size:11px;font-weight:900;color:var(--white);background:var(--navy);padding:.15rem .4rem;border-radius:8px;flex-shrink:0;white-space:nowrap;}
+.min-done-banner{
+  background:linear-gradient(135deg,var(--teal),#00c8a0);
+  border-radius:20px;padding:1.5rem;text-align:center;
+  border:3px solid var(--navy);box-shadow:5px 5px 0 var(--navy);
+  animation:popIn .4s cubic-bezier(.175,.885,.32,1.275);
+  display:none;margin-bottom:1rem;
+}
+.min-done-banner.visible{display:block;}
+.min-done-icon{font-size:3rem;display:block;animation:bounce 1s ease infinite alternate;}
+.min-done-text{font-family:'Fredoka One',cursive;font-size:22px;color:#fff;margin:.5rem 0 .3rem;text-shadow:1px 1px 0 rgba(0,0,0,.2);}
+.min-done-sub{font-size:14px;color:rgba(255,255,255,.85);font-weight:700;}
+.min-progress-row{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;}
+.min-progress-bar{flex:1;height:12px;background:rgba(26,16,64,.1);border-radius:6px;overflow:hidden;border:2px solid var(--navy);}
+.min-progress-fill{
+  height:100%;
+  background:repeating-linear-gradient(90deg,var(--pink) 0,var(--pink) 10px,var(--purple) 10px,var(--purple) 20px);
+  border-radius:4px;transition:width .4s cubic-bezier(.175,.885,.32,1.275);
+}
+.min-progress-count{font-family:'Fredoka One',cursive;font-size:15px;color:var(--navy);flex-shrink:0;}
 </style>
 </head>
 <body>
-<div class="wimpelkette" aria-hidden="true"><svg viewBox="0 0 400 44" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,7 Q50,11 100,9 Q150,7 200,10 Q250,13 300,9 Q350,7 400,9" stroke="#1a2744" stroke-width="1" fill="none" opacity="0.3"/><g class="wimpel-1" transform-origin="30 9"><polygon points="23,9 37,9 30,28" fill="#b8294a" opacity="0.8"/></g><g class="wimpel-2" transform-origin="67 9"><polygon points="60,9 74,9 67,28" fill="#c9893a" opacity="0.8"/></g><g class="wimpel-3" transform-origin="104 9"><polygon points="97,9 111,9 104,28" fill="#1a2744" opacity="0.75"/></g><g class="wimpel-4" transform-origin="141 9"><polygon points="134,9 148,9 141,28" fill="#6a3f7a" opacity="0.75"/></g><g class="wimpel-5" transform-origin="178 10"><polygon points="171,10 185,10 178,29" fill="#b8294a" opacity="0.8"/></g><g class="wimpel-6" transform-origin="215 9"><polygon points="208,9 222,9 215,28" fill="#5e8a5a" opacity="0.7"/></g><g class="wimpel-7" transform-origin="252 10"><polygon points="245,10 259,10 252,29" fill="#c9893a" opacity="0.8"/></g><g class="wimpel-8" transform-origin="289 9"><polygon points="282,9 296,9 289,28" fill="#b8294a" opacity="0.8"/></g><g class="wimpel-9" transform-origin="326 9"><polygon points="319,9 333,9 326,28" fill="#1a2744" opacity="0.75"/></g><g class="wimpel-1" transform-origin="363 9"><polygon points="356,9 370,9 363,28" fill="#6a3f7a" opacity="0.75"/></g></svg></div>
-<header>
-<div class="rainbow-stripe"></div>
-<div class="header-eyebrow">Zuhause</div>
-<div class="header-title">Haushaltsplan</div>
-<div class="header-sub">Schritt für Schritt, sanft</div>
-</header>
 
 <div class="confetti-wrap" id="confetti"></div>
 
-
+<header>
+  <div class="tent-stripe"></div>
+  <div class="header-inner">
+    <div class="header-stars">★ ✦ ★ ✦ ★</div>
+    <div class="header-title">🎪 Sandras Haushalts-Zirkus 🎪</div>
+    <div class="header-sub">Manege frei — für ein aufgeräumtes Zuhause!</div>
+  </div>
+  <div class="tent-stripe"></div>
+</header>
 
 <!-- RÄUME -->
 <div class="view active" id="view-rooms">
@@ -436,8 +454,8 @@ header{position:relative;z-index:10;background:var(--red);overflow:hidden;box-sh
     <div class="focus-label">⏱ Heute's Nummer im Programm</div>
     <div class="focus-room" id="tp-focus-room"></div>
     <ul class="task-list" id="tp-daily-tasks"></ul>
-    <div class="z-progress">
-      <div class="z-progress-bar"><div class="z-progress-fill" id="tp-progress-fill" style="width:0%"></div></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="tp-progress-fill" style="width:0%"></div></div>
       <div class="progress-text" id="tp-progress-text">0 von 0 erledigt</div>
     </div>
   </div>
@@ -445,10 +463,38 @@ header{position:relative;z-index:10;background:var(--red);overflow:hidden;box-sh
   <div id="tp-big-tasks"></div>
 </div>
 
+<!-- MINIMUM-TAG -->
+<div class="view" id="view-minimum" style="padding-bottom:5rem;">
+
+  <div class="min-hero">
+    <div class="min-hero-date" id="min-date"></div>
+    <div class="min-hero-title" id="min-hero-title">Heute's Mindestprogramm ✨</div>
+    <div class="min-hero-sub">~15 Minuten · jeden Tag · du schaffst das!</div>
+    <div class="min-streak" id="min-streak">🔥 <span id="min-streak-num">0</span> Tage in Folge!</div>
+  </div>
+
+  <div class="min-done-banner" id="min-done-banner">
+    <span class="min-done-icon" id="min-done-icon">🎉</span>
+    <div class="min-done-text" id="min-done-text">Alles erledigt!</div>
+    <div class="min-done-sub" id="min-done-sub">Du bist großartig! 🌟</div>
+  </div>
+
+  <div class="min-progress-row">
+    <div class="min-progress-bar"><div class="min-progress-fill" id="min-prog-fill" style="width:0%"></div></div>
+    <div class="min-progress-count" id="min-prog-count">0/8</div>
+  </div>
+
+  <div class="min-items" id="min-items-list"></div>
+
+</div>
+
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
   <button class="bnav-btn on" id="bnav-home" onclick="startNew()">
     <div class="bnav-icon">🎪</div><div class="bnav-label">FÜHLEN</div>
+  </button>
+  <button class="bnav-btn" id="bnav-min" onclick="openMinimum()">
+    <div class="bnav-icon">⚡</div><div class="bnav-label">MINIMUM</div>
   </button>
   <button class="bnav-btn" id="bnav-plan" onclick="openTagesplan()">
     <div class="bnav-icon">📋</div><div class="bnav-label">TAGESPLAN</div>
@@ -490,7 +536,7 @@ var AFFIRMATIONS={
 };
 
 function showView(id){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
-function setNav(activeId){['bnav-home','bnav-plan','bnav-hist'].forEach(function(id){document.getElementById(id).classList.toggle('on',id===activeId);});}
+function setNav(activeId){['bnav-home','bnav-min','bnav-plan','bnav-hist'].forEach(function(id){document.getElementById(id).classList.toggle('on',id===activeId);});}
 function selectRoom(card){
   document.querySelectorAll('.room-card').forEach(function(c){c.classList.remove('selected');});
   card.classList.add('selected');
@@ -540,7 +586,121 @@ function renderHistory(){
 }
 function openHistory(){renderHistory();showView('view-history');setNav('bnav-hist');}
 function startNew(){document.querySelectorAll('.room-card').forEach(function(c){c.classList.remove('selected');});showView('view-rooms');setNav('bnav-home');}
-function openTagesplan(){renderTagesplan();showView('view-tagesplan');setNav('bnav-plan');}
+
+function openMinimum(){renderMinimum();showView('view-minimum');setNav('bnav-min');}
+
+var MIN_TASKS=[
+  {id:'katzenklo', icon:'🐱', color:'#e8478a',
+   text:'Katzenklo ausmisten',
+   sub:'Klumpen raus, Streu prüfen — Rudi & Timmy danken dir!', min:3},
+  {id:'katzenaepfe', icon:'🥣', color:'#7b3fa0',
+   text:'Rudi & Timmy Näpfe',
+   sub:'Altes Nasses entfernen, frisches Futter rein, Wassernapf kontrollieren', min:2},
+  {id:'lottenapf', icon:'🐶', color:'#f5c518',
+   text:'Lottes Wassernapf',
+   sub:'Altes Wasser raus, frisches Wasser rein — jeden Tag!', min:1},
+  {id:'abwasch', icon:'🍽️', color:'#00a8a8',
+   text:'Abwasch / Spüler',
+   sub:'Alles Schmutzige rein, nix über Nacht liegenlassen', min:4},
+  {id:'herd', icon:'🍳', color:'#d42b2b',
+   text:'Herd & Küchentisch kurz abwischen',
+   sub:'Feuchtes Tuch — 1 Minute reicht! Nach dem Kochen sofort machen.', min:2},
+  {id:'muell', icon:'🗑️', color:'#7b3fa0',
+   text:'Mülleimer prüfen',
+   sub:'Voll? Rausnehmen und neuen Sack einlegen', min:1},
+  {id:'bett', icon:'🛏️', color:'#e8478a',
+   text:'Bett zurechtlegen',
+   sub:'Decke grob zusammenfalten, Polster aufstellen — macht den ganzen Raum freundlicher!', min:1},
+  {id:'medis', icon:'💊', color:'#00a8a8',
+   text:'Medikamente morgens',
+   sub:'Euthyrox, Magenschutz, Sertralin, Blutdruck — du sorgst für dich!', min:1},
+];
+
+var DONE_MESSAGES=[
+  {icon:'🎪', text:'Manege frei — du hast gewonnen!', sub:'Die Wohnung applaudiert! 👏'},
+  {icon:'🤹', text:'Jongliert wie eine Profi!', sub:'Alle Bälle in der Luft — alle Tasks erledigt!'},
+  {icon:'🎉', text:'Perfekte Vorstellung!', sub:'Heute läuft der Zirkus auf Hochtouren!'},
+  {icon:'⭐', text:'Stern der Vorstellung!', sub:'Sandra — einfach unaufhaltbar!'},
+  {icon:'🥳', text:'Das Minimum ist Maximum!', sub:'Du bist einfach wunderbar!'},
+  {icon:'🌟', text:'Heute glänzt alles!', sub:'Rudi, Timmy und Lotte sind stolz auf dich!'},
+];
+
+function getMinKey(){return 'min_'+new Date().toISOString().slice(0,10);}
+function loadMinChecked(){try{return JSON.parse(localStorage.getItem(getMinKey())||'[]');}catch(e){return[];}}
+function saveMinChecked(arr){try{localStorage.setItem(getMinKey(),JSON.stringify(arr));}catch(e){}}
+
+function getStreak(){
+  var streak=0,d=new Date();
+  for(var i=0;i<30;i++){
+    var key='min_'+d.toISOString().slice(0,10);
+    try{
+      var arr=JSON.parse(localStorage.getItem(key)||'[]');
+      if(arr.length===MIN_TASKS.length){streak++;}
+      else if(i>0){break;}
+    }catch(e){break;}
+    d.setDate(d.getDate()-1);
+  }
+  return streak;
+}
+
+function renderMinimum(){
+  var checked=loadMinChecked();
+  var today=new Date();
+  var days=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  var months=['Jänner','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  document.getElementById('min-date').textContent=days[today.getDay()]+', '+today.getDate()+'. '+months[today.getMonth()];
+
+  // Streak
+  var streak=getStreak();
+  document.getElementById('min-streak-num').textContent=streak;
+
+  // Hero title varies by time of day
+  var h=today.getHours();
+  var greet=h<10?'Guten Morgen, Sandra! ☀️':h<14?'Weiter geht\'s! 💪':h<18?'Nachmittags-Power! ✨':'Noch schnell — du schaffst das! 🌙';
+  document.getElementById('min-hero-title').textContent=greet;
+
+  // Render items
+  var list=document.getElementById('min-items-list');
+  list.innerHTML='';
+  MIN_TASKS.forEach(function(task){
+    var isDone=checked.indexOf(task.id)>=0;
+    var div=document.createElement('div');
+    div.className='min-item'+(isDone?' done':'');
+    div.style.setProperty('--item-color',task.color);
+    div.innerHTML=
+      '<div class="min-check">'+(isDone?'✓':task.icon)+'</div>'+
+      '<div class="min-item-body">'+
+        '<div class="min-item-text">'+task.text+'</div>'+
+        '<div class="min-item-sub">'+task.sub+'</div>'+
+      '</div>'+
+      '<span class="min-item-time">~'+task.min+'m</span>';
+    div.addEventListener('click',function(){
+      var idx=checked.indexOf(task.id);
+      if(idx>=0){checked.splice(idx,1);}else{checked.push(task.id);}
+      saveMinChecked(checked);
+      renderMinimum();
+    });
+    list.appendChild(div);
+  });
+
+  // Progress
+  var pct=Math.round(checked.length/MIN_TASKS.length*100);
+  document.getElementById('min-prog-fill').style.width=pct+'%';
+  document.getElementById('min-prog-count').textContent=checked.length+'/'+MIN_TASKS.length;
+
+  // Done banner
+  var banner=document.getElementById('min-done-banner');
+  if(checked.length===MIN_TASKS.length){
+    var msg=DONE_MESSAGES[Math.floor(today.getDate()%DONE_MESSAGES.length)];
+    document.getElementById('min-done-icon').textContent=msg.icon;
+    document.getElementById('min-done-text').textContent=msg.text;
+    document.getElementById('min-done-sub').textContent=msg.sub;
+    banner.classList.add('visible');
+  }else{
+    banner.classList.remove('visible');
+  }
+}
+
 
 var TAGESPLAN={
   1:{motto:'Montag · Küche',room:'🍳 Küche',tasks:[

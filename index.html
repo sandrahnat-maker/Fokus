@@ -532,41 +532,41 @@ header{
     <div class="wave" id="wave-morgen" onclick="showPhase('morgen')">
       <div class="wave-icon">✨</div>
       <div class="wave-name">Mo</div>
-      <div class="wave-time">bis 9h</div>
+      <div class="wave-time">7:30–9:30</div>
       <div class="wave-tea" id="wave-tea-morgen"></div>
-      <a class="wave-musik" href="https://open.spotify.com/playlist/15IrSSIrPD2qqi6JJmV6w2" target="_blank" onclick="event.stopPropagation()">🎵</a>
+      <a class="wave-musik" href="https://open.spotify.com/playlist/1RO7Inm2kFd6FLgSJZ8GWe" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-vormittag" onclick="showPhase('vormittag')">
       <div class="wave-icon">🎩</div>
       <div class="wave-name">Vm</div>
-      <div class="wave-time">9–12h</div>
+      <div class="wave-time">9:30–12:30</div>
       <div class="wave-tea" id="wave-tea-vormittag"></div>
-      <a class="wave-musik" href="https://open.spotify.com/playlist/0opVmEHbkHkRkWvS5oqCo3" target="_blank" onclick="event.stopPropagation()">🎵</a>
+      <a class="wave-musik" href="https://open.spotify.com/playlist/7kb6SPESF6UYOJwE6ELjzq" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-mittag" onclick="showPhase('mittag')">
       <div class="wave-icon">🎪</div>
       <div class="wave-name">Mi</div>
-      <div class="wave-time">12–15h</div>
+      <div class="wave-time">12:30–13:30</div>
       <div class="wave-tea" id="wave-tea-mittag"></div>
-      <a class="wave-musik" href="https://open.spotify.com/playlist/2SpuRwlVHhNX7nLnVdmsxg" target="_blank" onclick="event.stopPropagation()">🎵</a>
+      <a class="wave-musik" href="https://open.spotify.com/playlist/0rIM0LWeb25zwr5rl7Ijh2" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-nachmittag" onclick="showPhase('nachmittag')">
       <div class="wave-icon">🎠</div>
       <div class="wave-name">Nm</div>
-      <div class="wave-time">15–18h</div>
+      <div class="wave-time">13:30–18:00</div>
       <div class="wave-tea" id="wave-tea-nachmittag"></div>
-      <a class="wave-musik" href="https://open.spotify.com/playlist/4DBCMLQqUPGen2CmRqwhkh" target="_blank" onclick="event.stopPropagation()">🎵</a>
+      <a class="wave-musik" href="https://open.spotify.com/playlist/6X9u3seoLT0AUXEXdzYcTC" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-abend" onclick="showPhase('abend')">
       <div class="wave-icon">🌙</div>
       <div class="wave-name">Ab</div>
-      <div class="wave-time">ab 18h</div>
+      <div class="wave-time">ab 18:00</div>
       <div class="wave-tea" id="wave-tea-abend"></div>
-      <a class="wave-musik" href="https://open.spotify.com/playlist/3Ds8mQlNzLFSNHzSn5N6aL" target="_blank" onclick="event.stopPropagation()">🎵</a>
+      <a class="wave-musik" href="https://open.spotify.com/playlist/3wtSyNFvoSxSarePmVGYkx" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
   </div>
@@ -785,11 +785,12 @@ function updateWaveTea(){
 var currentPhase=null;
 
 function getPhaseByTime(){
-  var h=today.getHours();
-  if(h<9)return'morgen';
-  if(h<12)return'vormittag';
-  if(h<15)return'mittag';
-  if(h<18)return'nachmittag';
+  var h=today.getHours(),m=today.getMinutes();
+  var t=h*60+m;
+  if(t<9*60+30)return'morgen';
+  if(t<12*60+30)return'vormittag';
+  if(t<13*60+30)return'mittag';
+  if(t<18*60)return'nachmittag';
   return'abend';
 }
 
@@ -1147,8 +1148,6 @@ var ALL_APPS=[
   {icon:'📅',text:'Kalender',sub:'Mein Tageskalender',href:'https://sandrahnat-maker.github.io/Kalender_2203/',phasen:['morgen','vormittag','mittag','nachmittag','abend']},
 
   // Vormittag
-  {icon:'🎓',text:'Uni-Präsenz Packliste',sub:'Was mitnehmen zum Kurs',href:'Uni_Praesenz_Checkliste.html',phasen:['morgen','vormittag']},
-  {icon:'🏫',text:'VHS-Kurs Packliste',sub:'Was mitnehmen zum Kurs',href:'VHS_Kurs_Checkliste.html',phasen:['morgen','vormittag']},
   {icon:'📋',text:'VHS Kursvorbereitung',sub:'Checklisten & Materialien',href:'VHS_Kursvorbereitung.html',phasen:['vormittag','mittag']},
   {icon:'📚',text:'Lernplan',sub:'DaZF — Sandra Hnat-Gerersdorfer',href:'Lernplan.html',phasen:['vormittag','mittag']},
 
