@@ -585,6 +585,7 @@ function renderHistory(){
   }).join('');
 }
 function openHistory(){renderHistory();showView('view-history');setNav('bnav-hist');}
+function openTagesplan(){renderTagesplan();showView('view-tagesplan');setNav('bnav-plan');}
 function startNew(){document.querySelectorAll('.room-card').forEach(function(c){c.classList.remove('selected');});showView('view-rooms');setNav('bnav-home');}
 
 function openMinimum(){renderMinimum();showView('view-minimum');setNav('bnav-min');}
