@@ -698,6 +698,8 @@ var PHASES={
       {name:"Wasser · Tee · Frühstück",note:"bewusst genießen",cat:"ernährung",links:[{href:"tee-des-tages.html",label:"Tee"},{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"}]},
       {name:"Medikamente",note:"zum Frühstück",cat:"körper"},
       {name:"Rudi & Timmy",note:"Futter & Schmusezeit",cat:"tiere"},
+      {name:"Kaffee",note:"in Ruhe, bewusst genießen",cat:"ernährung"},
+      {name:"Tag planen",note:"Kalender & Prioritäten",cat:"arbeit",links:[{href:"https://sandrahnat-maker.github.io/Kalender_2203/",label:"Kalender"}]},
       {name:"Bad Früh",note:"Weleda-Ritual",cat:"pflege",links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
       {name:"Lotte raus",note:"erste Runde",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
       {name:"Tiermedikamente",note:"Lotte + Rudi",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"}]},
@@ -705,25 +707,22 @@ var PHASES={
     ]
   },
   vormittag:{
-    mood:"Der Vormittag trägt dich in den Tag hinein — frisch, klar, lebendig. Ich will diesen Vormittag so leben, wie ich mein ganzes Leben leben will.",
+    mood:"Der Vormittag ist deine produktivste Zeit — still, klar, ganz bei dir. Nicht alles muss heute fertig werden. Aber eines nach dem anderen bringt dich weiter als du denkst.",
     tasks:[
-      {name:"VHS Vorbereitung",note:"Checklisten & Materialien",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"}]},
-      {name:"Kreative Aufgabe & Lernplan",note:"DaZF, Atelier, oder etwas Eigenes",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
-      {name:"Hausverkauf",note:"einen Schritt weiter",cat:"arbeit",links:[{href:"hausverkauf-guide.html",label:"Guide"},{href:"Hausverkauf_Checkliste.html",label:"Checkliste"}]},
-      {name:"Futter bestellen",note:"wenn nötig",cat:"tiere",links:[{href:"Futter_Bestellplaner.html",label:"Bestellplaner"}]},
-      {name:"Tee & bewusste Pause",note:"nicht nebenbei — wirklich genießen",cat:"seele",links:[{href:"tee-des-tages.html",label:"Tee"}]},
-      {name:"Frische Luft & Bewegung",note:"Spaziergang, Wald, oder kurz raus",cat:"körper"},
-      {name:"Eine Sache erledigen",note:"die sich schon länger wartet",cat:"arbeit"},
+      {name:"Gestrigen Tag abschließen",note:"Was ist offen geblieben? Kurz notieren oder sofort erledigen.",cat:"arbeit"},
+      {name:"Heutigen Termin vorbereiten",note:"VHS, Uni, Arzt, Gespräch — was auch immer heute kommt. 10 Minuten reichen oft.",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste VHS"},{href:"Uni_Praesenz_Checkliste.html",label:"Packliste Uni"}]},
+      {name:"Berufliche To-Dos",note:"Steuer, berufliche Zukunft, Bewerbungen, Korrespondenz — ein kleiner Schritt zählt.",cat:"arbeit"},
+      {name:"Uni-Aufgaben",note:"DaZF-Lektüre, Reflexionen, Wahlaufgaben — du bist nah dran!",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
+      {name:"Sonstige Schreibtisch-Aufgaben",note:"Familie, private Post, Hausverkauf, Versicherungen — was auch immer gerade wartet.",cat:"arbeit"},
+      {name:"Tee & bewusste Pause",note:"nicht nebenbei — wirklich hinsetzen, wirklich trinken.",cat:"seele",links:[{href:"tee-des-tages.html",label:"Tee"}]},
     ]
   },
   mittag:{
-    mood:"Die Mitte des Tages — du bist unterwegs, lehrst, lernst, schaffst. Alles fließt durch dich hindurch. Ich will diesen Mittag so leben, wie ich mein ganzes Leben leben will.",
+    mood:"Die Mitte des Tages — durchatmen, genießen, auftanken. Du hast den Vormittag geschafft!",
     tasks:[
-      {name:"VHS oder Atelier",note:"ganz präsent sein",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"}]},
       {name:"Mittagessen bewusst",note:"LP(a)-freundlich",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährungsplan"},{href:"Einkaufsliste.html",label:"Einkauf"}]},
+      {name:"Kaffee",note:"in Ruhe genießen",cat:"ernährung"},
       {name:"Gabapentin (Rudi)",note:"nach dem Mittagessen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-      {name:"Bewegung oder frische Luft",note:"auch 10 Min. zählen",cat:"körper"},
-      {name:"DaZF-Aufgabe",note:"ein kleiner Schritt genügt",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
       {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
     ]
   },
@@ -731,24 +730,25 @@ var PHASES={
     mood:"Der Nachmittag — eine zweite Chance, ganz bei dir zu sein. Ich will diesen Nachmittag so leben, wie ich mein ganzes Leben leben will.",
     tasks:[
       {name:"Sport",note:"aufwärmen, trainieren, dehnen",cat:"sport",links:[{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Koerpergewicht_Training_Audio.html",label:"Kraft"},{href:"Balanceboard_Training_Audio.html",label:"Balance"},{href:"Sonntags_Yoga_Audio.html",label:"Yoga"},{href:"Dehnplan.html",label:"Dehnen"},{href:"Kalkschulter.html",label:"Schulter"},{href:"Beckenboden.html",label:"Beckenboden"}]},
-      {name:"Duschen & Körperpflege",note:"Weleda, Wärme, für mich",cat:"pflege",links:[{href:"Duschen.html",label:"Duschen"},{href:"Koerperpflege_Tagesplan.html",label:"Körperpflege"},{href:"Haarpflege.html",label:"Haarpflege"},{href:"Nagelpflege.html",label:"Nagelpflege"}]},
-      {name:"DaZF oder Vorbereitung",note:"ruhig & fokussiert",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"},{href:"VHS_Kursvorbereitung.html",label:"VHS abschließen"}]},
       {name:"Wohnung & Zuhause",note:"Pflanzen, Haushalt, Einkauf, Kosmetik",cat:"zuhause",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Pflanzen_Galerie.html",label:"Pflanzen"},{href:"Haushaltsplan.html",label:"Haushalt"},{href:"Naturkosmetik_Tagesplan.html",label:"Naturkosmetik"},{href:"Futter_Bestellplaner.html",label:"Futter"}]},
+      {name:"Duschen & Körperpflege",note:"Wärme, für mich",cat:"pflege",links:[{href:"Duschen.html",label:"Duschen"},{href:"Koerperpflege_Tagesplan.html",label:"Körperpflege"},{href:"Haarpflege.html",label:"Haarpflege"},{href:"Nagelpflege.html",label:"Nagelpflege"}]},
       {name:"Kreativzeit",note:"Atelier, Zeichnen, Lesen",cat:"seele"},
-      {name:"Lotte — Nachmittagsrunde",note:"gemütlich, keine Eile",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
     ]
   },
   abend:{
-    mood:"Der Abend trägt dich nach Hause — in dich selbst. Alles darf jetzt langsamer werden. Ich will diesen Abend so leben, wie ich mein ganzes Leben leben will.",
+    mood:"Der Abend trägt dich nach Hause — in dich selbst. Alles darf jetzt langsamer werden.",
     tasks:[
+      {name:"Katzen füttern",note:"Rudi & Timmy — Abendfutter",cat:"tiere"},
+      {name:"Abendessen",note:"mit Thomas oder allein, schön",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"}]},
+      {name:"Wegräumen",note:"Küche, Tisch, kurz aufräumen",cat:"zuhause"},
+      {name:"Freizeit",note:"was auch immer sich gut anfühlt",cat:"seele"},
       {name:"Lotte — Abendrunde",note:"in Ruhe, kein Hetzen",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
       {name:"Tiermedikamente Abend",note:"Rudi & Timmy",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Katzen_Medikamente.html",label:"Katzen"}]},
-      {name:"Abendessen",note:"mit Thomas oder allein, schön",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"}]},
-      {name:"Kreativzeit oder Stille",note:"Atelier, Lesen, Zeichnen",cat:"seele"},
-      {name:"Bad Abend Routine",note:"Weleda, warm, für mich",cat:"pflege",links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
-      {name:"Eine Sache erledigen",note:"die sich schon länger wartet",cat:"arbeit",links:[{href:"#notizen",label:"Meine Notizen"}]},
-      {name:"Handy weg — früh schlafen",note:"Schlaf ist die Investition",cat:"seele"},
       {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
+      {name:"Bad Abend",note:"warm, für mich",cat:"pflege",links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
+      {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Handcreme",cat:"körper"},
+      {name:"Lesen",note:"kein Handy — echtes Buch",cat:"seele"},
+      {name:"Schlafen",note:"früh genug, du weißt warum 🌙",cat:"körper"},
     ]
   }
 };
