@@ -123,6 +123,21 @@ h1{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;font-we
 </header>
 <p class="sub">Sandra Hnat-Gerersdorfer · März–Juni 2026 · <a href="https://moodle.univie.ac.at" target="_blank" style="color:var(--gold)">Moodle öffnen</a></p>
 
+<div style="padding:.5rem 1rem 0;">
+  <button onclick="toggleChronoView()" id="btn-chrono" style="
+    width:100%;background:var(--navy);color:#fff;border:none;border-radius:14px;
+    padding:.7rem 1rem;font-family:'Raleway',sans-serif;font-weight:700;font-size:14px;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;
+    box-shadow:0 3px 10px rgba(26,39,68,.15);margin-bottom:.5rem;">
+    📅 Alle Aufgaben nach Datum
+    <span id="btn-chrono-arrow" style="font-size:10px;opacity:.7;">▼</span>
+  </button>
+</div>
+
+<div id="chrono-view" style="display:none;padding:0 1rem .5rem;">
+  <div id="list-chrono" style="display:flex;flex-direction:column;gap:.5rem;"></div>
+</div>
+
 <div class="modul">
 <div class="modul-hdr mh-migration" onclick="toggleModul('migration')">
 <span class="modul-name">&#9995; Migration, Flucht, Trauma</span>
@@ -351,6 +366,67 @@ function render(){
 function toggleModul(id){
   var list = document.getElementById('list-'+id);
   list.style.display = list.style.display==='none' ? '' : 'none';
+}
+
+function toggleChronoView(){
+  var view = document.getElementById('chrono-view');
+  var arrow = document.getElementById('btn-chrono-arrow');
+  if(view.style.display==='none'){
+    renderChrono();
+    view.style.display='block';
+    arrow.textContent='▲';
+  } else {
+    view.style.display='none';
+    arrow.textContent='▼';
+  }
+}
+
+// Parse datum string to sortable number: "Do 19.03." → 20260319
+function parseDatum(datum){
+  var m = datum.match(/(\d{1,2})\.(\d{2})\./);
+  if(!m) return 99999999;
+  var day = parseInt(m[1],10);
+  var month = parseInt(m[2],10);
+  var year = month >= 3 ? 2026 : 2027;
+  return year*10000 + month*100 + day;
+}
+
+function renderChrono(){
+  // Collect all tasks with modul label
+  var MODUL_LABELS = {
+    migration:'Migration', grammatik:'Grammatik', aesthetisch:'Ästhetisch',
+    lehrskizze:'Lehrskizze', portfolio:'Portfolio', fehlerkorrektur:'Fehlerkorrektur',
+    lehrskizze_detail:'Lehrskizze Detail', kulturreflexiv:'Kulturreflexiv', praktikum:'Praktikum'
+  };
+  var all = [];
+  Object.keys(TASKS).forEach(function(modul){
+    TASKS[modul].forEach(function(t){
+      all.push({task:t, modul:modul, label:MODUL_LABELS[modul]||modul, sort:parseDatum(t.datum)});
+    });
+  });
+  all.sort(function(a,b){ return a.sort - b.sort; });
+
+  var container = document.getElementById('list-chrono');
+  container.innerHTML = '';
+  all.forEach(function(item){
+    var t = item.task;
+    var isDone = !!checked[t.id];
+    var div = document.createElement('div');
+    div.className = 'aufgabe'+(isDone?' done':'');
+    div.style.cssText = 'background:var(--card);border-radius:12px;padding:.7rem .9rem;border:1px solid var(--border);display:flex;align-items:flex-start;gap:.7rem;cursor:pointer;';
+    div.innerHTML =
+      '<div class="check'+(isDone?' on':'')+'" style="flex-shrink:0;margin-top:2px;">'+(isDone?'&#10003;':'')+
+      '</div><div style="flex:1;">'+
+      '<div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">'+
+        '<span class="aufg-datum">'+t.datum+'</span>'+
+        '<span style="font-size:10px;background:var(--navy);color:#fff;padding:.1rem .45rem;border-radius:6px;opacity:.7;">'+item.label+'</span>'+
+      '</div>'+
+      '<div class="aufg-text'+(isDone?' done-text':'')+'">'+t.text+'</div>'+
+      '<div class="aufg-dauer">'+t.dauer+'</div>'+
+      '</div>';
+    div.onclick = function(){ checked[t.id]=!checked[t.id]; save(); render(); renderChrono(); };
+    container.appendChild(div);
+  });
 }
 
 function resetAll(){

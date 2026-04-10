@@ -772,7 +772,7 @@ function updateWaveDoneBadges(){
 
 function updateWaveTea(){
   // Mo=0…So=6, passend zu tee-des-tages.html
-  var teas=[["Hibiskus & Hagebutte","Mo"],["Grüner Tee & Ingwer","Di"],["Weißdorn","Mi"],["Rooibos & Zimt","Do"],["Brennnessel & Löwenzahn","Fr"],["Lavendel & Kamille","Sa"],["Artischocke & Mariendistel","So"]];
+  var teas=[["Hibiskus & Hagebutte","Mo"],["Grüner Tee & Ingwer","Di"],["Weißdorn","Mi"],["Brennnessel & Löwenzahn","Do"],["Rooibos & Zimt","Fr"],["Lavendel & Kamille","Sa"],["Artischocke & Mariendistel","So"]];
   var dayMon=(today.getDay()+6)%7; // So(0)→6, Mo(1)→0
   var tea=teas[dayMon];
   var teaText='🍵 '+tea[0];
@@ -899,7 +899,7 @@ async function loadIntention(force){
   el.className='intention-text loading';
   el.textContent='Einen Moment …';
 
-  var teas=[["Hibiskus & Hagebutte","für Blutdruck und Herz"],["Grüner Tee & Ingwer","für Energie"],["Weißdorn","für das Herz"],["Rooibos & Zimt","für Wärme"],["Brennnessel & Löwenzahn","für Kraft"],["Lavendel & Kamille","für Schlaf"],["Artischocke & Mariendistel","für die Leber"]];
+  var teas=[["Hibiskus & Hagebutte","für Blutdruck und Herz"],["Grüner Tee & Ingwer","für Energie"],["Weißdorn","für das Herz"],["Brennnessel & Löwenzahn","für Kraft"],["Rooibos & Zimt","für Wärme"],["Lavendel & Kamille","für Schlaf"],["Artischocke & Mariendistel","für die Leber"]];
   var tea=teas[today.getDay()];
   var h=today.getHours();
   var tageszeit=h<11?'Morgen':h<17?'Mittag':'Abend';
