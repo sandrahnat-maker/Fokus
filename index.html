@@ -373,6 +373,77 @@ header{
 }
 .praxis-weiter:active{background:#8f1f38;box-shadow:0 1px 6px rgba(184,41,74,0.2);}
 
+/* ── STOISCHE TAGESABSICHT ── */
+.stoic-plan-wrap{
+  margin:.75rem 1rem 0;
+  background:var(--card);
+  border-radius:12px;
+  border:1px solid rgba(26,39,68,0.18);
+  box-shadow:0 2px 12px var(--shadow);
+  overflow:hidden;
+}
+.stoic-plan-wrap::before{
+  content:'';display:block;height:5px;
+  background:repeating-linear-gradient(
+    90deg,var(--navy) 0%,var(--navy) 25%,
+    var(--violet) 25%,var(--violet) 50%,
+    var(--gold) 50%,var(--gold) 75%,
+    var(--navy) 75%,var(--navy) 100%
+  );opacity:.5;
+}
+.stoic-plan-header{display:flex;align-items:center;gap:.45rem;padding:.75rem 1rem .3rem;}
+.stoic-plan-icon{font-size:1rem;opacity:.7;}
+.stoic-plan-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);font-weight:500;opacity:.8;}
+.stoic-plan-body{padding:.2rem 1rem .9rem;}
+.stoic-plan-sentence{font-family:"IM Fell English",serif;font-size:18px;font-style:italic;color:var(--muted);line-height:1.6;margin-bottom:.55rem;}
+.stoic-plan-sentence span{color:var(--text);font-style:normal;}
+.stoic-plan-input{
+  width:100%;border:none;border-bottom:1px solid rgba(26,39,68,0.2);
+  background:transparent;
+  font-family:"Playfair Display",serif;font-size:21px;font-style:italic;
+  color:var(--navy);padding:.25rem .1rem;outline:none;
+  transition:border-color .2s;
+}
+.stoic-plan-input:focus{border-color:var(--navy);}
+.stoic-plan-input::placeholder{color:rgba(26,39,68,0.3);font-style:italic;}
+.stoic-plan-sub{font-family:"IM Fell English",serif;font-size:16px;font-style:italic;color:var(--muted);margin-top:.65rem;line-height:1.55;opacity:.8;}
+
+/* ── STOISCHE REFLEXION ── */
+.stoic-reflex-wrap{
+  margin:.8rem 1rem 0;
+  background:var(--card);
+  border-radius:12px;
+  border:1px solid rgba(26,39,68,0.15);
+  box-shadow:0 2px 12px var(--shadow);
+  overflow:hidden;
+}
+.stoic-reflex-wrap::before{
+  content:'';display:block;height:5px;
+  background:repeating-linear-gradient(
+    90deg,var(--navy) 0%,var(--navy) 33%,
+    var(--gold) 33%,var(--gold) 66%,
+    var(--violet) 66%,var(--violet) 100%
+  );opacity:.45;
+}
+.stoic-reflex-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem .35rem;}
+.stoic-reflex-title{font-family:"Playfair Display",serif;font-size:21px;font-style:italic;color:var(--navy);}
+.stoic-reflex-badge{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);opacity:.5;background:rgba(26,39,68,0.07);border-radius:20px;padding:.12rem .55rem;font-family:"Raleway",sans-serif;}
+.stoic-reflex-body{padding:.1rem 1rem .85rem;}
+.stoic-reflex-q{font-family:"IM Fell English",serif;font-size:20px;font-style:italic;color:var(--navy);line-height:1.55;margin-bottom:.55rem;opacity:.85;}
+.stoic-reflex-q::before{content:'🏛 ';font-style:normal;opacity:.6;}
+.stoic-reflex-textarea{width:100%;border:1px solid rgba(26,39,68,0.15);border-radius:8px;padding:.6rem .85rem;font-family:"IM Fell English",serif;font-size:20px;color:var(--text);background:var(--bg);resize:none;min-height:90px;line-height:1.6;outline:none;}
+.stoic-reflex-textarea:focus{border-color:var(--navy);}
+.stoic-reflex-textarea::placeholder{color:var(--muted);font-style:italic;}
+.stoic-reflex-row{display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap;}
+.stoic-reflex-save{background:var(--navy);color:#fff;border:none;border-radius:20px;padding:.35rem 1rem;font-size:19px;font-family:"IM Fell English",serif;cursor:pointer;}
+.stoic-reflex-new{background:transparent;border:1px solid rgba(26,39,68,0.2);color:var(--muted);border-radius:20px;padding:.35rem .8rem;font-size:19px;font-family:"IM Fell English",serif;cursor:pointer;}
+.stoic-reflex-saved{font-size:15px;color:var(--sage);font-style:italic;margin-left:auto;font-family:"IM Fell English",serif;}
+.stoic-reflex-entries{margin-top:.9rem;border-top:1px dashed rgba(26,39,68,0.12);padding-top:.75rem;display:flex;flex-direction:column;gap:.5rem;}
+.stoic-entry-date{font-size:13px;color:var(--navy);letter-spacing:.08em;margin-bottom:.1rem;opacity:.6;}
+.stoic-entry-q{font-size:15px;color:var(--muted);margin-bottom:.06rem;font-family:"IM Fell English",serif;font-style:italic;}
+.stoic-entry-text{font-size:19px;font-style:italic;color:var(--text);line-height:1.6;font-family:"IM Fell English",serif;}
+.stoic-show-entries{background:transparent;border:none;color:var(--navy);font-family:"IM Fell English",serif;font-size:16px;font-style:italic;cursor:pointer;opacity:.6;padding:0;}
+
 /* ── LEBEN-TOAST ── */
 #leben-toast{position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);border-radius:20px;padding:.5rem 1.1rem;font-family:"IM Fell English",serif;font-size:17px;font-style:italic;color:#f8e8b8;box-shadow:0 4px 20px rgba(26,39,68,0.18);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap;z-index:500;}
 #leben-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
@@ -626,7 +697,41 @@ header{
   </div>
 </div>
 
-<!-- REFLEXION -->
+<!-- STOISCHE TAGESABSICHT -->
+<div class="stoic-plan-wrap" id="stoicPlanWrap">
+  <div class="stoic-plan-header">
+    <span class="stoic-plan-icon">🏛</span>
+    <span class="stoic-plan-label">Mein stoischer Tagesplan</span>
+  </div>
+  <div class="stoic-plan-body">
+    <div class="stoic-plan-sentence">
+      <span>Heute</span> werde ich
+      <input class="stoic-plan-input" id="stoicPlanInput" type="text" placeholder="… was ich heute tun will …" autocomplete="off" oninput="saveStoicPlan()" />
+    </div>
+    <div class="stoic-plan-sub" id="stoicPlanSub">— soweit nichts dazwischen kommt. Sollte es verhindert werden, tue ich das Nächstbeste.</div>
+  </div>
+</div>
+
+<!-- STOISCHE MORGEN-REFLEXION -->
+<div class="stoic-reflex-wrap" id="stoicMorgenReflex">
+  <div class="stoic-reflex-header">
+    <div class="stoic-reflex-title">✦ Stoische Morgenreflexion</div>
+    <span class="stoic-reflex-badge">Morgen</span>
+  </div>
+  <div class="stoic-reflex-body">
+    <div class="stoic-reflex-q" id="stoicMorgenQ"></div>
+    <textarea class="stoic-reflex-textarea" id="stoicMorgenText" placeholder="Schreib, was dir in den Sinn kommt …"></textarea>
+    <div class="stoic-reflex-row">
+      <button class="stoic-reflex-save" onclick="saveStoicMorgen()">Speichern</button>
+      <button class="stoic-reflex-new" onclick="nextStoicMorgenQ()">Andere Frage</button>
+      <span class="stoic-reflex-saved" id="stoicMorgenSaved" style="display:none">✓ gespeichert</span>
+      <button class="stoic-show-entries" onclick="toggleStoicMorgenEntries()">Einträge ›</button>
+    </div>
+    <div class="stoic-reflex-entries" id="stoicMorgenEntries" style="display:none"></div>
+  </div>
+</div>
+
+<!-- REFLEXION (allgemein) -->
 <div class="reflex-wrap">
   <div class="reflex-header">
     <div class="reflex-title">✦ Meine Gedanken</div>
@@ -641,6 +746,25 @@ header{
       <span class="reflex-saved" id="reflexSaved" style="display:none">✓ gespeichert</span>
     </div>
     <div class="reflex-entries" id="reflexEntries" style="display:none"></div>
+  </div>
+</div>
+
+<!-- STOISCHE ABEND-REFLEXION -->
+<div class="stoic-reflex-wrap" id="stoicAbendReflex">
+  <div class="stoic-reflex-header">
+    <div class="stoic-reflex-title">✦ Stoische Abendbilanz</div>
+    <span class="stoic-reflex-badge">Abend</span>
+  </div>
+  <div class="stoic-reflex-body">
+    <div class="stoic-reflex-q" id="stoicAbendQ"></div>
+    <textarea class="stoic-reflex-textarea" id="stoicAbendText" placeholder="Was nimmst du aus dem heutigen Tag mit …"></textarea>
+    <div class="stoic-reflex-row">
+      <button class="stoic-reflex-save" onclick="saveStoicAbend()">Speichern</button>
+      <button class="stoic-reflex-new" onclick="nextStoicAbendQ()">Andere Frage</button>
+      <span class="stoic-reflex-saved" id="stoicAbendSaved" style="display:none">✓ gespeichert</span>
+      <button class="stoic-show-entries" onclick="toggleStoicAbendEntries()">Einträge ›</button>
+    </div>
+    <div class="stoic-reflex-entries" id="stoicAbendEntries" style="display:none"></div>
   </div>
 </div>
 
@@ -1132,9 +1256,141 @@ function closeOverlay(){
   setTimeout(function(){el.style.display='none';},400);
 }
 
-showOverlay();
 
-// ── APPS pro Phase ──
+// ── STOISCHE TAGESABSICHT ──
+var stoicPlanKey='stoic_plan_'+today.toISOString().slice(0,10);
+function saveStoicPlan(){
+  var val=document.getElementById('stoicPlanInput').value;
+  try{localStorage.setItem(stoicPlanKey,val);}catch(e){}
+}
+function loadStoicPlan(){
+  var val='';try{val=localStorage.getItem(stoicPlanKey)||'';}catch(e){}
+  document.getElementById('stoicPlanInput').value=val;
+}
+loadStoicPlan();
+
+// ── STOISCHE MORGEN-FRAGEN ──
+var STOIC_MORGEN=[
+  'Was ist heute wirklich in meiner Macht?',
+  'Welche Haltung möchte ich heute kultivieren?',
+  'Was könnte mich heute aus der Ruhe bringen — und wie kann ich vorbereitet sein?',
+  'Welchem Menschen werde ich heute begegnen? Was wünsche ich ihnen?',
+  'Was würde eine weise Frau heute als Erstes tun?',
+  'Wofür bin ich dankbar — bevor der Tag beginnt?',
+  'Was ist das Eine, das heute wirklich zählt?',
+  'Wie will ich mich heute fühlen — und welche Handlung bringt mich dorthin?',
+  'Was kann ich loslassen, das mir gestern schwer fiel?',
+  'Welche meiner Tugenden brauche ich heute am meisten?',
+  'Marcus Aurelius schrieb: "Der Hinderung des Handelns liegt kein Hindernis im Weg." — Was bedeutet das für meinen heutigen Tag?',
+  'Was tue ich heute zum Wohle anderer — ohne Erwartung?',
+];
+
+// ── STOISCHE ABEND-FRAGEN ──
+var STOIC_ABEND=[
+  'Wo habe ich heute meine Werte gelebt?',
+  'Was hätte ich besser machen können — ohne mich zu verurteilen?',
+  'Was war heute in meiner Macht, und habe ich es genutzt?',
+  'Welchen Moment des Tages möchte ich bewusst festhalten?',
+  'Was hat mir heute Kraft gegeben? Was hat mich geschwächt?',
+  'Habe ich heute jemandem Gutes getan — auch kleines?',
+  'Was habe ich heute gelernt — über die Welt, über mich?',
+  'Gab es einen Moment, in dem ich meine Reaktion wählen konnte? Wie habe ich gewählt?',
+  'Was war mein "Nächstbestes" heute — wo ich umdisponieren musste?',
+  'Habe ich heute die Unterscheidung gehalten: was liegt an mir, was nicht?',
+  'Was verdient morgen meine Aufmerksamkeit — ruhig und klar?',
+  'Epiktet: "Es macht uns nicht Dinge unruhig, sondern unsere Meinungen darüber." — Was bedeutet das für heute?',
+];
+
+var stoicMorgenIdx=Math.floor(Math.random()*STOIC_MORGEN.length);
+var stoicAbendIdx=Math.floor(Math.random()*STOIC_ABEND.length);
+
+function initStoicReflex(){
+  document.getElementById('stoicMorgenQ').textContent=STOIC_MORGEN[stoicMorgenIdx];
+  document.getElementById('stoicAbendQ').textContent=STOIC_ABEND[stoicAbendIdx];
+}
+function nextStoicMorgenQ(){
+  stoicMorgenIdx=(stoicMorgenIdx+1)%STOIC_MORGEN.length;
+  document.getElementById('stoicMorgenQ').textContent=STOIC_MORGEN[stoicMorgenIdx];
+}
+function nextStoicAbendQ(){
+  stoicAbendIdx=(stoicAbendIdx+1)%STOIC_ABEND.length;
+  document.getElementById('stoicAbendQ').textContent=STOIC_ABEND[stoicAbendIdx];
+}
+
+function loadStoicData(key){try{return JSON.parse(localStorage.getItem(key)||'[]');}catch(e){return[];}}
+function saveStoicData(key,d){try{localStorage.setItem(key,JSON.stringify(d));}catch(e){}}
+
+function saveStoicMorgen(){
+  var text=document.getElementById('stoicMorgenText').value.trim();
+  if(!text)return;
+  var entries=loadStoicData('stoic_morgen_v1');
+  var now=new Date();
+  entries.unshift({text:text,q:STOIC_MORGEN[stoicMorgenIdx],date:now.getDate()+'.'+(now.getMonth()+1)+'.'+now.getFullYear(),time:String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')});
+  if(entries.length>60)entries=entries.slice(0,60);
+  saveStoicData('stoic_morgen_v1',entries);
+  document.getElementById('stoicMorgenText').value='';
+  var s=document.getElementById('stoicMorgenSaved');s.style.display='inline';setTimeout(function(){s.style.display='none';},2000);
+  nextStoicMorgenQ();
+  renderStoicMorgenEntries();
+}
+
+function saveStoicAbend(){
+  var text=document.getElementById('stoicAbendText').value.trim();
+  if(!text)return;
+  var entries=loadStoicData('stoic_abend_v1');
+  var now=new Date();
+  entries.unshift({text:text,q:STOIC_ABEND[stoicAbendIdx],date:now.getDate()+'.'+(now.getMonth()+1)+'.'+now.getFullYear(),time:String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')});
+  if(entries.length>60)entries=entries.slice(0,60);
+  saveStoicData('stoic_abend_v1',entries);
+  document.getElementById('stoicAbendText').value='';
+  var s=document.getElementById('stoicAbendSaved');s.style.display='inline';setTimeout(function(){s.style.display='none';},2000);
+  nextStoicAbendQ();
+  renderStoicAbendEntries();
+}
+
+function toggleStoicMorgenEntries(){
+  var el=document.getElementById('stoicMorgenEntries');
+  if(el.style.display==='none'){renderStoicMorgenEntries();el.style.display='flex';}
+  else{el.style.display='none';}
+}
+function toggleStoicAbendEntries(){
+  var el=document.getElementById('stoicAbendEntries');
+  if(el.style.display==='none'){renderStoicAbendEntries();el.style.display='flex';}
+  else{el.style.display='none';}
+}
+
+function renderStoicMorgenEntries(){
+  var entries=loadStoicData('stoic_morgen_v1');
+  var el=document.getElementById('stoicMorgenEntries');
+  if(!entries.length){el.innerHTML='<div style="font-size:19px;color:var(--muted);font-style:italic;">Noch keine Einträge.</div>';return;}
+  el.innerHTML=entries.slice(0,10).map(function(e){
+    return'<div><div class="stoic-entry-date">'+e.date+' · '+e.time+'</div><div class="stoic-entry-q">'+e.q+'</div><div class="stoic-entry-text">'+e.text+'</div></div>';
+  }).join('<hr style="border:none;border-top:1px solid rgba(26,39,68,0.1);margin:.3rem 0;">');
+}
+function renderStoicAbendEntries(){
+  var entries=loadStoicData('stoic_abend_v1');
+  var el=document.getElementById('stoicAbendEntries');
+  if(!entries.length){el.innerHTML='<div style="font-size:19px;color:var(--muted);font-style:italic;">Noch keine Einträge.</div>';return;}
+  el.innerHTML=entries.slice(0,10).map(function(e){
+    return'<div><div class="stoic-entry-date">'+e.date+' · '+e.time+'</div><div class="stoic-entry-q">'+e.q+'</div><div class="stoic-entry-text">'+e.text+'</div></div>';
+  }).join('<hr style="border:none;border-top:1px solid rgba(26,39,68,0.1);margin:.3rem 0;">');
+}
+
+initStoicReflex();
+
+// ── STOISCHE ELEMENTE SICHTBARKEIT nach Tageszeit ──
+// Morgenreflexion: immer sichtbar; Abendbilanz: ab 16:30
+(function(){
+  var h=today.getHours(),m=today.getMinutes();
+  var isAbend=(h>16)||(h===16&&m>=30);
+  // Abendbilanz nur ab 16:30 hervorheben (immer sichtbar, aber badge ändert sich)
+  if(!isAbend){
+    var badge=document.querySelector('#stoicAbendReflex .stoic-reflex-badge');
+    if(badge){badge.style.opacity='.35';}
+  }
+})();
+
+
 var ALL_APPS=[
   // Morgen
   {icon:'🌅',text:'Morgenroutine',sub:'Sanft in den Tag',href:'morgenroutine.html',phasen:['morgen']},
