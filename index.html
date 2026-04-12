@@ -449,6 +449,35 @@ header{
 #leben-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
 .phase-card.glow{animation:cardGlow 1.2s ease;}
+
+/* ── STIMMUNGS-CHECK OVERLAY ── */
+#stimmung-overlay{position:fixed;inset:0;background:rgba(26,39,68,0.72);z-index:2000;display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:overlayIn .35s ease;}
+#stimmung-overlay.hidden{display:none;}
+.stimmung-card{background:var(--bg);border-radius:18px;padding:2rem 1.5rem 1.5rem;max-width:340px;width:100%;box-shadow:0 8px 40px rgba(26,39,68,0.22);text-align:center;}
+.stimmung-title{font-family:"Playfair Display",serif;font-size:22px;font-style:italic;color:var(--crimson);margin-bottom:.3rem;}
+.stimmung-sub{font-family:"IM Fell English",serif;font-size:17px;font-style:italic;color:var(--muted);margin-bottom:1.4rem;line-height:1.5;}
+.stimmung-btns{display:flex;gap:.8rem;justify-content:center;margin-bottom:1rem;}
+.stimmung-btn{flex:1;padding:.7rem .5rem;border:2px solid var(--border);border-radius:14px;background:transparent;font-family:"IM Fell English",serif;font-size:18px;cursor:pointer;transition:all .2s;color:var(--text);}
+.stimmung-btn:active{transform:scale(.97);}
+.stimmung-btn.struktur{border-color:var(--navy);}
+.stimmung-btn.struktur:hover,.stimmung-btn.struktur.sel{background:var(--navy);color:#fff;}
+.stimmung-btn.fluss{border-color:var(--violet);}
+.stimmung-btn.fluss:hover,.stimmung-btn.fluss.sel{background:var(--violet);color:#fff;}
+.stimmung-weiter{width:100%;background:var(--crimson);color:#fff;border:none;border-radius:20px;padding:.55rem 1.2rem;font-family:"IM Fell English",serif;font-size:19px;font-style:italic;cursor:pointer;margin-top:.3rem;}
+
+/* ── WILDER SLOT TASK ── */
+.task-item.wild-slot{border-color:rgba(106,63,122,0.3);background:rgba(106,63,122,0.04);}
+.task-item.wild-slot .task-name{color:var(--violet);}
+.task-item.wild-slot .task-cat{color:var(--violet);opacity:.6;}
+.wild-slot-inner{font-family:"IM Fell English",serif;font-size:16px;font-style:italic;color:var(--violet);opacity:.7;margin-top:.25rem;}
+
+/* ── OFFENE BLÖCKE BADGE ── */
+.task-item.offen{border-left:3px solid rgba(94,138,90,0.5);}
+.task-item.offen .task-cat::after{content:' ✦';opacity:.5;}
+
+/* ── OPTIONALE TASKS (Fluss-Modus) ── */
+.task-item.optional{opacity:.45;}
+.task-item.optional .task-name::after{content:' · optional';font-size:12px;font-style:italic;color:var(--violet);opacity:.8;}
 </style>
 </head>
 <body>
@@ -495,6 +524,23 @@ header{
 
 <!-- LEBEN TOAST -->
 <div id="leben-toast"></div>
+
+<!-- STIMMUNGS-CHECK OVERLAY -->
+<div id="stimmung-overlay" class="hidden">
+  <div class="stimmung-card">
+    <div class="stimmung-title">Wie bin ich heute?</div>
+    <div class="stimmung-sub">Gib deinem Tag eine Richtung —<br>nicht als Regel, sondern als Einladung.</div>
+    <div class="stimmung-btns">
+      <button class="stimmung-btn struktur" id="btn-struktur" onclick="waehleStimmung('struktur')">
+        🗂️<br><span style="font-size:14px;">Struktur</span>
+      </button>
+      <button class="stimmung-btn fluss" id="btn-fluss" onclick="waehleStimmung('fluss')">
+        🌊<br><span style="font-size:14px;">Fluss</span>
+      </button>
+    </div>
+    <button class="stimmung-weiter" onclick="schliesseStimmung()">weiter →</button>
+  </div>
+</div>
 
 <!-- WIMPELKETTE oben -->
 <div class="wimpelkette" aria-hidden="true">
@@ -582,6 +628,11 @@ header{
   </div>
   <div style="font-family:'Playfair Display',serif;font-size:26px;font-style:italic;font-weight:700;color:var(--crimson);line-height:1.45;" id="headerMotto">Ich will heute so leben, wie ich mein ganzes Leben leben will.</div>
   <div style="font-family:'IM Fell English',serif;font-size:15px;font-style:italic;color:var(--muted);margin-top:.45rem;line-height:1.5;">Dieses Leben wähle ich — in fröhlicher Gelassenheit.</div>
+  <div style="display:flex;gap:.6rem;margin-top:.6rem;justify-content:center;" aria-label="Meine Werte">
+    <span style="font-family:'Playfair Display',serif;font-size:13px;letter-spacing:.12em;color:var(--crimson);opacity:.7;background:rgba(184,41,74,0.07);border-radius:20px;padding:.18rem .7rem;">🤍 Liebe</span>
+    <span style="font-family:'Playfair Display',serif;font-size:13px;letter-spacing:.12em;color:var(--violet);opacity:.7;background:rgba(106,63,122,0.07);border-radius:20px;padding:.18rem .7rem;">✨ Phantasie</span>
+    <span style="font-family:'Playfair Display',serif;font-size:13px;letter-spacing:.12em;color:var(--sage);opacity:.7;background:rgba(94,138,90,0.07);border-radius:20px;padding:.18rem .7rem;">🌿 Lebendigkeit</span>
+  </div>
 </header>
 
 <!-- INTENTION -->
@@ -856,7 +907,7 @@ var PHASES={
       {name:"Sport",note:"Spüre ganz bewusst deinen Körper.",cat:"sport",links:[{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Koerpergewicht_Training_Audio.html",label:"Kraft"},{href:"Balanceboard_Training_Audio.html",label:"Balance"},{href:"Sonntags_Yoga_Audio.html",label:"Yoga"},{href:"Dehnplan.html",label:"Dehnen"},{href:"Kalkschulter.html",label:"Schulter"},{href:"Beckenboden.html",label:"Beckenboden"}]},
       {name:"Wohnung & Zuhause",note:"Gestalte dein Zuhause für dich!",cat:"zuhause",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Pflanzen_Galerie.html",label:"Pflanzen"},{href:"Haushaltsplan.html",label:"Haushalt"},{href:"Naturkosmetik_Tagesplan.html",label:"Naturkosmetik"},{href:"Futter_Bestellplaner.html",label:"Futter"}]},
       {name:"Duschen & Körperpflege",note:"Ein Dankeschön an meinen Körper. 🌸",cat:"pflege",links:[{href:"Duschen.html",label:"Duschen"},{href:"Koerperpflege_Tagesplan.html",label:"Körperpflege"},{href:"Haarpflege.html",label:"Haarpflege"},{href:"Nagelpflege.html",label:"Nagelpflege"}]},
-      {name:"Kreativzeit",note:"jetzt gehört die Welt dir allein",cat:"seele"},
+      {name:"Kreativzeit",note:"jetzt gehört die Welt dir allein",cat:"seele",offen:true},
     ]
   },
   abend:{
@@ -940,11 +991,14 @@ function showPhase(p){
       });
       linksHtml+='</div>';
     }
-    html+='<div class="task-item'+(done?' done':'')+'" onclick="toggleTask(\''+p+'\','+i+')">'
+    var extraClass=t.wild?' wild-slot':t.offen?' offen':t.optional?' optional':'';
+    var wildExtra=t.wild?'<div class="wild-slot-inner">Was auch immer sich zeigt — es darf sein.</div>':'';
+    html+='<div class="task-item'+(done?' done':'')+extraClass+'" onclick="toggleTask(\''+p+'\','+i+')">'
       +'<div class="task-check"></div>'
       +'<div style="flex:1;min-width:0;">'
       +'<div class="task-name">'+t.name+'</div>'
       +'<div class="task-note">'+t.note+'</div>'
+      +wildExtra
       +linksHtml
       +'</div>'
       +'<div class="task-cat">'+t.cat+'</div>'
@@ -1194,6 +1248,25 @@ var PRAXIS=[
   {tradition:'Stoizismus',deko:'🔥',
    text:'Der Wille ist der Weg.',
    uebung:'Marc Aurel: Der Hinderung des Handelns liegt kein Hindernis im Weg. Was auch immer heute nicht klappt — deine Haltung dazu bleibt dir. Das ist keine kleine Sache. Das ist alles.'},
+  // ── Loslassen ──
+  {tradition:'Loslassen',deko:'🍂',loslassen:true,
+   text:'Was darf heute unfertig bleiben?',
+   uebung:'Nenne eine Sache, die du loslässt. Nicht für immer — nur für heute. Streich sie gedanklich durch. Der Rest darf warten.'},
+  {tradition:'Loslassen',deko:'🫧',loslassen:true,
+   text:'Strukturen tragen — aber Freiheit nährt.',
+   uebung:'Was wäre heute, wenn du eine Aufgabe einfach nicht erledigst? Nicht vergisst — bewusst lässt. Wie fühlt sich das an?'},
+  {tradition:'Loslassen',deko:'🌬️',loslassen:true,
+   text:'Genug ist genug. Auch heute.',
+   uebung:'Setz dir ein Ende: Wann ist heute genug getan? Einen Zeitpunkt wählen — und dann: Stift weg, Laptop zu, Mensch sein.'},
+  {tradition:'Loslassen',deko:'🌿',loslassen:true,
+   text:'Ordnung ist ein Mittel — nicht das Ziel.',
+   uebung:'Heute: Eine halbe Stunde ohne Plan. Kein To-Do, keine Struktur. Was kommt von allein? Lass es kommen — ohne es zu bewerten.'},
+  {tradition:'Loslassen',deko:'🎈',loslassen:true,
+   text:'Spielen ist keine Belohnung. Es ist Nahrung.',
+   uebung:'Was hättest du als Kind einfach so gemacht — ohne Grund? Zeichnen, singen, herumliegen, tanzen? Gönn dir heute fünf Minuten davon.'},
+  {tradition:'Loslassen',deko:'🕊️',loslassen:true,
+   text:'Du musst diesen Tag nicht meistern. Du darfst ihn bewohnen.',
+   uebung:'Was wäre, wenn heute "gut genug" wirklich gut genug wäre? Einen Atemzug lang glauben, dass es so ist.'},
 ];
 
 // Täglicher Index: wechselt jeden Tag, aber bleibt den ganzen Tag gleich
@@ -1473,6 +1546,77 @@ var _origShowPhase=showPhase;
 showPhase=function(p){
   _origShowPhase(p);
   renderApps(p);
+};
+
+// ── STIMMUNGS-CHECK ──
+var tagesStimmung=null;
+var stimmungKey='stimmung_'+today.toISOString().slice(0,10);
+
+function zeigeStimmungsCheck(){
+  // Nur einmal pro Tag, nach dem Praxis-Overlay
+  var gespeichert=null;
+  try{gespeichert=localStorage.getItem(stimmungKey);}catch(e){}
+  if(gespeichert){
+    tagesStimmung=gespeichert;
+    wendeStimmungAn(gespeichert);
+    return;
+  }
+  document.getElementById('stimmung-overlay').classList.remove('hidden');
+}
+
+function waehleStimmung(s){
+  tagesStimmung=s;
+  document.getElementById('btn-struktur').classList.toggle('sel',s==='struktur');
+  document.getElementById('btn-fluss').classList.toggle('sel',s==='fluss');
+}
+
+function schliesseStimmung(){
+  if(!tagesStimmung) tagesStimmung='struktur'; // Fallback
+  try{localStorage.setItem(stimmungKey,tagesStimmung);}catch(e){}
+  document.getElementById('stimmung-overlay').classList.add('hidden');
+  wendeStimmungAn(tagesStimmung);
+}
+
+function wendeStimmungAn(s){
+  if(s==='fluss'){
+    // Nachmittag-Mood anpassen
+    if(PHASES.nachmittag){
+      PHASES.nachmittag.mood='Der Nachmittag gehört dem Fluss. Kein Müssen — nur Sein. Was kommt, darf kommen.';
+    }
+    // Sport und Wohnung als optional markieren
+    PHASES.nachmittag.tasks.forEach(function(t){
+      if(t.cat==='sport'||t.cat==='zuhause') t.optional=true;
+    });
+    // Loslassen-Weisheit bevorzugen
+    var loslassenIdx=PRAXIS.reduce(function(found,p,i){
+      return p.loslassen?(found.concat([i])):found;
+    },[]);
+    if(loslassenIdx.length){
+      var pick=loslassenIdx[Math.floor(Math.random()*loslassenIdx.length)];
+      window._flussWeisheitIdx=pick;
+    }
+  }
+}
+
+// ── STIMMUNG in showOverlay einbauen ──
+var _origShowOverlay=showOverlay;
+showOverlay=function(){
+  _origShowOverlay.apply(this,arguments);
+  // Wenn Fluss-Modus aktiv: Loslassen-Weisheit zeigen
+  if(window._flussWeisheitIdx!==undefined){
+    var p=PRAXIS[window._flussWeisheitIdx];
+    document.getElementById('praxis-tradition').textContent=p.tradition;
+    document.getElementById('praxis-deko').textContent=p.deko;
+    document.getElementById('praxis-text').textContent=p.text;
+    document.getElementById('praxis-uebung').textContent=p.uebung;
+  }
+};
+
+// Stimmungs-Check nach Overlay-Schließen triggern
+var _origCloseOverlay=closeOverlay;
+closeOverlay=function(){
+  _origCloseOverlay.apply(this,arguments);
+  setTimeout(zeigeStimmungsCheck,420);
 };
 
 // ── INIT ──
