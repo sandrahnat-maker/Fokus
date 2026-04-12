@@ -35,6 +35,14 @@ main{max-width:860px;margin:0 auto;padding:1.2rem}
 .task-label.done-text{text-decoration:line-through;color:#8a7a60}
 footer{text-align:center;font-size:.7rem;color:#a09070;letter-spacing:.05em;padding:1.2rem;margin-top:.5rem}
 .all-done-banner{display:none;background:#faf3e8;color:#c8943a;text-align:center;padding:.6rem;font-size:.82rem;letter-spacing:.1em;border-top:2px solid #c8943a}
+.reflexion{padding:.8rem 1.2rem 1rem;border-top:1px solid #f0ebe0;background:#faf7f2}
+.reflexion-title{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:#c8943a;margin-bottom:.6rem}
+.reflexion-prompts{display:flex;flex-direction:column;gap:.5rem}
+.prompt-row{display:flex;flex-direction:column;gap:.2rem}
+.prompt-label{font-size:.75rem;color:#6b5a3e;font-style:italic}
+.prompt-input{font-family:'Cormorant Garamond',serif;font-size:.88rem;color:#2e2010;background:#fffdf8;border:1px solid #ddd5c5;border-radius:3px;padding:.4rem .6rem;resize:none;width:100%;line-height:1.4;min-height:2.4rem}
+.prompt-input:focus{outline:none;border-color:#c8943a;background:#fff}
+.reflexion-saved{font-size:.68rem;color:#c8943a;letter-spacing:.08em;text-align:right;margin-top:.3rem;opacity:0;transition:opacity .4s}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 </head>
@@ -141,6 +149,45 @@ function saveData(){
   try { localStorage.setItem(storageKey(), json); } catch(e){}
 }
 
+var reflexionen = {};
+function reflexionKey(){ return 'vhs_reflexion_v1'; }
+
+function loadReflexionen(){
+  try {
+    var raw = localStorage.getItem(reflexionKey());
+    if(raw) reflexionen = JSON.parse(raw);
+  } catch(e){}
+}
+
+function saveReflexion(courseId, field, value){
+  if(!reflexionen[courseId]) reflexionen[courseId] = {};
+  reflexionen[courseId][field] = value;
+  try { localStorage.setItem(reflexionKey(), JSON.stringify(reflexionen)); } catch(e){}
+  var ind = document.getElementById('saved-'+courseId);
+  if(ind){ ind.style.opacity='1'; setTimeout(function(){ ind.style.opacity='0'; }, 1400); }
+}
+
+function renderReflexion(courseId){
+  var r = reflexionen[courseId] || {};
+  var prompts = [
+    {field:'gut',   label:'Was hat heute gut funktioniert?'},
+    {field:'nicht', label:'Was hat nicht funktioniert?'},
+    {field:'warum', label:'Warum vermutlich?'}
+  ];
+  var rows = prompts.map(function(p){
+    var val = (r[p.field]||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return '<div class="prompt-row">' +
+      '<div class="prompt-label">'+p.label+'</div>' +
+      '<textarea class="prompt-input" rows="2" data-course="'+courseId+'" data-field="'+p.field+'">'+val+'</textarea>' +
+    '</div>';
+  }).join('');
+  return '<div class="reflexion">' +
+    '<div class="reflexion-title">✦ Reflexion</div>' +
+    '<div class="reflexion-prompts">'+rows+'</div>' +
+    '<div class="reflexion-saved" id="saved-'+courseId+'">gespeichert ✓</div>' +
+  '</div>';
+}
+
 function setDay(day){
   activeDay = day;
   var days = ['mo','di','mi','do'];
@@ -213,7 +260,8 @@ function render(){
         '</div>' +
       '</div>' +
       '<div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%;background:'+course.accent+'"></div></div>' +
-      '<ul class="task-list" id="tasks-'+course.id+'"></ul>';
+      '<ul class="task-list" id="tasks-'+course.id+'"></ul>' +
+      renderReflexion(course.id);
 
     container.appendChild(card);
 
@@ -231,6 +279,13 @@ function render(){
       li.addEventListener('click', function(){ toggle(course.id, task.id); });
       taskList.appendChild(li);
     });
+
+    // Wire up reflexion textareas
+    card.querySelectorAll('.prompt-input').forEach(function(ta){
+      ta.addEventListener('input', function(){
+        saveReflexion(ta.dataset.course, ta.dataset.field, ta.value);
+      });
+    });
   });
 
   // Banner
@@ -239,6 +294,7 @@ function render(){
 }
 
 loadData();
+loadReflexionen();
 render();
 </script>
 </body>
