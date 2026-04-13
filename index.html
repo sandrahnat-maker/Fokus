@@ -627,8 +627,6 @@ header{
     </div>
   </div>
   <div style="font-family:'Playfair Display',serif;font-size:26px;font-style:italic;font-weight:700;color:var(--crimson);line-height:1.45;" id="headerMotto">Ich will heute so leben, wie ich mein ganzes Leben leben will.</div>
-  <div style="font-family:'IM Fell English',serif;font-size:15px;font-style:italic;color:var(--muted);margin-top:.45rem;line-height:1.5;">Dieses Leben wähle ich — in fröhlicher Gelassenheit.</div>
-  <div style="font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:var(--crimson);margin-top:.5rem;line-height:1.6;opacity:.85;">In meiner Phantasie tanzend die ganze Welt umarmen. Das bin ich.</div>
 </header>
 
 <!-- INTENTION -->
@@ -1099,6 +1097,17 @@ Schreib einen einzigen poetischen Satz als Tages-Intention — wie ein Atemzug, 
     el.className='intention-text';
   }catch(e){
     var fallbacks=[
+      // Persönliche Sätze
+      'In meiner Phantasie tanzend die ganze Welt umarmen. Das bin ich.',
+      'Dieses Leben wähle ich — in fröhlicher Gelassenheit.',
+      'Heute darf alles leicht sein.',
+      'Was kommt, darf kommen. Was geht, darf gehen.',
+      'Ich bin nicht meine Gedanken — ich beobachte sie.',
+      'Dieser Moment ist vollständig.',
+      'Das Hindernis ist der Weg.',
+      'Ich brauche wenig — und habe viel.',
+      'Alles verändert sich. Auch das.',
+      // Bestehende Fallbacks
       'Alles fließt — auch dieser Tag.',
       'Der Morgen kennt kein Gestern.',
       'Heute gehört dir — ganz.',
