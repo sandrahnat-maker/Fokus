@@ -478,6 +478,69 @@ header{
 /* ── OPTIONALE TASKS (Fluss-Modus) ── */
 .task-item.optional{opacity:.45;}
 .task-item.optional .task-name::after{content:' · optional';font-size:12px;font-style:italic;color:var(--violet);opacity:.8;}
+
+/* ══ 3-EBENEN-BLOCK ══ */
+.drei-wrap{margin:.8rem 1rem 0;}
+.drei-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;}
+.drei-title{font-family:"Playfair Display",serif;font-size:1rem;font-style:italic;color:var(--text);}
+.drei-toggle{font-size:13px;font-family:"IM Fell English",serif;font-style:italic;color:var(--muted);background:none;border:none;cursor:pointer;opacity:.7;}
+.drei-toggle:active{opacity:1;}
+
+.ebene-block{
+  background:var(--card);border-radius:12px;border:1px solid var(--border);
+  box-shadow:0 3px 16px var(--shadow);margin-bottom:.5rem;overflow:hidden;
+}
+.ebene-stripe{height:4px;}
+.ebene-stripe.fix{background:repeating-linear-gradient(90deg,var(--crimson) 0%,var(--crimson) 33%,var(--gold) 33%,var(--gold) 66%,var(--navy) 66%,var(--navy) 100%);opacity:.55;}
+.ebene-stripe.heute{background:repeating-linear-gradient(90deg,var(--navy) 0%,var(--navy) 50%,var(--violet) 50%,var(--violet) 100%);opacity:.5;}
+.ebene-stripe.einladung{background:repeating-linear-gradient(90deg,var(--sage) 0%,var(--sage) 50%,rgba(94,138,90,0.4) 50%,rgba(94,138,90,0.4) 100%);opacity:.45;}
+
+.ebene-head{display:flex;align-items:center;gap:.45rem;padding:.65rem .95rem .3rem;}
+.ebene-icon{font-size:.95rem;opacity:.8;}
+.ebene-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;flex:1;}
+.ebene-label.fix{color:var(--crimson);}
+.ebene-label.heute{color:var(--navy);}
+.ebene-label.einladung{color:var(--sage);}
+.ebene-sub{font-family:"IM Fell English",serif;font-size:.8rem;font-style:italic;color:var(--muted);}
+.ebene-count{font-size:11px;color:var(--muted);font-family:"Raleway",sans-serif;opacity:.6;}
+
+.drei-task{
+  display:flex;align-items:flex-start;gap:.55rem;
+  padding:.42rem .95rem;border-bottom:1px solid rgba(184,41,74,0.07);
+  cursor:pointer;transition:opacity .2s;
+}
+.drei-task:last-child{border-bottom:none;}
+.drei-task.done{opacity:.28;}
+.drei-task.done .drei-task-name{text-decoration:line-through;text-decoration-color:rgba(184,41,74,0.3);}
+.drei-check{width:15px;height:15px;border-radius:50%;border:1px solid rgba(184,41,74,0.3);flex-shrink:0;margin-top:3px;display:flex;align-items:center;justify-content:center;font-size:8px;color:transparent;transition:all .25s;}
+.drei-task.done .drei-check{background:var(--sage-l);border-color:var(--sage);color:var(--sage);}
+.drei-task.done .drei-check::after{content:'✦';}
+.drei-task-name{font-size:.88rem;color:var(--text);line-height:1.35;}
+.drei-task-note{font-size:.75rem;font-style:italic;color:var(--muted);font-family:"IM Fell English",serif;margin-top:1px;}
+.drei-task-cat{font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-left:auto;flex-shrink:0;padding-top:3px;opacity:.35;color:var(--crimson);}
+.drei-link{display:inline-block;margin-top:.25rem;font-size:.75rem;font-style:italic;color:var(--crimson);text-decoration:none;background:var(--crimson-l);border:1px solid rgba(184,41,74,0.2);border-radius:20px;padding:.06rem .5rem;font-family:"IM Fell English",serif;}
+.drei-link:active{background:rgba(184,41,74,0.2);}
+
+/* Heute-gewählt: editierbar */
+.heute-slot{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.42rem .95rem;border-bottom:1px solid rgba(184,41,74,0.07);
+}
+.heute-slot:last-child{border-bottom:none;}
+.heute-slot-dot{width:6px;height:6px;border-radius:50%;background:var(--navy);opacity:.4;flex-shrink:0;}
+.heute-slot-text{font-family:"IM Fell English",serif;font-size:.85rem;font-style:italic;color:var(--navy);flex:1;opacity:.8;}
+.heute-slot-check{font-size:12px;cursor:pointer;color:var(--muted);opacity:.5;padding:.2rem .3rem;}
+.heute-slot-check:active{opacity:1;}
+.heute-slot.done .heute-slot-text{text-decoration:line-through;opacity:.4;}
+.heute-slot.done .heute-slot-dot{background:var(--sage);}
+
+.drei-einladung-note{
+  padding:.35rem .95rem .65rem;
+  font-family:"IM Fell English",serif;font-size:.8rem;font-style:italic;
+  color:var(--muted);line-height:1.5;
+  border-top:1px dashed rgba(184,41,74,0.1);
+}
+
 </style>
 </head>
 <body>
@@ -638,6 +701,48 @@ header{
   <div class="intention-text loading" id="intentionText">Einen Moment …</div>
   <div class="intention-refresh">
     <button class="refresh-btn" onclick="loadIntention(true)">↺ neuer Impuls</button>
+  </div>
+</div>
+
+
+<!-- 3-EBENEN-TAGESSTRUKTUR -->
+<div class="drei-wrap" id="dreiWrap">
+  <div class="drei-header">
+    <div class="drei-title">✦ Mein heutiger Rahmen</div>
+    <button class="drei-toggle" onclick="toggleDreiBlock()">minimieren ↑</button>
+  </div>
+
+  <!-- EBENE 1: FIX -->
+  <div class="ebene-block">
+    <div class="ebene-stripe fix"></div>
+    <div class="ebene-head">
+      <span class="ebene-icon">🌿</span>
+      <span class="ebene-label fix">Täglich fix</span>
+      <span class="ebene-count" id="fixCount"></span>
+    </div>
+    <div id="fixTasks"></div>
+  </div>
+
+  <!-- EBENE 2: HEUTE GEWÄHLT -->
+  <div class="ebene-block">
+    <div class="ebene-stripe heute"></div>
+    <div class="ebene-head">
+      <span class="ebene-icon">🎯</span>
+      <span class="ebene-label heute">Heute gewählt</span>
+      <span class="ebene-sub" id="heuteTagSub"></span>
+    </div>
+    <div id="heuteTasks"></div>
+  </div>
+
+  <!-- EBENE 3: EINLADUNG -->
+  <div class="ebene-block">
+    <div class="ebene-stripe einladung"></div>
+    <div class="ebene-head">
+      <span class="ebene-icon">🌸</span>
+      <span class="ebene-label einladung">Wenn Energie & Zeit</span>
+    </div>
+    <div id="einladungTasks"></div>
+    <div class="drei-einladung-note">Kein Müssen. Nur eine offene Tür — du entscheidest, ob du eintrittst.</div>
   </div>
 </div>
 
@@ -1002,6 +1107,9 @@ function showPhase(p){
   document.getElementById('phaseContent').innerHTML=html;
 }
 
+// Re-render drei block when phase changes (sync checkmarks)
+var _dreiOrigShowPhase = showPhase;
+
 function scrollToNotizen(e){
   e.preventDefault();e.stopPropagation();
   var el=document.getElementById('notizText');
@@ -1015,6 +1123,7 @@ function toggleTask(p,i){
   if(taskState[key]) showLebenMoment();
   showPhase(p);
   updateWaveDoneBadges();
+  if(typeof renderDrei === 'function') renderDrei();
 }
 
 // ── LEBEN-MOMENT beim Abhaken ──
@@ -1496,7 +1605,6 @@ var ALL_APPS=[
   {icon:'☀️',text:'Aufwärmen',sub:'Sonnengruß mit Mady Morrison',href:'Aufwaermen.html',phasen:['nachmittag']},
   {icon:'💪',text:'Körpergewicht Training',sub:'Audio-geführt',href:'Koerpergewicht_Training_Audio.html',phasen:['nachmittag']},
   {icon:'🏄',text:'Balance Board Training',sub:'Audio-geführt',href:'Balanceboard_Training_Audio.html',phasen:['nachmittag']},
-  {icon:'🎯',text:'Taillen-Training',sub:'Mo & Do — Core, Rotation, Kraft',href:'Taillen_Training.html',phasen:['nachmittag'],tage:[1,4]},
   {icon:'🧘',text:'Sonntags-Yoga',sub:'Audio-geführt',href:'Sonntags_Yoga_Audio.html',phasen:['nachmittag']},
   {icon:'🤸',text:'Dehnplan',sub:'Persönlicher Dehnplan',href:'Dehnplan.html',phasen:['nachmittag']},
   {icon:'💪',text:'Kalkschulter Training',sub:'Sanfte Schulterübungen',href:'Kalkschulter.html',phasen:['nachmittag']},
@@ -1529,12 +1637,7 @@ function renderApps(phase){
   var label=document.getElementById('apps-label');
   if(!list)return;
 
-  var viewDay=getViewDate().getDay();
-  var phaseApps=ALL_APPS.filter(function(a){
-    if(a.phasen.indexOf(phase)<0) return false;
-    if(a.tage&&a.tage.indexOf(viewDay)<0) return false;
-    return true;
-  });
+  var phaseApps=ALL_APPS.filter(function(a){return a.phasen.indexOf(phase)>=0;});
   var appsToShow=showingAllApps?ALL_APPS:phaseApps;
 
   label.textContent=showingAllApps?'Alle Apps':'Jetzt passend';
@@ -1625,6 +1728,219 @@ updateWaveDoneBadges();
 updateWaveTea();
 initReflex();
 loadNotiz();
+
+// ══════════════════════════════════════════
+// 3-EBENEN-TAGESSTRUKTUR
+// ══════════════════════════════════════════
+
+var FIX_TASKS = [
+  {name:"Euthyrox & Rückenübungen", note:"noch im Bett", cat:"körper", phase:"morgen", phaseIdx:0},
+  {name:"Rudi — Magenschutz", note:"erstes nach dem Aufstehen", cat:"tiere", phase:"morgen", phaseIdx:1},
+  {name:"Blutdruck & Gewicht", note:"nüchtern, ruhig", cat:"körper", phase:"morgen", phaseIdx:2},
+  {name:"Knirscherschiene raus", note:"Kiefer entspannen", cat:"körper", phase:"morgen", phaseIdx:3},
+  {name:"Wasser · Tee · Frühstück", note:"bewusst genießen", cat:"ernährung", phase:"morgen", phaseIdx:4},
+  {name:"Medikamente", note:"zum Frühstück", cat:"körper", phase:"morgen", phaseIdx:5},
+  {name:"Rudi & Timmy füttern", note:"Futter & Schmusezeit", cat:"tiere", phase:"morgen", phaseIdx:6},
+  {name:"Kaffee", note:"in Ruhe genießen", cat:"ernährung", phase:"morgen", phaseIdx:7},
+  {name:"Lotte raus", note:"Morgenrunde", cat:"tiere", phase:"morgen", phaseIdx:10},
+  {name:"Anulind morgens", note:"Creme auftragen", cat:"pflege", phase:"morgen", phaseIdx:12},
+  {name:"Mittagessen", note:"bewusst genießen", cat:"ernährung", phase:"mittag", phaseIdx:0},
+  {name:"Gabapentin Rudi", note:"nach dem Mittagessen", cat:"tiere", phase:"mittag", phaseIdx:2},
+  {name:"Anulind mittags", note:"Creme auftragen", cat:"pflege", phase:"mittag", phaseIdx:3},
+  {name:"Katzen füttern Abend", note:"Rudi & Timmy", cat:"tiere", phase:"abend", phaseIdx:0},
+  {name:"Abendessen", note:"mit Thomas, schön", cat:"ernährung", phase:"abend", phaseIdx:1},
+  {name:"Lotte — Abendrunde", note:"der schönste Abschluss", cat:"tiere", phase:"abend", phaseIdx:4},
+  {name:"Tiermedikamente Abend", note:"Rudi & Timmy", cat:"tiere", phase:"abend", phaseIdx:5},
+  {name:"Anulind abends", note:"Creme auftragen", cat:"pflege", phase:"abend", phaseIdx:6},
+  {name:"Bett vorbereiten", note:"Atorvastatin, Melatonin, Handcreme", cat:"körper", phase:"abend", phaseIdx:8},
+];
+
+// Wochentags-Vorschläge: 0=So,1=Mo,2=Di,3=Mi,4=Do,5=Fr,6=Sa
+var HEUTE_VORSCHLAEGE = {
+  0: [ // Sonntag
+    {name:"Wochenrückblick & Planung", note:"Was war gut? Was kommt?", phase:"vormittag", phaseIdx:4},
+    {name:"Waldspaziergang mit Lotte", note:"Sonntags-Ritual", phase:"nachmittag", phaseIdx:0},
+    {name:"Kunstzeit", note:"zeichnen, malen, drucken — für mich allein", phase:"nachmittag", phaseIdx:3},
+  ],
+  1: [ // Montag
+    {name:"Kursvorbereitung MS Mathe", note:"Montag-Kurs vorbereiten", phase:"vormittag", phaseIdx:1},
+    {name:"Uni-Aufgaben", note:"DaZF — ein Schritt nach vorne", phase:"vormittag", phaseIdx:3},
+    {name:"Taillen-Training Tag A", note:"Core & Rotation", phase:"nachmittag", phaseIdx:0},
+  ],
+  2: [ // Dienstag
+    {name:"Schreibtisch-Block", note:"Mails, Erledigungen, Post", phase:"vormittag", phaseIdx:4},
+    {name:"Uni-Lektüre", note:"lesen & Notizen", phase:"vormittag", phaseIdx:3},
+    {name:"Sport & Bewegung", note:"Aufwärmen + Yoga oder Dehnen", phase:"nachmittag", phaseIdx:0},
+  ],
+  3: [ // Mittwoch
+    {name:"VHS Kursvorbereitung A/B", note:"Mittwoch-Kurs", phase:"vormittag", phaseIdx:1},
+    {name:"Uni-Aufgaben", note:"DaZF — Wahlaufgabe oder Pflichtaufgabe", phase:"vormittag", phaseIdx:3},
+    {name:"Haushaltsblock", note:"Wohnung, Pflanzen, Einkauf", phase:"nachmittag", phaseIdx:1},
+  ],
+  4: [ // Donnerstag
+    {name:"VHS Kursvorbereitung AHS Deutsch", note:"Donnerstag-Kurs", phase:"vormittag", phaseIdx:1},
+    {name:"Taillen-Training Tag B", note:"Rücken, Schultern & Gesäß", phase:"nachmittag", phaseIdx:0},
+    {name:"Körperpflege-Block", note:"Duschen, Pflege, was sich zeigt", phase:"nachmittag", phaseIdx:2},
+  ],
+  5: [ // Freitag
+    {name:"Gestrigen Tag abschließen", note:"Was ist offen geblieben?", phase:"vormittag", phaseIdx:0},
+    {name:"Berufliche To-Dos", note:"Steuer, Zukunft, Korrespondenz", phase:"vormittag", phaseIdx:2},
+    {name:"Kreativzeit", note:"zeichnen, collagen, freies Gestalten", phase:"nachmittag", phaseIdx:3},
+  ],
+  6: [ // Samstag
+    {name:"Einkauf & Vorrat", note:"für die neue Woche", phase:"nachmittag", phaseIdx:1},
+    {name:"Entspannung & Ruhe", note:"Sitzbad, Haarpflege, Ruhetag", phase:"nachmittag", phaseIdx:2},
+    {name:"Bad Abend", note:"Loslassen, abschließen", phase:"abend", phaseIdx:7},
+  ],
+};
+
+var EINLADUNG_TASKS = [
+  {name:"Tiefe Körperpflege", note:"Peeling, Maske, Fußpflege — wenn Zeit & Lust", cat:"pflege", phase:"nachmittag", phaseIdx:2},
+  {name:"Gesichtsyoga & Kiefer", note:"sanft & bewusst", cat:"pflege", phase:"nachmittag", phaseIdx:2},
+  {name:"Kreativzeit", note:"zeichnen, malen, collage, drucken", cat:"seele", phase:"nachmittag", phaseIdx:3},
+  {name:"Langer Spaziergang", note:"mehr als die Pflicht-Runde", cat:"tiere", phase:"nachmittag", phaseIdx:0},
+  {name:"Pflanzen besorgen & gestalten", note:"Frühjahrscheck", cat:"zuhause", phase:"nachmittag", phaseIdx:1},
+  {name:"Finanzen & Planung", note:"wenn der Kopf klar ist", cat:"arbeit", phase:"vormittag", phaseIdx:4},
+  {name:"Soziales", note:"Freundinnen, Familie, schreiben", cat:"seele", phase:"abend", phaseIdx:3},
+  {name:"Tiefe Lektüre", note:"Widdascheck, Plutzar oder ein Roman", cat:"lernen", phase:"abend", phaseIdx:9},
+];
+
+var dreiVisible = true;
+
+// Linked tasks use taskState (single source of truth)
+// Unlinked einladung tasks use their own key in taskState
+function getDreiKey(ebene, idx) {
+  var task = null;
+  if (ebene === 'fix') task = FIX_TASKS[idx];
+  else if (ebene === 'heute') {
+    var vorschlaege = HEUTE_VORSCHLAEGE[getViewDate().getDay()] || HEUTE_VORSCHLAEGE[1];
+    task = vorschlaege[idx];
+  }
+  if (task && task.phase) return task.phase + '_' + task.phaseIdx;
+  return 'einladung_' + idx;
+}
+
+function dreiClick(ebeneNum, idx) {
+  var ebene = ['fix','heute','einladung'][ebeneNum];
+  toggleDreiTask(ebene, idx);
+}
+
+function toggleDreiTask(ebene, idx) {
+  var task = null;
+  if (ebene === 'fix') task = FIX_TASKS[idx];
+  else if (ebene === 'heute') {
+    var vorschlaege = HEUTE_VORSCHLAEGE[getViewDate().getDay()] || HEUTE_VORSCHLAEGE[1];
+    task = vorschlaege[idx];
+  } else if (ebene === 'einladung') task = EINLADUNG_TASKS[idx];
+
+  if (task && task.phase !== undefined) {
+    // Linked: use the phase task toggle, which handles state + UI
+    toggleTask(task.phase, task.phaseIdx);
+    // Also scroll to and open that phase
+    showPhase(task.phase);
+    setTimeout(function() {
+      var phaseEl = document.getElementById('wave-' + task.phase);
+      if (phaseEl) phaseEl.scrollIntoView({behavior:'smooth', block:'center'});
+    }, 100);
+  } else {
+    // Unlinked (einladung or no phase): local taskState key
+    var key = 'einladung_' + idx;
+    taskState[key] = !taskState[key];
+    saveTaskState();
+    if (taskState[key]) showLebenMoment();
+  }
+  renderDrei();
+}
+
+function toggleDreiBlock() {
+  dreiVisible = !dreiVisible;
+  var wrap = document.getElementById('dreiWrap');
+  var btn = wrap.querySelector('.drei-toggle');
+  var blocks = wrap.querySelectorAll('.ebene-block');
+  blocks.forEach(function(b) { b.style.display = dreiVisible ? '' : 'none'; });
+  btn.textContent = dreiVisible ? 'minimieren ↑' : 'aufklappen ↓';
+}
+
+function renderDrei() {
+  var day = getViewDate().getDay();
+
+  // FIX
+  var fixDone = FIX_TASKS.filter(function(t, i) {
+    var key = t.phase ? t.phase + '_' + t.phaseIdx : 'fix_' + i;
+    return !!taskState[key];
+  }).length;
+  document.getElementById('fixCount').textContent = fixDone + ' / ' + FIX_TASKS.length;
+  var fixEl = document.getElementById('fixTasks');
+  fixEl.innerHTML = '';
+  FIX_TASKS.forEach(function(t, i) {
+    var key = t.phase ? t.phase + '_' + t.phaseIdx : 'fix_' + i;
+    var done = !!taskState[key];
+    var div = document.createElement('div');
+    div.className = 'drei-task' + (done ? ' done' : '');
+    div.dataset.ebene = '0';
+    div.dataset.idx = i;
+    var linkBtn = t.href ? '<a class="drei-link" href="' + t.href + '" onclick="event.stopPropagation()">öffnen ›</a>' : '';
+    div.innerHTML = '<div class="drei-check"></div>'
+      + '<div style="flex:1;min-width:0;">'
+      + '<div class="drei-task-name">' + t.name + '</div>'
+      + '<div class="drei-task-note">' + t.note + '</div>'
+      + linkBtn
+      + '</div>'
+      + '<div class="drei-task-cat">' + t.cat + '</div>';
+    div.addEventListener('click', function() { dreiClick(+this.dataset.ebene, +this.dataset.idx); });
+    fixEl.appendChild(div);
+  });
+
+  // HEUTE GEWÄHLT
+  var vorschlaege = HEUTE_VORSCHLAEGE[day] || HEUTE_VORSCHLAEGE[1];
+  var tagnamen = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  document.getElementById('heuteTagSub').textContent = tagnamen[day];
+  var heuteEl = document.getElementById('heuteTasks');
+  heuteEl.innerHTML = '';
+  vorschlaege.forEach(function(t, i) {
+    var key = t.phase ? t.phase + '_' + t.phaseIdx : 'heute_' + i;
+    var done = !!taskState[key];
+    var div = document.createElement('div');
+    div.className = 'heute-slot' + (done ? ' done' : '');
+    var hLinkBtn = t.href ? '<a class="drei-link" href="' + t.href + '" onclick="event.stopPropagation()">öffnen ›</a>' : '';
+    div.innerHTML = '<div class="heute-slot-dot"></div>'
+      + '<div style="flex:1;">'
+      + '<div class="heute-slot-text">' + t.name + '</div>'
+      + (t.note ? '<div class="drei-task-note" style="padding-left:0;">' + t.note + '</div>' : '')
+      + hLinkBtn
+      + '</div>'
+      + '<span class="heute-slot-check">' + (done ? '✦' : '○') + '</span>';
+    div.dataset.ebene = '1';
+    div.dataset.idx = i;
+    div.addEventListener('click', function() { dreiClick(+this.dataset.ebene, +this.dataset.idx); });
+    heuteEl.appendChild(div);
+  });
+
+  // EINLADUNG
+  var einlEl = document.getElementById('einladungTasks');
+  einlEl.innerHTML = '';
+  EINLADUNG_TASKS.forEach(function(t, i) {
+    var done = !!taskState['einladung_' + i];
+    var div = document.createElement('div');
+    div.className = 'drei-task' + (done ? ' done' : '');
+    div.dataset.ebene = '2';
+    div.dataset.idx = i;
+    var eLinkBtn = t.href ? '<a class="drei-link" href="' + t.href + '" onclick="event.stopPropagation()">öffnen ›</a>' : '';
+    div.innerHTML = '<div class="drei-check"></div>'
+      + '<div style="flex:1;min-width:0;">'
+      + '<div class="drei-task-name">' + t.name + '</div>'
+      + '<div class="drei-task-note">' + t.note + '</div>'
+      + eLinkBtn
+      + '</div>'
+      + '<div class="drei-task-cat">' + t.cat + '</div>';
+    div.addEventListener('click', function() { dreiClick(+this.dataset.ebene, +this.dataset.idx); });
+    einlEl.appendChild(div);
+  });
+}
+
+// Initial render
+renderDrei();
+
 </script>
 </body>
 </html>
