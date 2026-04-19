@@ -1920,7 +1920,8 @@ function renderDrei() {
   var einlEl = document.getElementById('einladungTasks');
   einlEl.innerHTML = '';
   EINLADUNG_TASKS.forEach(function(t, i) {
-    var done = !!taskState['einladung_' + i];
+    var key = t.phase ? t.phase + '_' + t.phaseIdx : 'einladung_' + i;
+    var done = !!taskState[key];
     var div = document.createElement('div');
     div.className = 'drei-task' + (done ? ' done' : '');
     div.dataset.ebene = '2';
