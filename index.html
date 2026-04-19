@@ -1496,6 +1496,7 @@ var ALL_APPS=[
   {icon:'☀️',text:'Aufwärmen',sub:'Sonnengruß mit Mady Morrison',href:'Aufwaermen.html',phasen:['nachmittag']},
   {icon:'💪',text:'Körpergewicht Training',sub:'Audio-geführt',href:'Koerpergewicht_Training_Audio.html',phasen:['nachmittag']},
   {icon:'🏄',text:'Balance Board Training',sub:'Audio-geführt',href:'Balanceboard_Training_Audio.html',phasen:['nachmittag']},
+  {icon:'🎯',text:'Taillen-Training',sub:'Mo & Do — Core, Rotation, Kraft',href:'Taillen_Training.html',phasen:['nachmittag'],tage:[1,4]},
   {icon:'🧘',text:'Sonntags-Yoga',sub:'Audio-geführt',href:'Sonntags_Yoga_Audio.html',phasen:['nachmittag']},
   {icon:'🤸',text:'Dehnplan',sub:'Persönlicher Dehnplan',href:'Dehnplan.html',phasen:['nachmittag']},
   {icon:'💪',text:'Kalkschulter Training',sub:'Sanfte Schulterübungen',href:'Kalkschulter.html',phasen:['nachmittag']},
@@ -1528,7 +1529,12 @@ function renderApps(phase){
   var label=document.getElementById('apps-label');
   if(!list)return;
 
-  var phaseApps=ALL_APPS.filter(function(a){return a.phasen.indexOf(phase)>=0;});
+  var viewDay=getViewDate().getDay();
+  var phaseApps=ALL_APPS.filter(function(a){
+    if(a.phasen.indexOf(phase)<0) return false;
+    if(a.tage&&a.tage.indexOf(viewDay)<0) return false;
+    return true;
+  });
   var appsToShow=showingAllApps?ALL_APPS:phaseApps;
 
   label.textContent=showingAllApps?'Alle Apps':'Jetzt passend';
