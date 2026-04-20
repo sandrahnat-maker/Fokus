@@ -2,816 +2,713 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>🎪 Sandras Haushalts-Zirkus</title>
-<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#fdf6ee">
+<title>Haushalts-Zirkus</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+@keyframes wimpel-swing{0%,100%{transform:rotate(-4deg) skewX(2deg);}50%{transform:rotate(4deg) skewX(-2deg);}}
+@keyframes wimpel-swing2{0%,100%{transform:rotate(3deg) skewX(-1deg);}50%{transform:rotate(-3deg) skewX(1deg);}}
+@keyframes wimpel-swing3{0%,100%{transform:rotate(-2deg);}50%{transform:rotate(5deg);}}
+@keyframes rope-sway{0%,100%{transform:scaleX(1);}50%{transform:scaleX(1.008);}}
+@keyframes tier-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(.75);}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes spotlight{0%{left:-100%;}60%,100%{left:220%;}}
+@keyframes confetti-fall{0%{transform:translateY(-20px) rotate(0deg);opacity:.8;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+@keyframes celebrate-pop{0%{transform:scale(0.5);opacity:0;}60%{transform:scale(1.18);}100%{transform:scale(1);opacity:1;}}
+
 :root{
-  --red:#d42b2b;--red2:#e84040;--cream:#fff8e7;--gold:#f5c518;--gold2:#ffd84a;
-  --navy:#1a1040;--teal:#00a8a8;--pink:#e8478a;--purple:#7b3fa0;
-  --text:#1a1040;--muted:#7a6a9a;--white:#fffdf5;
+  --bg:#fdf6ee;--card:#fffbf5;--text:#1e1208;--muted:rgba(30,18,8,0.45);
+  --crimson:#b8294a;--crimson-l:rgba(184,41,74,0.10);
+  --gold:#c9893a;--gold-l:rgba(201,137,58,0.13);
+  --navy:#1a2744;--navy-l:rgba(26,39,68,0.07);
+  --sage:#5e8a5a;--sage-l:rgba(94,138,90,0.12);
+  --violet:#6a3f7a;
+  --border:rgba(184,41,74,0.13);--shadow:rgba(30,18,8,0.08);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html{font-size:16px;}
 body{
-  background:var(--cream);
-  font-family:'Nunito',sans-serif;
-  color:var(--text);
-  min-height:100vh;
-  padding-bottom:5rem;
-  overflow-x:hidden;
-  position:relative;
-}
-body::before{
-  content:'';
-  position:fixed;top:0;left:0;right:0;bottom:0;
-  background:repeating-linear-gradient(
-    -45deg,
-    rgba(212,43,43,0.04) 0px,rgba(212,43,43,0.04) 20px,
-    transparent 20px,transparent 40px
+  background:var(--bg);font-family:"Raleway",sans-serif;color:var(--text);
+  min-height:100vh;padding-bottom:5rem;
+  background-image:repeating-linear-gradient(
+    -6deg,
+    rgba(184,41,74,0.022) 0px,rgba(184,41,74,0.022) 28px,
+    transparent 28px,transparent 56px,
+    rgba(201,137,58,0.018) 56px,rgba(201,137,58,0.018) 84px,
+    transparent 84px,transparent 112px
   );
-  pointer-events:none;z-index:0;
 }
-.confetti-wrap{position:fixed;top:0;left:0;right:0;height:100vh;pointer-events:none;z-index:0;overflow:hidden;}
-.cdot{position:absolute;animation:cfall linear infinite;opacity:.6;}
-@keyframes cfall{
-  0%{transform:translateY(-20px) rotate(0deg);opacity:.7;}
-  100%{transform:translateY(110vh) rotate(720deg);opacity:0;}
-}
+
+/* WIMPELKETTE */
+.wimpelkette{position:relative;width:100%;height:48px;overflow:hidden;display:block;background:var(--bg);}
+.wimpelkette svg{width:100%;height:48px;overflow:visible;animation:rope-sway 5s ease-in-out infinite;}
+.wimpel-1{animation:wimpel-swing 2.8s ease-in-out infinite;}
+.wimpel-2{animation:wimpel-swing2 3.2s ease-in-out infinite 0.3s;}
+.wimpel-3{animation:wimpel-swing3 2.5s ease-in-out infinite 0.6s;}
+.wimpel-4{animation:wimpel-swing 3.0s ease-in-out infinite 0.9s;}
+.wimpel-5{animation:wimpel-swing2 2.7s ease-in-out infinite 1.2s;}
+.wimpel-6{animation:wimpel-swing3 3.4s ease-in-out infinite 1.5s;}
+.wimpel-7{animation:wimpel-swing 2.9s ease-in-out infinite 1.8s;}
+.wimpel-8{animation:wimpel-swing2 2.6s ease-in-out infinite 2.1s;}
+.wimpel-9{animation:wimpel-swing3 3.1s ease-in-out infinite 2.4s;}
+
 /* HEADER */
-header{position:relative;z-index:10;background:var(--red);overflow:hidden;box-shadow:0 4px 0 #8b0000,0 6px 20px rgba(0,0,0,.3);}
-.tent-stripe{
-  height:10px;
-  background:repeating-linear-gradient(90deg,var(--red) 0,var(--red) 20px,var(--cream) 20px,var(--cream) 40px);
-}
-.header-inner{padding:1rem 1rem .8rem;text-align:center;background:var(--red);}
-.header-stars{font-size:.95rem;letter-spacing:.35em;margin-bottom:.2rem;color:var(--gold);animation:twinkle 2s ease-in-out infinite alternate;}
-@keyframes twinkle{from{opacity:.6;}to{opacity:1;}}
-.header-title{font-family:'Fredoka One',cursive;font-size:25px;color:var(--gold);text-shadow:2px 2px 0 #8b0000,0 0 20px rgba(245,197,24,.5);line-height:1.1;}
-.header-sub{font-size:12px;color:rgba(255,248,231,.75);letter-spacing:.07em;margin-top:.25rem;font-weight:700;}
-/* VIEWS */
-.view{display:none;padding:1rem;position:relative;z-index:2;}
-.view.active{display:block;}
-/* SECTION BANNER */
-.section-banner{
-  background:var(--navy);border-radius:16px;padding:.7rem 1rem;
-  text-align:center;margin-bottom:1rem;position:relative;overflow:hidden;
-  box-shadow:0 4px 0 rgba(0,0,0,.3);
-}
-.section-banner::before{content:'★ ★ ★';position:absolute;top:50%;left:.5rem;transform:translateY(-50%);color:var(--gold);font-size:.55rem;letter-spacing:.2em;opacity:.4;}
-.section-banner::after{content:'★ ★ ★';position:absolute;top:50%;right:.5rem;transform:translateY(-50%);color:var(--gold);font-size:.55rem;letter-spacing:.2em;opacity:.4;}
-.section-banner-text{font-family:'Fredoka One',cursive;font-size:17px;color:var(--gold);}
-.section-banner-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:.1rem;}
-/* ROOM GRID */
-.rooms-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
-.room-card{
-  background:var(--white);border-radius:16px;padding:1.1rem .8rem;
-  text-align:center;cursor:pointer;
-  border:3px solid rgba(26,16,64,.12);
-  transition:all .15s;
-  box-shadow:0 4px 0 rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.07);
-  position:relative;overflow:hidden;
-}
-.room-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;}
-.room-card:nth-child(1)::before{background:var(--red);}
-.room-card:nth-child(2)::before{background:var(--teal);}
-.room-card:nth-child(3)::before{background:var(--pink);}
-.room-card:nth-child(4)::before{background:var(--purple);}
-.room-card:nth-child(5)::before{background:var(--gold);}
-.room-card:nth-child(6)::before{background:var(--red2);}
-.room-card:nth-child(7)::before{background:var(--teal);}
-.room-card:nth-child(8)::before{background:var(--pink);}
-.room-card:active{transform:scale(.95) translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.1);}
-.room-card.selected{border:3px solid var(--gold);background:linear-gradient(135deg,#fffbe0,#fff8e7);box-shadow:0 4px 0 rgba(245,197,24,.4),0 0 20px rgba(245,197,24,.2);}
-.room-icon{font-size:2.2rem;margin-bottom:.4rem;display:block;}
-.room-name{font-family:'Fredoka One',cursive;font-size:15px;color:var(--text);}
-.room-card.selected .room-name{color:var(--red);}
-/* Q CARD */
-.q-card{
-  background:var(--white);border-radius:20px;padding:1.4rem 1.2rem;
-  margin-bottom:1rem;border:3px solid var(--navy);
-  box-shadow:5px 5px 0 var(--navy);
-}
-.q-step{font-family:'Fredoka One',cursive;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--red);margin-bottom:.5rem;}
-.q-text{font-family:'Fredoka One',cursive;font-size:20px;color:var(--text);line-height:1.4;margin-bottom:1rem;}
-.q-room-name{color:var(--red);}
-/* CHIPS */
-.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem;}
-.chip{
-  padding:.35rem .8rem;border-radius:20px;font-size:13px;
-  font-family:'Nunito',sans-serif;font-weight:700;cursor:pointer;
-  border:2px solid var(--navy);background:var(--white);
-  color:var(--text);transition:all .15s;
-}
-.chip:active{transform:scale(.94);}
-.chip.on{color:#fff;transform:scale(1.05);}
-.chip.on.sage{background:#2a9a5a;border-color:#2a9a5a;}
-.chip.on.rose{background:var(--pink);border-color:var(--pink);}
-.chip.on.lavender{background:var(--purple);border-color:var(--purple);}
-.chip.on.terra{background:var(--red);border-color:var(--red);}
-.chip.on.gold{background:#c4960e;border-color:#c4960e;}
-/* TEXTAREA */
-.ta{
-  width:100%;border:2px solid var(--navy);border-radius:12px;
-  padding:.8rem 1rem;font-family:'Nunito',sans-serif;
-  font-size:15px;color:var(--text);background:var(--white);
-  resize:none;min-height:80px;line-height:1.6;
-}
-.ta:focus{outline:none;border-color:var(--red);}
-.needs-label{font-size:11px;color:var(--muted);font-weight:800;margin-bottom:.5rem;margin-top:.7rem;display:block;text-transform:uppercase;letter-spacing:.07em;}
-/* NAV DOTS */
-.nav-dots{display:flex;justify-content:center;gap:.4rem;padding:.5rem 0 .8rem;}
-.dot{width:10px;height:10px;border-radius:50%;background:rgba(26,16,64,.15);transition:all .3s;}
-.dot.active{background:var(--red);width:24px;border-radius:5px;}
-/* AFFIRMATION */
-.affirmation-card{
-  background:var(--navy);border-radius:20px;padding:1.6rem 1.4rem;
-  text-align:center;box-shadow:5px 5px 0 var(--red),0 10px 30px rgba(26,16,64,.3);
-  margin-bottom:1rem;animation:popIn .4s cubic-bezier(.175,.885,.32,1.275);
-  position:relative;overflow:hidden;
-}
-@keyframes popIn{from{opacity:0;transform:scale(.8) rotate(-3deg);}to{opacity:1;transform:scale(1) rotate(0);}}
-.affirmation-card::before{content:'🎪';position:absolute;top:-10px;right:-10px;font-size:5rem;opacity:.08;transform:rotate(15deg);}
-.affirmation-icon{font-size:3rem;margin-bottom:.6rem;display:block;animation:bounce 1s ease infinite alternate;}
-@keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-6px);}}
-.affirmation-room{font-family:'Fredoka One',cursive;font-size:12px;letter-spacing:.15em;color:var(--gold);margin-bottom:.4rem;text-transform:uppercase;}
-.affirmation-feeling{font-family:'Fredoka One',cursive;font-size:18px;color:var(--white);margin-bottom:.3rem;line-height:1.4;}
-.affirmation-need{font-size:13px;color:rgba(255,248,231,.65);margin-bottom:1rem;line-height:1.5;}
-.affirmation-text{
-  font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;
-  color:var(--gold);line-height:1.6;padding:.8rem 1rem;
-  background:rgba(255,255,255,.07);border-radius:12px;
-  border-left:4px solid var(--gold);text-align:left;
-}
-/* BUTTONS */
-.btn-primary{
-  width:100%;background:var(--red);color:var(--gold);
-  border:3px solid var(--navy);border-radius:50px;
-  padding:.75rem 1.5rem;font-size:17px;font-family:'Fredoka One',cursive;
-  cursor:pointer;transition:all .15s;margin-top:.8rem;display:block;
-  box-shadow:4px 4px 0 var(--navy);letter-spacing:.03em;
-}
-.btn-primary:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--navy);}
-.btn-secondary{
-  width:100%;background:transparent;color:var(--muted);
-  border:2px solid rgba(26,16,64,.2);border-radius:50px;
-  padding:.6rem 1.5rem;font-size:15px;font-family:'Nunito',sans-serif;font-weight:700;
-  cursor:pointer;transition:all .15s;margin-top:.5rem;display:block;
-}
-.btn-secondary:active{transform:scale(.97);}
-/* HISTORY */
-.history-title{font-family:'Fredoka One',cursive;font-size:20px;color:var(--red);text-align:center;margin-bottom:1rem;}
-.history-empty{text-align:center;font-size:14px;color:var(--muted);padding:2.5rem 0;}
-.history-item{
-  background:var(--white);border-radius:16px;padding:.9rem 1rem;
-  margin-bottom:.6rem;border:2px solid rgba(26,16,64,.1);
-  border-left:5px solid var(--red);box-shadow:3px 3px 0 rgba(0,0,0,.07);
-}
-.history-date{font-size:11px;color:var(--muted);margin-bottom:.3rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;}
-.history-room{font-family:'Fredoka One',cursive;font-size:17px;color:var(--text);}
-.history-details{font-size:13px;color:var(--muted);margin-top:.25rem;line-height:1.6;}
-/* BOTTOM NAV */
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;
-  background:var(--navy);border-top:4px solid var(--gold);
-  display:flex;z-index:100;box-shadow:0 -4px 20px rgba(26,16,64,.4);
-}
-.bnav-btn{
-  flex:1;display:flex;flex-direction:column;align-items:center;
-  gap:.15rem;background:none;border:none;cursor:pointer;
-  padding:.55rem 0 .45rem;font-family:'Nunito',sans-serif;
+header{
+  padding:1rem 1.2rem .85rem;
+  border-bottom:2px solid var(--border);
+  background:rgba(255,251,245,0.85);
+  backdrop-filter:blur(3px);
   position:relative;
 }
-.bnav-btn::after{
-  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:0;height:3px;background:var(--gold);border-radius:0 0 3px 3px;transition:width .2s;
+.header-back{display:inline-flex;align-items:center;gap:.35rem;font-size:13px;color:var(--crimson);text-decoration:none;font-family:"IM Fell English",serif;font-style:italic;margin-bottom:.5rem;opacity:.75;}
+.header-back:active{opacity:1;}
+.header-title{font-family:"Playfair Display",serif;font-size:24px;font-style:italic;color:var(--text);line-height:1.3;}
+.header-sub{font-size:12px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:.2rem;font-family:"Raleway",sans-serif;font-weight:400;}
+
+/* TIERE */
+.tier-zeile{display:flex;align-items:center;justify-content:center;gap:.2rem;padding:.35rem 1rem;font-size:.85rem;user-select:none;pointer-events:none;overflow:hidden;}
+.tier-zeile .tier{display:inline-block;animation:tier-float 3s ease-in-out infinite;opacity:.55;font-size:1rem;}
+.tier-zeile .tier:nth-child(2){animation-delay:.4s;}
+.tier-zeile .tier:nth-child(3){animation-delay:.8s;}
+.tier-zeile .tier:nth-child(4){animation-delay:1.2s;}
+.tier-zeile .tier:nth-child(5){animation-delay:1.6s;}
+.tier-linie{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(184,41,74,0.2),transparent);}
+
+/* INTENTION-BANNER — Tages-Motto */
+.intention-wrap{
+  margin:1rem 1rem 0;background:var(--card);border-radius:4px 4px 16px 16px;
+  border:1px solid var(--border);box-shadow:0 3px 18px var(--shadow);overflow:hidden;position:relative;
 }
-.bnav-btn.on::after{width:60%;}
-.bnav-icon{font-size:1.4rem;}
-.bnav-label{font-size:10px;color:rgba(255,248,231,.45);font-weight:800;letter-spacing:.04em;}
-.bnav-btn.on .bnav-label{color:var(--gold);}
-/* TAGESPLAN */
-.day-header{
-  background:var(--red);border-radius:20px;padding:1.2rem;
-  margin-bottom:1rem;border:3px solid var(--navy);
-  box-shadow:5px 5px 0 var(--navy);position:relative;overflow:hidden;
+.intention-wrap::before{
+  content:'';display:block;height:7px;
+  background:repeating-linear-gradient(90deg,var(--crimson) 0%,var(--crimson) 20%,var(--gold) 20%,var(--gold) 40%,var(--navy) 40%,var(--navy) 60%,var(--violet) 60%,var(--violet) 80%,var(--sage) 80%,var(--sage) 100%);
+  opacity:.65;
 }
-.day-header::after{content:'🎡';position:absolute;right:-5px;top:50%;transform:translateY(-50%);font-size:5rem;opacity:.1;}
-.day-label{font-family:'Fredoka One',cursive;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.3rem;}
-.day-title{font-family:'Fredoka One',cursive;font-size:22px;color:var(--white);margin-bottom:.2rem;text-shadow:1px 1px 0 rgba(0,0,0,.3);}
-.day-sub{font-size:13px;color:rgba(255,248,231,.7);font-weight:600;}
-.day-focus{
-  background:var(--white);border-radius:20px;padding:1.1rem;
-  margin-bottom:1rem;border:3px solid var(--navy);box-shadow:5px 5px 0 var(--navy);
+.intention-top{padding:.9rem 1.1rem .4rem;display:flex;align-items:center;gap:.5rem;}
+.intention-dot{width:7px;height:7px;border-radius:50%;background:var(--crimson);animation:pulse 3s ease-in-out infinite;}
+.intention-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--crimson);font-weight:500;}
+.intention-text{padding:.1rem 1.1rem 1rem;font-family:"Playfair Display",serif;font-size:20px;font-style:italic;color:var(--text);line-height:1.55;}
+
+/* FORTSCHRITT GESAMT */
+.progress-wrap{margin:1rem 1rem 0;}
+.progress-bar-bg{height:6px;border-radius:3px;background:rgba(184,41,74,0.1);overflow:hidden;}
+.progress-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--crimson),var(--gold));transition:width .5s cubic-bezier(.34,1.2,.64,1);}
+.progress-label{display:flex;justify-content:space-between;margin-top:.3rem;}
+.progress-text{font-size:12px;color:var(--muted);font-family:"IM Fell English",serif;font-style:italic;}
+.progress-pct{font-size:12px;color:var(--crimson);font-family:"IM Fell English",serif;font-style:italic;}
+
+/* TAGESBLOCK — Accordion */
+.block-wrap{margin:.75rem 1rem 0;}
+.block-header{
+  display:flex;align-items:center;gap:.65rem;
+  padding:.7rem .95rem;background:var(--card);
+  border-radius:12px;border:1px solid var(--border);
+  box-shadow:0 2px 10px var(--shadow);cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:all .2s;
 }
-.focus-label{font-family:'Fredoka One',cursive;font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:var(--teal);margin-bottom:.4rem;}
-.focus-room{font-family:'Fredoka One',cursive;font-size:18px;color:var(--red);margin-bottom:.8rem;}
-/* TASKS */
-.task-list{list-style:none;padding:0;margin:0;}
+.block-header::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+  border-radius:4px 0 0 4px;
+}
+.block-header.morgen::before{background:var(--crimson);}
+.block-header.schreibtisch::before{background:var(--navy);}
+.block-header.mittag::before{background:var(--gold);}
+.block-header.haushalt::before{background:var(--sage);}
+.block-header.ich::before{background:var(--violet);}
+.block-header.abend::before{background:var(--navy);}
+
+.block-header.open{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-color:transparent;}
+.block-icon{font-size:1.3rem;flex-shrink:0;}
+.block-info{flex:1;min-width:0;}
+.block-name{font-family:"Playfair Display",serif;font-size:18px;color:var(--text);}
+.block-sub{font-family:"IM Fell English",serif;font-size:14px;font-style:italic;color:var(--muted);margin-top:.05rem;}
+.block-badge{
+  flex-shrink:0;font-size:11px;font-family:"Raleway",sans-serif;
+  font-weight:500;letter-spacing:.08em;padding:.18rem .55rem;
+  border-radius:20px;background:var(--crimson-l);color:var(--crimson);
+  border:1px solid rgba(184,41,74,0.18);
+}
+.block-badge.done-all{background:var(--sage-l);color:var(--sage);border-color:rgba(94,138,90,0.3);}
+.block-arr{font-size:.8rem;color:var(--muted);margin-left:.2rem;transition:transform .25s;flex-shrink:0;}
+.block-header.open .block-arr{transform:rotate(180deg);}
+
+/* BLOCK CONTENT */
+.block-content{
+  display:none;background:var(--card);
+  border:1px solid var(--border);border-top:none;
+  border-radius:0 0 12px 12px;
+  box-shadow:0 4px 14px var(--shadow);
+  overflow:hidden;position:relative;
+}
+.block-content::after{
+  content:'';position:absolute;top:0;left:-100%;width:55%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.055),transparent);
+  animation:spotlight 10s ease-in-out infinite;pointer-events:none;
+}
+.block-content.open{display:block;animation:fadeIn .3s ease;}
+.block-mood{
+  font-family:"IM Fell English",serif;font-size:16px;font-style:italic;
+  color:var(--muted);line-height:1.65;padding:.75rem 1rem .65rem;
+  border-bottom:1px dashed rgba(184,41,74,0.18);
+}
+
+/* RAUM-SEKTION */
+.raum-section{border-bottom:1px solid rgba(184,41,74,0.07);}
+.raum-section:last-child{border-bottom:none;}
+.raum-label{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.6rem 1rem .4rem;
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);font-weight:500;
+}
+.raum-icon{font-size:1rem;opacity:.7;}
+
+/* TASK */
 .task-item{
-  display:flex;align-items:flex-start;gap:.7rem;
-  padding:.7rem .3rem;border-bottom:2px dashed rgba(26,16,64,.1);
-  cursor:pointer;transition:background .15s;border-radius:8px;
+  display:flex;align-items:flex-start;gap:.6rem;
+  padding:.5rem 1rem;border-bottom:1px solid rgba(184,41,74,0.06);
+  cursor:pointer;transition:opacity .2s;
 }
 .task-item:last-child{border-bottom:none;}
-.task-item:active{background:rgba(212,43,43,.05);}
+.task-item.done{opacity:.28;}
+.task-item.done .task-name{text-decoration:line-through;text-decoration-color:rgba(184,41,74,0.3);}
 .task-check{
-  width:26px;height:26px;border-radius:50%;
-  border:3px solid var(--navy);flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  margin-top:1px;transition:all .2s;background:var(--white);
+  width:16px;height:16px;border-radius:50%;border:1px solid rgba(184,41,74,0.3);
+  flex-shrink:0;margin-top:3px;transition:all .25s;
+  display:flex;align-items:center;justify-content:center;font-size:9px;color:transparent;
 }
-.task-item.done .task-check{background:var(--teal);border-color:var(--teal);animation:checkPop .3s cubic-bezier(.175,.885,.32,1.275);}
-@keyframes checkPop{from{transform:scale(0);}to{transform:scale(1);}}
-.task-item.done .task-check::after{content:'✓';color:#fff;font-weight:900;font-size:14px;}
-.task-item.done .task-text{text-decoration:line-through;color:var(--muted);}
-.task-text{font-size:14px;line-height:1.6;color:var(--text);flex:1;font-weight:600;}
-.task-time{font-size:11px;font-weight:900;color:var(--white);background:var(--navy);padding:.15rem .4rem;border-radius:8px;flex-shrink:0;margin-top:2px;white-space:nowrap;}
-/* PROGRESS */
-.progress-wrap{margin-top:.8rem;}
-.progress-bar{height:10px;background:rgba(26,16,64,.1);border-radius:5px;overflow:hidden;border:2px solid var(--navy);}
-.progress-fill{
-  height:100%;
-  background:repeating-linear-gradient(90deg,var(--teal) 0,var(--teal) 10px,#00c8c8 10px,#00c8c8 20px);
-  border-radius:3px;transition:width .4s cubic-bezier(.175,.885,.32,1.275);
-}
-.progress-text{font-size:12px;font-weight:800;color:var(--muted);margin-top:.3rem;text-align:right;font-family:'Fredoka One',cursive;}
-/* BIG TASKS */
-.big-section-title{font-family:'Fredoka One',cursive;font-size:16px;color:var(--navy);margin:1.2rem 0 .6rem;display:flex;align-items:center;gap:.5rem;}
-.big-task-item{
-  background:var(--white);border-radius:16px;padding:.85rem 1rem;
-  margin-bottom:.5rem;border:2px solid rgba(26,16,64,.12);
-  display:flex;align-items:flex-start;gap:.7rem;cursor:pointer;
-  transition:all .15s;box-shadow:3px 3px 0 rgba(0,0,0,.08);
-}
-.big-task-item:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(0,0,0,.08);}
-.big-task-item.done{opacity:.4;background:#f0f0f0;}
-.big-task-item.done .task-text{text-decoration:line-through;}
-.big-task-check{width:26px;height:26px;border-radius:6px;border:3px solid var(--navy);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .2s;}
-.big-task-item.done .big-task-check{background:var(--pink);border-color:var(--pink);}
-.big-task-item.done .big-task-check::after{content:'✓';color:#fff;font-weight:900;font-size:14px;}
-.big-task-room-tag{font-family:'Fredoka One',cursive;font-size:11px;color:var(--red);display:block;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.06em;}
+.task-item.done .task-check{background:var(--sage-l);border-color:var(--sage);color:var(--sage);}
+.task-item.done .task-check::after{content:'✦';}
+.task-name{font-size:16px;color:var(--text);line-height:1.35;}
+.task-note{font-size:13px;font-style:italic;color:var(--muted);margin-top:2px;font-family:"IM Fell English",serif;}
 
-/* ══ MINIMUM-TAG ══ */
-.min-hero{
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  border-radius:22px;padding:1.3rem 1.2rem 1rem;
-  margin-bottom:1rem;border:3px solid var(--navy);
-  box-shadow:5px 5px 0 var(--navy);
-  text-align:center;position:relative;overflow:hidden;
+/* GROSSE AUFGABEN */
+.gross-wrap{margin:.75rem 1rem 0;}
+.gross-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem;padding-left:.2rem;font-weight:500;}
+.gross-item{
+  display:flex;align-items:flex-start;gap:.6rem;
+  padding:.6rem .9rem;background:var(--card);
+  border-radius:10px;border:1px solid var(--border);
+  margin-bottom:.35rem;cursor:pointer;transition:opacity .2s;
 }
-.min-hero::before{content:'🌟';position:absolute;left:-8px;top:-8px;font-size:4rem;opacity:.12;transform:rotate(-20deg);}
-.min-hero::after{content:'🌟';position:absolute;right:-8px;bottom:-8px;font-size:4rem;opacity:.12;transform:rotate(20deg);}
-.min-hero-date{font-family:'Fredoka One',cursive;font-size:11px;letter-spacing:.18em;color:rgba(255,255,255,.7);margin-bottom:.3rem;text-transform:uppercase;}
-.min-hero-title{font-family:'Fredoka One',cursive;font-size:24px;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.2);margin-bottom:.2rem;}
-.min-hero-sub{font-size:13px;color:rgba(255,255,255,.8);font-weight:700;}
-.min-streak{
-  display:inline-flex;align-items:center;gap:.4rem;
-  background:rgba(255,255,255,.2);border-radius:20px;
-  padding:.3rem .8rem;margin-top:.6rem;
-  font-family:'Fredoka One',cursive;font-size:14px;color:#fff;
+.gross-item.done{opacity:.3;}
+.gross-item.done .task-name{text-decoration:line-through;text-decoration-color:rgba(184,41,74,0.3);}
+.gross-check{
+  width:18px;height:18px;border-radius:4px;
+  border:1px solid rgba(184,41,74,0.3);flex-shrink:0;margin-top:2px;
+  display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;
+  transition:all .25s;
 }
-.min-items{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem;}
-.min-item{
-  background:var(--white);border-radius:18px;
-  padding:.85rem 1rem;
-  border:3px solid var(--navy);
-  box-shadow:4px 4px 0 var(--navy);
-  display:flex;align-items:center;gap:.75rem;
-  cursor:pointer;transition:all .15s;
-  position:relative;overflow:hidden;
+.gross-item.done .gross-check{background:var(--sage-l);border-color:var(--sage);color:var(--sage);}
+.gross-item.done .gross-check::after{content:'✦';}
+.gross-raum{font-size:11px;color:var(--crimson);letter-spacing:.08em;text-transform:uppercase;margin-top:3px;opacity:.7;}
+
+/* MANEGE-LINIE */
+.manege-line{display:flex;align-items:center;gap:.5rem;padding:.1rem 1rem;color:var(--crimson);opacity:.3;font-size:11px;letter-spacing:.3em;user-select:none;}
+.manege-line::before,.manege-line::after{content:'';flex:1;height:1px;background:currentColor;}
+
+/* KONFETTI */
+.confetti-wrap{position:fixed;top:0;left:0;right:0;height:100vh;pointer-events:none;z-index:999;overflow:hidden;}
+.cdot{position:absolute;animation:confetti-fall linear forwards;border-radius:2px;}
+
+/* TOAST */
+#haushalt-toast{
+  position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--navy);border-radius:20px;padding:.5rem 1.2rem;
+  font-family:"IM Fell English",serif;font-size:17px;font-style:italic;
+  color:#f8e8b8;box-shadow:0 4px 20px rgba(26,39,68,0.18);
+  opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;
+  white-space:nowrap;z-index:500;
 }
-.min-item::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:5px;
-  background:var(--item-color,var(--teal));
-  border-radius:3px 0 0 3px;
+#haushalt-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ZURÜCK LINK */
+.nav-bottom{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(253,246,238,0.95);backdrop-filter:blur(6px);
+  border-top:1px solid var(--border);
+  padding:.6rem 1rem;display:flex;justify-content:center;
+  z-index:100;
 }
-.min-item:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--navy);}
-.min-item.done{background:#f0faf5;border-color:#b0d8c0;}
-.min-item.done::before{background:#b0d8c0;}
-.min-item.done .min-item-text{text-decoration:line-through;color:var(--muted);}
-.min-item.done .min-item-sub{text-decoration:line-through;}
-.min-check{
-  width:30px;height:30px;border-radius:50%;
-  border:3px solid var(--navy);flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;transition:all .25s;background:var(--white);
+.nav-back-btn{
+  font-family:"IM Fell English",serif;font-size:16px;font-style:italic;
+  color:var(--crimson);text-decoration:none;opacity:.7;
+  display:flex;align-items:center;gap:.4rem;
 }
-.min-item.done .min-check{
-  background:var(--teal);border-color:var(--teal);
-  animation:checkPop .3s cubic-bezier(.175,.885,.32,1.275);
-  font-size:.85rem;
-}
-.min-item-body{flex:1;}
-.min-item-text{font-family:'Fredoka One',cursive;font-size:16px;color:var(--text);line-height:1.2;}
-.min-item-sub{font-size:12px;color:var(--muted);font-weight:600;line-height:1.4;margin-top:.15rem;}
-.min-item-time{font-size:11px;font-weight:900;color:var(--white);background:var(--navy);padding:.15rem .4rem;border-radius:8px;flex-shrink:0;white-space:nowrap;}
-.min-done-banner{
-  background:linear-gradient(135deg,var(--teal),#00c8a0);
-  border-radius:20px;padding:1.5rem;text-align:center;
-  border:3px solid var(--navy);box-shadow:5px 5px 0 var(--navy);
-  animation:popIn .4s cubic-bezier(.175,.885,.32,1.275);
-  display:none;margin-bottom:1rem;
-}
-.min-done-banner.visible{display:block;}
-.min-done-icon{font-size:3rem;display:block;animation:bounce 1s ease infinite alternate;}
-.min-done-text{font-family:'Fredoka One',cursive;font-size:22px;color:#fff;margin:.5rem 0 .3rem;text-shadow:1px 1px 0 rgba(0,0,0,.2);}
-.min-done-sub{font-size:14px;color:rgba(255,255,255,.85);font-weight:700;}
-.min-progress-row{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;}
-.min-progress-bar{flex:1;height:12px;background:rgba(26,16,64,.1);border-radius:6px;overflow:hidden;border:2px solid var(--navy);}
-.min-progress-fill{
-  height:100%;
-  background:repeating-linear-gradient(90deg,var(--pink) 0,var(--pink) 10px,var(--purple) 10px,var(--purple) 20px);
-  border-radius:4px;transition:width .4s cubic-bezier(.175,.885,.32,1.275);
-}
-.min-progress-count{font-family:'Fredoka One',cursive;font-size:15px;color:var(--navy);flex-shrink:0;}
+.nav-back-btn:active{opacity:1;}
 </style>
 </head>
 <body>
 
-<div class="confetti-wrap" id="confetti"></div>
+<div class="wimpelkette">
+<svg viewBox="0 0 400 48" preserveAspectRatio="none">
+  <line x1="0" y1="8" x2="400" y2="8" stroke="rgba(26,39,68,0.18)" stroke-width="1"/>
+  <polygon class="wimpel-1" points="20,8 36,8 28,36" fill="#b8294a" opacity=".75" transform-origin="28 8"/>
+  <polygon class="wimpel-2" points="60,8 76,8 68,36" fill="#c9893a" opacity=".7" transform-origin="68 8"/>
+  <polygon class="wimpel-3" points="100,8 116,8 108,36" fill="#1a2744" opacity=".65" transform-origin="108 8"/>
+  <polygon class="wimpel-4" points="140,8 156,8 148,36" fill="#6a3f7a" opacity=".7" transform-origin="148 8"/>
+  <polygon class="wimpel-5" points="180,8 196,8 188,36" fill="#5e8a5a" opacity=".68" transform-origin="188 8"/>
+  <polygon class="wimpel-6" points="220,8 236,8 228,36" fill="#b8294a" opacity=".72" transform-origin="228 8"/>
+  <polygon class="wimpel-7" points="260,8 276,8 268,36" fill="#c9893a" opacity=".68" transform-origin="268 8"/>
+  <polygon class="wimpel-8" points="300,8 316,8 308,36" fill="#1a2744" opacity=".65" transform-origin="308 8"/>
+  <polygon class="wimpel-9" points="340,8 356,8 348,36" fill="#6a3f7a" opacity=".7" transform-origin="348 8"/>
+</svg>
+</div>
 
 <header>
-  <div class="tent-stripe"></div>
-  <div class="header-inner">
-    <div class="header-stars">★ ✦ ★ ✦ ★</div>
-    <div class="header-title">🎪 Sandras Haushalts-Zirkus 🎪</div>
-    <div class="header-sub">Manege frei — für ein aufgeräumtes Zuhause!</div>
-  </div>
-  <div class="tent-stripe"></div>
+  <a href="index.html" class="header-back">← Mein Leben</a>
+  <div class="header-title">Mein Haushalt</div>
+  <div class="header-sub">Ordnung ist ein Mittel — nicht das Ziel</div>
 </header>
 
-<!-- RÄUME -->
-<div class="view active" id="view-rooms">
-  <div class="section-banner">
-    <div class="section-banner-text">🤹 In welchem Raum heute?</div>
-    <div class="section-banner-sub">Wähle deinen Auftrittsort</div>
+<div class="tier-zeile">
+  <div class="tier-linie"></div>
+  <span class="tier">🧺</span>
+  <span class="tier">🌿</span>
+  <span class="tier">🫧</span>
+  <span class="tier">🏠</span>
+  <span class="tier">🌸</span>
+  <span class="tier">✨</span>
+  <span class="tier">🧹</span>
+  <div class="tier-linie"></div>
+</div>
+
+<!-- TAGES-MOTTO -->
+<div class="intention-wrap">
+  <div class="intention-top"><div class="intention-dot"></div><div class="intention-label">Heute putze ich</div></div>
+  <div class="intention-text" id="tagesMottoText">wird geladen…</div>
+</div>
+
+<!-- FORTSCHRITT -->
+<div class="progress-wrap">
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="progress-label">
+    <span class="progress-text" id="progressText">0 von 0 erledigt</span>
+    <span class="progress-pct" id="progressPct">0 %</span>
   </div>
-  <div class="rooms-grid">
-    <div class="room-card" data-room="Wohnzimmer" data-icon="🛋️" onclick="selectRoom(this)">
-      <span class="room-icon">🛋️</span><div class="room-name">Wohnzimmer</div>
+</div>
+
+<div class="manege-line">✦ ✦ ✦</div>
+
+<!-- BLÖCKE -->
+
+<!-- 1. MORGENROUTINE -->
+<div class="block-wrap">
+  <div class="block-header morgen" onclick="toggleBlock('morgen')">
+    <div class="block-icon">🌅</div>
+    <div class="block-info">
+      <div class="block-name">Morgenroutine</div>
+      <div class="block-sub">Schlafzimmer · Bad wartet schon auf dich</div>
     </div>
-    <div class="room-card" data-room="Küche" data-icon="🍳" onclick="selectRoom(this)">
-      <span class="room-icon">🍳</span><div class="room-name">Küche</div>
+    <div class="block-badge" id="badge-morgen">0 / 3</div>
+    <div class="block-arr">▼</div>
+  </div>
+  <div class="block-content" id="content-morgen">
+    <div class="block-mood">Der Raum wartet schon auf dich. Alles liegt bereit.</div>
+    <div class="raum-section">
+      <div class="raum-label"><span class="raum-icon">🌙</span> Schlafzimmer</div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="morgen">
+        <div class="task-check"></div>
+        <div><div class="task-name">Bett machen</div><div class="task-note">Bettzeug aufschütteln, Kissen aufstellen</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="morgen">
+        <div class="task-check"></div>
+        <div><div class="task-name">Medikamente griffbereit</div><div class="task-note">Euthyrox, Sertralin, Magenschutz — in Reihenfolge</div></div>
+      </div>
     </div>
-    <div class="room-card" data-room="Schlafzimmer" data-icon="🌙" onclick="selectRoom(this)">
-      <span class="room-icon">🌙</span><div class="room-name">Schlafzimmer</div>
-    </div>
-    <div class="room-card" data-room="Bad" data-icon="🛁" onclick="selectRoom(this)">
-      <span class="room-icon">🛁</span><div class="room-name">Bad</div>
-    </div>
-    <div class="room-card" data-room="Vorzimmer" data-icon="🚪" onclick="selectRoom(this)">
-      <span class="room-icon">🚪</span><div class="room-name">Vorzimmer</div>
-    </div>
-    <div class="room-card" data-room="Atelier" data-icon="🎨" onclick="selectRoom(this)">
-      <span class="room-icon">🎨</span><div class="room-name">Atelier</div>
-    </div>
-    <div class="room-card" data-room="Essplatz" data-icon="🪑" onclick="selectRoom(this)">
-      <span class="room-icon">🪑</span><div class="room-name">Essplatz</div>
-    </div>
-    <div class="room-card" data-room="Klo" data-icon="🚽" onclick="selectRoom(this)">
-      <span class="room-icon">🚽</span><div class="room-name">Klo</div>
+    <div class="raum-section">
+      <div class="raum-label"><span class="raum-icon">🛁</span> Bad</div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="morgen">
+        <div class="task-check"></div>
+        <div><div class="task-name">Bad frisch herrichten</div><div class="task-note">Waschbecken sauber, frisches Handtuch bereit</div></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- FÜHLEN -->
-<div class="view" id="view-feel">
-  <div class="nav-dots"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
-  <div class="q-card">
-    <div class="q-step">🎭 Akt 1 · Fühlen</div>
-    <div class="q-text">Wie fühlt sich <span class="q-room-name" id="feelRoomName"></span> gerade an?</div>
-    <div class="chips" id="feelChips">
-      <div class="chip" data-color="sage" onclick="toggleChip(this)">🌿 ruhig & stimmig</div>
-      <div class="chip" data-color="gold" onclick="toggleChip(this)">✨ lebendig</div>
-      <div class="chip" data-color="terra" onclick="toggleChip(this)">🍂 schwer & voll</div>
-      <div class="chip" data-color="rose" onclick="toggleChip(this)">🌸 sanft & warm</div>
-      <div class="chip" data-color="lavender" onclick="toggleChip(this)">💜 unruhig</div>
-      <div class="chip" data-color="terra" onclick="toggleChip(this)">🌫️ stagnierend</div>
-      <div class="chip" data-color="sage" onclick="toggleChip(this)">🌬️ frisch & klar</div>
-      <div class="chip" data-color="rose" onclick="toggleChip(this)">🕯️ gemütlich</div>
+<!-- 2. SCHREIBTISCHBLOCK -->
+<div class="block-wrap">
+  <div class="block-header schreibtisch" onclick="toggleBlock('schreibtisch')">
+    <div class="block-icon">📚</div>
+    <div class="block-info">
+      <div class="block-name">Schreibtischblock</div>
+      <div class="block-sub">Atelier · kein visuelles Rauschen</div>
     </div>
-    <textarea class="ta" id="feelText" placeholder="Oder mit eigenen Worten..."></textarea>
+    <div class="block-badge" id="badge-schreibtisch">0 / 2</div>
+    <div class="block-arr">▼</div>
   </div>
-  <button class="btn-primary" onclick="goToNeeds()">Weiter → Akt 2</button>
-  <button class="btn-secondary" onclick="showView('view-rooms');setNav('bnav-home')">‹ Zurück</button>
-</div>
-
-<!-- BRAUCHEN -->
-<div class="view" id="view-needs">
-  <div class="nav-dots"><div class="dot"></div><div class="dot active"></div><div class="dot"></div></div>
-  <div class="q-card">
-    <div class="q-step">🎪 Akt 2 · Lauschen</div>
-    <div class="q-text">Was braucht <span class="q-room-name" id="needRoomName"></span> gerade?</div>
-    <div class="chips" id="needChips">
-      <div class="chip" data-color="sage" onclick="toggleChip(this)">🌬️ Luft & Lüften</div>
-      <div class="chip" data-color="gold" onclick="toggleChip(this)">🕯️ Licht & Wärme</div>
-      <div class="chip" data-color="terra" onclick="toggleChip(this)">🧹 leichtes Aufräumen</div>
-      <div class="chip" data-color="rose" onclick="toggleChip(this)">🌸 ein schönes Detail</div>
-      <div class="chip" data-color="sage" onclick="toggleChip(this)">🌱 Pflanzen gießen</div>
-      <div class="chip" data-color="lavender" onclick="toggleChip(this)">✨ Energie reinigen</div>
-      <div class="chip" data-color="terra" onclick="toggleChip(this)">📦 etwas weggeben</div>
-      <div class="chip" data-color="gold" onclick="toggleChip(this)">🛋️ nichts — es ist gut so</div>
-      <div class="chip" data-color="rose" onclick="toggleChip(this)">🎨 einen kreativen Touch</div>
-      <div class="chip" data-color="sage" onclick="toggleChip(this)">🔇 Stille & Ruhe</div>
-    </div>
-    <span class="needs-label">Noch etwas das du spürst?</span>
-    <textarea class="ta" id="needText" placeholder="Ein Gedanke, eine Idee..."></textarea>
-  </div>
-  <button class="btn-primary" onclick="saveAndShow()">🎊 Speichern & Vorhang!</button>
-  <button class="btn-secondary" onclick="showView('view-feel')">‹ Zurück</button>
-</div>
-
-<!-- AFFIRMATION -->
-<div class="view" id="view-affirm">
-  <div class="nav-dots"><div class="dot"></div><div class="dot"></div><div class="dot active"></div></div>
-  <div class="affirmation-card">
-    <span class="affirmation-icon" id="affirmIcon"></span>
-    <div class="affirmation-room" id="affirmRoom"></div>
-    <div class="affirmation-feeling" id="affirmFeeling"></div>
-    <div class="affirmation-need" id="affirmNeed"></div>
-    <div class="affirmation-text" id="affirmText"></div>
-  </div>
-  <button class="btn-primary" onclick="openHistory()">🌿 Alle Räume ansehen</button>
-  <button class="btn-secondary" onclick="startNew()">Neue Vorstellung 🎪</button>
-</div>
-
-<!-- VERLAUF -->
-<div class="view" id="view-history">
-  <div class="history-title">🎭 Meine Raumgefühle</div>
-  <div id="historyList"></div>
-  <button class="btn-primary" onclick="startNew()">🎪 Neue Vorstellung</button>
-</div>
-
-<!-- TAGESPLAN -->
-<div class="view" id="view-tagesplan" style="padding-bottom:5rem;">
-  <div class="day-header">
-    <div class="day-label" id="tp-wochentag"></div>
-    <div class="day-title" id="tp-motto"></div>
-    <div class="day-sub">30 Minuten · ein Fokus · ganz konkrete Schritte</div>
-  </div>
-  <div class="day-focus">
-    <div class="focus-label">⏱ Heute's Nummer im Programm</div>
-    <div class="focus-room" id="tp-focus-room"></div>
-    <ul class="task-list" id="tp-daily-tasks"></ul>
-    <div class="progress-wrap">
-      <div class="progress-bar"><div class="progress-fill" id="tp-progress-fill" style="width:0%"></div></div>
-      <div class="progress-text" id="tp-progress-text">0 von 0 erledigt</div>
+  <div class="block-content" id="content-schreibtisch">
+    <div class="block-mood">Eine freie Fläche. Nicht perfekt — nur klar.</div>
+    <div class="raum-section">
+      <div class="raum-label"><span class="raum-icon">🖊️</span> Schreibtisch</div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="schreibtisch">
+        <div class="task-check"></div>
+        <div><div class="task-name">Schreibtisch frei machen</div><div class="task-note">Uni-Unterlagen verräumt, eine freie Arbeitsfläche</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="schreibtisch">
+        <div class="task-check"></div>
+        <div><div class="task-name">Offene Zettel an ihren Platz</div><div class="task-note">Notizen, Aufgaben, Papiere — nichts auf dem Tisch lassen</div></div>
+      </div>
     </div>
   </div>
-  <div class="big-section-title">🗂 Große Nummern <span style="font-size:12px;font-family:Nunito,sans-serif;font-weight:700;color:var(--muted);margin-left:.3rem">(wann immer du kannst)</span></div>
-  <div id="tp-big-tasks"></div>
 </div>
 
-<!-- MINIMUM-TAG -->
-<div class="view" id="view-minimum" style="padding-bottom:5rem;">
-
-  <div class="min-hero">
-    <div class="min-hero-date" id="min-date"></div>
-    <div class="min-hero-title" id="min-hero-title">Heute's Mindestprogramm ✨</div>
-    <div class="min-hero-sub">~15 Minuten · jeden Tag · du schaffst das!</div>
-    <div class="min-streak" id="min-streak">🔥 <span id="min-streak-num">0</span> Tage in Folge!</div>
+<!-- 3. MITTAGSPAUSE -->
+<div class="block-wrap">
+  <div class="block-header mittag" onclick="toggleBlock('mittag')">
+    <div class="block-icon">☀️</div>
+    <div class="block-info">
+      <div class="block-name">Mittagspause</div>
+      <div class="block-sub">Küche · kleiner Reset</div>
+    </div>
+    <div class="block-badge" id="badge-mittag">0 / 2</div>
+    <div class="block-arr">▼</div>
   </div>
-
-  <div class="min-done-banner" id="min-done-banner">
-    <span class="min-done-icon" id="min-done-icon">🎉</span>
-    <div class="min-done-text" id="min-done-text">Alles erledigt!</div>
-    <div class="min-done-sub" id="min-done-sub">Du bist großartig! 🌟</div>
+  <div class="block-content" id="content-mittag">
+    <div class="block-mood">Geschirr direkt weg — damit die Nachmittagsstimmung sich nicht mit Küchenunordnung mischt.</div>
+    <div class="raum-section">
+      <div class="raum-label"><span class="raum-icon">🍳</span> Küche</div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="mittag">
+        <div class="task-check"></div>
+        <div><div class="task-name">Geschirr wegräumen</div><div class="task-note">Direkt nach dem Essen — nicht bis später warten</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="mittag">
+        <div class="task-check"></div>
+        <div><div class="task-name">Küche kurz wischen</div><div class="task-note">Arbeitsfläche frei für den Nachmittag</div></div>
+      </div>
+    </div>
   </div>
-
-  <div class="min-progress-row">
-    <div class="min-progress-bar"><div class="min-progress-fill" id="min-prog-fill" style="width:0%"></div></div>
-    <div class="min-progress-count" id="min-prog-count">0/8</div>
-  </div>
-
-  <div class="min-items" id="min-items-list"></div>
-
 </div>
+
+<!-- 4. HAUSHALTSBLOCK — DER KERNBLOCK -->
+<div class="block-wrap">
+  <div class="block-header haushalt" onclick="toggleBlock('haushalt')">
+    <div class="block-icon">🧹</div>
+    <div class="block-info">
+      <div class="block-name">Haushaltsblock</div>
+      <div class="block-sub">In der Reihenfolge deines Morgens</div>
+    </div>
+    <div class="block-badge" id="badge-haushalt">0 / 12</div>
+    <div class="block-arr">▼</div>
+  </div>
+  <div class="block-content" id="content-haushalt">
+    <div class="block-mood">Du putzt nicht die Wohnung. Du bereitest deinen nächsten Morgen vor.</div>
+
+    <div class="raum-section">
+      <div class="raum-label"><span class="raum-icon">🌙</span> Schlafzimmer — dein Start</div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
+        <div class="task-check"></div>
+        <div><div class="task-name">Nachtkästchen abwischen</div><div class="task-note">Nur das Nötigste zurück: Lampe, Buch, Wasser</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
+        <div class="task-check"></div>
+        <div><div class="task-name">Kleidung verräumen</div><div class="task-note">Kein „vielleicht noch mal tragen"-Stapel</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
+        <div class="task-check"></div>
+        <div><div class="task-name">Fenster kurz lüften + Boden fegen</div><div class="task-note">5 Minuten frische Luft, Boden saugen oder fegen</div></div>
+      </div>
+    </div>
+
+    <div class="raum-section">
+      <div class="raum-label"><span class="raum-icon">🛁</span> Bad — dein Ritual</div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
+        <div class="task-check"></div>
+        <div><div class="task-name">Waschbecken + Armatur reinigen</div><div class="task-note">Essigreiniger, kurz schrubben, trocken wischen</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
+        <div class="task-check"></div>
+        <div><div class="task-name">WC reinigen</div><div class="task-note">Innen schrubben + Außenseite abwischen</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
+        <div class="task-check"></div>
+        <div><div class="task-name">Fenstersims: Produkte prüfen</div><div class="task-note">Leere Flaschen weg, Sims abwischen, sinnvoll zurück</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
+        <div class="task-check"></div>
+        <div><div class="task-name">Badboden fegen + wischen</div><div class="task-note">Sauger oder Besen, dann feuchtes Tuch</div></div>
+      </div>
+    </div>
+
+    <div class="raum-section">
+      <div class="raum-label"><span class="raum-icon">🍳</span> Küche — dein Frühstück</div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
+        <div class="task-check"></div>
+        <div><div class="task-name">Abwasch erledigen</div><div class="task-note">Alles Schmutzige rein, Geschirrspüler einschalten</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
+        <div class="task-check"></div>
+        <div><div class="task-name">Teetasse + Frühstück vorbereiten</div><div class="task-note">Teefach offen, Tasse bereit, Zutaten sichtbar</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
+        <div class="task-check"></div>
+        <div><div class="task-name">Küchenboden fegen</div><div class="task-note">Besonders unter dem Tisch und vor dem Herd</div></div>
+      </div>
+    </div>
+
+    <div class="raum-section">
+      <div class="raum-label"><span class="raum-icon">🛋️</span> Wohnzimmer — dein Abend</div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
+        <div class="task-check"></div>
+        <div><div class="task-name">Abendstimmung herstellen</div><div class="task-note">Kissen zurecht, Lottedecke falten, Kerze bereit — nicht sauber machen, nur ankommen lassen</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. ICH-BLOCK -->
+<div class="block-wrap">
+  <div class="block-header ich" onclick="toggleBlock('ich')">
+    <div class="block-icon">🌸</div>
+    <div class="block-info">
+      <div class="block-name">Ich-Block</div>
+      <div class="block-sub">Bad herrichten für dein Pflegegefühl</div>
+    </div>
+    <div class="block-badge" id="badge-ich">0 / 2</div>
+    <div class="block-arr">▼</div>
+  </div>
+  <div class="block-content" id="content-ich">
+    <div class="block-mood">Körperpflege fühlt sich besser an, wenn der Raum schon bereit ist.</div>
+    <div class="raum-section">
+      <div class="raum-label"><span class="raum-icon">🛁</span> Bad für den Ich-Block</div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="ich">
+        <div class="task-check"></div>
+        <div><div class="task-name">Bad als Ritual herrichten</div><div class="task-note">Handtücher bereit, Körperöl + Pflegeprodukte auf Platz</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="ich">
+        <div class="task-check"></div>
+        <div><div class="task-name">Bad danach in Ordnung lassen</div><div class="task-note">Nicht bis morgen warten — 2 Minuten jetzt</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. ABENDROUTINE -->
+<div class="block-wrap">
+  <div class="block-header abend" onclick="toggleBlock('abend')">
+    <div class="block-icon">🌙</div>
+    <div class="block-info">
+      <div class="block-name">Abendroutine</div>
+      <div class="block-sub">Abschluss geben · nicht aufräumen</div>
+    </div>
+    <div class="block-badge" id="badge-abend">0 / 2</div>
+    <div class="block-arr">▼</div>
+  </div>
+  <div class="block-content" id="content-abend">
+    <div class="block-mood">Nicht sauber machen. Den Tag ankommen lassen.</div>
+    <div class="raum-section">
+      <div class="raum-label"><span class="raum-icon">🛋️</span> Wohnzimmer + Küche</div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="abend">
+        <div class="task-check"></div>
+        <div><div class="task-name">Küche für den Morgen schließen</div><div class="task-note">Reste wegräumen, Arbeitsfläche frei — Tasse für morgen</div></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-block="abend">
+        <div class="task-check"></div>
+        <div><div class="task-name">Wohnzimmer abschließen</div><div class="task-note">Kissen zurecht, Lotte-Platz schön, Kerze auspusten</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="manege-line">✦ ✦ ✦</div>
+
+<!-- GROSSE AUFGABEN -->
+<div class="gross-wrap">
+  <div class="gross-label">Große Aufgaben · wenn Zeit und Muße da sind</div>
+  <div id="grossContainer"></div>
+</div>
+
+<!-- TOAST -->
+<div id="haushalt-toast"></div>
+
+<!-- KONFETTI -->
+<div class="confetti-wrap" id="confettiWrap"></div>
 
 <!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <button class="bnav-btn on" id="bnav-home" onclick="startNew()">
-    <div class="bnav-icon">🎪</div><div class="bnav-label">FÜHLEN</div>
-  </button>
-  <button class="bnav-btn" id="bnav-min" onclick="openMinimum()">
-    <div class="bnav-icon">⚡</div><div class="bnav-label">MINIMUM</div>
-  </button>
-  <button class="bnav-btn" id="bnav-plan" onclick="openTagesplan()">
-    <div class="bnav-icon">📋</div><div class="bnav-label">TAGESPLAN</div>
-  </button>
-  <button class="bnav-btn" id="bnav-hist" onclick="openHistory()">
-    <div class="bnav-icon">🌿</div><div class="bnav-label">VERLAUF</div>
-  </button>
-</div>
+<nav class="nav-bottom">
+  <a href="index.html" class="nav-back-btn">← zurück zu Mein Leben</a>
+</nav>
 
 <script>
-(function(){
-  var colors=['#d42b2b','#f5c518','#00a8a8','#e8478a','#7b3fa0','#fff8e7','#e84040'];
-  var wrap=document.getElementById('confetti');
-  for(var i=0;i<20;i++){
-    var d=document.createElement('div');d.className='cdot';
-    d.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;'+
-      'background:'+colors[Math.floor(Math.random()*colors.length)]+';'+
-      'animation-duration:'+(7+Math.random()*10)+'s;'+
-      'animation-delay:'+Math.random()*8+'s;'+
-      'width:'+(5+Math.random()*8)+'px;height:'+(5+Math.random()*8)+'px;'+
-      'border-radius:'+(Math.random()>.5?'50%':'3px')+';';
+// ══ DATEN ══
+
+var TAGES_MOTTOS = {
+  0: 'Sonntag · Pflanzen gießen & den Raum für die neue Woche vorbereiten',
+  1: 'Montag · Küche & Wohnzimmer — frischer Start in die Woche',
+  2: 'Dienstag · Bad & WC — das Ritual des Morgens verdient einen sauberen Rahmen',
+  3: 'Mittwoch · Vorzimmer & Flur — der erste Blick nach Hause',
+  4: 'Donnerstag · Wohnzimmer — Lottes Platz, dein Abend',
+  5: 'Freitag · Atelier & Schreibtisch — Woche abschließen, Platz für Neues',
+  6: 'Samstag · Schlafzimmer & Wäsche — das Bett, das wartet'
+};
+
+var GROSS_AUFGABEN = [
+  {raum:'🎨 Atelier', text:'Papierberg Schreibtisch (1h): Alle Papiere in Stapel: Uni, VHS, privat, weg. Dann jeden Stapel abheften oder entsorgen.', done:false},
+  {raum:'🎨 Atelier', text:'Boden Atelier: Alle Mappen, Ordner, losen Papiere vom Boden — einen Heimplatz für jede Kategorie.', done:false},
+  {raum:'🚪 Vorzimmer', text:'Ablagebank komplett leeren: Jeden Gegenstand bewusst entscheiden. Nur Ausgangs-Dinge gehören dort hin.', done:false},
+  {raum:'🚪 Vorzimmer', text:'Garderobe komplett: Jeden Mantel durchgehen. Was wurde letztes Jahr nicht getragen? Weggeben-Sackerl.', done:false},
+  {raum:'🛋️ Wohnzimmer', text:'Bücherwand: Staubwischen hinter Büchern, eine Reihe neu ordnen.', done:false},
+  {raum:'🍳 Küche', text:'Oberschränke: Einen Schrank ausräumen. Abgelaufenes entsorgen, neu gruppieren.', done:false},
+  {raum:'🍳 Küche', text:'Kühlschrank komplett: Alles raus, alle Fächer mit Essigreiniger abwischen, neu einräumen.', done:false},
+  {raum:'🛁 Bad', text:'Badewannenrand + Fugen: Schimmelentferner, 10 Min einwirken, alte Zahnbürste zum Schrubben.', done:false},
+  {raum:'🌙 Schlafzimmer', text:'Wäsche sortieren: Alle Wäschestapel zusammentragen. Falten, einräumen. Was passt nicht mehr?', done:false},
+  {raum:'🗃️ Allgemein', text:'Weggeben-Sackerl: Durch die ganze Wohnung, einen großen Sack befüllen. Kleidung → Caritas. Bücher → Bücherschrank Mariahilf.', done:false},
+  {raum:'🌱 Balkon', text:'Balkon-Regal: Alle Töpfe und Geräte raus, Regal abwischen, Töpfe mit Frühjahrspflanzen neu bepflanzen.', done:false},
+];
+
+// ══ STATE ══
+
+var blockState = {};  // blockId -> array of done indices
+var grossDone = [];
+
+function loadState() {
+  try {
+    var s = JSON.parse(localStorage.getItem('haushalt_v2') || 'null');
+    if (s) { blockState = s.blocks || {}; grossDone = s.gross || []; }
+  } catch(e) {}
+}
+function saveState() {
+  try { localStorage.setItem('haushalt_v2', JSON.stringify({blocks: blockState, gross: grossDone})); } catch(e) {}
+}
+
+// ══ INIT ══
+
+loadState();
+
+// Tages-Motto
+var dow = new Date().getDay();
+document.getElementById('tagesMottoText').textContent = TAGES_MOTTOS[dow];
+
+// Große Aufgaben rendern
+var gc = document.getElementById('grossContainer');
+GROSS_AUFGABEN.forEach(function(g, i) {
+  if (grossDone.indexOf(i) >= 0) g.done = true;
+  var div = document.createElement('div');
+  div.className = 'gross-item' + (g.done ? ' done' : '');
+  div.innerHTML = '<div class="gross-check"></div><div><div class="task-name">' + g.text + '</div><div class="gross-raum">' + g.raum + '</div></div>';
+  div.addEventListener('click', function() {
+    g.done = !g.done;
+    var idx = grossDone.indexOf(i);
+    if (g.done && idx < 0) grossDone.push(i);
+    else if (!g.done && idx >= 0) grossDone.splice(idx, 1);
+    div.classList.toggle('done', g.done);
+    saveState();
+    updateProgress();
+  });
+  gc.appendChild(div);
+});
+
+// Gespeicherten Task-Zustand wiederherstellen
+document.querySelectorAll('.task-item').forEach(function(item, globalIdx) {
+  var block = item.dataset.block;
+  var blockItems = Array.from(document.querySelectorAll('.task-item[data-block="' + block + '"]'));
+  var idx = blockItems.indexOf(item);
+  if (blockState[block] && blockState[block].indexOf(idx) >= 0) {
+    item.classList.add('done');
+  }
+});
+
+updateAllBadges();
+updateProgress();
+
+// ══ TOGGLE BLOCK ══
+
+function toggleBlock(id) {
+  var header = document.querySelector('.block-header.' + id);
+  var content = document.getElementById('content-' + id);
+  var isOpen = header.classList.contains('open');
+  // Alle schließen
+  document.querySelectorAll('.block-header').forEach(function(h) { h.classList.remove('open'); });
+  document.querySelectorAll('.block-content').forEach(function(c) { c.classList.remove('open'); });
+  if (!isOpen) {
+    header.classList.add('open');
+    content.classList.add('open');
+  }
+}
+
+// ══ TOGGLE TASK ══
+
+function toggleTask(item) {
+  var block = item.dataset.block;
+  var blockItems = Array.from(document.querySelectorAll('.task-item[data-block="' + block + '"]'));
+  var idx = blockItems.indexOf(item);
+  item.classList.toggle('done');
+  if (!blockState[block]) blockState[block] = [];
+  var pos = blockState[block].indexOf(idx);
+  if (item.classList.contains('done')) {
+    if (pos < 0) blockState[block].push(idx);
+    var allDone = blockItems.every(function(i) { return i.classList.contains('done'); });
+    if (allDone) showToast('✦ ' + block + ' — alles erledigt!');
+  } else {
+    if (pos >= 0) blockState[block].splice(pos, 1);
+  }
+  saveState();
+  updateBadge(block);
+  updateProgress();
+}
+
+// ══ BADGES ══
+
+function updateBadge(block) {
+  var items = document.querySelectorAll('.task-item[data-block="' + block + '"]');
+  var done = document.querySelectorAll('.task-item[data-block="' + block + '"].done').length;
+  var badge = document.getElementById('badge-' + block);
+  if (!badge) return;
+  badge.textContent = done + ' / ' + items.length;
+  badge.classList.toggle('done-all', done === items.length);
+}
+
+function updateAllBadges() {
+  ['morgen','schreibtisch','mittag','haushalt','ich','abend'].forEach(updateBadge);
+}
+
+// ══ PROGRESS ══
+
+function updateProgress() {
+  var total = document.querySelectorAll('.task-item').length + GROSS_AUFGABEN.length;
+  var done = document.querySelectorAll('.task-item.done').length + grossDone.length;
+  var pct = total > 0 ? Math.round(done / total * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = done + ' von ' + total + ' erledigt';
+  document.getElementById('progressPct').textContent = pct + ' %';
+  if (done === total && total > 0) { launchConfetti(); showToast('🎊 Alles erledigt — was für ein Tag!'); }
+}
+
+// ══ TOAST ══
+
+function showToast(msg) {
+  var t = document.getElementById('haushalt-toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2800);
+}
+
+// ══ KONFETTI ══
+
+function launchConfetti() {
+  var wrap = document.getElementById('confettiWrap');
+  wrap.innerHTML = '';
+  var colors = ['#b8294a','#c9893a','#1a2744','#6a3f7a','#5e8a5a','#f8e8b8'];
+  for (var i = 0; i < 60; i++) {
+    var d = document.createElement('div');
+    d.className = 'cdot';
+    d.style.cssText = [
+      'left:' + Math.random() * 100 + '%',
+      'top:-20px',
+      'width:' + (6 + Math.random() * 8) + 'px',
+      'height:' + (6 + Math.random() * 8) + 'px',
+      'background:' + colors[Math.floor(Math.random() * colors.length)],
+      'animation-duration:' + (2 + Math.random() * 3) + 's',
+      'animation-delay:' + Math.random() * 1.5 + 's',
+      'opacity:0.8'
+    ].join(';');
     wrap.appendChild(d);
   }
-})();
-
-var currentRoom='',currentIcon='';
-
-var AFFIRMATIONS={
-  'ruhig':'Dieser Raum trägt mich. Ich darf hier einfach sein.',
-  'lebendig':'Leben strömt durch diesen Raum — und durch mich.',
-  'schwer':'Ich erkenne, was der Raum trägt. Leichter werden darf ein sanfter Prozess sein.',
-  'warm':'Wärme und Geborgenheit — ich habe mir einen schönen Ort geschaffen.',
-  'unruhig':'Ich atme tief. Der Raum darf zur Ruhe kommen — ich auch.',
-  'stagnierend':'Neues kann nur entstehen, wenn altes Platz macht. Ich beginne sanft.',
-  'klar':'Klarheit im Raum — Klarheit in mir.',
-  'gemütlich':'Hier ist mein Zuhause. Warm, mein, lebendig.',
-  'gut so':'Manchmal ist das Schönste: innehalten und erkennen — es ist gut so.',
-  'default':'Ich sorge für meinen Raum mit Liebe — und mein Raum sorgt für mich.'
-};
-
-function showView(id){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
-function setNav(activeId){['bnav-home','bnav-min','bnav-plan','bnav-hist'].forEach(function(id){document.getElementById(id).classList.toggle('on',id===activeId);});}
-function selectRoom(card){
-  document.querySelectorAll('.room-card').forEach(function(c){c.classList.remove('selected');});
-  card.classList.add('selected');
-  currentRoom=card.getAttribute('data-room');
-  currentIcon=card.getAttribute('data-icon');
-  document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on','sage','rose','lavender','terra','gold');});
-  document.getElementById('feelText').value='';document.getElementById('needText').value='';
-  document.getElementById('feelRoomName').textContent=currentRoom;
-  document.getElementById('needRoomName').textContent=currentRoom;
-  setTimeout(function(){showView('view-feel');},150);
-}
-function toggleChip(chip){
-  var color=chip.getAttribute('data-color')||'gold';
-  if(chip.classList.contains('on')){chip.classList.remove('on','sage','rose','lavender','terra','gold');}
-  else{chip.classList.add('on',color);}
-}
-function getSelected(id){return Array.from(document.querySelectorAll('#'+id+' .chip.on')).map(function(c){return c.textContent.trim();});}
-function goToNeeds(){showView('view-needs');}
-function getAffirmation(f,n){
-  var all=f.concat(n).join(' ').toLowerCase();
-  for(var k in AFFIRMATIONS){if(k!=='default'&&all.indexOf(k)>=0)return AFFIRMATIONS[k];}
-  return AFFIRMATIONS['default'];
-}
-function saveAndShow(){
-  var feelings=getSelected('feelChips');var fe=document.getElementById('feelText').value.trim();if(fe)feelings.push(fe);
-  var needs=getSelected('needChips');var ne=document.getElementById('needText').value.trim();if(ne)needs.push(ne);
-  document.getElementById('affirmIcon').textContent=currentIcon;
-  document.getElementById('affirmRoom').textContent=currentRoom;
-  document.getElementById('affirmFeeling').textContent='"'+(feelings.length?feelings.join(', '):'still beobachtend')+'"';
-  document.getElementById('affirmNeed').textContent='Es braucht: '+(needs.length?needs.join(', '):'einfach innehalten');
-  document.getElementById('affirmText').textContent=getAffirmation(feelings,needs);
-  try{var e=JSON.parse(localStorage.getItem('raumgefuehl_v1')||'[]');e.unshift({room:currentRoom,icon:currentIcon,feelings:feelings,needs:needs,date:new Date().toISOString()});if(e.length>50)e=e.slice(0,50);localStorage.setItem('raumgefuehl_v1',JSON.stringify(e));}catch(ex){}
-  showView('view-affirm');
-}
-function renderHistory(){
-  var entries=[];try{entries=JSON.parse(localStorage.getItem('raumgefuehl_v1')||'[]');}catch(e){}
-  var el=document.getElementById('historyList');
-  if(!entries.length){el.innerHTML='<div class="history-empty">🎪 Noch keine Vorstellung gegeben.<br>Beginne heute!</div>';return;}
-  var days=['So','Mo','Di','Mi','Do','Fr','Sa'],months=['Jän','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
-  el.innerHTML=entries.slice(0,20).map(function(e){
-    var d=new Date(e.date);
-    return '<div class="history-item"><div class="history-date">'+days[d.getDay()]+', '+d.getDate()+'. '+months[d.getMonth()]+' · '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+' Uhr</div>'+
-    '<div class="history-room">'+e.icon+' '+e.room+'</div>'+
-    '<div class="history-details">'+(e.feelings&&e.feelings.length?'💭 '+e.feelings.join(' · ')+'<br>':'')+(e.needs&&e.needs.length?'🌿 '+e.needs.join(' · '):'')+
-    '</div></div>';
-  }).join('');
-}
-function openHistory(){renderHistory();showView('view-history');setNav('bnav-hist');}
-function openTagesplan(){renderTagesplan();showView('view-tagesplan');setNav('bnav-plan');}
-function startNew(){document.querySelectorAll('.room-card').forEach(function(c){c.classList.remove('selected');});showView('view-rooms');setNav('bnav-home');}
-
-function openMinimum(){renderMinimum();showView('view-minimum');setNav('bnav-min');}
-
-var MIN_TASKS=[
-  {id:'katzenklo', icon:'🐱', color:'#e8478a',
-   text:'Katzenklo ausmisten',
-   sub:'Klumpen raus, Streu prüfen — Rudi & Timmy danken dir!', min:3},
-  {id:'katzenaepfe', icon:'🥣', color:'#7b3fa0',
-   text:'Rudi & Timmy Näpfe',
-   sub:'Altes Nasses entfernen, frisches Futter rein, Wassernapf kontrollieren', min:2},
-  {id:'lottenapf', icon:'🐶', color:'#f5c518',
-   text:'Lottes Wassernapf',
-   sub:'Altes Wasser raus, frisches Wasser rein — jeden Tag!', min:1},
-  {id:'abwasch', icon:'🍽️', color:'#00a8a8',
-   text:'Abwasch / Spüler',
-   sub:'Alles Schmutzige rein, nix über Nacht liegenlassen', min:4},
-  {id:'herd', icon:'🍳', color:'#d42b2b',
-   text:'Herd & Küchentisch kurz abwischen',
-   sub:'Feuchtes Tuch — 1 Minute reicht! Nach dem Kochen sofort machen.', min:2},
-  {id:'muell', icon:'🗑️', color:'#7b3fa0',
-   text:'Mülleimer prüfen',
-   sub:'Voll? Rausnehmen und neuen Sack einlegen', min:1},
-  {id:'bett', icon:'🛏️', color:'#e8478a',
-   text:'Bett zurechtlegen',
-   sub:'Decke grob zusammenfalten, Polster aufstellen — macht den ganzen Raum freundlicher!', min:1},
-  {id:'medis', icon:'💊', color:'#00a8a8',
-   text:'Medikamente morgens',
-   sub:'Euthyrox, Magenschutz, Sertralin, Blutdruck — du sorgst für dich!', min:1},
-];
-
-var DONE_MESSAGES=[
-  {icon:'🎪', text:'Manege frei — du hast gewonnen!', sub:'Die Wohnung applaudiert! 👏'},
-  {icon:'🤹', text:'Jongliert wie eine Profi!', sub:'Alle Bälle in der Luft — alle Tasks erledigt!'},
-  {icon:'🎉', text:'Perfekte Vorstellung!', sub:'Heute läuft der Zirkus auf Hochtouren!'},
-  {icon:'⭐', text:'Stern der Vorstellung!', sub:'Sandra — einfach unaufhaltbar!'},
-  {icon:'🥳', text:'Das Minimum ist Maximum!', sub:'Du bist einfach wunderbar!'},
-  {icon:'🌟', text:'Heute glänzt alles!', sub:'Rudi, Timmy und Lotte sind stolz auf dich!'},
-];
-
-function getMinKey(){return 'min_'+new Date().toISOString().slice(0,10);}
-function loadMinChecked(){try{return JSON.parse(localStorage.getItem(getMinKey())||'[]');}catch(e){return[];}}
-function saveMinChecked(arr){try{localStorage.setItem(getMinKey(),JSON.stringify(arr));}catch(e){}}
-
-function getStreak(){
-  var streak=0,d=new Date();
-  for(var i=0;i<30;i++){
-    var key='min_'+d.toISOString().slice(0,10);
-    try{
-      var arr=JSON.parse(localStorage.getItem(key)||'[]');
-      if(arr.length===MIN_TASKS.length){streak++;}
-      else if(i>0){break;}
-    }catch(e){break;}
-    d.setDate(d.getDate()-1);
-  }
-  return streak;
-}
-
-function renderMinimum(){
-  var checked=loadMinChecked();
-  var today=new Date();
-  var days=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
-  var months=['Jänner','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
-  document.getElementById('min-date').textContent=days[today.getDay()]+', '+today.getDate()+'. '+months[today.getMonth()];
-
-  // Streak
-  var streak=getStreak();
-  document.getElementById('min-streak-num').textContent=streak;
-
-  // Hero title varies by time of day
-  var h=today.getHours();
-  var greet=h<10?'Guten Morgen, Sandra! ☀️':h<14?'Weiter geht\'s! 💪':h<18?'Nachmittags-Power! ✨':'Noch schnell — du schaffst das! 🌙';
-  document.getElementById('min-hero-title').textContent=greet;
-
-  // Render items
-  var list=document.getElementById('min-items-list');
-  list.innerHTML='';
-  MIN_TASKS.forEach(function(task){
-    var isDone=checked.indexOf(task.id)>=0;
-    var div=document.createElement('div');
-    div.className='min-item'+(isDone?' done':'');
-    div.style.setProperty('--item-color',task.color);
-    div.innerHTML=
-      '<div class="min-check">'+(isDone?'✓':task.icon)+'</div>'+
-      '<div class="min-item-body">'+
-        '<div class="min-item-text">'+task.text+'</div>'+
-        '<div class="min-item-sub">'+task.sub+'</div>'+
-      '</div>'+
-      '<span class="min-item-time">~'+task.min+'m</span>';
-    div.addEventListener('click',function(){
-      var idx=checked.indexOf(task.id);
-      if(idx>=0){checked.splice(idx,1);}else{checked.push(task.id);}
-      saveMinChecked(checked);
-      renderMinimum();
-    });
-    list.appendChild(div);
-  });
-
-  // Progress
-  var pct=Math.round(checked.length/MIN_TASKS.length*100);
-  document.getElementById('min-prog-fill').style.width=pct+'%';
-  document.getElementById('min-prog-count').textContent=checked.length+'/'+MIN_TASKS.length;
-
-  // Done banner
-  var banner=document.getElementById('min-done-banner');
-  if(checked.length===MIN_TASKS.length){
-    var msg=DONE_MESSAGES[Math.floor(today.getDate()%DONE_MESSAGES.length)];
-    document.getElementById('min-done-icon').textContent=msg.icon;
-    document.getElementById('min-done-text').textContent=msg.text;
-    document.getElementById('min-done-sub').textContent=msg.sub;
-    banner.classList.add('visible');
-  }else{
-    banner.classList.remove('visible');
-  }
-}
-
-
-var TAGESPLAN={
-  1:{motto:'Montag · Küche',room:'🍳 Küche',tasks:[
-    {text:'🧴 Essigreiniger + Schwamm (rauer Teil): Herdplatten und den Bereich rund um die Knöpfe abreiben. Hartnäckiges kurz einweichen lassen.',min:7},
-    {text:'🧻 Küchenpapier oder Microfasertuch: Arbeitsplatte links und rechts vom Herd komplett leer räumen, abwischen, alles wieder zurück – aber nur was wirklich dort hingehört.',min:6},
-    {text:'🍽️ Abwasch oder Geschirrspüler: alles Schmutzige rein, nix liegenlassen. Wenn Spüler voll: einschalten.',min:5},
-    {text:'🗑️ Mülleimer im Küchenkasterl prüfen: voll? Rausnehmen, neuen Sack einlegen.',min:4},
-    {text:'🧹 Handfeger + Kehrschaufel: Küchenboden fegen – besonders unter dem Tisch und vor dem Herd.',min:5},
-    {text:'💧 Feuchtes Tuch: Esstisch komplett leer räumen, abwischen. Nur das Nötigste wieder drauf (Salz, Pfeffer, Servietten).',min:3},
-  ]},
-  2:{motto:'Dienstag · Bad & WC',room:'🛁 Bad & WC',tasks:[
-    {text:'🧴 WC-Reiniger (z.B. Domestos oder Essigreiniger): in die Kloschüssel schütten, kurz einwirken lassen. Dann WC-Bürste: innen schrubben, spülen.',min:4},
-    {text:'🧻 Feuchtes Tuch oder Küchenrolle mit Allzweckreiniger: WC-Außenseite abwischen – Sitz oben + unten, Rand, Spülkasten, Boden drumherum.',min:5},
-    {text:'🪥 Zahnputzbecher, Seifenspender, alles vom Waschbecken nehmen. Waschbecken + Armatur mit Essigreiniger + Schwamm schrubben, trocken wischen.',min:6},
-    {text:'🪞 Glasreiniger (oder Essigwasser) + Zeitungspapier oder Microfasertuch: Spiegel wischen bis keine Schlieren da sind.',min:4},
-    {text:'🛁 Fenstersims Bad: jede Flasche einzeln in die Hand nehmen – leer? Weg damit. Danach Sims mit feuchtem Tuch abwischen, alles geordnet zurück.',min:6},
-    {text:'🧹 Besen oder Sauger: Badboden fegen/saugen. Dann feuchter Wischmopp oder Bodentuch: Boden aufwischen.',min:5},
-  ]},
-  3:{motto:'Mittwoch · Vorzimmer & Flur',room:'🚪 Vorzimmer & Flur',tasks:[
-    {text:'📬 Sideboard/Ablage: alles in die Hand nehmen. Bei jedem Ding: Kommt das woanders hin? Kann das weg? Nur was wirklich hierher gehört, bleibt.',min:8},
-    {text:'👟 Schuhe: maximal 2 Paar direkt beim Eingang. Alle anderen in den Schrank oder Kiste. Schmutzige Schuhe säubern oder wegräumen.',min:5},
-    {text:'🧥 Garderobe: ein Kleidungsstück abnehmen das dort schon zu lange hängt – einräumen, waschen oder weggeben.',min:3},
-    {text:'🧹 Handfeger + Kehrschaufel ODER Staubsauger: Flurboden komplett – Katzenhaare, Erde von Schuhen, Papier vom Boden (grüßt Rudi! 😄).',min:6},
-    {text:'💧 Feuchtes Tuch: Türrahmen, Lichtschalter, Türklinke abwischen – wird fast nie gemacht und ist oft sehr schmutzig.',min:4},
-    {text:'📄 Post am Sideboard: 3 Stapel – erledigt/weg, muss ich lesen, muss ich abheften. Sofort verarbeiten was geht.',min:4},
-  ]},
-  4:{motto:'Donnerstag · Wohnzimmer',room:'🛋️ Wohnzimmer',tasks:[
-    {text:'🛋️ Couch: ALLES runter (Kleidung, Kissen, Decken). Polster abklopfen oder Handstaubsauger. Decken falten, Kissen aufstellen, Kleidung WEG von der Couch.',min:7},
-    {text:'☕ Couchtisch (türkiser Tisch): alles drauf nehmen, Tisch mit feuchtem Tuch abwischen. Nur 3 Dinge dürfen zurück: Fernbedienung, eine Kerze, eine Schale.',min:5},
-    {text:'🔍 5-Dinge-Runde: durch den Raum gehen und 5 Dinge finden die woanders hingehören – Gläser in die Küche, Jacken zur Garderobe. Sofort wegtragen.',min:6},
-    {text:'🪣 Staubtuch oder feuchtes Microfasertuch: Sideboard, Fensterbrett, TV-Möbel abwischen. Besonders wo Lotte liegt ist oft Staub + Haare.',min:5},
-    {text:'🧹 Staubsauger: Wohnzimmerboden saugen – unter dem Couchtisch, vor der Couch, Ecken. Lottehaare!',min:7},
-  ]},
-  5:{motto:'Freitag · Atelier & Schreibtisch',room:'🎨 Atelier',tasks:[
-    {text:'📄 Boden: ALLE Papiere vom Boden aufheben. Nicht lesen, nicht sortieren – alle in einen Stapel auf den Schreibtisch. Ziel: Boden frei.',min:6},
-    {text:'🗂️ Papierberg-Timer: Handy auf 8 Minuten. Stapel durchgehen: weg (Mistkübel direkt daneben!), abheften, oder "muss ich noch lesen". Kein Grübeln – wenn unklar: Stapel "später".',min:8},
-    {text:'🖊️ Stifte und Pinsel: alle Behälter anschauen. Was ist leer/kaputt? Weg damit. Nur was benutzt wird, bleibt auf dem Tisch.',min:5},
-    {text:'🟡 Rolltisch (gelber Ikea-Wagen): eine Etage komplett leeren, Zeug verräumen, Etage abwischen.',min:6},
-    {text:'🧹 Besen: Atelierboden fegen (Papierschnipsel, Katzenhaare, Farbreste).',min:5},
-  ]},
-  6:{motto:'Samstag · Schlafzimmer & Wäsche',room:'🌙 Schlafzimmer',tasks:[
-    {text:'🛏️ Bett machen: Bettdecken aufschütteln, Polster aufstellen, Bettzeug glatt ziehen. Kleidung auf dem Bett – sofort woanders hin, nicht auf den Boden!',min:5},
-    {text:'👕 Kleidung auf Boden/Stuhl/Bett: jedes Teil in die Hand nehmen. Frisch? → einräumen. Getragen? → Wäschekorb. Kein "vielleicht noch mal tragen"-Stapel.',min:10},
-    {text:'🧴 Nachtkästchen: alles runter, mit feuchtem Tuch abwischen. Nur das Nötigste zurück (Lampe, Buch, Wasser).',min:4},
-    {text:'👚 Wäscheständer: Was ist trocken? Zusammenlegen und sofort einräumen. Nasse Wäsche umhängen damit sie trocknen kann.',min:7},
-    {text:'🌬️ Fenster 5 Minuten öffnen, Boden saugen oder fegen.',min:4},
-  ]},
-  0:{motto:'Sonntag · Pflanzen & Wochenabschluss',room:'🌱 Pflanzen',tasks:[
-    {text:'🪴 Gießkanne füllen. Alle Zimmerpflanzen einzeln anfassen: Erde trocken? → gießen. Noch feucht? → stehen lassen. Verwelkte Blätter abzupfen.',min:8},
-    {text:'🌿 Balkon: Töpfe kontrollieren. Erde eingetrocknet? Gießen. Schimmelige Erde oder tote Pflanzen entfernen. Samentöpfe prüfen.',min:7},
-    {text:'🧹 Einen Ort der Woche wählen der besonders schlimm ist – 5 Minuten nur dort aufräumen. Kein Anspruch, nur 5 Minuten.',min:5},
-    {text:'📋 Kurzer Wochenrückblick: Was hat gut funktioniert? Was war zu viel? Plan für nächste Woche anpassen.',min:5},
-    {text:'🛒 Einkaufsliste prüfen: Was brauchen Rudi und Timmy? Was fehlt in der Küche? Kurz notieren.',min:5},
-  ]}
-};
-
-var BIG_TASKS=[
-  {room:'🎨 Atelier',text:'PAPIERBERG SCHREIBTISCH (1h): Alle Papiere in Stapel: Uni, VHS, privat, weg. Dann jeden Stapel abheften oder entsorgen. Braucht einen freien Nachmittag.',done:false},
-  {room:'🎨 Atelier',text:'BODEN ATELIER: Alle Mappen, Ordner, losen Papiere vom Boden – einen Heimplatz für jede Kategorie finden. Ordner beschriften.',done:false},
-  {room:'🎨 Atelier',text:'WANDKASTEN (oben im Atelier): Öffnen, alles raus, schauen was da drin ist, neu sortieren. Was kann weg?',done:false},
-  {room:'🚪 Vorzimmer',text:'ABLAGEBANK: Komplett leeren. Jeden Gegenstand bewusst entscheiden: hat dieser Platz einen Sinn hier? Nur "Ausgangs-Dinge" gehören dort hin.',done:false},
-  {room:'🚪 Vorzimmer',text:'GARDEROBE KOMPLETT: Jeden Mantel/jede Jacke durchgehen. Was wurde letztes Jahr nicht getragen? Weggeben-Sackerl befüllen.',done:false},
-  {room:'🛋️ Wohnzimmer',text:"BÜCHERWAND (Thomas' Bereich): Staubwischen hinter Büchern, eine Reihe neu ordnen.",done:false},
-  {room:'🍳 Küche',text:'OBERSCHRÄNKE: Einen Schrank komplett ausräumen. Abgelaufenes entsorgen, neu gruppieren (Gewürze / Konserven / Backzeug).',done:false},
-  {room:'🍳 Küche',text:'KÜHLSCHRANK KOMPLETT: Alles raus, alle Fächer mit Essigreiniger + Schwamm abwischen, trocken wischen, neu einräumen.',done:false},
-  {room:'🛁 Bad',text:'BADEWANNENRAND + FUGEN: Schimmelentferner (z.B. Domestos Gel direkt auf Fugen), 10 Min einwirken, alte Zahnbürste zum Schrubben der Fugen.',done:false},
-  {room:'🛁 Bad',text:'FENSTERSIMS BAD KOMPLETT: Alle Produkte raus, jeden einzeln anschauen (leer? kaputt? abgelaufen?), Sims abwischen, sinnvoll neu stellen.',done:false},
-  {room:'🌙 Schlafzimmer',text:'WÄSCHE SORTIEREN: Alle Wäschestapel zusammentragen. Falten, einräumen. Was passt nicht mehr? Weggeben-Stapel machen.',done:false},
-  {room:'🗃️ Allgemein',text:'WEGGEBEN-SACKERL: Durch die ganze Wohnung gehen, einen großen Sack befüllen. Kleidung → Caritas. Bücher → Bücherschrank Mariahilf.',done:false},
-  {room:'🌱 Balkon',text:'BALKON-REGAL: Alle Töpfe und Geräte raus, Regal abwischen, Töpfe mit Frühjahrspflanzen neu bepflanzen oder lagern.',done:false},
-];
-
-function loadBigTasks(){try{var s=JSON.parse(localStorage.getItem('big_tasks_v1')||'null');if(s&&s.length===BIG_TASKS.length)for(var i=0;i<BIG_TASKS.length;i++)BIG_TASKS[i].done=s[i];}catch(e){}}
-function saveBigTasks(){try{localStorage.setItem('big_tasks_v1',JSON.stringify(BIG_TASKS.map(function(t){return t.done;})));}catch(e){}}
-function loadDailyProgress(k){try{return(JSON.parse(localStorage.getItem('daily_v1')||'{}'))[k]||[];}catch(e){return[];}}
-function saveDailyProgress(k,c){try{var s=JSON.parse(localStorage.getItem('daily_v1')||'{}');var ks=Object.keys(s);if(ks.length>6)delete s[ks[0]];s[k]=c;localStorage.setItem('daily_v1',JSON.stringify(s));}catch(e){}}
-
-function renderTagesplan(){
-  loadBigTasks();
-  var today=new Date(),dow=today.getDay(),plan=TAGESPLAN[dow];
-  var dayKey=today.toISOString().slice(0,10),checkedArr=loadDailyProgress(dayKey);
-  var wt=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
-  document.getElementById('tp-wochentag').textContent=wt[dow]+',  '+today.getDate()+'.'+(today.getMonth()+1)+'.'+today.getFullYear();
-  document.getElementById('tp-motto').textContent=plan.motto;
-  document.getElementById('tp-focus-room').textContent=plan.room;
-  var ul=document.getElementById('tp-daily-tasks');ul.innerHTML='';
-  plan.tasks.forEach(function(task,i){
-    var isDone=checkedArr.indexOf(i)>=0,li=document.createElement('li');
-    li.className='task-item'+(isDone?' done':'');
-    li.innerHTML='<div class="task-check"></div><span class="task-text">'+task.text+'</span><span class="task-time">~'+task.min+'m</span>';
-    li.addEventListener('click',function(){
-      li.classList.toggle('done');
-      var idx=checkedArr.indexOf(i);if(idx>=0)checkedArr.splice(idx,1);else checkedArr.push(i);
-      saveDailyProgress(dayKey,checkedArr);updateProgress(plan.tasks.length,checkedArr.length);
-    });
-    ul.appendChild(li);
-  });
-  updateProgress(plan.tasks.length,checkedArr.length);
-  var container=document.getElementById('tp-big-tasks');container.innerHTML='';
-  BIG_TASKS.forEach(function(task){
-    var div=document.createElement('div');div.className='big-task-item'+(task.done?' done':'');
-    div.innerHTML='<div class="big-task-check"></div><div><span class="big-task-room-tag">'+task.room+'</span><span class="task-text">'+task.text+'</span></div>';
-    div.addEventListener('click',function(){task.done=!task.done;div.classList.toggle('done',task.done);saveBigTasks();});
-    container.appendChild(div);
-  });
-}
-function updateProgress(total,done){
-  var pct=total>0?Math.round(done/total*100):0;
-  document.getElementById('tp-progress-fill').style.width=pct+'%';
-  document.getElementById('tp-progress-text').textContent=done+' von '+total+' Nummern geschafft'+(done===total&&total>0?' 🎊':'');
+  setTimeout(function() { wrap.innerHTML = ''; }, 6000);
 }
 </script>
 </body>
