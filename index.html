@@ -960,6 +960,25 @@ updateDateDisplay();
 
 var storageKey='tasks_'+today.toISOString().slice(0,10);
 var taskState=JSON.parse(localStorage.getItem(storageKey)||'{}');
+
+// ── MITTERNACHTS-RESET: alte Tages-Keys löschen ──
+(function(){
+  var todayKey=storageKey;
+  Object.keys(localStorage).forEach(function(k){
+    if(k.startsWith('tasks_')&&k!==todayKey) localStorage.removeItem(k);
+  });
+})();
+
+// ── AUTOMATISCHER RESET bei Mitternacht (auch wenn Tab offen bleibt) ──
+document.addEventListener('visibilitychange', function(){
+  if(document.visibilityState==='visible'){
+    var newKey='tasks_'+new Date().toISOString().slice(0,10);
+    if(newKey!==storageKey){
+      // Neuer Tag — Seite neu laden für sauberen Start
+      window.location.reload();
+    }
+  }
+});
 // links: Array von {href, label} — erscheinen als kleine Buttons beim Task
 var PHASES={
   morgen:{
