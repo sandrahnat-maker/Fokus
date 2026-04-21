@@ -588,22 +588,7 @@ header{
 <!-- LEBEN TOAST -->
 <div id="leben-toast"></div>
 
-<!-- STIMMUNGS-CHECK OVERLAY -->
-<div id="stimmung-overlay" class="hidden">
-  <div class="stimmung-card">
-    <div class="stimmung-title">Wie bin ich heute?</div>
-    <div class="stimmung-sub">Gib deinem Tag eine Richtung —<br>nicht als Regel, sondern als Einladung.</div>
-    <div class="stimmung-btns">
-      <button class="stimmung-btn struktur" id="btn-struktur" onclick="waehleStimmung('struktur')">
-        🗂️<br><span style="font-size:14px;">Struktur</span>
-      </button>
-      <button class="stimmung-btn fluss" id="btn-fluss" onclick="waehleStimmung('fluss')">
-        🌊<br><span style="font-size:14px;">Fluss</span>
-      </button>
-    </div>
-    <button class="stimmung-weiter" onclick="schliesseStimmung()">weiter →</button>
-  </div>
-</div>
+
 
 <!-- WIMPELKETTE oben -->
 <div class="wimpelkette" aria-hidden="true">
@@ -689,7 +674,7 @@ header{
       <button id="btnHeute" onclick="switchDay(0)" style="display:none;font-size:13px;font-family:'IM Fell English',serif;font-style:italic;color:var(--crimson);background:none;border:1px solid rgba(184,41,74,0.25);border-radius:12px;padding:.15rem .55rem;cursor:pointer;">Heute</button>
     </div>
   </div>
-  <div style="font-family:'Playfair Display',serif;font-size:26px;font-style:italic;font-weight:700;color:var(--crimson);line-height:1.45;" id="headerMotto">Ich will heute so leben, wie ich mein ganzes Leben leben will.</div>
+  <div style="font-family:'IM Fell English',serif;font-size:22px;font-style:italic;color:var(--crimson);line-height:1.6;letter-spacing:0.04em;opacity:0.82;">Liebe &nbsp;·&nbsp; Wunder &nbsp;·&nbsp; Lächeln</div>
 </header>
 
 <!-- INTENTION -->
@@ -873,7 +858,6 @@ header{
     <textarea class="stoic-reflex-textarea" id="stoicMorgenText" placeholder="Schreib, was dir in den Sinn kommt …"></textarea>
     <div class="stoic-reflex-row">
       <button class="stoic-reflex-save" onclick="saveStoicMorgen()">Speichern</button>
-      <button class="stoic-reflex-new" onclick="nextStoicMorgenQ()">Andere Frage</button>
       <span class="stoic-reflex-saved" id="stoicMorgenSaved" style="display:none">✓ gespeichert</span>
       <button class="stoic-show-entries" onclick="toggleStoicMorgenEntries()">Einträge ›</button>
     </div>
@@ -881,23 +865,7 @@ header{
   </div>
 </div>
 
-<!-- REFLEXION (allgemein) -->
-<div class="reflex-wrap">
-  <div class="reflex-header">
-    <div class="reflex-title">✦ Meine Gedanken</div>
-    <button class="reflex-toggle" onclick="toggleReflexEntries()">Einträge anzeigen</button>
-  </div>
-  <div class="reflex-card">
-    <div class="reflex-leitfrage" id="reflexLeitfrage"></div>
-    <textarea class="reflex-textarea" id="reflexText" placeholder="Was bewegt dich gerade? Schreib einfach drauf los …"></textarea>
-    <div class="reflex-row">
-      <button class="reflex-save" onclick="saveReflex()">Speichern</button>
-      <button class="reflex-new" onclick="newLeitfrage()">Andere Frage</button>
-      <span class="reflex-saved" id="reflexSaved" style="display:none">✓ gespeichert</span>
-    </div>
-    <div class="reflex-entries" id="reflexEntries" style="display:none"></div>
-  </div>
-</div>
+
 
 <!-- STOISCHE ABEND-REFLEXION -->
 <div class="stoic-reflex-wrap" id="stoicAbendReflex">
@@ -910,7 +878,6 @@ header{
     <textarea class="stoic-reflex-textarea" id="stoicAbendText" placeholder="Was nimmst du aus dem heutigen Tag mit …"></textarea>
     <div class="stoic-reflex-row">
       <button class="stoic-reflex-save" onclick="saveStoicAbend()">Speichern</button>
-      <button class="stoic-reflex-new" onclick="nextStoicAbendQ()">Andere Frage</button>
       <span class="stoic-reflex-saved" id="stoicAbendSaved" style="display:none">✓ gespeichert</span>
       <button class="stoic-show-entries" onclick="toggleStoicAbendEntries()">Einträge ›</button>
     </div>
@@ -938,11 +905,7 @@ function updateDateDisplay(){
   document.getElementById('dateLine').textContent=
     DAYS_DE[d.getDay()]+', '+d.getDate()+'. '+MONTHS_DE[d.getMonth()]+' '+d.getFullYear()
     +(isToday?'':' · Vortag');
-  document.getElementById('headerMotto').textContent=
-    isToday
-      ? 'Ich will heute so leben, wie ich mein ganzes Leben leben will.'
-      : 'Was war gestern schön? Was darf ich noch nachtragen?';
-  document.getElementById('headerMotto').style.color=isToday?'var(--crimson)':'var(--muted)';
+
   document.getElementById('btnVortag').style.display=isToday?'inline':'none';
   document.getElementById('btnHeute').style.display=isToday?'none':'inline';
 }
@@ -1225,28 +1188,17 @@ Schreib einen einzigen poetischen Satz als Tages-Intention — wie ein Atemzug, 
     el.className='intention-text';
   }catch(e){
     var fallbacks=[
-      // Persönliche Sätze
       'In meiner Phantasie tanzend die ganze Welt umarmen. Das bin ich.',
       'Dieses Leben wähle ich — in fröhlicher Gelassenheit.',
       'Heute darf alles leicht sein.',
       'Was kommt, darf kommen. Was geht, darf gehen.',
       'Ich bin nicht meine Gedanken — ich beobachte sie.',
-      'Dieser Moment ist vollständig.',
-      'Das Hindernis ist der Weg.',
-      'Ich brauche wenig — und habe viel.',
       'Alles verändert sich. Auch das.',
-      // Bestehende Fallbacks
       'Alles fließt — auch dieser Tag.',
-      'Der Morgen kennt kein Gestern.',
-      'Heute gehört dir — ganz.',
       'Atme tief. Du bist genau richtig hier.',
-      'Was wäre, wenn heute alles leicht wäre?',
       'Dein Leben wartet nicht — es ist jetzt.',
       'Kleine Dinge tragen das Große.',
       'Geh langsam. Fühl mehr.',
-      'Heute darf es einfach sein.',
-      'Der Tag trägt dich — wenn du es lässt.',
-      'Freiheit beginnt im nächsten Atemzug.',
       'Du weißt, wie du leben willst.',
     ];
     var idx=Math.floor(Math.random()*fallbacks.length);
@@ -1256,8 +1208,6 @@ Schreib einen einzigen poetischen Satz als Tages-Intention — wie ein Atemzug, 
 }
 
 // ── REFLEXION ──
-var LEITFRAGEN=["Was bewegt mich gerade?","Was möchte ich heute loslassen?","Was brauche ich gerade wirklich?","Was habe ich heute für mich getan?","Wofür bin ich dankbar — auch für Kleines?","Was darf in meinem Leben mehr Platz haben?","Wo habe ich heute eine Grenze gespürt?","Was macht mir gerade Freude — auch wenn es klein ist?","Was ist mein Schluck Leben heute?","Was würde ich mir selbst raten?","Wie fühlt sich mein Zuhause gerade an?","Was stärkt mich? Was schwächt mich?"];
-var currentLF=0;
 function loadReflex(){try{return JSON.parse(localStorage.getItem("reflex_v1")||"[]");}catch(e){return[];}}
 function saveReflexData(d){try{localStorage.setItem("reflex_v1",JSON.stringify(d));}catch(e){}}
 function initReflex(){currentLF=Math.floor(Math.random()*LEITFRAGEN.length);document.getElementById("reflexLeitfrage").textContent="🌸 "+LEITFRAGEN[currentLF];}
@@ -1681,62 +1631,13 @@ showPhase=function(p){
   renderApps(p);
 };
 
-// ── STIMMUNGS-CHECK ──
-var tagesStimmung=null;
-var stimmungKey='stimmung_'+today.toISOString().slice(0,10);
 
-function zeigeStimmungsCheck(){
-  var gespeichert=null;
-  try{gespeichert=localStorage.getItem(stimmungKey);}catch(e){}
-  if(gespeichert){
-    tagesStimmung=gespeichert;
-    wendeStimmungAn(gespeichert);
-    return;
-  }
-  document.getElementById('stimmung-overlay').classList.remove('hidden');
-}
-
-function waehleStimmung(s){
-  tagesStimmung=s;
-  document.getElementById('btn-struktur').classList.toggle('sel',s==='struktur');
-  document.getElementById('btn-fluss').classList.toggle('sel',s==='fluss');
-}
-
-function schliesseStimmung(){
-  if(!tagesStimmung) tagesStimmung='struktur';
-  try{localStorage.setItem(stimmungKey,tagesStimmung);}catch(e){}
-  document.getElementById('stimmung-overlay').classList.add('hidden');
-  wendeStimmungAn(tagesStimmung);
-}
-
-function wendeStimmungAn(s){
-  if(s==='fluss'){
-    if(PHASES.nachmittag){
-      PHASES.nachmittag.mood='Der Nachmittag gehört dem Fluss. Kein Müssen — nur Sein. Was kommt, darf kommen.';
-    }
-    PHASES.nachmittag.tasks.forEach(function(t){
-      if(t.cat==='sport'||t.cat==='zuhause') t.optional=true;
-    });
-    // Loslassen-Weisheit im Praxis-Overlay direkt setzen (Overlay ist schon geschlossen, aber für nächstes Mal)
-    var loslassenIdx=PRAXIS.reduce(function(found,p,i){return p.loslassen?(found.concat([i])):found;},[]);
-    if(loslassenIdx.length){
-      var pick=loslassenIdx[Math.floor(Math.random()*loslassenIdx.length)];
-      var pw=PRAXIS[pick];
-      document.getElementById('praxis-tradition').textContent=pw.tradition;
-      document.getElementById('praxis-deko').textContent=pw.deko;
-      document.getElementById('praxis-text').textContent=pw.text;
-      document.getElementById('praxis-uebung').textContent=pw.uebung;
-    }
-    // Nachmittag neu rendern falls aktiv
-    if(currentPhase==='nachmittag') showPhase('nachmittag');
-  }
-}
 
 // closeOverlay triggert Stimmungs-Check
 var _origCloseOverlay=closeOverlay;
 closeOverlay=function(){
   _origCloseOverlay.apply(this,arguments);
-  setTimeout(zeigeStimmungsCheck,420);
+
 };
 
 // ── INIT ──
@@ -1745,7 +1646,6 @@ loadIntention(false);
 showPhase(getPhaseByTime());
 updateWaveDoneBadges();
 updateWaveTea();
-initReflex();
 loadNotiz();
 
 // ══════════════════════════════════════════
