@@ -674,10 +674,34 @@ header{
       <button id="btnHeute" onclick="switchDay(0)" style="display:none;font-size:13px;font-family:'IM Fell English',serif;font-style:italic;color:var(--crimson);background:none;border:1px solid rgba(184,41,74,0.25);border-radius:12px;padding:.15rem .55rem;cursor:pointer;">Heute</button>
     </div>
   </div>
-  <div style="font-family:'IM Fell English',serif;font-size:22px;font-style:italic;color:var(--crimson);line-height:1.6;letter-spacing:0.04em;opacity:0.82;">Liebe &nbsp;·&nbsp; Wunder &nbsp;·&nbsp; Lächeln</div>
+
 </header>
 
+<!-- GUTER TAG OVERLAY -->
+<div id="gutертag-overlay" style="display:none;position:fixed;inset:0;background:rgba(26,39,68,0.45);z-index:900;align-items:center;justify-content:center;padding:1.5rem;">
+  <div style="background:var(--bg);border-radius:20px;padding:2rem 1.6rem;max-width:380px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,0.18);position:relative;">
+    <div style="font-family:'Playfair Display',serif;font-size:17px;font-style:italic;font-weight:700;color:var(--crimson);margin-bottom:1.2rem;letter-spacing:.01em;">Das ist ein guter Tag für mich.</div>
+    <div style="font-family:'IM Fell English',serif;font-size:18px;color:var(--text);line-height:1.75;font-style:italic;">
+      Ich hatte Zeit für die Tiere und habe sie mit ihnen genossen.<br><br>
+      Ich hatte einen guten Kontakt zu den Schülerinnen und Schülern.<br><br>
+      Ich habe Liebe bewusst gespürt.<br><br>
+      Ich war achtsam statt wie ferngesteuert.<br><br>
+      Ich habe ein Wunder entdeckt und mich darüber gefreut.<br><br>
+      Ich habe gelächelt.<br><br>
+      Ich habe etwas schön gefunden.
+    </div>
+    <button onclick="document.getElementById('gutертag-overlay').style.display='none';" style="margin-top:1.6rem;width:100%;padding:.7rem;background:var(--crimson);color:#fff;border:none;border-radius:12px;font-family:'IM Fell English',serif;font-size:16px;font-style:italic;cursor:pointer;">schließen</button>
+  </div>
+</div>
+
 <!-- INTENTION -->
+<div style="height:1.2rem;"></div>
+<div style="display:flex;justify-content:center;padding:0 1.2rem;">
+  <button onclick="document.getElementById('gutертag-overlay').style.display='flex';" style="width:100%;padding:.75rem 1rem;background:none;border:1px solid rgba(184,41,74,0.3);border-radius:14px;font-family:'IM Fell English',serif;font-size:17px;font-style:italic;color:var(--crimson);cursor:pointer;letter-spacing:.01em;">Das ist ein guter Tag für mich.</button>
+</div>
+<div style="height:1rem;"></div>
+<div style="height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:0 1.5rem;opacity:0.5;"></div>
+<div style="height:1rem;"></div>
 <div class="intention-wrap">
   <div class="intention-top">
     <div class="intention-dot"></div>
