@@ -971,14 +971,15 @@ var PHASES={
   morgen:{
     mood:"Der Morgen gehört dir — noch vor allem anderen. Kein Lärm, kein Druck. Nur du, dein Tee, das Licht. Ich will diesen Morgen so leben, wie ich mein ganzes Leben leben will.",
     tasks:[
-      {name:"Euthyrox & Rückenübungen",note:"noch im Bett",cat:"körper"},
-      {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere"},
+      {name:"Euthyrox & Rückenübungen",note:"noch im Bett",cat:"körper",links:[{href:"Ruecken.html",label:"Rücken"}]},
+      {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
       {name:"Blutdruck & Gewicht",note:"nüchtern, ruhig",cat:"körper",links:[{href:"Blutdruck.html",label:"Blutdruck"},{href:"Wiegen.html",label:"Gewicht"}]},
-      {name:"Knirscherschiene raus",note:"Kiefer entspannen",cat:"körper"},
-      {name:"Wasser · Tee · Frühstück",note:"bewusst genießen",cat:"ernährung",links:[{href:"tee-des-tages.html",label:"Tee"},{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"}]},
-      {name:"Medikamente",note:"zum Frühstück",cat:"körper"},
+      {name:"Knirscherschiene raus",note:"Kiefer entspannen",cat:"körper",links:[{href:"Kaumuskel.html",label:"Kieferübungen"}]},
+      {name:"Wasser · Tee · Frühstück",note:"bewusst genießen",cat:"ernährung",links:[{href:"tee-des-tages.html",label:"Tee"},{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"https://play.google.com/store/apps/details?id=org.nutritionfacts.dailydozen",label:"Daily Dozen"}]},
+      {name:"Medikamente",note:"zum Frühstück",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
       {name:"Rudi & Timmy",note:"Futter & Schmusezeit",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
       {name:"Kaffee",note:"in Ruhe, bewusst genießen",cat:"ernährung"},
+      {name:"Meditation",note:"still werden, ankommen",cat:"seele",links:[{href:"Meditation.html",label:"Meditation"}]},
       {name:"Tag planen",note:"Was für ein wundervoller Tag vor mir liegt! ❤️",cat:"arbeit",links:[{href:"https://sandrahnat-maker.github.io/Kalender_2203/",label:"Kalender"}]},
       {name:"Bad Früh",note:"Du gestaltest dich selbst · FM4 oder Podcast mitnehmen 🎵",cat:"pflege",links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
       {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
@@ -1000,7 +1001,7 @@ var PHASES={
   mittag:{
     mood:"Die Mitte des Tages — durchatmen, genießen, auftanken. Du hast den Vormittag geschafft!",
     tasks:[
-      {name:"Mittagessen bewusst",note:"ein schönes Mittagessen — du hast es dir verdient",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährungsplan"},{href:"Einkaufsliste.html",label:"Einkauf"}]},
+      {name:"Mittagessen bewusst",note:"ein schönes Mittagessen — du hast es dir verdient",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährungsplan"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"https://play.google.com/store/apps/details?id=org.nutritionfacts.dailydozen",label:"Daily Dozen"}]},
       {name:"Kaffee",note:"in Ruhe genießen",cat:"ernährung"},
       {name:"Gabapentin (Rudi)",note:"nach dem Mittagessen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
       {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
@@ -1019,14 +1020,14 @@ var PHASES={
     mood:"Der Abend trägt dich nach Hause — in dich selbst. Alles darf jetzt langsamer werden.",
     tasks:[
       {name:"Katzen füttern",note:"Rudi & Timmy — Abendfutter",cat:"tiere"},
-      {name:"Abendessen",note:"mit Thomas oder allein, schön",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"}]},
-      {name:"Wegräumen",note:"Für morgen, für dich allein.",cat:"zuhause"},
+      {name:"Abendessen",note:"mit Thomas oder allein, schön",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"https://play.google.com/store/apps/details?id=org.nutritionfacts.dailydozen",label:"Daily Dozen"}]},
+      {name:"Wegräumen",note:"Für morgen, für dich allein.",cat:"zuhause",links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
       {name:"Freizeit",note:"was auch immer sich gut anfühlt",cat:"seele"},
       {name:"Lotte — Abendrunde",note:"Lotte & du — der schönste Abschluss",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
       {name:"Tiermedikamente Abend",note:"Rudi & Timmy",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Katzen_Medikamente.html",label:"Katzen"}]},
       {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
       {name:"Bad Abend",note:"Loslassen, abschließen. Bereit für's Bett.",cat:"pflege",links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
-      {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Handcreme",cat:"körper"},
+      {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Handcreme",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
       {name:"Lesen",note:"kein Handy — echtes Buch",cat:"seele"},
       {name:"Schlafen",note:"früh genug, du weißt warum 🌙",cat:"körper"},
     ]
