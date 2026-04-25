@@ -450,6 +450,84 @@ header{
 
 .phase-card.glow{animation:cardGlow 1.2s ease;}
 
+/* ── INNEHALTEN OVERLAY ── */
+#innehalten-overlay{
+  position:fixed;inset:0;z-index:3000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:2.5rem 2rem;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(184,41,74,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(201,137,58,0.05) 0%, transparent 70%),
+    #fdf6ee;
+  animation:overlayIn .6s cubic-bezier(.34,1.2,.64,1);
+  text-align:center;
+}
+#innehalten-overlay.leaving{animation:overlayOut .45s ease forwards;}
+
+.innehalten-atem{
+  font-size:2.2rem;
+  margin-bottom:1.4rem;
+  animation:tier-float 4s ease-in-out infinite;
+  filter:drop-shadow(0 0 10px rgba(201,137,58,0.3));
+}
+.innehalten-label{
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--crimson);opacity:.6;font-weight:500;
+  margin-bottom:1.1rem;
+}
+.innehalten-frage{
+  font-family:\"Playfair Display\",serif;
+  font-size:27px;font-style:italic;
+  color:var(--text);line-height:1.6;
+  max-width:300px;margin:0 auto 1rem;
+}
+.innehalten-frage em{
+  color:var(--crimson);font-style:italic;
+}
+.innehalten-pause{
+  font-family:\"IM Fell English\",serif;
+  font-size:17px;font-style:italic;
+  color:var(--muted);line-height:1.7;
+  max-width:270px;margin:0 auto 2rem;
+  opacity:.75;
+}
+.innehalten-antwort{
+  width:100%;max-width:300px;
+  border:none;border-bottom:2px solid rgba(184,41,74,0.25);
+  background:transparent;
+  font-family:\"Playfair Display\",serif;
+  font-size:22px;font-style:italic;
+  color:var(--text);
+  padding:.4rem .2rem;
+  outline:none;text-align:center;
+  transition:border-color .3s;
+  margin-bottom:1.8rem;
+  display:block;
+  margin-left:auto;margin-right:auto;
+}
+.innehalten-antwort:focus{border-color:var(--crimson);}
+.innehalten-antwort::placeholder{color:var(--muted);opacity:.45;font-style:italic;}
+.innehalten-weiter{
+  background:transparent;
+  border:1.5px solid rgba(184,41,74,0.35);
+  color:var(--crimson);
+  border-radius:30px;
+  padding:.5rem 1.8rem;
+  font-family:\"IM Fell English\",serif;font-size:18px;font-style:italic;
+  cursor:pointer;
+  transition:all .25s;
+  letter-spacing:.03em;
+}
+.innehalten-weiter:active{background:var(--crimson);color:#fff;border-color:var(--crimson);}
+.innehalten-skip{
+  display:block;margin-top:1rem;
+  font-family:\"IM Fell English\",serif;font-size:15px;font-style:italic;
+  color:var(--muted);opacity:.45;
+  background:none;border:none;cursor:pointer;
+  text-decoration:underline;text-decoration-style:dotted;
+}
+.innehalten-skip:active{opacity:.8;}
+
 /* ── STIMMUNGS-CHECK OVERLAY ── */
 #stimmung-overlay{position:fixed;inset:0;background:rgba(26,39,68,0.72);z-index:2000;display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:overlayIn .35s ease;}
 #stimmung-overlay.hidden{display:none;}
@@ -544,6 +622,26 @@ header{
 </style>
 </head>
 <body>
+
+<!-- INNEHALTEN OVERLAY — stille Schwelle -->
+<div id="innehalten-overlay">
+  <div class="innehalten-atem">🌿</div>
+  <div class="innehalten-label">Einen Moment</div>
+  <div class="innehalten-frage">
+    Was weiß ich darüber,<br>was jetzt das<br><em>Richtige</em> ist?
+  </div>
+  <div class="innehalten-pause">Drei Atemzüge.<br>Dann lauschen.</div>
+  <input
+    class="innehalten-antwort"
+    id="innehalten-antwort"
+    type="text"
+    placeholder="oder einfach weitergehen …"
+    autocomplete="off"
+    inputmode="text"
+  >
+  <button class="innehalten-weiter" onclick="schliesseInnehalten()">weiter ›</button>
+  <button class="innehalten-skip" onclick="schliesseInnehalten()">überspringen</button>
+</div>
 
 <!-- INNERE PRAXIS OVERLAY — Zirkusmanege -->
 <div id="praxis-overlay">
@@ -1665,8 +1763,32 @@ closeOverlay=function(){
 
 };
 
+// ── INNEHALTEN ──
+function schliesseInnehalten(){
+  var antwort=document.getElementById('innehalten-antwort').value.trim();
+  // Antwort in localStorage speichern (Datum + Text)
+  if(antwort){
+    try{
+      var key='innehalten_'+today.toISOString().slice(0,10);
+      localStorage.setItem(key,antwort);
+    }catch(e){}
+  }
+  var el=document.getElementById('innehalten-overlay');
+  el.classList.add('leaving');
+  setTimeout(function(){
+    el.style.display='none';
+    // Nach Innehalten: Praxis-Overlay zeigen
+    showOverlay();
+  },450);
+}
+
+// Enter-Taste schließt auch
+document.getElementById('innehalten-antwort').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){schliesseInnehalten();}
+});
+
 // ── INIT ──
-showOverlay();
+// Innehalten-Overlay ist bereits sichtbar (HTML), Praxis-Overlay wird danach gezeigt
 loadIntention(false);
 showPhase(getPhaseByTime());
 updateWaveDoneBadges();
