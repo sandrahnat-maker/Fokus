@@ -815,7 +815,7 @@ header{
 <!-- 3-EBENEN-TAGESSTRUKTUR -->
 <div class="drei-wrap" id="dreiWrap">
   <div class="drei-header">
-    <div class="drei-title">✦ Mein heutiger Rahmen</div>
+    <div class="drei-title">✦ Was heute zählt</div>
     <button class="drei-toggle" onclick="toggleDreiBlock()">minimieren ↑</button>
   </div>
 
@@ -846,7 +846,7 @@ header{
     <div class="ebene-stripe einladung"></div>
     <div class="ebene-head">
       <span class="ebene-icon">🌸</span>
-      <span class="ebene-label einladung">Wenn Energie & Zeit</span>
+      <span class="ebene-label einladung">Nächstes Abenteuer 🎪</span>
     </div>
     <div id="einladungTasks"></div>
     <div class="drei-einladung-note">Kein Müssen. Nur eine offene Tür — du entscheidest, ob du eintrittst.</div>
@@ -859,40 +859,24 @@ header{
   <div class="waves">
     <div class="wave" id="wave-morgen" onclick="showPhase('morgen')">
       <div class="wave-icon">✨</div>
-      <div class="wave-name">Mo</div>
-      <div class="wave-time">7:30–9:30</div>
+      <div class="wave-name" style="font-size:10px;letter-spacing:.03em;">Bevor ich</div>
+      <div class="wave-time" style="font-size:10px;">7:30–13:15</div>
       <div class="wave-tea" id="wave-tea-morgen"></div>
       <a class="wave-musik" href="https://open.spotify.com/playlist/1RO7Inm2kFd6FLgSJZ8GWe" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
     <div class="wave" id="wave-vormittag" onclick="showPhase('vormittag')">
-      <div class="wave-icon">🎩</div>
-      <div class="wave-name">Vm</div>
-      <div class="wave-time">9:30–12:30</div>
+      <div class="wave-icon">🎪</div>
+      <div class="wave-name" style="font-size:10px;letter-spacing:.03em;">Unterwegs</div>
+      <div class="wave-time" style="font-size:10px;">13:15–18:00</div>
       <div class="wave-tea" id="wave-tea-vormittag"></div>
       <a class="wave-musik" href="https://open.spotify.com/playlist/7kb6SPESF6UYOJwE6ELjzq" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
     </div>
-    <div class="wave" id="wave-mittag" onclick="showPhase('mittag')">
-      <div class="wave-icon">🎪</div>
-      <div class="wave-name">Mi</div>
-      <div class="wave-time">12:30–13:30</div>
-      <div class="wave-tea" id="wave-tea-mittag"></div>
-      <a class="wave-musik" href="https://open.spotify.com/playlist/0rIM0LWeb25zwr5rl7Ijh2" target="_blank" onclick="event.stopPropagation()">🎵</a>
-      <div class="wave-done-badge">✓</div>
-    </div>
-    <div class="wave" id="wave-nachmittag" onclick="showPhase('nachmittag')">
-      <div class="wave-icon">🎠</div>
-      <div class="wave-name">Nm</div>
-      <div class="wave-time">13:30–18:00</div>
-      <div class="wave-tea" id="wave-tea-nachmittag"></div>
-      <a class="wave-musik" href="https://open.spotify.com/playlist/6X9u3seoLT0AUXEXdzYcTC" target="_blank" onclick="event.stopPropagation()">🎵</a>
-      <div class="wave-done-badge">✓</div>
-    </div>
     <div class="wave" id="wave-abend" onclick="showPhase('abend')">
       <div class="wave-icon">🌙</div>
-      <div class="wave-name">Ab</div>
-      <div class="wave-time">ab 18:00</div>
+      <div class="wave-name" style="font-size:10px;letter-spacing:.03em;">Ankommen</div>
+      <div class="wave-time" style="font-size:10px;">ab 18:00</div>
       <div class="wave-tea" id="wave-tea-abend"></div>
       <a class="wave-musik" href="https://open.spotify.com/playlist/3wtSyNFvoSxSarePmVGYkx" target="_blank" onclick="event.stopPropagation()">🎵</a>
       <div class="wave-done-badge">✓</div>
@@ -1067,7 +1051,7 @@ document.addEventListener('visibilitychange', function(){
 // links: Array von {href, label} — erscheinen als kleine Buttons beim Task
 var PHASES={
   morgen:{
-    mood:"Der Morgen gehört dir — noch vor allem anderen. Kein Lärm, kein Druck. Nur du, dein Tee, das Licht. Ich will diesen Morgen so leben, wie ich mein ganzes Leben leben will.",
+    mood:"Erst ich. Dann die Welt.",
     tasks:[
       {name:"Euthyrox & Rückenübungen",note:"noch im Bett",cat:"körper",links:[{href:"Ruecken.html",label:"Rücken"}]},
       {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
@@ -1076,54 +1060,37 @@ var PHASES={
       {name:"Wasser · Tee · Frühstück",note:"bewusst genießen",cat:"ernährung",links:[{href:"tee-des-tages.html",label:"Tee"},{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"https://play.google.com/store/apps/details?id=org.nutritionfacts.dailydozen",label:"Daily Dozen"}]},
       {name:"Medikamente",note:"zum Frühstück",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
       {name:"Rudi & Timmy",note:"Futter & Schmusezeit",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
-      {name:"Kaffee",note:"in Ruhe, bewusst genießen",cat:"ernährung"},
-      {name:"Meditation",note:"still werden, ankommen",cat:"seele",links:[{href:"Meditation.html",label:"Meditation"}]},
       {name:"Bad Früh",note:"Du gestaltest dich selbst · FM4 oder Podcast mitnehmen 🎵",cat:"pflege",links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
       {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
       {name:"Tiermedikamente",note:"Lotte + Rudi",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"}]},
-      {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
+      {name:"Unterricht vorbereiten",note:"Was brauche ich heute? Eines nach dem anderen.",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste VHS"},{href:"Uni_Praesenz_Checkliste.html",label:"Packliste Uni"}]},
+      {name:"Uni-Aufgabe — ein Schritt",note:"Lernplan öffnen, eine konkrete Sache anpacken.",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
+      {name:"Tee & Pause",note:"Nicht nebenbei. Wirklich innehalten. 🍵",cat:"seele",links:[{href:"tee-des-tages.html",label:"Tee"}]},
+      {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
+      {name:"Schnell essen & fertig machen",note:"und raus 🎪",cat:"ernährung"},
     ]
   },
   vormittag:{
-    mood:"Der Vormittag ist deine produktivste Zeit — still, klar, ganz bei dir. Nicht alles muss heute fertig werden. Aber eines nach dem anderen bringt dich weiter als du denkst.",
+    mood:"Ich bin draußen. Das ist auch Leben.",
     tasks:[
-      {name:"Gestrigen Tag abschließen",note:"Was ist offen geblieben? Kurz notieren oder sofort erledigen.",cat:"arbeit"},
-      {name:"Heutigen Termin vorbereiten",note:"VHS, Uni, Arzt, Gespräch — was auch immer heute kommt. 10 Minuten reichen oft.",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste VHS"},{href:"Uni_Praesenz_Checkliste.html",label:"Packliste Uni"}]},
-      {name:"Berufliche To-Dos",note:"Steuer, berufliche Zukunft, Bewerbungen, Korrespondenz — ein kleiner Schritt zählt.",cat:"arbeit"},
-      {name:"Uni-Aufgaben",note:"DaZF-Lektüre, Reflexionen, Wahlaufgaben — du bist nah dran!",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
-      {name:"Sonstige Schreibtisch-Aufgaben",note:"Familie, private Post, Hausverkauf, Versicherungen — was auch immer gerade wartet.",cat:"arbeit"},
-      {name:"Tee & bewusste Pause",note:"Dein Tee, dein Moment — ganz für dich 🍵",cat:"seele",links:[{href:"tee-des-tages.html",label:"Tee"}]},
+      {name:"Ich unterrichte. Ich bewege mich. Ich bin lebendig.",note:"Kein Abhaken — nur ein Begleitsatz für unterwegs.",cat:"seele"},
     ]
   },
-  mittag:{
-    mood:"Die Mitte des Tages — durchatmen, genießen, auftanken. Du hast den Vormittag geschafft!",
-    tasks:[
-      {name:"Mittagessen bewusst",note:"ein schönes Mittagessen — du hast es dir verdient",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährungsplan"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"https://play.google.com/store/apps/details?id=org.nutritionfacts.dailydozen",label:"Daily Dozen"}]},
-      {name:"Kaffee",note:"in Ruhe genießen",cat:"ernährung"},
-      {name:"Gabapentin (Rudi)",note:"nach dem Mittagessen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-      {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
-    ]
-  },
-  nachmittag:{
-    mood:"Der Nachmittag — eine zweite Chance, ganz bei dir zu sein. Ich will diesen Nachmittag so leben, wie ich mein ganzes Leben leben will.",
-    tasks:[
-      {name:"Sport",note:"Spüre ganz bewusst deinen Körper.",cat:"sport",links:[{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Koerpergewicht_Training_Audio.html",label:"Kraft"},{href:"Balanceboard_Training_Audio.html",label:"Balance"},{href:"Sonntags_Yoga_Audio.html",label:"Yoga"},{href:"Dehnplan.html",label:"Dehnen"},{href:"Kalkschulter.html",label:"Schulter"},{href:"Beckenboden.html",label:"Beckenboden"}]},
-      {name:"Wohnung & Zuhause",note:"Gestalte dein Zuhause für dich!",cat:"zuhause",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Pflanzen_Galerie.html",label:"Pflanzen"},{href:"Haushaltsplan.html",label:"Haushalt"},{href:"Naturkosmetik_Tagesplan.html",label:"Naturkosmetik"},{href:"Futter_Bestellplaner.html",label:"Futter"}]},
-      {name:"Duschen & Körperpflege",note:"Ein Dankeschön an meinen Körper. 🌸",cat:"pflege",links:[{href:"Duschen.html",label:"Duschen"},{href:"Koerperpflege_Tagesplan.html",label:"Körperpflege"},{href:"Haarpflege.html",label:"Haarpflege"},{href:"Nagelpflege.html",label:"Nagelpflege"}]},
-      {name:"Kreativzeit",note:"jetzt gehört die Welt dir allein",cat:"seele",offen:true},
-    ]
-  },
+  mittag:{mood:"",tasks:[]},
+  nachmittag:{mood:"",tasks:[]},
   abend:{
-    mood:"Der Abend trägt dich nach Hause — in dich selbst. Alles darf jetzt langsamer werden.",
+    mood:"Du bist zuhause. Jetzt gehört der Rest dir.",
     tasks:[
-      {name:"Katzen füttern",note:"Rudi & Timmy — Abendfutter",cat:"tiere"},
-      {name:"Abendessen",note:"mit Thomas oder allein, schön",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"https://play.google.com/store/apps/details?id=org.nutritionfacts.dailydozen",label:"Daily Dozen"}]},
-      {name:"Wegräumen",note:"Für morgen, für dich allein.",cat:"zuhause",links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
-      {name:"Tag planen",note:"Morgen vorbereiten — im Kinderzimmer, ganz bei dir. ❤️",cat:"arbeit",links:[{href:"https://sandrahnat-maker.github.io/Kalender_2203/",label:"Kalender"}]},
-      {name:"Freizeit",note:"was auch immer sich gut anfühlt",cat:"seele"},
-      {name:"Lotte — Abendrunde",note:"Lotte & du — der schönste Abschluss",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
-      {name:"Tiermedikamente Abend",note:"Rudi & Timmy",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Katzen_Medikamente.html",label:"Katzen"}]},
-      {name:"Anulind",note:"Creme auftragen",cat:"pflege"},
+      {name:"Katzen füttern",note:"Rudi & Timmy — ca. 18:00, wenn Flo nicht da ist",cat:"tiere"},
+      {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"https://play.google.com/store/apps/details?id=org.nutritionfacts.dailydozen",label:"Daily Dozen"}]},
+      {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",cat:"zuhause",links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
+      {name:"Zeit mit Thomas",note:"1–1,5 Stunden — einfach da sein",cat:"seele"},
+      {name:"Unterricht vorbereiten",note:"nur So / Di / Mi — Spiele, Arbeitsblätter, gestalten",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
+      {name:"Uni-Aufgabe",note:"nur wenn Deadline naht — Lernplan checken",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
+      {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir. Kein Zweck, nur Freude.",cat:"seele",offen:true},
+      {name:"Wie war das heute?",note:"Abschluss & Reflexion — 15–30 Minuten",cat:"seele"},
+      {name:"Freizeit 🎪",note:"was auch immer sich gut anfühlt",cat:"seele"},
+      {name:"Lotte — Futter & Medikamente für alle Tiere",note:"während Thomas mit Lotte raus ist",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Katzen_Medikamente.html",label:"Katzen"}]},
       {name:"Bad Abend",note:"Loslassen, abschließen. Bereit für's Bett.",cat:"pflege",links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
       {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Handcreme",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
       {name:"Lesen",note:"kein Handy — echtes Buch",cat:"seele"},
@@ -1135,12 +1102,13 @@ var PHASES={
 function saveTaskState(){localStorage.setItem(storageKey,JSON.stringify(taskState));}
 
 function updateWaveDoneBadges(){
-  ['morgen','vormittag','mittag','nachmittag','abend'].forEach(function(p){
+  ['morgen','vormittag','abend'].forEach(function(p){
     var tasks=PHASES[p].tasks;
     var total=tasks.length;
     if(total===0)return;
     var done=tasks.filter(function(_,i){return !!taskState[p+'_'+i];}).length;
     var waveEl=document.getElementById('wave-'+p);
+    if(!waveEl)return;
     if(done===total){
       waveEl.classList.add('done-all');
     } else {
@@ -1150,12 +1118,11 @@ function updateWaveDoneBadges(){
 }
 
 function updateWaveTea(){
-  // Mo=0…So=6, passend zu tee-des-tages.html
   var teas=[["Hibiskus & Hagebutte","Mo"],["Grüner Tee & Ingwer","Di"],["Weißdorn","Mi"],["Brennnessel & Löwenzahn","Do"],["Rooibos & Zimt","Fr"],["Lavendel & Kamille","Sa"],["Artischocke & Mariendistel","So"]];
-  var dayMon=(today.getDay()+6)%7; // So(0)→6, Mo(1)→0
+  var dayMon=(today.getDay()+6)%7;
   var tea=teas[dayMon];
   var teaText='🍵 '+tea[0];
-  ['morgen','vormittag','mittag','nachmittag','abend'].forEach(function(p){
+  ['morgen','vormittag','abend'].forEach(function(p){
     var el=document.getElementById('wave-tea-'+p);
     if(el) el.textContent=teaText;
   });
@@ -1166,16 +1133,14 @@ var currentPhase=null;
 function getPhaseByTime(){
   var h=today.getHours(),m=today.getMinutes();
   var t=h*60+m;
-  if(t<9*60+30)return'morgen';
-  if(t<12*60+30)return'vormittag';
-  if(t<13*60+30)return'mittag';
-  if(t<18*60)return'nachmittag';
+  if(t<13*60+15)return'morgen';
+  if(t<18*60)return'vormittag';
   return'abend';
 }
 
 function showPhase(p){
   currentPhase=p;
-  ['morgen','vormittag','mittag','nachmittag','abend'].forEach(function(w){
+  ['morgen','vormittag','abend'].forEach(function(w){
     document.getElementById('wave-'+w).className='wave'+(w===p?' active':'');
   });
   var phase=PHASES[p];
@@ -1685,31 +1650,30 @@ var ALL_APPS=[
   {icon:'⚖️',text:'Mein Gewicht',sub:'Täglich, nüchtern',href:'Wiegen.html',phasen:['morgen']},
   {icon:'💊',text:'Medikamentenplan',sub:'Rudi, Timmy & Lotte',href:'Medikamente_Tiere.html',phasen:['morgen']},
   {icon:'🐱',text:'Katzen Medikamente',sub:'Rudi & Timmy',href:'Katzen_Medikamente.html',phasen:['morgen','abend']},
-  {icon:'🗺️',text:'Lotte Runden',sub:'Spaziergänge & Routen',href:'Lotte_Runden.html',phasen:['morgen','nachmittag','abend']},
-  {icon:'📅',text:'Kalender',sub:'Mein Tageskalender',href:'https://sandrahnat-maker.github.io/Kalender_2203/',phasen:['morgen','vormittag','mittag','nachmittag','abend']},
+  {icon:'🗺️',text:'Lotte Runden',sub:'Spaziergänge & Routen',href:'Lotte_Runden.html',phasen:['morgen','abend']},
+  {icon:'📅',text:'Kalender',sub:'Mein Tageskalender',href:'https://sandrahnat-maker.github.io/Kalender_2203/',phasen:['morgen','vormittag','abend']},
 
-  // Vormittag
-  {icon:'📋',text:'VHS Kursvorbereitung',sub:'Checklisten & Materialien',href:'VHS_Kursvorbereitung.html',phasen:['vormittag','mittag']},
-  {icon:'📚',text:'Lernplan',sub:'DaZF — Sandra Hnat-Gerersdorfer',href:'Lernplan.html',phasen:['vormittag','mittag']},
+  // Unterwegs
+  {icon:'📋',text:'VHS Kursvorbereitung',sub:'Checklisten & Materialien',href:'VHS_Kursvorbereitung.html',phasen:['morgen','vormittag']},
+  {icon:'📚',text:'Lernplan',sub:'DaZF — Sandra Hnat-Gerersdorfer',href:'Lernplan.html',phasen:['morgen','vormittag']},
 
-  // Mittag
-  {icon:'🥗',text:'Ernährungsplan',sub:'4-Wochen, LP(a)-freundlich',href:'Ernaehrungsplan_4Wochen.html',phasen:['mittag']},
-  {icon:'🛒',text:'Einkaufsliste',sub:'LP(a)-freundlich & vegetarisch',href:'Einkaufsliste.html',phasen:['mittag']},
+  // Abend — Essen & Haushalt
+  {icon:'🥗',text:'Ernährungsplan',sub:'4-Wochen, LP(a)-freundlich',href:'Ernaehrungsplan_4Wochen.html',phasen:['abend']},
+  {icon:'🛒',text:'Einkaufsliste',sub:'LP(a)-freundlich & vegetarisch',href:'Einkaufsliste.html',phasen:['abend']},
+  {icon:'🏠',text:'Haushaltsplan',sub:'Schritt für Schritt, sanft',href:'Haushaltsplan.html',phasen:['abend']},
 
-  // Nachmittag — Sport, Körper, VHS abschließen
-  {icon:'☀️',text:'Aufwärmen',sub:'Sonnengruß mit Mady Morrison',href:'Aufwaermen.html',phasen:['nachmittag']},
-  {icon:'💪',text:'Körpergewicht Training',sub:'Audio-geführt',href:'Koerpergewicht_Training_Audio.html',phasen:['nachmittag']},
-  {icon:'🏄',text:'Balance Board Training',sub:'Audio-geführt',href:'Balanceboard_Training_Audio.html',phasen:['nachmittag']},
-  {icon:'🧘',text:'Sonntags-Yoga',sub:'Audio-geführt',href:'Sonntags_Yoga_Audio.html',phasen:['nachmittag']},
-  {icon:'🤸',text:'Dehnplan',sub:'Persönlicher Dehnplan',href:'Dehnplan.html',phasen:['nachmittag']},
-  {icon:'💪',text:'Kalkschulter Training',sub:'Sanfte Schulterübungen',href:'Kalkschulter.html',phasen:['nachmittag']},
-  {icon:'🌸',text:'Beckenboden',sub:'Mit Liebe & Geduld',href:'Beckenboden.html',phasen:['nachmittag']},
-  {icon:'🚿',text:'Duschen & Fertig',sub:'Schnell & bewusst',href:'Duschen.html',phasen:['nachmittag']},
-  {icon:'✨',text:'Körperpflege Tagesplan',sub:'Vollständige Routine',href:'Koerperpflege_Tagesplan.html',phasen:['nachmittag']},
-  {icon:'😊',text:'Gesichtsyoga',sub:'Entspannung & Leuchten',href:'Gesichtsyoga.html',phasen:['nachmittag']},
-  {icon:'🌿',text:'Meine Pflanzen',sub:'Galerie & Pflege',href:'Pflanzen_Galerie.html',phasen:['nachmittag']},
-  {icon:'🏠',text:'Haushaltsplan',sub:'Schritt für Schritt, sanft',href:'Haushaltsplan.html',phasen:['nachmittag']},
-  {icon:'📋',text:'VHS — Nachbereitung',sub:'Abschließen & notieren',href:'VHS_Kursvorbereitung.html',phasen:['nachmittag']},
+  // Abend — Sport & Körper
+  {icon:'☀️',text:'Aufwärmen',sub:'Sonnengruß mit Mady Morrison',href:'Aufwaermen.html',phasen:['abend']},
+  {icon:'💪',text:'Körpergewicht Training',sub:'Audio-geführt',href:'Koerpergewicht_Training_Audio.html',phasen:['abend']},
+  {icon:'🏄',text:'Balance Board Training',sub:'Audio-geführt',href:'Balanceboard_Training_Audio.html',phasen:['abend']},
+  {icon:'🧘',text:'Sonntags-Yoga',sub:'Audio-geführt',href:'Sonntags_Yoga_Audio.html',phasen:['abend']},
+  {icon:'🤸',text:'Dehnplan',sub:'Persönlicher Dehnplan',href:'Dehnplan.html',phasen:['abend']},
+  {icon:'💪',text:'Kalkschulter Training',sub:'Sanfte Schulterübungen',href:'Kalkschulter.html',phasen:['abend']},
+  {icon:'🌸',text:'Beckenboden',sub:'Mit Liebe & Geduld',href:'Beckenboden.html',phasen:['abend']},
+  {icon:'🚿',text:'Duschen & Fertig',sub:'Schnell & bewusst',href:'Duschen.html',phasen:['abend']},
+  {icon:'✨',text:'Körperpflege Tagesplan',sub:'Vollständige Routine',href:'Koerperpflege_Tagesplan.html',phasen:['abend']},
+  {icon:'😊',text:'Gesichtsyoga',sub:'Entspannung & Leuchten',href:'Gesichtsyoga.html',phasen:['abend']},
+  {icon:'🌿',text:'Meine Pflanzen',sub:'Galerie & Pflege',href:'Pflanzen_Galerie.html',phasen:['abend']},
 
   // Abend
   {icon:'🛁',text:'Bad Abend Routine',sub:'Mein Abendritual mit Liebe',href:'Bad_Abend.html',phasen:['abend']},
@@ -1717,11 +1681,11 @@ var ALL_APPS=[
   {icon:'🫀',text:'Kiefer & Kaumuskel',sub:'Sanfte Bruxismus-Übungen',href:'Kiefer_Bruxismus.html',phasen:['abend']},
 
   // Nur über "alle Apps"
-  {icon:'📋',text:'Hausverkauf Guide',sub:'Weidlingbach',href:'hausverkauf-guide.html',phasen:['vormittag']},
-  {icon:'✅',text:'Hausverkauf Checkliste',sub:'Alle Schritte',href:'Hausverkauf_Checkliste.html',phasen:['vormittag']},
-  {icon:'🛒',text:'Futter-Bestellplaner',sub:'Rudi, Timmy & Lotte',href:'Futter_Bestellplaner.html',phasen:['vormittag']},
-  {icon:'💆',text:'Haarpflege',sub:'Meine Haarpflegeroutine',href:'Haarpflege.html',phasen:['nachmittag']},
-  {icon:'💅',text:'Nagelpflege',sub:'Mit Sorgfalt & Freude',href:'Nagelpflege.html',phasen:['nachmittag']},
+  {icon:'📋',text:'Hausverkauf Guide',sub:'Weidlingbach',href:'hausverkauf-guide.html',phasen:['morgen']},
+  {icon:'✅',text:'Hausverkauf Checkliste',sub:'Alle Schritte',href:'Hausverkauf_Checkliste.html',phasen:['morgen']},
+  {icon:'🛒',text:'Futter-Bestellplaner',sub:'Rudi, Timmy & Lotte',href:'Futter_Bestellplaner.html',phasen:['abend']},
+  {icon:'💆',text:'Haarpflege',sub:'Meine Haarpflegeroutine',href:'Haarpflege.html',phasen:['abend']},
+  {icon:'💅',text:'Nagelpflege',sub:'Mit Sorgfalt & Freude',href:'Nagelpflege.html',phasen:['abend']},
 ];
 
 var showingAllApps=false;
@@ -1810,74 +1774,66 @@ var FIX_TASKS = [
   {name:"Wasser · Tee · Frühstück", note:"bewusst genießen", cat:"ernährung", phase:"morgen", phaseIdx:4},
   {name:"Medikamente", note:"zum Frühstück", cat:"körper", phase:"morgen", phaseIdx:5},
   {name:"Rudi & Timmy füttern", note:"Futter & Schmusezeit", cat:"tiere", phase:"morgen", phaseIdx:6},
-  {name:"Kaffee", note:"in Ruhe genießen", cat:"ernährung", phase:"morgen", phaseIdx:7},
-  {name:"Meditation", note:"still werden, ankommen", cat:"seele", phase:"morgen", phaseIdx:8},
-  {name:"Tag planen", note:"Was f\u00fcr ein wundervoller Tag vor mir liegt!", cat:"arbeit", phase:"morgen", phaseIdx:9},
-  {name:"Bad Fr\u00fch", note:"FM4 oder Podcast mitnehmen \uD83C\uDFB5", cat:"pflege", phase:"morgen", phaseIdx:10},
-  {name:"Lotte raus", note:"Morgenrunde", cat:"tiere", phase:"morgen", phaseIdx:11},
-  {name:"Tiermedikamente", note:"Lotte + Rudi", cat:"tiere", phase:"morgen", phaseIdx:12},
-  {name:"Anulind morgens", note:"Creme auftragen", cat:"pflege", phase:"morgen", phaseIdx:13},
-  {name:"Mittagessen", note:"bewusst genie\u00dfen", cat:"ern\u00e4hrung", phase:"mittag", phaseIdx:0},
-  {name:"Gabapentin Rudi", note:"nach dem Mittagessen", cat:"tiere", phase:"mittag", phaseIdx:2},
-  {name:"Anulind mittags", note:"Creme auftragen", cat:"pflege", phase:"mittag", phaseIdx:3},
-  {name:"Duschen & K\u00f6rperpflege", note:"Ein Dankesch\u00f6n an meinen K\u00f6rper. \uD83C\uDF38", cat:"pflege", phase:"nachmittag", phaseIdx:2},
-  {name:"Katzen f\u00fcttern Abend", note:"Rudi & Timmy", cat:"tiere", phase:"abend", phaseIdx:0},
-  {name:"Abendessen", note:"mit Thomas, sch\u00f6n", cat:"ern\u00e4hrung", phase:"abend", phaseIdx:1},
-  {name:"Lotte \u2014 Abendrunde", note:"der sch\u00f6nste Abschluss", cat:"tiere", phase:"abend", phaseIdx:4},
-  {name:"Tiermedikamente Abend", note:"Rudi & Timmy", cat:"tiere", phase:"abend", phaseIdx:5},
-  {name:"Anulind abends", note:"Creme auftragen", cat:"pflege", phase:"abend", phaseIdx:6},
-  {name:"Bad Abend", note:"Loslassen, abschlie\u00dfen. Bereit f\u00fcr's Bett.", cat:"pflege", phase:"abend", phaseIdx:7},
-  {name:"Bett vorbereiten", note:"Atorvastatin, Melatonin, Handcreme", cat:"k\u00f6rper", phase:"abend", phaseIdx:8},
+  {name:"Bad Früh", note:"FM4 oder Podcast mitnehmen 🎵", cat:"pflege", phase:"morgen", phaseIdx:7},
+  {name:"Lotte raus", note:"Morgenrunde", cat:"tiere", phase:"morgen", phaseIdx:8},
+  {name:"Tiermedikamente", note:"Lotte + Rudi", cat:"tiere", phase:"morgen", phaseIdx:9},
+  {name:"Rudi — Gabapentin", note:"vor dem Rausgehen", cat:"tiere", phase:"morgen", phaseIdx:13},
+  {name:"Katzen füttern Abend", note:"Rudi & Timmy — ca. 18:00", cat:"tiere", phase:"abend", phaseIdx:0},
+  {name:"Abendessen", note:"schön kochen, bewusst genießen", cat:"ernährung", phase:"abend", phaseIdx:1},
+  {name:"Haushalt — täglich", note:"Küche, aufräumen, das Nötigste", cat:"zuhause", phase:"abend", phaseIdx:2},
+  {name:"Lotte — Futter & Medikamente", note:"für alle Tiere", cat:"tiere", phase:"abend", phaseIdx:9},
+  {name:"Bad Abend", note:"Loslassen, abschließen. Bereit für's Bett.", cat:"pflege", phase:"abend", phaseIdx:10},
+  {name:"Bett vorbereiten", note:"Atorvastatin, Melatonin, Handcreme", cat:"körper", phase:"abend", phaseIdx:11},
 ];
 
 // Wochentags-Vorschläge: 0=So,1=Mo,2=Di,3=Mi,4=Do,5=Fr,6=Sa
 var HEUTE_VORSCHLAEGE = {
   0: [ // Sonntag
-    {name:"Wochenrückblick & Planung", note:"Was war gut? Was kommt?", phase:"vormittag", phaseIdx:4},
-    {name:"Waldspaziergang mit Lotte", note:"Sonntags-Ritual", phase:"nachmittag", phaseIdx:0},
-    {name:"Kunstzeit", note:"zeichnen, malen, drucken — für mich allein", phase:"nachmittag", phaseIdx:3},
+    {name:"Haushalt & Wohnung", note:"die Woche vorbereiten", phase:"abend", phaseIdx:2},
+    {name:"Montag vorbereiten", note:"Spiele & Materialien gestalten", phase:"abend", phaseIdx:4},
+    {name:"Kreativzeit 🎨", note:"zeichnen, malen, drucken — für mich allein", phase:"abend", phaseIdx:6},
   ],
   1: [ // Montag
-    {name:"Kursvorbereitung MS Mathe", note:"Montag-Kurs vorbereiten", phase:"vormittag", phaseIdx:1},
-    {name:"Uni-Aufgaben", note:"DaZF — ein Schritt nach vorne", phase:"vormittag", phaseIdx:3},
-    {name:"Taillen-Training Tag A", note:"Core & Rotation", phase:"nachmittag", phaseIdx:0},
+    {name:"Unterricht vorbereiten", note:"Was brauche ich heute?", phase:"morgen", phaseIdx:10},
+    {name:"Uni-Aufgabe", note:"DaZF — ein Schritt nach vorne", phase:"morgen", phaseIdx:11},
+    {name:"Wie war das heute?", note:"kurz abschließen", phase:"abend", phaseIdx:7},
   ],
   2: [ // Dienstag
-    {name:"Schreibtisch-Block", note:"Mails, Erledigungen, Post", phase:"vormittag", phaseIdx:4},
-    {name:"Uni-Lektüre", note:"lesen & Notizen", phase:"vormittag", phaseIdx:3},
-    {name:"Sport & Bewegung", note:"Aufwärmen + Yoga oder Dehnen", phase:"nachmittag", phaseIdx:0},
+    {name:"Mittwoch vorbereiten", note:"Spiele & Materialien", phase:"abend", phaseIdx:4},
+    {name:"Unterricht dokumentieren", note:"kurz abschließen", phase:"abend", phaseIdx:7},
+    {name:"Sport & Bewegung", note:"Aufwärmen + Yoga oder Dehnen", phase:"abend", phaseIdx:0},
   ],
   3: [ // Mittwoch
-    {name:"VHS Kursvorbereitung A/B", note:"Mittwoch-Kurs", phase:"vormittag", phaseIdx:1},
-    {name:"Uni-Aufgaben", note:"DaZF — Wahlaufgabe oder Pflichtaufgabe", phase:"vormittag", phaseIdx:3},
-    {name:"Haushaltsblock", note:"Wohnung, Pflanzen, Einkauf", phase:"nachmittag", phaseIdx:1},
+    {name:"Donnerstag vorbereiten", note:"Spiele & Arbeitsblätter gestalten", phase:"abend", phaseIdx:4},
+    {name:"Unterricht dokumentieren", note:"kurz abschließen", phase:"abend", phaseIdx:7},
+    {name:"Uni-Aufgabe", note:"DaZF — Pflichtaufgabe", phase:"morgen", phaseIdx:11},
   ],
   4: [ // Donnerstag
-    {name:"VHS Kursvorbereitung AHS Deutsch", note:"Donnerstag-Kurs", phase:"vormittag", phaseIdx:1},
-    {name:"Taillen-Training Tag B", note:"Rücken, Schultern & Gesäß", phase:"nachmittag", phaseIdx:0},
-    {name:"Körperpflege-Block", note:"Duschen, Pflege, was sich zeigt", phase:"nachmittag", phaseIdx:2},
+    {name:"Unterricht dokumentieren", note:"kurz abschließen", phase:"abend", phaseIdx:7},
+    {name:"Sport & Bewegung", note:"Aufwärmen + Yoga oder Kraft", phase:"abend", phaseIdx:0},
+    {name:"Zeit mit Thomas", note:"Abend genießen", phase:"abend", phaseIdx:3},
   ],
   5: [ // Freitag
-    {name:"Gestrigen Tag abschließen", note:"Was ist offen geblieben?", phase:"vormittag", phaseIdx:0},
-    {name:"Berufliche To-Dos", note:"Steuer, Zukunft, Korrespondenz", phase:"vormittag", phaseIdx:2},
-    {name:"Kreativzeit", note:"zeichnen, collagen, freies Gestalten", phase:"nachmittag", phaseIdx:3},
+    {name:"Kreativzeit 🎨", note:"zeichnen, collagen, freies Gestalten", phase:"abend", phaseIdx:6},
+    {name:"Berufliche To-Dos", note:"Steuer, Zukunft, Korrespondenz", phase:"morgen", phaseIdx:11},
+    {name:"Entspannen", note:"Freiheit — kein Plan", phase:"abend", phaseIdx:8},
   ],
   6: [ // Samstag
-    {name:"Einkauf & Vorrat", note:"für die neue Woche", phase:"nachmittag", phaseIdx:1},
-    {name:"Entspannung & Ruhe", note:"Sitzbad, Haarpflege, Ruhetag", phase:"nachmittag", phaseIdx:2},
-    {name:"Bad Abend", note:"Loslassen, abschließen", phase:"abend", phaseIdx:7},
+    {name:"Einkauf & Vorrat", note:"für die neue Woche", phase:"abend", phaseIdx:2},
+    {name:"Kreativzeit 🎨", note:"zeichnen, malen, collage", phase:"abend", phaseIdx:6},
+    {name:"Entspannung & Ruhe", note:"Sitzbad, Haarpflege, Ruhetag", phase:"abend", phaseIdx:0},
   ],
 };
 
 var EINLADUNG_TASKS = [
-  {name:"Tiefe Körperpflege", note:"Peeling, Maske, Fußpflege — wenn Zeit & Lust", cat:"pflege", phase:"nachmittag", phaseIdx:2},
-  {name:"Gesichtsyoga & Kiefer", note:"sanft & bewusst", cat:"pflege", phase:"nachmittag", phaseIdx:2},
-  {name:"Kreativzeit", note:"zeichnen, malen, collage, drucken", cat:"seele", phase:"nachmittag", phaseIdx:3},
-  {name:"Langer Spaziergang", note:"mehr als die Pflicht-Runde", cat:"tiere", phase:"nachmittag", phaseIdx:0},
-  {name:"Pflanzen besorgen & gestalten", note:"Frühjahrscheck", cat:"zuhause", phase:"nachmittag", phaseIdx:1},
-  {name:"Finanzen & Planung", note:"wenn der Kopf klar ist", cat:"arbeit", phase:"vormittag", phaseIdx:4},
+  {name:"Tiefe Körperpflege", note:"Peeling, Maske, Fußpflege — wenn Zeit & Lust", cat:"pflege", phase:"abend", phaseIdx:0},
+  {name:"Gesichtsyoga & Kiefer", note:"sanft & bewusst", cat:"pflege", phase:"abend", phaseIdx:0},
+  {name:"Kreativzeit 🎨", note:"zeichnen, malen, collage, drucken", cat:"seele", phase:"abend", phaseIdx:6},
+  {name:"Langer Spaziergang mit Lotte", note:"mehr als die Pflicht-Runde", cat:"tiere", phase:"morgen", phaseIdx:8},
+  {name:"Pflanzen besorgen & gestalten", note:"Frühjahrscheck", cat:"zuhause", phase:"abend", phaseIdx:2},
+  {name:"Finanzen & Planung", note:"wenn der Kopf klar ist", cat:"arbeit", phase:"morgen", phaseIdx:11},
   {name:"Soziales", note:"Freundinnen, Familie, schreiben", cat:"seele", phase:"abend", phaseIdx:3},
-  {name:"Tiefe Lektüre", note:"Widdascheck, Plutzar oder ein Roman", cat:"lernen", phase:"abend", phaseIdx:9},
+  {name:"Tiefe Lektüre", note:"Widdascheck, Plutzar oder ein Roman", cat:"lernen", phase:"abend", phaseIdx:11},
 ];
 
 var dreiVisible = true;
