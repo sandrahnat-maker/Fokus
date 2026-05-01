@@ -2,1977 +2,818 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#fdf6ee">
-<title>Mein Leben</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Villa Kunterbunt</title>
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Fredoka+One&family=Nunito:wght@400;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* ══════════════════════════════════════════
-   ZIRKUS-WIMPEL ANIMATION
-══════════════════════════════════════════ */
-@keyframes wimpel-swing{
-  0%,100%{transform:rotate(-4deg) skewX(2deg);}
-  50%{transform:rotate(4deg) skewX(-2deg);}
+:root {
+  --gelb: #FFD93D;
+  --rot: #E84855;
+  --blau: #3D87CB;
+  --grün: #4CAF72;
+  --orange: #FF6B35;
+  --lila: #9B5DE5;
+  --creme: #FFF8E7;
+  --dunkel: #1a0a00;
 }
-@keyframes wimpel-swing2{
-  0%,100%{transform:rotate(3deg) skewX(-1deg);}
-  50%{transform:rotate(-3deg) skewX(1deg);}
-}
-@keyframes wimpel-swing3{
-  0%,100%{transform:rotate(-2deg);}
-  50%{transform:rotate(5deg);}
-}
-@keyframes rope-sway{
-  0%,100%{transform:scaleX(1);}
-  50%{transform:scaleX(1.008);}
-}
-@keyframes tier-float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-3px);}
-}
-@keyframes spotlight{
-  0%{left:-100%;}60%,100%{left:220%;}
-}
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1);}
-  50%{opacity:.3;transform:scale(.75);}
-}
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(8px);}
-  to{opacity:1;transform:translateY(0);}
-}
-@keyframes cardGlow{
-  0%{box-shadow:0 3px 16px var(--shadow);}
-  35%{box-shadow:0 0 0 3px rgba(184,41,74,0.18),0 4px 22px rgba(184,41,74,0.12);}
-  100%{box-shadow:0 3px 16px var(--shadow);}
-}
-@keyframes overlayIn{from{opacity:0;transform:scale(.97);}to{opacity:1;transform:scale(1);}}
-@keyframes overlayOut{from{opacity:1;transform:scale(1);}to{opacity:0;transform:scale(.97);}}
-</style>
-<style>
-:root{
-  --bg:#fdf6ee;--card:#fffbf5;--text:#1e1208;--muted:rgba(30,18,8,0.45);
-  --crimson:#b8294a;--crimson-l:rgba(184,41,74,0.10);
-  --gold:#c9893a;--gold-l:rgba(201,137,58,0.13);
-  --navy:#1a2744;--navy-l:rgba(26,39,68,0.07);
-  --sage:#5e8a5a;--sage-l:rgba(94,138,90,0.12);
-  --violet:#6a3f7a;
-  --border:rgba(184,41,74,0.13);--shadow:rgba(30,18,8,0.08);
-}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html{font-size:26px;}
 
-body{
-  background:var(--bg);
-  font-family:"Raleway",sans-serif;
-  color:var(--text);
-  min-height:100vh;
-  padding-bottom:5rem;
-  background-image:
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--creme);
+  font-family: 'Nunito', sans-serif;
+  color: var(--dunkel);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Schräge bunte Streifen im Hintergrund */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
     repeating-linear-gradient(
-      -6deg,
-      rgba(184,41,74,0.022) 0px,rgba(184,41,74,0.022) 28px,
-      transparent 28px,transparent 56px,
-      rgba(201,137,58,0.018) 56px,rgba(201,137,58,0.018) 84px,
-      transparent 84px,transparent 112px
+      -12deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(255,217,61,0.07) 60px,
+      rgba(255,217,61,0.07) 80px,
+      transparent 80px,
+      transparent 140px,
+      rgba(232,72,85,0.05) 140px,
+      rgba(232,72,85,0.05) 160px,
+      transparent 160px,
+      transparent 220px,
+      rgba(61,135,203,0.05) 220px,
+      rgba(61,135,203,0.05) 240px
     );
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* ══ ZIRKUSZELT-HEADER ══ */
-.zirkus-zelt{
-  position:relative;
-  background:var(--bg);
-  overflow:visible;
-  padding-bottom:0;
-}
-
-/* SVG-Zelt sitzt direkt über dem Header */
-.zelt-svg-wrap{
-  width:100%;
-  line-height:1;
-  display:block;
-  overflow:hidden;
-  background:var(--bg);
-}
-
-/* ── WIMPELKETTE ── */
-.wimpelkette{
-  position:relative;
-  width:100%;
-  height:48px;
-  overflow:hidden;
-  display:block;
-  background:var(--bg);
-}
-.wimpelkette svg{
-  width:100%;height:48px;overflow:visible;
-  animation:rope-sway 5s ease-in-out infinite;
-}
-
-/* Individuelle Wimpel-Animationen */
-.wimpel-1{animation:wimpel-swing 2.8s ease-in-out infinite;}
-.wimpel-2{animation:wimpel-swing2 3.2s ease-in-out infinite 0.3s;}
-.wimpel-3{animation:wimpel-swing3 2.5s ease-in-out infinite 0.6s;}
-.wimpel-4{animation:wimpel-swing 3.0s ease-in-out infinite 0.9s;}
-.wimpel-5{animation:wimpel-swing2 2.7s ease-in-out infinite 1.2s;}
-.wimpel-6{animation:wimpel-swing3 3.4s ease-in-out infinite 1.5s;}
-.wimpel-7{animation:wimpel-swing 2.9s ease-in-out infinite 1.8s;}
-.wimpel-8{animation:wimpel-swing2 2.6s ease-in-out infinite 2.1s;}
-.wimpel-9{animation:wimpel-swing3 3.1s ease-in-out infinite 2.4s;}
-
-/* ── HEADER ── */
-header{
-  padding:1rem 1.2rem .85rem;
-  border-bottom:2px solid var(--border);
-  background:rgba(255,251,245,0.85);
-  backdrop-filter:blur(3px);
-  position:relative;
-}
-.date-line{font-size:13px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.3rem;font-family:"Raleway",sans-serif;font-weight:400;}
-.goal-text{font-family:"IM Fell English",serif;font-size:22px;font-style:italic;color:var(--text);line-height:1.5;}
-
-/* ── ZIRKUSTIERE — Dekorative Trennelemente ── */
-.tier-zeile{
-  display:flex;align-items:center;justify-content:center;
-  gap:.2rem;padding:.35rem 1rem;
-  font-size:.85rem;
-  user-select:none;pointer-events:none;
-  overflow:hidden;
-}
-.tier-zeile .tier{
-  display:inline-block;
-  animation:tier-float 3s ease-in-out infinite;
-  opacity:.55;
-  font-size:1rem;
-}
-.tier-zeile .tier:nth-child(2){animation-delay:.4s;}
-.tier-zeile .tier:nth-child(3){animation-delay:.8s;}
-.tier-zeile .tier:nth-child(4){animation-delay:1.2s;}
-.tier-zeile .tier:nth-child(5){animation-delay:1.6s;}
-.tier-zeile .tier:nth-child(6){animation-delay:2.0s;}
-.tier-zeile .tier:nth-child(7){animation-delay:2.4s;}
-.tier-linie{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(184,41,74,0.2),transparent);}
-
-/* ── INTENTION ── */
-.intention-wrap{
-  margin:1rem 1rem 0;
-  background:var(--card);
-  border-radius:4px 4px 16px 16px;
-  border:1px solid var(--border);
-  box-shadow:0 3px 18px var(--shadow);
-  overflow:hidden;
-  position:relative;
-}
-.intention-wrap::before{
-  content:'';display:block;height:7px;
-  background:repeating-linear-gradient(
+/* Holzzaun unten */
+body::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: repeating-linear-gradient(
     90deg,
-    var(--crimson) 0%,var(--crimson) 20%,
-    var(--gold) 20%,var(--gold) 40%,
-    var(--navy) 40%,var(--navy) 60%,
-    var(--violet) 60%,var(--violet) 80%,
-    var(--sage) 80%,var(--sage) 100%
-  );opacity:.65;
-}
-.intention-top{padding:.9rem 1.1rem .4rem;display:flex;align-items:center;gap:.5rem;}
-.intention-dot{width:7px;height:7px;border-radius:50%;background:var(--crimson);animation:pulse 3s ease-in-out infinite;}
-.intention-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--crimson);font-weight:500;}
-.intention-text{padding:.1rem 1.1rem 1rem;font-family:"Playfair Display",serif;font-size:26px;font-style:italic;color:var(--text);line-height:1.55;min-height:52px;}
-.intention-text.loading{color:var(--muted);font-size:20px;font-family:"IM Fell English",serif;}
-.intention-refresh{display:flex;align-items:center;justify-content:flex-end;padding:.1rem 1.1rem .7rem;}
-.refresh-btn{font-size:15px;font-style:italic;color:var(--muted);background:none;border:none;cursor:pointer;font-family:"IM Fell English",serif;opacity:.6;}
-.refresh-btn:hover{opacity:1;color:var(--crimson);}
-
-/* ── RHYTHMUS ── */
-.rhythmus-wrap{margin:.8rem 1rem 0;}
-.rhythmus-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.2rem;font-weight:500;}
-.waves{display:flex;gap:.28rem;}
-.wave{
-  flex:1;background:var(--card);
-  border-radius:6px 6px 12px 12px;
-  border:1px solid var(--border);
-  padding:.55rem .25rem;text-align:center;cursor:pointer;
-  transition:all .3s cubic-bezier(.34,1.56,.64,1);
-  position:relative;overflow:hidden;
-}
-.wave::before{
-  content:'';display:block;
-  position:absolute;top:0;left:0;right:0;height:4px;
-  background:repeating-linear-gradient(
-    90deg,var(--crimson) 0%,var(--crimson) 25%,
-    var(--gold) 25%,var(--gold) 50%,
-    var(--navy) 50%,var(--navy) 75%,
-    var(--violet) 75%,var(--violet) 100%
+    var(--orange) 0px, var(--orange) 28px,
+    var(--gelb) 28px, var(--gelb) 56px,
+    var(--rot) 56px, var(--rot) 84px,
+    var(--blau) 84px, var(--blau) 112px,
+    var(--grün) 112px, var(--grün) 140px
   );
-  opacity:0;transition:opacity .3s;
-}
-.wave.active::before{opacity:.8;}
-.wave.active{border-color:var(--crimson);box-shadow:0 3px 16px rgba(184,41,74,0.14);transform:translateY(-2px);}
-.wave-icon{font-size:1rem;margin-bottom:.15rem;}
-.wave-name{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;}
-.wave.active .wave-name{color:var(--crimson);}
-.wave-time{font-size:13px;color:var(--muted);font-style:italic;margin-top:.1rem;font-family:"IM Fell English",serif;}
-.wave-tea{font-size:10px;color:var(--crimson);margin-top:.1rem;opacity:.75;font-style:italic;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
-.wave-done-badge{font-size:12px;color:var(--sage);margin-top:.15rem;opacity:0;transition:opacity .4s;}
-.wave-musik{display:block;font-size:11px;color:var(--crimson);opacity:.5;margin-top:.1rem;text-decoration:none;line-height:1;}
-.wave-musik:active{opacity:1;}
-.wave.done-all .wave-done-badge{opacity:1;}
-.wave.done-all{border-color:rgba(94,138,90,0.4);}
-.wave.done-all::before{background:repeating-linear-gradient(90deg,var(--sage) 0%,var(--sage) 50%,rgba(94,138,90,0.5) 50%,rgba(94,138,90,0.5) 100%);opacity:.55;}
-.wave.done-all .wave-name{color:var(--sage);}
-
-/* ── PHASE CONTENT ── */
-.phase-content{margin:.6rem 1rem 0;animation:fadeIn .4s cubic-bezier(.34,1.2,.64,1);}
-.phase-card{background:var(--card);border-radius:12px;border:1px solid var(--border);box-shadow:0 3px 16px var(--shadow);padding:.75rem .95rem;position:relative;overflow:hidden;}
-.phase-card::after{content:'';position:absolute;top:0;left:-100%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.055),transparent);animation:spotlight 10s ease-in-out infinite;pointer-events:none;}
-.phase-mood{font-family:"IM Fell English",serif;font-size:19px;font-style:italic;color:var(--muted);line-height:1.65;margin-bottom:.65rem;padding-bottom:.65rem;border-bottom:1px dashed rgba(184,41,74,0.18);}
-
-/* Aufgaben */
-.task-item{display:flex;align-items:flex-start;gap:.6rem;padding:.48rem .15rem;border-bottom:1px solid rgba(184,41,74,0.07);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .2s;}
-.task-item:last-child{border-bottom:none;}
-.task-item.done{opacity:.28;}
-.task-item.done .task-name{text-decoration:line-through;text-decoration-color:rgba(184,41,74,0.3);}
-.task-check{width:16px;height:16px;border-radius:50%;border:1px solid rgba(184,41,74,0.3);flex-shrink:0;margin-top:3px;transition:all .25s;display:flex;align-items:center;justify-content:center;font-size:9px;color:transparent;}
-.task-item.done .task-check{background:var(--sage-l,rgba(94,138,90,0.15));border-color:var(--sage);color:var(--sage);}
-.task-item.done .task-check::after{content:'✦';}
-.task-name{font-size:20px;color:var(--text);line-height:1.35;font-weight:400;}
-.task-note{font-size:15px;font-style:italic;color:var(--muted);margin-top:1px;font-family:"IM Fell English",serif;}
-.task-cat{font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-left:auto;flex-shrink:0;padding-top:3px;opacity:.38;color:var(--crimson);}
-.task-links{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.32rem;}
-.task-link{font-size:12px;font-style:italic;color:var(--crimson);text-decoration:none;background:var(--crimson-l);border:1px solid rgba(184,41,74,0.2);border-radius:20px;padding:.08rem .5rem;white-space:nowrap;font-family:"IM Fell English",serif;}
-.task-link:active{background:rgba(184,41,74,0.2);}
-
-/* ── APPS ── */
-.section-wrap{margin:.9rem 1rem 0;}
-.section-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem;padding-left:.2rem;font-weight:500;}
-.al{display:flex;align-items:center;gap:.65rem;padding:.55rem .8rem;background:var(--card);border-radius:10px;margin-bottom:.35rem;text-decoration:none;color:var(--text);border:1px solid var(--border);transition:all .2s;position:relative;overflow:hidden;}
-.al::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--crimson),var(--gold));opacity:0;transition:opacity .2s;}
-.al:active{background:var(--crimson-l);}
-.al:active::before{opacity:1;}
-.al-icon{font-size:1.15rem;}
-.al-text{font-size:21px;font-weight:400;flex:1;}
-.al-sub{font-size:16px;color:var(--muted);font-style:italic;font-family:"IM Fell English",serif;}
-.al-arr{color:rgba(184,41,74,0.35);font-size:.8rem;margin-left:auto;}
-
-/* ── REFLEXION ── */
-.reflex-wrap{margin:1rem 1rem 0;}
-.reflex-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;}
-.reflex-title{font-family:"Playfair Display",serif;font-size:24px;font-style:italic;color:var(--text);}
-.reflex-toggle{font-size:16px;color:var(--crimson);cursor:pointer;border:none;background:none;font-family:"IM Fell English",serif;font-style:italic;opacity:.7;}
-.reflex-card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:.9rem 1rem;box-shadow:0 2px 12px var(--shadow);}
-.reflex-leitfrage{font-family:"IM Fell English",serif;font-size:20px;font-style:italic;color:var(--crimson);margin-bottom:.65rem;line-height:1.5;opacity:.85;}
-.reflex-textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:.65rem .85rem;font-family:"IM Fell English",serif;font-size:21px;color:var(--text);background:var(--bg);resize:none;min-height:100px;line-height:1.6;outline:none;}
-.reflex-textarea:focus{border-color:var(--crimson);}
-.reflex-textarea::placeholder{color:var(--muted);font-style:italic;}
-.reflex-row{display:flex;gap:.5rem;margin-top:.55rem;align-items:center;}
-.reflex-save{background:var(--crimson);color:#fff;border:none;border-radius:20px;padding:.38rem 1rem;font-size:20px;font-family:"IM Fell English",serif;cursor:pointer;}
-.reflex-new{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:20px;padding:.38rem .8rem;font-size:20px;font-family:"IM Fell English",serif;cursor:pointer;}
-.reflex-saved{font-size:16px;color:var(--sage);font-style:italic;margin-left:auto;font-family:"IM Fell English",serif;}
-.reflex-entries{margin-top:.9rem;border-top:1px dashed rgba(184,41,74,0.15);padding-top:.75rem;display:flex;flex-direction:column;gap:.55rem;}
-.reflex-entry-date{font-size:14px;color:var(--crimson);letter-spacing:.08em;margin-bottom:.12rem;opacity:.7;}
-.reflex-entry-lf{font-size:16px;color:var(--muted);margin-bottom:.08rem;font-family:"IM Fell English",serif;font-style:italic;}
-.reflex-entry-text{font-size:20px;font-style:italic;color:var(--text);line-height:1.6;font-family:"IM Fell English",serif;}
-
-/* ── MANEGE-LINIE ── */
-.manege-line{display:flex;align-items:center;gap:.5rem;padding:.1rem 1rem;color:var(--crimson);opacity:.3;font-size:11px;letter-spacing:.3em;user-select:none;}
-.manege-line::before,.manege-line::after{content:'';flex:1;height:1px;background:currentColor;}
-
-/* ── PRAXIS OVERLAY — Zirkusmanege ── */
-#praxis-overlay{
-  position:fixed;inset:0;z-index:999;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:2rem 1.5rem 1.5rem;
-  animation:overlayIn .5s ease;
-  /* Zirkus-Vorhang-Hintergrund */
-  background:
-    /* Sterne */
-    radial-gradient(circle, rgba(248,232,184,0.6) 1px, transparent 1px) 12% 18% / 180px 180px,
-    radial-gradient(circle, rgba(248,232,184,0.4) 1px, transparent 1px) 38% 42% / 140px 140px,
-    radial-gradient(circle, rgba(248,232,184,0.5) 1px, transparent 1px) 65% 25% / 160px 160px,
-    radial-gradient(circle, rgba(248,232,184,0.3) 1px, transparent 1px) 82% 65% / 120px 120px,
-    /* Streifen-Vorhang */
-    repeating-linear-gradient(
-      -3deg,
-      rgba(184,41,74,0.07) 0px, rgba(184,41,74,0.07) 38px,
-      rgba(253,246,238,0.0) 38px, rgba(253,246,238,0.0) 76px,
-      rgba(201,137,58,0.05) 76px, rgba(201,137,58,0.05) 114px,
-      rgba(253,246,238,0.0) 114px, rgba(253,246,238,0.0) 152px
-    ),
-    /* Hintergrund */
-    #fdf6ee;
-}
-#praxis-overlay.leaving{animation:overlayOut .4s ease forwards;}
-
-/* Mini-Wimpelkette oben im Overlay */
-#praxis-overlay::before{
-  content:'';
-  position:absolute;top:0;left:0;right:0;
-  height:44px;
-  background:
-    /* Seil */
-    linear-gradient(rgba(26,39,68,0.18) 0%, rgba(26,39,68,0.18) 100%) center 8px / 100% 1px no-repeat;
-  pointer-events:none;
+  z-index: 100;
 }
 
-/* Vorhang-Kurven links und rechts */
-#praxis-overlay::after{
-  content:'';
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 80px 100% at 0% 50%, rgba(184,41,74,0.06) 0%, transparent 100%),
-    radial-gradient(ellipse 80px 100% at 100% 50%, rgba(184,41,74,0.06) 0%, transparent 100%);
-  pointer-events:none;
+.container {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0 0 80px;
+  position: relative;
+  z-index: 1;
 }
 
-.praxis-wimpel{
-  width:100%;
-  margin-bottom:.8rem;
-  position:relative;
-  z-index:1;
+/* ═══ DACH ═══ */
+.dach {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
 }
 
-.praxis-tradition{
-  font-size:11px;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--crimson);margin-bottom:.8rem;opacity:.75;font-weight:500;
-  position:relative;z-index:1;
+.dach svg {
+  width: 100%;
+  display: block;
 }
-.praxis-deko{
-  font-size:2.2rem;margin-bottom:.9rem;opacity:.75;
-  position:relative;z-index:1;
-  /* Scheinwerfer-Effekt */
-  filter:drop-shadow(0 0 8px rgba(201,137,58,0.35));
-}
-.praxis-text{
-  font-family:"Playfair Display",serif;font-size:24px;font-style:italic;
-  color:var(--text);line-height:1.65;text-align:center;
-  margin-bottom:1.2rem;max-width:310px;
-  position:relative;z-index:1;
-}
-.praxis-uebung{
-  font-family:"IM Fell English",serif;font-size:17px;font-style:italic;
-  color:var(--muted);line-height:1.75;text-align:center;
-  margin-bottom:1.6rem;max-width:300px;
-  padding:.8rem 1rem;
-  background:rgba(255,251,245,0.7);
-  border:1px solid rgba(184,41,74,0.18);
-  border-radius:12px;
-  box-shadow:0 2px 12px rgba(30,18,8,0.06);
-  position:relative;z-index:1;
-}
-.praxis-weiter{
-  background:var(--crimson);
-  border:none;
-  color:#fffbf5;border-radius:30px;
-  padding:.55rem 1.6rem;font-size:17px;
-  font-family:"IM Fell English",serif;font-style:italic;
-  cursor:pointer;transition:all .25s;
-  box-shadow:0 3px 14px rgba(184,41,74,0.25);
-  position:relative;z-index:1;
-  letter-spacing:.03em;
-}
-.praxis-weiter:active{background:#8f1f38;box-shadow:0 1px 6px rgba(184,41,74,0.2);}
 
-/* ── STOISCHE TAGESABSICHT ── */
-.stoic-plan-wrap{
-  margin:.75rem 1rem 0;
-  background:var(--card);
-  border-radius:12px;
-  border:1px solid rgba(26,39,68,0.18);
-  box-shadow:0 2px 12px var(--shadow);
-  overflow:hidden;
+/* ═══ HAUS-FASSADE ═══ */
+.fassade {
+  background: #FFF8E7;
+  position: relative;
+  padding: 0 1.2rem 1.5rem;
 }
-.stoic-plan-wrap::before{
-  content:'';display:block;height:5px;
-  background:repeating-linear-gradient(
-    90deg,var(--navy) 0%,var(--navy) 25%,
-    var(--violet) 25%,var(--violet) 50%,
-    var(--gold) 50%,var(--gold) 75%,
-    var(--navy) 75%,var(--navy) 100%
-  );opacity:.5;
-}
-.stoic-plan-header{display:flex;align-items:center;gap:.45rem;padding:.75rem 1rem .3rem;}
-.stoic-plan-icon{font-size:1rem;opacity:.7;}
-.stoic-plan-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);font-weight:500;opacity:.8;}
-.stoic-plan-body{padding:.2rem 1rem .9rem;}
-.stoic-plan-sentence{font-family:"IM Fell English",serif;font-size:18px;font-style:italic;color:var(--muted);line-height:1.6;margin-bottom:.55rem;}
-.stoic-plan-sentence span{color:var(--text);font-style:normal;}
-.stoic-plan-input{
-  width:100%;border:none;border-bottom:1px solid rgba(26,39,68,0.2);
-  background:transparent;
-  font-family:"Playfair Display",serif;font-size:21px;font-style:italic;
-  color:var(--navy);padding:.25rem .1rem;outline:none;
-  transition:border-color .2s;
-}
-.stoic-plan-input:focus{border-color:var(--navy);}
-.stoic-plan-input::placeholder{color:rgba(26,39,68,0.3);font-style:italic;}
-.stoic-plan-sub{font-family:"IM Fell English",serif;font-size:16px;font-style:italic;color:var(--muted);margin-top:.65rem;line-height:1.55;opacity:.8;}
 
-/* ── STOISCHE REFLEXION ── */
-.stoic-reflex-wrap{
-  margin:.8rem 1rem 0;
-  background:var(--card);
-  border-radius:12px;
-  border:1px solid rgba(26,39,68,0.15);
-  box-shadow:0 2px 12px var(--shadow);
-  overflow:hidden;
+/* Fenster-Effekt links und rechts */
+.fassade::before, .fassade::after {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  width: 60px;
+  height: 60px;
+  background: var(--gelb);
+  border: 3px solid var(--dunkel);
+  border-radius: 8px 8px 50% 50%;
 }
-.stoic-reflex-wrap::before{
-  content:'';display:block;height:5px;
-  background:repeating-linear-gradient(
-    90deg,var(--navy) 0%,var(--navy) 33%,
-    var(--gold) 33%,var(--gold) 66%,
-    var(--violet) 66%,var(--violet) 100%
-  );opacity:.45;
+.fassade::before { left: -20px; transform: rotate(-8deg); }
+.fassade::after { right: -20px; transform: rotate(8deg); }
+
+/* ═══ SCHILD ═══ */
+.schild {
+  background: var(--gelb);
+  border: 4px solid var(--dunkel);
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  margin: 0 0 1rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 5px 5px 0 var(--dunkel);
+  transform: rotate(-1deg);
 }
-.stoic-reflex-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem .35rem;}
-.stoic-reflex-title{font-family:"Playfair Display",serif;font-size:21px;font-style:italic;color:var(--navy);}
-.stoic-reflex-badge{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);opacity:.5;background:rgba(26,39,68,0.07);border-radius:20px;padding:.12rem .55rem;font-family:"Raleway",sans-serif;}
-.stoic-reflex-body{padding:.1rem 1rem .85rem;}
-.stoic-reflex-q{font-family:"IM Fell English",serif;font-size:20px;font-style:italic;color:var(--navy);line-height:1.55;margin-bottom:.55rem;opacity:.85;}
-.stoic-reflex-q::before{content:'🏛 ';font-style:normal;opacity:.6;}
-.stoic-reflex-textarea{width:100%;border:1px solid rgba(26,39,68,0.15);border-radius:8px;padding:.6rem .85rem;font-family:"IM Fell English",serif;font-size:20px;color:var(--text);background:var(--bg);resize:none;min-height:90px;line-height:1.6;outline:none;}
-.stoic-reflex-textarea:focus{border-color:var(--navy);}
-.stoic-reflex-textarea::placeholder{color:var(--muted);font-style:italic;}
-.stoic-reflex-row{display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap;}
-.stoic-reflex-save{background:var(--navy);color:#fff;border:none;border-radius:20px;padding:.35rem 1rem;font-size:19px;font-family:"IM Fell English",serif;cursor:pointer;}
-.stoic-reflex-new{background:transparent;border:1px solid rgba(26,39,68,0.2);color:var(--muted);border-radius:20px;padding:.35rem .8rem;font-size:19px;font-family:"IM Fell English",serif;cursor:pointer;}
-.stoic-reflex-saved{font-size:15px;color:var(--sage);font-style:italic;margin-left:auto;font-family:"IM Fell English",serif;}
-.stoic-reflex-entries{margin-top:.9rem;border-top:1px dashed rgba(26,39,68,0.12);padding-top:.75rem;display:flex;flex-direction:column;gap:.5rem;}
-.stoic-entry-date{font-size:13px;color:var(--navy);letter-spacing:.08em;margin-bottom:.1rem;opacity:.6;}
-.stoic-entry-q{font-size:15px;color:var(--muted);margin-bottom:.06rem;font-family:"IM Fell English",serif;font-style:italic;}
-.stoic-entry-text{font-size:19px;font-style:italic;color:var(--text);line-height:1.6;font-family:"IM Fell English",serif;}
-.stoic-show-entries{background:transparent;border:none;color:var(--navy);font-family:"IM Fell English",serif;font-size:16px;font-style:italic;cursor:pointer;opacity:.6;padding:0;}
 
-/* ── LEBEN-TOAST ── */
-#leben-toast{position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);border-radius:20px;padding:.5rem 1.1rem;font-family:"IM Fell English",serif;font-size:17px;font-style:italic;color:#f8e8b8;box-shadow:0 4px 20px rgba(26,39,68,0.18);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap;z-index:500;}
-#leben-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
-.phase-card.glow{animation:cardGlow 1.2s ease;}
-
-/* ── INNEHALTEN OVERLAY ── */
-#innehalten-overlay{
-  position:fixed;inset:0;z-index:3000;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:2.5rem 2rem;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(184,41,74,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(201,137,58,0.05) 0%, transparent 70%),
-    #fdf6ee;
-  animation:overlayIn .6s cubic-bezier(.34,1.2,.64,1);
-  text-align:center;
+.schild::before {
+  content: '🌟';
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.8rem;
 }
-#innehalten-overlay.leaving{animation:overlayOut .45s ease forwards;}
 
-.innehalten-atem{
-  font-size:2.2rem;
-  margin-bottom:1.4rem;
-  animation:tier-float 4s ease-in-out infinite;
-  filter:drop-shadow(0 0 10px rgba(201,137,58,0.3));
+.schild-titel {
+  font-family: 'Limelight', cursive;
+  font-size: 2rem;
+  color: var(--dunkel);
+  line-height: 1.1;
+  letter-spacing: .02em;
 }
-.innehalten-label{
-  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--crimson);opacity:.6;font-weight:500;
-  margin-bottom:1.1rem;
-}
-.innehalten-frage{
-  font-family:\"Playfair Display\",serif;
-  font-size:27px;font-style:italic;
-  color:var(--text);line-height:1.6;
-  max-width:300px;margin:0 auto 1rem;
-}
-.innehalten-frage em{
-  color:var(--crimson);font-style:italic;
-}
-.innehalten-pause{
-  font-family:\"IM Fell English\",serif;
-  font-size:17px;font-style:italic;
-  color:var(--muted);line-height:1.7;
-  max-width:270px;margin:0 auto 2rem;
-  opacity:.75;
-}
-.innehalten-antwort{
-  width:100%;max-width:300px;
-  border:none;border-bottom:2px solid rgba(184,41,74,0.25);
-  background:transparent;
-  font-family:\"Playfair Display\",serif;
-  font-size:22px;font-style:italic;
-  color:var(--text);
-  padding:.4rem .2rem;
-  outline:none;text-align:center;
-  transition:border-color .3s;
-  margin-bottom:1.8rem;
-  display:block;
-  margin-left:auto;margin-right:auto;
-}
-.innehalten-antwort:focus{border-color:var(--crimson);}
-.innehalten-antwort::placeholder{color:var(--muted);opacity:.45;font-style:italic;}
-.innehalten-weiter{
-  background:transparent;
-  border:1.5px solid rgba(184,41,74,0.35);
-  color:var(--crimson);
-  border-radius:30px;
-  padding:.5rem 1.8rem;
-  font-family:\"IM Fell English\",serif;font-size:18px;font-style:italic;
-  cursor:pointer;
-  transition:all .25s;
-  letter-spacing:.03em;
-}
-.innehalten-weiter:active{background:var(--crimson);color:#fff;border-color:var(--crimson);}
-.innehalten-skip{
-  display:block;margin-top:1rem;
-  font-family:\"IM Fell English\",serif;font-size:15px;font-style:italic;
-  color:var(--muted);opacity:.45;
-  background:none;border:none;cursor:pointer;
-  text-decoration:underline;text-decoration-style:dotted;
-}
-.innehalten-skip:active{opacity:.8;}
 
-/* ── STIMMUNGS-CHECK OVERLAY ── */
-#stimmung-overlay{position:fixed;inset:0;background:rgba(26,39,68,0.72);z-index:2000;display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:overlayIn .35s ease;}
-#stimmung-overlay.hidden{display:none;}
-.stimmung-card{background:var(--bg);border-radius:18px;padding:2rem 1.5rem 1.5rem;max-width:340px;width:100%;box-shadow:0 8px 40px rgba(26,39,68,0.22);text-align:center;}
-.stimmung-title{font-family:"Playfair Display",serif;font-size:22px;font-style:italic;color:var(--crimson);margin-bottom:.3rem;}
-.stimmung-sub{font-family:"IM Fell English",serif;font-size:17px;font-style:italic;color:var(--muted);margin-bottom:1.4rem;line-height:1.5;}
-.stimmung-btns{display:flex;gap:.8rem;justify-content:center;margin-bottom:1rem;}
-.stimmung-btn{flex:1;padding:.7rem .5rem;border:2px solid var(--border);border-radius:14px;background:transparent;font-family:"IM Fell English",serif;font-size:18px;cursor:pointer;transition:all .2s;color:var(--text);}
-.stimmung-btn:active{transform:scale(.97);}
-.stimmung-btn.struktur{border-color:var(--navy);}
-.stimmung-btn.struktur:hover,.stimmung-btn.struktur.sel{background:var(--navy);color:#fff;}
-.stimmung-btn.fluss{border-color:var(--violet);}
-.stimmung-btn.fluss:hover,.stimmung-btn.fluss.sel{background:var(--violet);color:#fff;}
-.stimmung-weiter{width:100%;background:var(--crimson);color:#fff;border:none;border-radius:20px;padding:.55rem 1.2rem;font-family:"IM Fell English",serif;font-size:19px;font-style:italic;cursor:pointer;margin-top:.3rem;}
-
-/* ── WILDER SLOT TASK ── */
-.task-item.wild-slot{border-color:rgba(106,63,122,0.3);background:rgba(106,63,122,0.04);}
-.task-item.wild-slot .task-name{color:var(--violet);}
-.task-item.wild-slot .task-cat{color:var(--violet);opacity:.6;}
-.wild-slot-inner{font-family:"IM Fell English",serif;font-size:16px;font-style:italic;color:var(--violet);opacity:.7;margin-top:.25rem;}
-
-/* ── OFFENE BLÖCKE BADGE ── */
-.task-item.offen{border-left:3px solid rgba(94,138,90,0.5);}
-.task-item.offen .task-cat::after{content:' ✦';opacity:.5;}
-
-/* ── OPTIONALE TASKS (Fluss-Modus) ── */
-.task-item.optional{opacity:.45;}
-.task-item.optional .task-name::after{content:' · optional';font-size:12px;font-style:italic;color:var(--violet);opacity:.8;}
-
-/* ══ 3-EBENEN-BLOCK ══ */
-.drei-wrap{margin:.8rem 1rem 0;}
-.drei-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;}
-.drei-title{font-family:"Playfair Display",serif;font-size:1rem;font-style:italic;color:var(--text);}
-.drei-toggle{font-size:13px;font-family:"IM Fell English",serif;font-style:italic;color:var(--muted);background:none;border:none;cursor:pointer;opacity:.7;}
-.drei-toggle:active{opacity:1;}
-
-.ebene-block{
-  background:var(--card);border-radius:12px;border:1px solid var(--border);
-  box-shadow:0 3px 16px var(--shadow);margin-bottom:.5rem;overflow:hidden;
+.schild-sub {
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  color: var(--dunkel);
+  opacity: .7;
+  margin-top: .2rem;
 }
-.ebene-stripe{height:4px;}
-.ebene-stripe.fix{background:repeating-linear-gradient(90deg,var(--crimson) 0%,var(--crimson) 33%,var(--gold) 33%,var(--gold) 66%,var(--navy) 66%,var(--navy) 100%);opacity:.55;}
-.ebene-stripe.heute{background:repeating-linear-gradient(90deg,var(--navy) 0%,var(--navy) 50%,var(--violet) 50%,var(--violet) 100%);opacity:.5;}
-.ebene-stripe.einladung{background:repeating-linear-gradient(90deg,var(--sage) 0%,var(--sage) 50%,rgba(94,138,90,0.4) 50%,rgba(94,138,90,0.4) 100%);opacity:.45;}
 
-.ebene-head{display:flex;align-items:center;gap:.45rem;padding:.65rem .95rem .3rem;}
-.ebene-icon{font-size:.95rem;opacity:.8;}
-.ebene-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;flex:1;}
-.ebene-label.fix{color:var(--crimson);}
-.ebene-label.heute{color:var(--navy);}
-.ebene-label.einladung{color:var(--sage);}
-.ebene-sub{font-family:"IM Fell English",serif;font-size:.8rem;font-style:italic;color:var(--muted);}
-.ebene-count{font-size:11px;color:var(--muted);font-family:"Raleway",sans-serif;opacity:.6;}
-
-.drei-task{
-  display:flex;align-items:flex-start;gap:.55rem;
-  padding:.42rem .95rem;border-bottom:1px solid rgba(184,41,74,0.07);
-  cursor:pointer;transition:opacity .2s;
+/* ═══ DATUM BANNER ═══ */
+.datum-banner {
+  background: var(--rot);
+  color: white;
+  font-family: 'Fredoka One', cursive;
+  font-size: .95rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .4rem 1.2rem;
+  margin: 0 -1.2rem .8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.drei-task:last-child{border-bottom:none;}
-.drei-task.done{opacity:.28;}
-.drei-task.done .drei-task-name{text-decoration:line-through;text-decoration-color:rgba(184,41,74,0.3);}
-.drei-check{width:15px;height:15px;border-radius:50%;border:1px solid rgba(184,41,74,0.3);flex-shrink:0;margin-top:3px;display:flex;align-items:center;justify-content:center;font-size:8px;color:transparent;transition:all .25s;}
-.drei-task.done .drei-check{background:var(--sage-l);border-color:var(--sage);color:var(--sage);}
-.drei-task.done .drei-check::after{content:'✦';}
-.drei-task-name{font-size:.88rem;color:var(--text);line-height:1.35;}
-.drei-task-note{font-size:.75rem;font-style:italic;color:var(--muted);font-family:"IM Fell English",serif;margin-top:1px;}
-.drei-task-cat{font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-left:auto;flex-shrink:0;padding-top:3px;opacity:.35;color:var(--crimson);}
-.drei-link{display:inline-block;margin-top:.25rem;font-size:.75rem;font-style:italic;color:var(--crimson);text-decoration:none;background:var(--crimson-l);border:1px solid rgba(184,41,74,0.2);border-radius:20px;padding:.06rem .5rem;font-family:"IM Fell English",serif;}
-.drei-link:active{background:rgba(184,41,74,0.2);}
 
-/* Heute-gewählt: editierbar */
-.heute-slot{
-  display:flex;align-items:center;gap:.5rem;
-  padding:.42rem .95rem;border-bottom:1px solid rgba(184,41,74,0.07);
+/* ═══ TAGES-IMPULS ═══ */
+.impuls-karte {
+  background: white;
+  border: 3px solid var(--dunkel);
+  border-radius: 20px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  position: relative;
+  box-shadow: 4px 4px 0 var(--dunkel);
+  overflow: hidden;
 }
-.heute-slot:last-child{border-bottom:none;}
-.heute-slot-dot{width:6px;height:6px;border-radius:50%;background:var(--navy);opacity:.4;flex-shrink:0;}
-.heute-slot-text{font-family:"IM Fell English",serif;font-size:.85rem;font-style:italic;color:var(--navy);flex:1;opacity:.8;}
-.heute-slot-check{font-size:12px;cursor:pointer;color:var(--muted);opacity:.5;padding:.2rem .3rem;}
-.heute-slot-check:active{opacity:1;}
-.heute-slot.done .heute-slot-text{text-decoration:line-through;opacity:.4;}
-.heute-slot.done .heute-slot-dot{background:var(--sage);}
 
-.drei-einladung-note{
-  padding:.35rem .95rem .65rem;
-  font-family:"IM Fell English",serif;font-size:.8rem;font-style:italic;
-  color:var(--muted);line-height:1.5;
-  border-top:1px dashed rgba(184,41,74,0.1);
+.impuls-karte::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(90deg,
+    var(--rot) 0,var(--rot) 20%,
+    var(--gelb) 20%,var(--gelb) 40%,
+    var(--grün) 40%,var(--grün) 60%,
+    var(--blau) 60%,var(--blau) 80%,
+    var(--lila) 80%,var(--lila) 100%
+  );
+}
+
+.impuls-label {
+  font-size: .7rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--rot);
+  font-weight: 700;
+  margin-bottom: .3rem;
+  margin-top: .3rem;
+}
+
+.impuls-text {
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: var(--dunkel);
+  line-height: 1.4;
+}
+
+/* ═══ WELLEN-TABS ═══ */
+.phasen-tabs {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+
+.phase-tab {
+  flex: 1;
+  background: white;
+  border: 3px solid var(--dunkel);
+  border-radius: 16px 16px 8px 8px;
+  padding: .5rem .3rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  box-shadow: 3px 3px 0 var(--dunkel);
+  position: relative;
+  overflow: hidden;
+}
+
+.phase-tab:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--dunkel); }
+
+.phase-tab.aktiv {
+  transform: translateY(-3px);
+  box-shadow: 3px 6px 0 var(--dunkel);
+}
+
+.phase-tab.aktiv-morgen { background: var(--gelb); }
+.phase-tab.aktiv-unterwegs { background: var(--orange); }
+.phase-tab.aktiv-abend { background: var(--lila); color: white; }
+
+.tab-icon { font-size: 1.3rem; display: block; }
+.tab-name { font-family: 'Fredoka One', cursive; font-size: .75rem; display: block; margin-top: .1rem; }
+.tab-zeit { font-size: .6rem; opacity: .65; font-weight: 600; }
+
+/* ═══ PHASE KARTE ═══ */
+.phase-karte {
+  background: white;
+  border: 3px solid var(--dunkel);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 5px 5px 0 var(--dunkel);
+  margin-bottom: 1rem;
+  animation: reingehüpft .3s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes reingehüpft {
+  from { transform: scale(.96) translateY(8px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.phase-kopf {
+  padding: .8rem 1.1rem .6rem;
+  position: relative;
+}
+
+.phase-kopf-morgen { background: var(--gelb); }
+.phase-kopf-unterwegs { background: var(--orange); color: white; }
+.phase-kopf-abend { background: var(--lila); color: white; }
+
+.phase-motto {
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+/* ═══ AUFGABEN ═══ */
+.aufgabe {
+  display: flex;
+  align-items: flex-start;
+  gap: .7rem;
+  padding: .65rem 1rem;
+  border-bottom: 2px dashed rgba(26,10,0,0.1);
+  cursor: pointer;
+  transition: background .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.aufgabe:last-child { border-bottom: none; }
+.aufgabe:active { background: rgba(255,217,61,0.2); }
+.aufgabe.erledigt { opacity: .35; }
+.aufgabe.erledigt .aufg-name { text-decoration: line-through; }
+
+.aufg-kreis {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--dunkel);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+  transition: all .2s;
+  background: white;
+}
+
+.aufgabe.erledigt .aufg-kreis {
+  background: var(--grün);
+  border-color: var(--grün);
+  color: white;
+}
+
+.aufg-inhalt { flex: 1; }
+.aufg-name { font-size: 1rem; font-weight: 600; line-height: 1.3; }
+.aufg-note { font-family: 'Caveat', cursive; font-size: .95rem; color: rgba(26,10,0,.5); margin-top: .05rem; }
+
+/* ═══ UNTERWEGS KARTE ═══ */
+.unterwegs-karte {
+  background: var(--orange);
+  border: 3px solid var(--dunkel);
+  border-radius: 20px;
+  padding: 1.5rem 1.2rem;
+  text-align: center;
+  box-shadow: 5px 5px 0 var(--dunkel);
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.unterwegs-emoji {
+  font-size: 3rem;
+  display: block;
+  animation: schaukeln 2s ease-in-out infinite;
+}
+
+@keyframes schaukeln {
+  0%,100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.unterwegs-satz {
+  font-family: 'Caveat', cursive;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: .5rem;
+}
+
+/* ═══ REFLEXION ═══ */
+.reflex-karte {
+  background: white;
+  border: 3px solid var(--dunkel);
+  border-radius: 20px;
+  padding: 1rem 1.1rem;
+  box-shadow: 4px 4px 0 var(--dunkel);
+  margin-bottom: 1rem;
+}
+
+.reflex-frage {
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  color: var(--rot);
+  margin-bottom: .6rem;
+  font-weight: 600;
+}
+
+.reflex-feld {
+  width: 100%;
+  border: 2px solid rgba(26,10,0,.2);
+  border-radius: 12px;
+  padding: .6rem .8rem;
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  color: var(--dunkel);
+  background: var(--creme);
+  resize: none;
+  min-height: 80px;
+  outline: none;
+}
+
+.reflex-feld:focus { border-color: var(--rot); }
+
+.reflex-btn {
+  background: var(--rot);
+  color: white;
+  border: 2px solid var(--dunkel);
+  border-radius: 20px;
+  padding: .4rem 1.2rem;
+  font-family: 'Fredoka One', cursive;
+  font-size: .95rem;
+  cursor: pointer;
+  margin-top: .5rem;
+  box-shadow: 2px 2px 0 var(--dunkel);
+  transition: transform .1s, box-shadow .1s;
+}
+
+.reflex-btn:active { transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--dunkel); }
+
+/* ═══ GUTER TAG BUTTON ═══ */
+.guter-tag-btn {
+  width: 100%;
+  background: var(--grün);
+  color: white;
+  border: 3px solid var(--dunkel);
+  border-radius: 20px;
+  padding: .85rem 1rem;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--dunkel);
+  margin-bottom: 1rem;
+  transition: transform .15s, box-shadow .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.guter-tag-btn:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--dunkel); }
+
+/* ═══ CONFETTI ═══ */
+.konfetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  display: none;
+}
+
+.konfetti-stück {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  animation: fallen 1.5s ease-in forwards;
+}
+
+@keyframes fallen {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* ═══ TOAST ═══ */
+.toast {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--dunkel);
+  color: var(--gelb);
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  padding: .5rem 1.2rem;
+  border-radius: 20px;
+  opacity: 0;
+  transition: all .3s;
+  z-index: 200;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.toast.sichtbar {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ═══ ABSCHNITT-TRENNER ═══ */
+.trenner {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: .5rem 0 .8rem;
+  opacity: .4;
+  letter-spacing: .3rem;
+}
+
+/* ═══ FLOATING DEKO ═══ */
+.deko-links {
+  position: fixed;
+  left: -5px;
+  top: 40%;
+  font-size: 1.5rem;
+  opacity: .15;
+  transform: rotate(-15deg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.deko-rechts {
+  position: fixed;
+  right: -5px;
+  top: 55%;
+  font-size: 1.5rem;
+  opacity: .15;
+  transform: rotate(15deg);
+  pointer-events: none;
+  z-index: 0;
 }
 
 </style>
 </head>
 <body>
 
-<!-- INNEHALTEN OVERLAY — stille Schwelle -->
-<div id="innehalten-overlay">
-  <div class="innehalten-atem">🌿</div>
-  <div class="innehalten-label">Einen Moment</div>
-  <div class="innehalten-frage">
-    Was weiß ich darüber,<br>was jetzt das<br><em>Richtige</em> ist?
-  </div>
-  <div class="innehalten-pause">Drei Atemzüge.<br>Dann lauschen.</div>
-  <input
-    class="innehalten-antwort"
-    id="innehalten-antwort"
-    type="text"
-    placeholder="oder einfach weitergehen …"
-    autocomplete="off"
-    inputmode="text"
-  >
-  <button class="innehalten-weiter" onclick="schliesseInnehalten()">weiter ›</button>
-  <button class="innehalten-skip" onclick="schliesseInnehalten()">überspringen</button>
-</div>
+<div class="deko-links">🐴<br>🐴<br>🐴</div>
+<div class="deko-rechts">⭐<br>⭐<br>⭐</div>
 
-<!-- INNERE PRAXIS OVERLAY — Zirkusmanege -->
-<div id="praxis-overlay">
+<div class="konfetti" id="konfetti"></div>
+<div class="toast" id="toast"></div>
 
-  <!-- Mini-Wimpelkette oben -->
-  <div class="praxis-wimpel">
-    <svg viewBox="0 0 340 32" style="width:100%;height:28px;display:block;" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,6 Q42,11 85,7 Q127,3 170,7 Q212,11 255,7 Q298,3 340,7" stroke="#1a2744" stroke-width="1" fill="none" opacity="0.25"/>
-      <g style="transform-origin:24px 6px;animation:wimpel-swing 2.8s ease-in-out infinite"><polygon points="16,6 32,6 24,24" fill="#b8294a" opacity="0.7"/></g>
-      <g style="transform-origin:57px 7px;animation:wimpel-swing2 3.2s ease-in-out infinite 0.3s"><polygon points="49,7 65,7 57,25" fill="#c9893a" opacity="0.7"/></g>
-      <g style="transform-origin:90px 6px;animation:wimpel-swing3 2.5s ease-in-out infinite 0.6s"><polygon points="82,6 98,6 90,24" fill="#1a2744" opacity="0.65"/></g>
-      <g style="transform-origin:123px 6px;animation:wimpel-swing 3.0s ease-in-out infinite 0.9s"><polygon points="115,6 131,6 123,24" fill="#6a3f7a" opacity="0.65"/></g>
-      <g style="transform-origin:156px 7px;animation:wimpel-swing2 2.7s ease-in-out infinite 1.2s"><polygon points="148,7 164,7 156,25" fill="#b8294a" opacity="0.7"/></g>
-      <g style="transform-origin:189px 6px;animation:wimpel-swing3 3.4s ease-in-out infinite 1.5s"><polygon points="181,6 197,6 189,24" fill="#5e8a5a" opacity="0.6"/></g>
-      <g style="transform-origin:222px 7px;animation:wimpel-swing 2.9s ease-in-out infinite 1.8s"><polygon points="214,7 230,7 222,25" fill="#c9893a" opacity="0.7"/></g>
-      <g style="transform-origin:255px 6px;animation:wimpel-swing2 2.6s ease-in-out infinite 2.1s"><polygon points="247,6 263,6 255,24" fill="#b8294a" opacity="0.7"/></g>
-      <g style="transform-origin:288px 6px;animation:wimpel-swing3 3.1s ease-in-out infinite 2.4s"><polygon points="280,6 296,6 288,24" fill="#1a2744" opacity="0.65"/></g>
-      <g style="transform-origin:321px 7px;animation:wimpel-swing 2.8s ease-in-out infinite 2.7s"><polygon points="313,7 329,7 321,25" fill="#6a3f7a" opacity="0.65"/></g>
+<div class="container">
+
+  <!-- DACH -->
+  <div class="dach">
+    <svg viewBox="0 0 420 120" xmlns="http://www.w3.org/2000/svg">
+      <!-- Himmel -->
+      <rect width="420" height="120" fill="#87CEEB"/>
+      <!-- Wolken -->
+      <ellipse cx="60" cy="30" rx="35" ry="18" fill="white" opacity=".9"/>
+      <ellipse cx="85" cy="22" rx="28" ry="16" fill="white" opacity=".9"/>
+      <ellipse cx="340" cy="40" rx="30" ry="15" fill="white" opacity=".8"/>
+      <ellipse cx="365" cy="32" rx="25" ry="14" fill="white" opacity=".8"/>
+      <!-- Sonne -->
+      <circle cx="380" cy="20" r="18" fill="var(--gelb)" opacity=".9"/>
+      <line x1="380" y1="0" x2="380" y2="5" stroke="var(--gelb)" stroke-width="2"/>
+      <line x1="395" y1="5" x2="392" y2="9" stroke="var(--gelb)" stroke-width="2"/>
+      <line x1="365" y1="5" x2="368" y2="9" stroke="var(--gelb)" stroke-width="2"/>
+      <!-- Dach links (rot-weiß gestreift) -->
+      <polygon points="0,120 180,25 180,120" fill="var(--rot)"/>
+      <polygon points="0,120 180,25 180,120" fill="url(#streifenL)"/>
+      <!-- Dach rechts (blau-weiß gestreift) -->
+      <polygon points="420,120 240,25 240,120" fill="var(--blau)"/>
+      <polygon points="420,120 240,25 240,120" fill="url(#streifenR)"/>
+      <!-- Mitteldach (grün) -->
+      <polygon points="150,120 210,20 270,120" fill="var(--grün)"/>
+      <!-- Schornstein -->
+      <rect x="290" y="30" width="22" height="55" fill="var(--orange)"/>
+      <rect x="286" y="26" width="30" height="10" fill="var(--dunkel)" rx="3"/>
+      <!-- Rauch -->
+      <circle cx="301" cy="15" r="7" fill="white" opacity=".5"/>
+      <circle cx="308" cy="8" r="5" fill="white" opacity=".35"/>
+      <!-- Stern auf dem Mitteldach -->
+      <text x="210" y="70" text-anchor="middle" font-size="20" fill="var(--gelb)">⭐</text>
+      <!-- Bodenlinie -->
+      <rect x="0" y="118" width="420" height="4" fill="var(--dunkel)" opacity=".3"/>
+      <defs>
+        <pattern id="streifenL" patternUnits="userSpaceOnUse" width="16" height="16" patternTransform="rotate(45)">
+          <rect width="8" height="16" fill="white" opacity=".15"/>
+        </pattern>
+        <pattern id="streifenR" patternUnits="userSpaceOnUse" width="16" height="16" patternTransform="rotate(45)">
+          <rect width="8" height="16" fill="white" opacity=".15"/>
+        </pattern>
+      </defs>
     </svg>
   </div>
 
-  <!-- Scheinwerfer + Tradition -->
-  <div class="praxis-tradition" id="praxis-tradition"></div>
-  <div class="praxis-deko" id="praxis-deko"></div>
-  <div class="praxis-text" id="praxis-text"></div>
-  <div class="praxis-uebung" id="praxis-uebung"></div>
+  <!-- FASSADE -->
+  <div class="fassade">
 
-  <!-- Tier-Parade vor dem Weiter-Button -->
-  <div style="display:flex;gap:.6rem;margin-bottom:1.2rem;opacity:.35;font-size:.95rem;animation:tier-float 3s ease-in-out infinite;" aria-hidden="true">
-    <span style="animation:tier-float 3s ease-in-out infinite 0s">🐘</span>
-    <span style="animation:tier-float 3s ease-in-out infinite 0.4s">✦</span>
-    <span style="animation:tier-float 3s ease-in-out infinite 0.8s">🦁</span>
-    <span style="animation:tier-float 3s ease-in-out infinite 1.2s">✦</span>
-    <span style="animation:tier-float 3s ease-in-out infinite 1.6s">🐆</span>
-    <span style="animation:tier-float 3s ease-in-out infinite 2.0s">✦</span>
-    <span style="animation:tier-float 3s ease-in-out infinite 2.4s">🎪</span>
-  </div>
-
-  <button class="praxis-weiter" onclick="closeOverlay()">weiter in den Tag ›</button>
-</div>
-
-<!-- LEBEN TOAST -->
-<div id="leben-toast"></div>
-
-
-
-<!-- WIMPELKETTE oben -->
-<div class="wimpelkette" aria-hidden="true">
-<svg viewBox="0 0 400 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Seil -->
-  <path d="M0,8 Q50,12 100,10 Q150,8 200,11 Q250,14 300,10 Q350,8 400,10" stroke="#1a2744" stroke-width="1" fill="none" stroke-dasharray="none" opacity="0.3"/>
-  <!-- Wimpel 1 -->
-  <g class="wimpel-1" transform-origin="30 10">
-    <polygon points="22,10 38,10 30,34" fill="#b8294a" opacity="0.8"/>
-  </g>
-  <!-- Wimpel 2 -->
-  <g class="wimpel-2" transform-origin="67 10">
-    <polygon points="59,10 75,10 67,34" fill="#c9893a" opacity="0.8"/>
-  </g>
-  <!-- Wimpel 3 -->
-  <g class="wimpel-3" transform-origin="104 10">
-    <polygon points="96,10 112,10 104,34" fill="#1a2744" opacity="0.75"/>
-  </g>
-  <!-- Wimpel 4 -->
-  <g class="wimpel-4" transform-origin="141 10">
-    <polygon points="133,10 149,10 141,34" fill="#6a3f7a" opacity="0.75"/>
-  </g>
-  <!-- Wimpel 5 -->
-  <g class="wimpel-5" transform-origin="178 11">
-    <polygon points="170,11 186,11 178,35" fill="#b8294a" opacity="0.8"/>
-  </g>
-  <!-- Wimpel 6 -->
-  <g class="wimpel-6" transform-origin="215 10">
-    <polygon points="207,10 223,10 215,34" fill="#5e8a5a" opacity="0.7"/>
-  </g>
-  <!-- Wimpel 7 -->
-  <g class="wimpel-7" transform-origin="252 11">
-    <polygon points="244,11 260,11 252,35" fill="#c9893a" opacity="0.8"/>
-  </g>
-  <!-- Wimpel 8 -->
-  <g class="wimpel-8" transform-origin="289 10">
-    <polygon points="281,10 297,10 289,34" fill="#b8294a" opacity="0.8"/>
-  </g>
-  <!-- Wimpel 9 -->
-  <g class="wimpel-9" transform-origin="326 10">
-    <polygon points="318,10 334,10 326,34" fill="#1a2744" opacity="0.75"/>
-  </g>
-  <!-- Wimpel 10 -->
-  <g class="wimpel-1" transform-origin="363 10">
-    <polygon points="355,10 371,10 363,34" fill="#6a3f7a" opacity="0.75"/>
-  </g>
-</svg>
-</div>
-
-<!-- ZIRKUSZELT — emoji-basiert, zart und klar -->
-<div class="zelt-svg-wrap" aria-hidden="true" style="
-  display:flex;flex-direction:column;align-items:center;
-  padding:.6rem 1rem .5rem;
-  background:var(--bg);
-">
-  <div style="
-    font-size:4rem;
-    line-height:1;
-    filter:drop-shadow(0 3px 12px rgba(184,41,74,0.18));
-    animation:tier-float 6s ease-in-out infinite;
-  ">🎪</div>
-  <div style="
-    font-family:'Playfair Display',serif;
-    font-size:12px;
-    font-style:italic;
-    letter-spacing:.2em;
-    color:var(--crimson);
-    opacity:.5;
-    margin-top:.2rem;
-    text-transform:uppercase;
-  ">Grand Cirque de Sandra</div>
-  <div style="
-    font-size:9px;letter-spacing:.28em;color:var(--gold);
-    opacity:.45;margin-top:.1rem;
-  ">✦ · ✦ · ✦ · ✦ · ✦</div>
-</div>
-
-<header>
-  <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;">
-    <div class="date-line" id="dateLine"></div>
-    <div id="dateNav" style="display:flex;gap:.4rem;flex-shrink:0;">
-      <button id="btnVortag" onclick="switchDay(-1)" style="font-size:13px;font-family:'IM Fell English',serif;font-style:italic;color:var(--muted);background:none;border:1px solid var(--border);border-radius:12px;padding:.15rem .55rem;cursor:pointer;">← Vortag</button>
-      <button id="btnHeute" onclick="switchDay(0)" style="display:none;font-size:13px;font-family:'IM Fell English',serif;font-style:italic;color:var(--crimson);background:none;border:1px solid rgba(184,41,74,0.25);border-radius:12px;padding:.15rem .55rem;cursor:pointer;">Heute</button>
+    <!-- SCHILD -->
+    <div class="schild">
+      <div class="schild-titel">Villa Kunterbunt</div>
+      <div class="schild-sub">Dieses Leben wähle ich ✦</div>
     </div>
-  </div>
 
-</header>
-
-<!-- GUTER TAG OVERLAY -->
-<div id="gutертag-overlay" style="display:none;position:fixed;inset:0;background:rgba(26,39,68,0.45);z-index:900;align-items:center;justify-content:center;padding:1.5rem;">
-  <div style="background:var(--bg);border-radius:20px;padding:2rem 1.6rem;max-width:380px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,0.18);position:relative;">
-    <div style="font-family:'Playfair Display',serif;font-size:17px;font-style:italic;font-weight:700;color:var(--crimson);margin-bottom:1.2rem;letter-spacing:.01em;">Das ist ein guter Tag für mich.</div>
-    <div style="font-family:'IM Fell English',serif;font-size:18px;color:var(--text);line-height:1.75;font-style:italic;">
-      Ich habe Zeit für die Tiere und genieße sie mit ihnen.<br><br>
-      Ich habe guten Kontakt zu den Schülerinnen und Schülern.<br><br>
-      Ich spüre Liebe bewusst.<br><br>
-      Ich bin achtsam statt im Automodus.<br><br>
-      Ich entdecke Wunder und freue mich darüber.<br><br>
-      Ich lächle.<br><br>
-      Ich finde etwas schön.
+    <!-- DATUM -->
+    <div class="datum-banner">
+      <span id="datumText">Heute</span>
+      <span>🎪</span>
     </div>
-    <button onclick="document.getElementById('gutертag-overlay').style.display='none';" style="margin-top:1.6rem;width:100%;padding:.7rem;background:var(--crimson);color:#fff;border:none;border-radius:12px;font-family:'IM Fell English',serif;font-size:16px;font-style:italic;cursor:pointer;">schließen</button>
-  </div>
-</div>
 
-<!-- INTENTION -->
-<div style="height:1.2rem;"></div>
-<div style="display:flex;justify-content:center;padding:0 1.2rem;">
-  <button onclick="document.getElementById('gutертag-overlay').style.display='flex';" style="width:100%;padding:.75rem 1rem;background:none;border:1px solid rgba(184,41,74,0.3);border-radius:14px;font-family:'IM Fell English',serif;font-size:17px;font-style:italic;color:var(--crimson);cursor:pointer;letter-spacing:.01em;">Das ist ein guter Tag für mich.</button>
-</div>
-<div style="height:1rem;"></div>
-<div style="height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:0 1.5rem;opacity:0.5;"></div>
-<div style="height:1rem;"></div>
-<div class="intention-wrap">
-  <div class="intention-top">
-    <div class="intention-dot"></div>
-    <div class="intention-label">Mein heutiger Impuls</div>
-  </div>
-  <div class="intention-text loading" id="intentionText">Einen Moment …</div>
-  <div class="intention-refresh">
-    <button class="refresh-btn" onclick="loadIntention(true)">↺ neuer Impuls</button>
-  </div>
-</div>
+    <!-- GUTER TAG BUTTON -->
+    <button class="guter-tag-btn" onclick="zeigGutenTag()">
+      <span>🌟</span> Das ist ein guter Tag für mich
+    </button>
 
-
-<!-- 3-EBENEN-TAGESSTRUKTUR -->
-<div class="drei-wrap" id="dreiWrap">
-  <div class="drei-header">
-    <div class="drei-title">✦ Was heute zählt</div>
-    <button class="drei-toggle" onclick="toggleDreiBlock()">minimieren ↑</button>
-  </div>
-
-  <!-- EBENE 1: FIX -->
-  <div class="ebene-block">
-    <div class="ebene-stripe fix"></div>
-    <div class="ebene-head">
-      <span class="ebene-icon">🌿</span>
-      <span class="ebene-label fix">Täglich fix</span>
-      <span class="ebene-count" id="fixCount"></span>
+    <!-- IMPULS -->
+    <div class="impuls-karte">
+      <div class="impuls-label">✦ Mein heutiger Impuls</div>
+      <div class="impuls-text" id="impulsText">
+        Heute darf alles leicht sein — wie Pippi, die einfach losspringt.
+      </div>
     </div>
-    <div id="fixTasks"></div>
-  </div>
 
-  <!-- EBENE 2: HEUTE GEWÄHLT -->
-  <div class="ebene-block">
-    <div class="ebene-stripe heute"></div>
-    <div class="ebene-head">
-      <span class="ebene-icon">🎯</span>
-      <span class="ebene-label heute">Heute gewählt</span>
-      <span class="ebene-sub" id="heuteTagSub"></span>
+    <!-- PHASEN TABS -->
+    <div class="phasen-tabs" id="phasenTabs">
+      <div class="phase-tab aktiv aktiv-morgen" onclick="zeigePhase('morgen')" id="tab-morgen">
+        <span class="tab-icon">✨</span>
+        <span class="tab-name">Bevor ich</span>
+        <span class="tab-zeit">bis 13:15</span>
+      </div>
+      <div class="phase-tab" onclick="zeigePhase('unterwegs')" id="tab-unterwegs">
+        <span class="tab-icon">🎪</span>
+        <span class="tab-name">Unterwegs</span>
+        <span class="tab-zeit">13:15–18:00</span>
+      </div>
+      <div class="phase-tab" onclick="zeigePhase('abend')" id="tab-abend">
+        <span class="tab-icon">🌙</span>
+        <span class="tab-name">Ankommen</span>
+        <span class="tab-zeit">ab 18:00</span>
+      </div>
     </div>
-    <div id="heuteTasks"></div>
-  </div>
 
-  <!-- EBENE 3: EINLADUNG -->
-  <div class="ebene-block">
-    <div class="ebene-stripe einladung"></div>
-    <div class="ebene-head">
-      <span class="ebene-icon">🌸</span>
-      <span class="ebene-label einladung">Nächstes Abenteuer 🎪</span>
+    <!-- PHASE INHALT -->
+    <div id="phaseInhalt"></div>
+
+    <!-- REFLEXION -->
+    <div class="trenner">✦ · ✦ · ✦</div>
+    <div class="reflex-karte">
+      <div class="reflex-frage" id="reflexFrage">🌸 Was war heute schön?</div>
+      <textarea class="reflex-feld" id="reflexText" placeholder="Einfach drauflosschreiben …" rows="3"></textarea>
+      <button class="reflex-btn" onclick="speichereReflex()">✦ festhalten</button>
     </div>
-    <div id="einladungTasks"></div>
-    <div class="drei-einladung-note">Kein Müssen. Nur eine offene Tür — du entscheidest, ob du eintrittst.</div>
-  </div>
-</div>
 
-<!-- TAGES-RHYTHMUS -->
-<div class="rhythmus-wrap">
-  <div class="rhythmus-label">Mein Tag</div>
-  <div class="waves">
-    <div class="wave" id="wave-morgen" onclick="showPhase('morgen')">
-      <div class="wave-icon">✨</div>
-      <div class="wave-name" style="font-size:10px;letter-spacing:.03em;">Bevor ich</div>
-      <div class="wave-time" style="font-size:10px;">7:30–13:15</div>
-      <div class="wave-tea" id="wave-tea-morgen"></div>
-      <a class="wave-musik" href="https://open.spotify.com/playlist/1RO7Inm2kFd6FLgSJZ8GWe" target="_blank" onclick="event.stopPropagation()">🎵</a>
-      <div class="wave-done-badge">✓</div>
-    </div>
-    <div class="wave" id="wave-vormittag" onclick="showPhase('vormittag')">
-      <div class="wave-icon">🎪</div>
-      <div class="wave-name" style="font-size:10px;letter-spacing:.03em;">Unterwegs</div>
-      <div class="wave-time" style="font-size:10px;">13:15–18:00</div>
-      <div class="wave-tea" id="wave-tea-vormittag"></div>
-      <a class="wave-musik" href="https://open.spotify.com/playlist/7kb6SPESF6UYOJwE6ELjzq" target="_blank" onclick="event.stopPropagation()">🎵</a>
-      <div class="wave-done-badge">✓</div>
-    </div>
-    <div class="wave" id="wave-abend" onclick="showPhase('abend')">
-      <div class="wave-icon">🌙</div>
-      <div class="wave-name" style="font-size:10px;letter-spacing:.03em;">Ankommen</div>
-      <div class="wave-time" style="font-size:10px;">ab 18:00</div>
-      <div class="wave-tea" id="wave-tea-abend"></div>
-      <a class="wave-musik" href="https://open.spotify.com/playlist/3wtSyNFvoSxSarePmVGYkx" target="_blank" onclick="event.stopPropagation()">🎵</a>
-      <div class="wave-done-badge">✓</div>
-    </div>
-  </div>
-</div>
-
-<div class="phase-content" id="phaseContent"></div>
-
-<!-- Mini-Wimpelkette zwischen Tab und Inhalt -->
-<div style="width:100%;padding:0 1rem;margin-top:.4rem;" aria-hidden="true">
-  <svg viewBox="0 0 340 22" style="width:100%;height:18px;display:block;" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,4 Q42,8 85,5 Q127,2 170,5 Q212,8 255,5 Q298,2 340,5" stroke="#1a2744" stroke-width=".8" fill="none" opacity="0.2"/>
-    <polygon points="20,4 28,4 24,16" fill="#b8294a" opacity="0.45"/>
-    <polygon points="55,5 63,5 59,17" fill="#c9893a" opacity="0.45"/>
-    <polygon points="90,4 98,4 94,16" fill="#1a2744" opacity="0.38"/>
-    <polygon points="125,5 133,5 129,17" fill="#6a3f7a" opacity="0.4"/>
-    <polygon points="160,4 168,4 164,16" fill="#b8294a" opacity="0.45"/>
-    <polygon points="195,5 203,5 199,17" fill="#5e8a5a" opacity="0.38"/>
-    <polygon points="230,4 238,4 234,16" fill="#c9893a" opacity="0.45"/>
-    <polygon points="265,5 273,5 269,17" fill="#b8294a" opacity="0.45"/>
-    <polygon points="300,4 308,4 304,16" fill="#1a2744" opacity="0.38"/>
-  </svg>
-</div>
-
-<!-- APPS — phasenabhängig -->
-<div class="tier-zeile" aria-hidden="true">
-  <div class="tier-linie"></div>
-  <span class="tier">🐘</span>
-  <span class="tier">🦁</span>
-  <span class="tier">🐆</span>
-  <span class="tier">🐎</span>
-  <span class="tier">🦜</span>
-  <div class="tier-linie"></div>
-</div>
-<div class="section-wrap">
-  <div class="section-label" id="apps-label">Jetzt passend</div>
-  <div id="apps-list"></div>
-  <button onclick="toggleAllApps()" id="alle-apps-btn" style="background:transparent;border:none;color:var(--muted);font-family:'IM Fell English',serif;font-size:16px;font-style:italic;cursor:pointer;padding:.3rem .2rem;margin-top:.2rem;opacity:.7;">alle Apps anzeigen ↓</button>
-</div>
-
-<!-- NOTIZEN -->
-<div class="tier-zeile" aria-hidden="true">
-  <div class="tier-linie"></div>
-  <span class="tier">🐇</span>
-  <span class="tier">🦢</span>
-  <span class="tier">🐻</span>
-  <span class="tier">🦊</span>
-  <span class="tier">🦋</span>
-  <div class="tier-linie"></div>
-</div>
-<div class="reflex-wrap" style="margin-top:.8rem;">
-  <div class="reflex-header">
-    <div class="reflex-title">✦ Meine Notizen</div>
-    <button class="reflex-toggle" onclick="clearNotiz()" id="notizClear" style="display:none">löschen</button>
-  </div>
-  <div class="reflex-card">
-    <textarea class="reflex-textarea" id="notizText" placeholder="Was ich mir merken möchte …" oninput="saveNotiz()" style="min-height:80px;"></textarea>
-  </div>
-</div>
-
-<!-- STOISCHE TAGESABSICHT -->
-<div class="stoic-plan-wrap" id="stoicPlanWrap">
-  <div class="stoic-plan-header">
-    <span class="stoic-plan-icon">🏛</span>
-    <span class="stoic-plan-label">Mein stoischer Tagesplan</span>
-  </div>
-  <div class="stoic-plan-body">
-    <div class="stoic-plan-sentence">
-      <span>Heute</span> werde ich
-      <input class="stoic-plan-input" id="stoicPlanInput" type="text" placeholder="… was ich heute tun will …" autocomplete="off" oninput="saveStoicPlan()" />
-    </div>
-    <div class="stoic-plan-sub" id="stoicPlanSub">— soweit nichts dazwischen kommt. Sollte es verhindert werden, tue ich das Nächstbeste.</div>
-  </div>
-</div>
-
-<!-- STOISCHE MORGEN-REFLEXION -->
-<div class="stoic-reflex-wrap" id="stoicMorgenReflex">
-  <div class="stoic-reflex-header">
-    <div class="stoic-reflex-title">✦ Stoische Morgenreflexion</div>
-    <span class="stoic-reflex-badge">Morgen</span>
-  </div>
-  <div class="stoic-reflex-body">
-    <div class="stoic-reflex-q" id="stoicMorgenQ"></div>
-    <textarea class="stoic-reflex-textarea" id="stoicMorgenText" placeholder="Schreib, was dir in den Sinn kommt …"></textarea>
-    <div class="stoic-reflex-row">
-      <button class="stoic-reflex-save" onclick="saveStoicMorgen()">Speichern</button>
-      <span class="stoic-reflex-saved" id="stoicMorgenSaved" style="display:none">✓ gespeichert</span>
-      <button class="stoic-show-entries" onclick="toggleStoicMorgenEntries()">Einträge ›</button>
-    </div>
-    <div class="stoic-reflex-entries" id="stoicMorgenEntries" style="display:none"></div>
-  </div>
-</div>
-
-
-
-<!-- STOISCHE ABEND-REFLEXION -->
-<div class="stoic-reflex-wrap" id="stoicAbendReflex">
-  <div class="stoic-reflex-header">
-    <div class="stoic-reflex-title">✦ Stoische Abendbilanz</div>
-    <span class="stoic-reflex-badge">Abend</span>
-  </div>
-  <div class="stoic-reflex-body">
-    <div class="stoic-reflex-q" id="stoicAbendQ"></div>
-    <textarea class="stoic-reflex-textarea" id="stoicAbendText" placeholder="Was nimmst du aus dem heutigen Tag mit …"></textarea>
-    <div class="stoic-reflex-row">
-      <button class="stoic-reflex-save" onclick="saveStoicAbend()">Speichern</button>
-      <span class="stoic-reflex-saved" id="stoicAbendSaved" style="display:none">✓ gespeichert</span>
-      <button class="stoic-show-entries" onclick="toggleStoicAbendEntries()">Einträge ›</button>
-    </div>
-    <div class="stoic-reflex-entries" id="stoicAbendEntries" style="display:none"></div>
   </div>
 </div>
 
 <script>
-var DAYS_DE=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
-var MONTHS_DE=["Jänner","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
-var today=new Date(); // immer das echte Heute (für Tageszeit etc.)
+var TAGE = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+var MONATE = ['Jänner','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+var heute = new Date();
 
-// ── DATUM-NAVIGATION ──
-var viewOffset=0; // 0 = heute, -1 = gestern
+// Datum
+document.getElementById('datumText').textContent =
+  TAGE[heute.getDay()] + ', ' + heute.getDate() + '. ' + MONATE[heute.getMonth()];
 
-function getViewDate(){
-  var d=new Date(today);
-  d.setDate(d.getDate()+viewOffset);
-  return d;
-}
-
-function updateDateDisplay(){
-  var d=getViewDate();
-  var isToday=viewOffset===0;
-  document.getElementById('dateLine').textContent=
-    DAYS_DE[d.getDay()]+', '+d.getDate()+'. '+MONTHS_DE[d.getMonth()]+' '+d.getFullYear()
-    +(isToday?'':' · Vortag');
-
-  document.getElementById('btnVortag').style.display=isToday?'inline':'none';
-  document.getElementById('btnHeute').style.display=isToday?'none':'inline';
-}
-
-function switchDay(offset){
-  viewOffset=offset;
-  storageKey='tasks_'+getViewDate().toISOString().slice(0,10);
-  taskState=JSON.parse(localStorage.getItem(storageKey)||'{}');
-  updateDateDisplay();
-  showPhase(currentPhase||getPhaseByTime());
-  updateWaveDoneBadges();
-}
-
-updateDateDisplay();
-
-var storageKey='tasks_'+today.toISOString().slice(0,10);
-var taskState=JSON.parse(localStorage.getItem(storageKey)||'{}');
-
-// ── MITTERNACHTS-RESET: alte Tages-Keys löschen ──
-(function(){
-  var todayKey=storageKey;
-  Object.keys(localStorage).forEach(function(k){
-    if(k.startsWith('tasks_')&&k!==todayKey) localStorage.removeItem(k);
-  });
-})();
-
-// ── AUTOMATISCHER RESET bei Mitternacht (auch wenn Tab offen bleibt) ──
-document.addEventListener('visibilitychange', function(){
-  if(document.visibilityState==='visible'){
-    var newKey='tasks_'+new Date().toISOString().slice(0,10);
-    if(newKey!==storageKey){
-      // Neuer Tag — Seite neu laden für sauberen Start
-      window.location.reload();
-    }
-  }
-});
-// links: Array von {href, label} — erscheinen als kleine Buttons beim Task
-var PHASES={
-  morgen:{
-    mood:"Erst ich. Dann die Welt.",
-    tasks:[
-      {name:"Euthyrox & Rückenübungen",note:"noch im Bett",cat:"körper",links:[{href:"Ruecken.html",label:"Rücken"}]},
-      {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-      {name:"Blutdruck & Gewicht",note:"nüchtern, ruhig",cat:"körper",links:[{href:"Blutdruck.html",label:"Blutdruck"},{href:"Wiegen.html",label:"Gewicht"}]},
-      {name:"Knirscherschiene raus",note:"Kiefer entspannen",cat:"körper",links:[{href:"Kaumuskel.html",label:"Kieferübungen"}]},
-      {name:"Wasser · Tee · Frühstück",note:"bewusst genießen",cat:"ernährung",links:[{href:"tee-des-tages.html",label:"Tee"},{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"https://play.google.com/store/apps/details?id=org.nutritionfacts.dailydozen",label:"Daily Dozen"}]},
-      {name:"Medikamente",note:"zum Frühstück",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
-      {name:"Rudi & Timmy",note:"Futter & Schmusezeit",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
-      {name:"Bad Früh",note:"Du gestaltest dich selbst · FM4 oder Podcast mitnehmen 🎵",cat:"pflege",links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
-      {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
-      {name:"Tiermedikamente",note:"Lotte + Rudi",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"}]},
-      {name:"Unterricht vorbereiten",note:"Was brauche ich heute? Eines nach dem anderen.",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste VHS"},{href:"Uni_Praesenz_Checkliste.html",label:"Packliste Uni"}]},
-      {name:"Uni-Aufgabe — ein Schritt",note:"Lernplan öffnen, eine konkrete Sache anpacken.",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
-      {name:"Tee & Pause",note:"Nicht nebenbei. Wirklich innehalten. 🍵",cat:"seele",links:[{href:"tee-des-tages.html",label:"Tee"}]},
-      {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-      {name:"Schnell essen & fertig machen",note:"und raus 🎪",cat:"ernährung"},
+// Phasen
+var PHASEN = {
+  morgen: {
+    motto: "Erst ich. Dann die Welt. 🌈",
+    farbe: "morgen",
+    aufgaben: [
+      {name:"Euthyrox & Rückenübungen", note:"noch im Bett, ganz in Ruhe"},
+      {name:"Rudi — Magenschutz", note:"erstes nach dem Aufstehen"},
+      {name:"Blutdruck & Gewicht", note:"nüchtern, ruhig"},
+      {name:"Knirscherschiene raus", note:"Kiefer entspannen"},
+      {name:"Wasser · Tee · Frühstück", note:"bewusst genießen 🍵"},
+      {name:"Medikamente", note:"zum Frühstück"},
+      {name:"Rudi & Timmy", note:"Futter & Schmusezeit 🐱"},
+      {name:"Bad Früh", note:"FM4 oder Podcast mitnehmen 🎵"},
+      {name:"Lotte raus", note:"Lotte strahlt — und die Stadt auch 🐾"},
+      {name:"Tiermedikamente", note:"Lotte + Rudi"},
+      {name:"Unterricht vorbereiten", note:"Was brauche ich heute?"},
+      {name:"Uni-Aufgabe — ein Schritt", note:"einen Schritt, nicht alles"},
+      {name:"Tee & Pause", note:"wirklich innehalten ☕"},
+      {name:"Rudi — Gabapentin", note:"vor dem Rausgehen"},
+      {name:"Schnell essen & fertig machen", note:"und raus! 🎪"},
     ]
   },
-  vormittag:{
-    mood:"Ich bin draußen. Das ist auch Leben.",
-    tasks:[
-      {name:"Ich unterrichte. Ich bewege mich. Ich bin lebendig.",note:"Kein Abhaken — nur ein Begleitsatz für unterwegs.",cat:"seele"},
-    ]
-  },
-  mittag:{mood:"",tasks:[]},
-  nachmittag:{mood:"",tasks:[]},
-  abend:{
-    mood:"Du bist zuhause. Jetzt gehört der Rest dir.",
-    tasks:[
-      {name:"Katzen füttern",note:"Rudi & Timmy — ca. 18:00, wenn Flo nicht da ist",cat:"tiere"},
-      {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"https://play.google.com/store/apps/details?id=org.nutritionfacts.dailydozen",label:"Daily Dozen"}]},
-      {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",cat:"zuhause",links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
-      {name:"Zeit mit Thomas",note:"1–1,5 Stunden — einfach da sein",cat:"seele"},
-      {name:"Unterricht vorbereiten",note:"nur So / Di / Mi — Spiele, Arbeitsblätter, gestalten",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
-      {name:"Uni-Aufgabe",note:"nur wenn Deadline naht — Lernplan checken",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
-      {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir. Kein Zweck, nur Freude.",cat:"seele",offen:true},
-      {name:"Wie war das heute?",note:"Abschluss & Reflexion — 15–30 Minuten",cat:"seele"},
-      {name:"Freizeit 🎪",note:"was auch immer sich gut anfühlt",cat:"seele"},
-      {name:"Lotte — Futter & Medikamente für alle Tiere",note:"während Thomas mit Lotte raus ist",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Katzen_Medikamente.html",label:"Katzen"}]},
-      {name:"Bad Abend",note:"Loslassen, abschließen. Bereit für's Bett.",cat:"pflege",links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
-      {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Handcreme",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
-      {name:"Lesen",note:"kein Handy — echtes Buch",cat:"seele"},
-      {name:"Schlafen",note:"früh genug, du weißt warum 🌙",cat:"körper"},
+  unterwegs: null,
+  abend: {
+    motto: "Du bist zuhause. Jetzt gehört der Rest dir. 🌙",
+    farbe: "abend",
+    aufgaben: [
+      {name:"Katzen füttern", note:"Rudi & Timmy — ca. 18:00 🐱"},
+      {name:"Abendessen", note:"schön kochen, bewusst genießen"},
+      {name:"Haushalt — täglich", note:"Küche, aufräumen, das Nötigste"},
+      {name:"Zeit mit Thomas", note:"1–1,5 Stunden — einfach da sein ❤️"},
+      {name:"Unterricht vorbereiten", note:"nur So / Di / Mi"},
+      {name:"Uni-Aufgabe", note:"nur wenn Deadline naht"},
+      {name:"Kreativzeit 🎨", note:"Fr / Sa / So — gehört dir"},
+      {name:"Wie war das heute?", note:"Abschluss & Reflexion"},
+      {name:"Freizeit 🎪", note:"was auch immer sich gut anfühlt"},
+      {name:"Lotte — Futter & Medikamente", note:"für alle Tiere"},
+      {name:"Bad Abend", note:"Loslassen, abschließen"},
+      {name:"Bett vorbereiten", note:"Atorvastatin, Melatonin, Handcreme"},
+      {name:"Lesen", note:"kein Handy — echtes Buch 📖"},
+      {name:"Schlafen", note:"früh genug, du weißt warum 🌙"},
     ]
   }
 };
 
-function saveTaskState(){localStorage.setItem(storageKey,JSON.stringify(taskState));}
-
-function updateWaveDoneBadges(){
-  ['morgen','vormittag','abend'].forEach(function(p){
-    var tasks=PHASES[p].tasks;
-    var total=tasks.length;
-    if(total===0)return;
-    var done=tasks.filter(function(_,i){return !!taskState[p+'_'+i];}).length;
-    var waveEl=document.getElementById('wave-'+p);
-    if(!waveEl)return;
-    if(done===total){
-      waveEl.classList.add('done-all');
-    } else {
-      waveEl.classList.remove('done-all');
-    }
-  });
-}
-
-function updateWaveTea(){
-  var teas=[["Hibiskus & Hagebutte","Mo"],["Grüner Tee & Ingwer","Di"],["Weißdorn","Mi"],["Brennnessel & Löwenzahn","Do"],["Rooibos & Zimt","Fr"],["Lavendel & Kamille","Sa"],["Artischocke & Mariendistel","So"]];
-  var dayMon=(today.getDay()+6)%7;
-  var tea=teas[dayMon];
-  var teaText='🍵 '+tea[0];
-  ['morgen','vormittag','abend'].forEach(function(p){
-    var el=document.getElementById('wave-tea-'+p);
-    if(el) el.textContent=teaText;
-  });
-}
-
-var currentPhase=null;
-
-function getPhaseByTime(){
-  var h=today.getHours(),m=today.getMinutes();
-  var t=h*60+m;
-  if(t<13*60+15)return'morgen';
-  if(t<18*60)return'vormittag';
-  return'abend';
-}
-
-function showPhase(p){
-  currentPhase=p;
-  ['morgen','vormittag','abend'].forEach(function(w){
-    document.getElementById('wave-'+w).className='wave'+(w===p?' active':'');
-  });
-  var phase=PHASES[p];
-  var html='<div class="phase-card"><div class="phase-mood">'+phase.mood+'</div>';
-  phase.tasks.forEach(function(t,i){
-    var key=p+'_'+i;
-    var done=!!taskState[key];
-    var linksHtml='';
-    if(t.links&&t.links.length){
-      linksHtml='<div class="task-links">';
-      t.links.forEach(function(l){
-        if(l.href==='#notizen'){
-          linksHtml+='<a class="task-link" href="#" onclick="scrollToNotizen(event)">'+l.label+' ›</a>';
-        } else {
-          linksHtml+='<a class="task-link" href="'+l.href+'">'+l.label+' ›</a>';
-        }
-      });
-      linksHtml+='</div>';
-    }
-    var extraClass=t.wild?' wild-slot':t.offen?' offen':t.optional?' optional':'';
-    var wildExtra=t.wild?'<div class="wild-slot-inner">Was auch immer sich zeigt — es darf sein.</div>':'';
-    html+='<div class="task-item'+(done?' done':'')+extraClass+'" onclick="toggleTask(\''+p+'\','+i+')">'
-      +'<div class="task-check"></div>'
-      +'<div style="flex:1;min-width:0;">'
-      +'<div class="task-name">'+t.name+'</div>'
-      +'<div class="task-note">'+t.note+'</div>'
-      +wildExtra
-      +linksHtml
-      +'</div>'
-      +'<div class="task-cat">'+t.cat+'</div>'
-      +'</div>';
-  });
-  html+='</div>';
-  document.getElementById('phaseContent').innerHTML=html;
-}
-
-// Re-render drei block when phase changes (sync checkmarks)
-var _dreiOrigShowPhase = showPhase;
-
-function scrollToNotizen(e){
-  e.preventDefault();e.stopPropagation();
-  var el=document.getElementById('notizText');
-  if(el){el.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){el.focus();},400);}
-}
-
-function toggleTask(p,i){
-  var key=p+'_'+i;
-  taskState[key]=!taskState[key];
-  saveTaskState();
-  if(taskState[key]) showLebenMoment();
-  showPhase(p);
-  updateWaveDoneBadges();
-  if(typeof renderDrei === 'function') renderDrei();
-}
-
-// ── LEBEN-MOMENT beim Abhaken ──
-var LEBEN_SAETZE=[
-  'Das ist mein geliebtes Leben.',
-  'Jeder Schritt — meiner.',
-  'Ich lebe, wie ich leben will.',
-  'Das gehört mir.',
-  'Genau das. Genau jetzt.',
-  'Schön, dass ich das tue.',
-  'Das ist Fürsorge — für mich.',
-  'Ein kleiner Atemzug meines Lebens.',
-  'Ich bin dabei.',
-  'Das zählt.',
-  'Mit Freude — oder zumindest mit Würde.',
-  'Mein Leben, Schritt für Schritt.',
-  'Das tue ich mit Liebe.',
-  'Hier bin ich.',
-  'Das ist genug — und es ist schön.',
+var PIPPI_SAETZE = [
+  "Das tue ich mit Freude!",
+  "Nächstes Abenteuer! 🎪",
+  "Jeder Schritt — meiner.",
+  "Das ist mein geliebtes Leben.",
+  "Schön, dass ich das tue.",
+  "Genau das. Genau jetzt.",
+  "Ich lebe, wie ich leben will!",
+  "Das zählt. ✦"
 ];
-var lebenIdx=0;
-var lebenTimer=null;
 
-function showLebenMoment(){
-  var toast=document.getElementById('leben-toast');
-  var card=document.querySelector('.phase-card');
-  // Satz wählen — immer der nächste
-  toast.textContent=LEBEN_SAETZE[lebenIdx%LEBEN_SAETZE.length];
-  lebenIdx++;
-  // Glow auf der Karte
-  if(card){
-    card.classList.remove('glow');
-    void card.offsetWidth; // reflow
-    card.classList.add('glow');
-    setTimeout(function(){card.classList.remove('glow');},1200);
-  }
-  // Toast einblenden
-  if(lebenTimer) clearTimeout(lebenTimer);
-  toast.classList.add('show');
-  lebenTimer=setTimeout(function(){toast.classList.remove('show');},2200);
+var REFLEX_FRAGEN = [
+  "🌸 Was war heute schön?",
+  "✦ Was hat mich heute lebendig gemacht?",
+  "🎪 Was würde ich heute nochmal tun?",
+  "🌿 Wofür bin ich heute dankbar?",
+  "⭐ Was hat heute gut funktioniert?",
+  "🌈 Was hat mich heute überrascht?",
+];
+
+var taskState = {};
+try { taskState = JSON.parse(localStorage.getItem('vk_tasks_' + heute.toISOString().slice(0,10)) || '{}'); } catch(e) {}
+
+function speichereTaskState() {
+  try { localStorage.setItem('vk_tasks_' + heute.toISOString().slice(0,10), JSON.stringify(taskState)); } catch(e) {}
 }
 
-// ── INTENTION via Claude ──
-var intentionKey="intention_"+today.toISOString().slice(0,10);
+var aktivePhase = 'morgen';
 
-async function loadIntention(force){
-  var saved=localStorage.getItem(intentionKey);
-  if(saved&&!force){
-    document.getElementById('intentionText').textContent=saved;
-    document.getElementById('intentionText').className='intention-text';
+// Auto-Phase
+function getPhaseNachZeit() {
+  var h = heute.getHours(), m = heute.getMinutes();
+  var t = h * 60 + m;
+  if (t < 13*60+15) return 'morgen';
+  if (t < 18*60) return 'unterwegs';
+  return 'abend';
+}
+
+aktivePhase = getPhaseNachZeit();
+
+function zeigePhase(p) {
+  aktivePhase = p;
+  // Tabs updaten
+  ['morgen','unterwegs','abend'].forEach(function(t) {
+    var el = document.getElementById('tab-'+t);
+    el.className = 'phase-tab' + (t === p ? ' aktiv aktiv-'+t : '');
+  });
+  renderPhase(p);
+}
+
+function renderPhase(p) {
+  var inhalt = document.getElementById('phaseInhalt');
+
+  if (p === 'unterwegs') {
+    inhalt.innerHTML = '<div class="unterwegs-karte">' +
+      '<span class="unterwegs-emoji">🎪</span>' +
+      '<div class="unterwegs-satz">Ich unterrichte.<br>Ich bewege mich.<br>Ich bin lebendig.</div>' +
+      '</div>';
     return;
   }
-  var el=document.getElementById('intentionText');
-  el.className='intention-text loading';
-  el.textContent='Einen Moment …';
 
-  var teas=[["Hibiskus & Hagebutte","für Blutdruck und Herz"],["Grüner Tee & Ingwer","für Energie"],["Weißdorn","für das Herz"],["Brennnessel & Löwenzahn","für Kraft"],["Rooibos & Zimt","für Wärme"],["Lavendel & Kamille","für Schlaf"],["Artischocke & Mariendistel","für die Leber"]];
-  var tea=teas[today.getDay()];
-  var h=today.getHours();
-  var tageszeit=h<11?'Morgen':h<17?'Mittag':'Abend';
-  var jahreszeit=['Winter','Winter','Frühling','Frühling','Frühling','Sommer','Sommer','Sommer','Herbst','Herbst','Herbst','Winter'][today.getMonth()];
+  var phase = PHASEN[p];
+  var html = '<div class="phase-karte">' +
+    '<div class="phase-kopf phase-kopf-'+p+'">' +
+    '<div class="phase-motto">'+phase.motto+'</div>' +
+    '</div>';
 
-  try{
-    var res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:`Du bist Sandras stiller innerer Begleiter. Sandra ist DaZ-Lehrerin und Künstlerin in Wien, lebt mit Lotte (Hund), Rudi & Timmy (Katzen). Ihr Ziel: ein selbstbestimmtes Leben im Flow, voller Fröhlichkeit und Phantasie.
-Schreib einen einzigen poetischen Satz als Tages-Intention — wie ein Atemzug, nicht wie eine Aufgabe. Keine Ratschläge, keine Imperative. Kein "Heute kannst du..." oder "Vergiss nicht...". Nur ein Bild, ein Gefühl, eine Einladung. Maximal 20 Wörter. Auf Deutsch. Kein Anführungszeichen.`,
-        messages:[{role:'user',content:`${DAYS_DE[today.getDay()]}, ${jahreszeit}, ${tageszeit}. Tee heute: ${tea[0]} (${tea[1]}).`}]
-      })
-    });
-    var data=await res.json();
-    var text=data.content?.find(function(b){return b.type==='text';})?.text||'';
-    text=text.trim().replace(/^["„]|[""]$/g,'');
-    localStorage.setItem(intentionKey,text);
-    el.textContent=text;
-    el.className='intention-text';
-  }catch(e){
-    var fallbacks=[
-      'In meiner Phantasie tanzend die ganze Welt umarmen. Das bin ich.',
-      'Dieses Leben wähle ich — in fröhlicher Gelassenheit.',
-      'Heute darf alles leicht sein.',
-      'Was kommt, darf kommen. Was geht, darf gehen.',
-      'Ich bin nicht meine Gedanken — ich beobachte sie.',
-      'Alles verändert sich. Auch das.',
-      'Alles fließt — auch dieser Tag.',
-      'Atme tief. Du bist genau richtig hier.',
-      'Dein Leben wartet nicht — es ist jetzt.',
-      'Kleine Dinge tragen das Große.',
-      'Geh langsam. Fühl mehr.',
-      'Du weißt, wie du leben willst.',
-    ];
-    var idx=Math.floor(Math.random()*fallbacks.length);
-    el.textContent=fallbacks[idx];
-    el.className='intention-text';
-  }
-}
-
-// ── REFLEXION ──
-function loadReflex(){try{return JSON.parse(localStorage.getItem("reflex_v1")||"[]");}catch(e){return[];}}
-function saveReflexData(d){try{localStorage.setItem("reflex_v1",JSON.stringify(d));}catch(e){}}
-function initReflex(){currentLF=Math.floor(Math.random()*LEITFRAGEN.length);document.getElementById("reflexLeitfrage").textContent="🌸 "+LEITFRAGEN[currentLF];}
-function newLeitfrage(){currentLF=(currentLF+1)%LEITFRAGEN.length;document.getElementById("reflexLeitfrage").textContent="🌸 "+LEITFRAGEN[currentLF];}
-function saveReflex(){var text=document.getElementById("reflexText").value.trim();if(!text)return;var entries=loadReflex();var now=new Date();entries.unshift({text:text,lf:LEITFRAGEN[currentLF],date:now.getDate()+"."+(now.getMonth()+1)+"."+now.getFullYear(),time:String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0")});if(entries.length>50)entries=entries.slice(0,50);saveReflexData(entries);document.getElementById("reflexText").value="";var s=document.getElementById("reflexSaved");s.style.display="inline";setTimeout(function(){s.style.display="none";},2000);newLeitfrage();renderReflexEntries();}
-function toggleReflexEntries(){var el=document.getElementById("reflexEntries");var btn=document.querySelector(".reflex-toggle");if(el.style.display==="none"){renderReflexEntries();el.style.display="flex";btn.textContent="ausblenden";}else{el.style.display="none";btn.textContent="Einträge anzeigen";}}
-function renderReflexEntries(){var entries=loadReflex();var el=document.getElementById("reflexEntries");if(!entries.length){el.innerHTML='<div style="font-size:20px;color:var(--muted);font-style:italic;text-align:center;">Noch keine Einträge.</div>';return;}el.innerHTML=entries.slice(0,10).map(function(e){return'<div><div class="reflex-entry-date">'+e.date+' · '+e.time+'</div><div class="reflex-entry-lf">'+e.lf+'</div><div class="reflex-entry-text">'+e.text+'</div></div>';}).join('<hr style="border:none;border-top:1px solid var(--border);margin:.3rem 0;">');}
-
-// ── NOTIZEN ──
-function saveNotiz(){
-  var text=document.getElementById('notizText').value;
-  try{localStorage.setItem('notizen_v1',text);}catch(e){}
-  document.getElementById('notizClear').style.display=text?'inline':'none';
-}
-function clearNotiz(){
-  if(!confirm('Notizen löschen?'))return;
-  document.getElementById('notizText').value='';
-  try{localStorage.removeItem('notizen_v1');}catch(e){}
-  document.getElementById('notizClear').style.display='none';
-}
-function loadNotiz(){
-  var text='';try{text=localStorage.getItem('notizen_v1')||'';}catch(e){}
-  document.getElementById('notizText').value=text;
-  document.getElementById('notizClear').style.display=text?'inline':'none';
-}
-
-// ── INNERE PRAXIS OVERLAY ──
-var PRAXIS=[
-  // Stoisch
-  {tradition:'Stoizismus',deko:'🏛️',
-   text:'Was könnte heute schwierig werden?',
-   uebung:'Denk es ruhig durch — nicht um dich zu ängstigen, sondern um es zu entzaubern. Dann: Kann ich damit leben? Ja. Gut. Fertig.'},
-  {tradition:'Stoizismus',deko:'🌅',
-   text:'Was liegt in deiner Macht — und was nicht?',
-   uebung:'Nur eines gehört dir wirklich: deine Haltung. Alles andere ist Gast. Atme einmal tief und lass die Gäste sein, was sie sind.'},
-  {tradition:'Stoizismus',deko:'⚖️',
-   text:'Marcus schrieb jeden Morgen an sich selbst.',
-   uebung:'Was würdest du dir heute schreiben? Einen Satz. Nicht als Aufgabe — als Begleitung. Lass ihn kommen.'},
-  {tradition:'Stoizismus',deko:'🌿',
-   text:'Heute wirst du Menschen begegnen, die schwierig sind.',
-   uebung:'Das ist keine Drohung — es ist eine Vorbereitung. Wer vorbereitet ist, kann offen bleiben. Du bist vorbereitet.'},
-  {tradition:'Stoizismus',deko:'🕯️',
-   text:'Was wäre das Schlimmste, das heute passieren könnte?',
-   uebung:'Denk es zu Ende. Wirklich. Dann frag: Würde ich überleben? Würde ich weitermachen? Meistens: ja. Das ist genug.'},
-
-  // Buddhistisch
-  {tradition:'Buddhismus',deko:'☁️',
-   text:'Deine Gedanken sind Wolken.',
-   uebung:'Du bist der Himmel — weit, still, unveränderlich. Schau zu, wie ein Gedanke zieht. Du musst nicht mitziehen. Drei Atemzüge lang einfach schauen.'},
-  {tradition:'Buddhismus',deko:'🌸',
-   text:'Möge ich ruhig sein. Möge ich fröhlich sein.',
-   uebung:'Das ist Metta — liebende Güte für dich selbst. Sag es einmal leise, als echter Wunsch. Dann schick denselben Wunsch einer Person, die dir wichtig ist. Lotte zählt.'},
-  {tradition:'Buddhismus',deko:'🍂',
-   text:'Anicca — alles verändert sich.',
-   uebung:'Auch das Schwierige zieht weiter. Auch das Schöne. Nichts festhalten, nichts wegstoßen. Nur einen Atemzug lang dabei sein, wie es gerade ist.'},
-  {tradition:'Buddhismus',deko:'🪷',
-   text:'Dieser Moment — genau dieser — ist vollständig.',
-   uebung:'Bevor du aufstehst oder losgehst: fünf Sekunden lang nur wahrnehmen. Was hörst du? Was spürst du? Kein Bewerten. Nur da sein.'},
-  {tradition:'Buddhismus',deko:'🌊',
-   text:'Möge alles, was lebt, glücklich sein.',
-   uebung:'Metta für alle: Denk an Thomas, Flo, Lotte, Rudi, Timmy, deine Schüler*innen. Ein stiller Wunsch für jeden. Das dauert eine Minute und verändert die Stimmung des ganzen Tages.'},
-
-  // ACT
-  {tradition:'ACT',deko:'🔭',
-   text:'Ich bemerke, dass da ein Gedanke ist.',
-   uebung:'Nicht: "Ich bin gestresst." Sondern: "Ich bemerke, dass da ein Gedanke von Stress ist." Der kleine Abstand ist alles. Probier es mit einem Gedanken, der dich heute beschäftigt.'},
-  {tradition:'ACT',deko:'🌱',
-   text:'Was ist dir wirklich wichtig — heute, ganz konkret?',
-   uebung:'Nicht was du erledigen musst. Was dir wichtig ist. Ein Wert, eine Qualität, eine Art zu sein. Danach: Eine kleine Handlung, die dazu passt.'},
-  {tradition:'ACT',deko:'🫧',
-   text:'Lass den Gedanken schwimmen.',
-   uebung:'Stell dir vor, dein schwierigster Gedanke sitzt auf einem Blatt, das einen Bach hinuntertreibt. Du schaust vom Ufer zu. Er schwimmt. Du bleibst.'},
-  {tradition:'ACT',deko:'🧭',
-   text:'Wer willst du sein — unabhängig davon, wie du dich fühlst?',
-   uebung:'ACT fragt nicht "Wie geht es dir?" sondern "Wer bist du?" Du kannst müde und trotzdem fürsorglich sein. Du kannst unsicher und trotzdem kreativ sein. Beides gleichzeitig.'},
-  {tradition:'ACT',deko:'💨',
-   text:'Ein Atemzug als Anker.',
-   uebung:'Einatmen — vier Sekunden. Halten — vier Sekunden. Ausatmen — sechs Sekunden. Einmal reicht. Das Nervensystem hört zu.'},
-  {tradition:'Stoizismus',deko:'🌾',
-   text:'Epiktet hatte nichts außer seiner Haltung. Das war genug.',
-   uebung:'Was würdest du behalten wollen, wenn du alles andere abgeben müsstest? Das ist dein Kern. Trag ihn heute bewusst mit dir.'},
-  {tradition:'Stoizismus',deko:'⏳',
-   text:'Memento mori — nicht als Drohung, sondern als Einladung.',
-   uebung:'Dieser Tag ist ein Geschenk. Kein Drama, kein Pathos — nur: Was möchte ich heute wirklich tun? Was würde ich bereuen, nicht getan zu haben?'},
-  {tradition:'Stoizismus',deko:'🪨',
-   text:'Seneca: Die Zeit ist das Einzige, das man wirklich stehlen kann.',
-   uebung:'Schau auf den heutigen Tag: Was würdest du gerne nicht als verschwendet bezeichnen? Eine Sache. Nur eine. Und dann — tu sie.'},
-  {tradition:'Stoizismus',deko:'🌬️',
-   text:'Dinge außerhalb von dir: Wetter, Meinungen, Zufälle.',
-   uebung:'Nenne einen Gedanken, der dich beschäftigt, aber außerhalb deiner Kontrolle liegt. Atme ihn aus. Er darf da sein. Du musst ihn nicht lösen.'},
-  {tradition:'Buddhismus',deko:'🫶',
-   text:'Mitgefühl beginnt bei dir selbst.',
-   uebung:'Leg eine Hand auf dein Herz. Sag innerlich: „Das ist schwer. Viele Menschen fühlen das. Ich bin nicht allein damit." Das ist kein Selbstmitleid — das ist Würde.'},
-  {tradition:'Buddhismus',deko:'🌀',
-   text:'Anfängergeist: jeder Tag ist der erste.',
-   uebung:'Was wäre, wenn du deinen Morgen so erleben könntest, als hättest du ihn noch nie erlebt? Den Kaffee, das Licht, den ersten Schritt. Versuche es für einen Moment.'},
-  {tradition:'Buddhismus',deko:'🕊️',
-   text:'Dukkha — das Unbehagen — gehört zum Leben. Es ist kein Fehler.',
-   uebung:'Was fühlt sich gerade nicht gut an? Nenn es ruhig beim Namen. Nicht um es zu lösen — nur um es anzuerkennen. Das allein kann schon erleichtern.'},
-  {tradition:'ACT',deko:'🎭',
-   text:'Auch unangenehme Gefühle dürfen mitfahren.',
-   uebung:'Stell dir dein Leben als Bus vor. Du fährst. Manchmal sitzen laute Passagiere hinten. Sie dürfen mitfahren — du wählst die Richtung. Wer fährt heute mit?'},
-  {tradition:'ACT',deko:'🌟',
-   text:'Handeln nach Werten — auch wenn Gefühle dagegen sprechen.',
-   uebung:'Denk an einen deiner tiefsten Werte (Fürsorge, Kreativität, Lernen…). Gibt es eine kleine Handlung heute — auch eine winzige — die diesem Wert entspricht? Dann tu genau die.'},
-  {tradition:'ACT',deko:'🔓',
-   text:'Du bist nicht deine Geschichte über dich.',
-   uebung:'Welchen Satz über dich selbst erzählst du dir immer wieder? Schreib ihn auf — und dann: „Ich bemerke, dass ich mir erzähle, dass …" Das ist Defusion. Das schafft Raum.'},
-  {tradition:'Zen',deko:'🍵',
-   text:'Tu eine Sache. Vollständig. Dann die nächste.',
-   uebung:'Heute beim Teetrinken: nur Tee trinken. Kein Handy, kein Planen. Nur der Tee, die Wärme, die Tasse in deinen Händen. Zwei Minuten Zen.'},
-  {tradition:'Ikigai',deko:'🌺',
-   text:'Was liebst du? Worin bist du gut? Was braucht die Welt?',
-   uebung:'Heute nur eine Frage: Was macht dich lebendig — ganz persönlich, ganz ehrlich? Du musst die Antwort nicht laut sagen. Nur einen Moment damit sitzen.'},
-  {tradition:'Logotherapie',deko:'🕯️',
-   text:'Viktor Frankl: Zwischen Reiz und Reaktion liegt ein Raum.',
-   uebung:'Heute, wenn etwas Schwieriges passiert — bevor du reagierst, atme einmal. Nur einen Atemzug. Das ist der Raum. Da bist du. Da ist deine Freiheit.'},
-  {tradition:'Achtsamkeit',deko:'👣',
-   text:'Jeder Schritt kann ein Ankommen sein.',
-   uebung:'Wenn du heute gehst — ob mit Lotte, zur U-Bahn, durch die Wohnung — spür einen Schritt bewusst. Ferse, Mitte, Zehen. Du bist angekommen. Hier.'},
-  {tradition:'Stoizismus',deko:'🔥',
-   text:'Der Wille ist der Weg.',
-   uebung:'Marc Aurel: Der Hinderung des Handelns liegt kein Hindernis im Weg. Was auch immer heute nicht klappt — deine Haltung dazu bleibt dir. Das ist keine kleine Sache. Das ist alles.'},
-  // ── Loslassen ──
-  {tradition:'Loslassen',deko:'🍂',loslassen:true,
-   text:'Was darf heute unfertig bleiben?',
-   uebung:'Nenne eine Sache, die du loslässt. Nicht für immer — nur für heute. Streich sie gedanklich durch. Der Rest darf warten.'},
-  {tradition:'Loslassen',deko:'🫧',loslassen:true,
-   text:'Strukturen tragen — aber Freiheit nährt.',
-   uebung:'Was wäre heute, wenn du eine Aufgabe einfach nicht erledigst? Nicht vergisst — bewusst lässt. Wie fühlt sich das an?'},
-  {tradition:'Loslassen',deko:'🌬️',loslassen:true,
-   text:'Genug ist genug. Auch heute.',
-   uebung:'Setz dir ein Ende: Wann ist heute genug getan? Einen Zeitpunkt wählen — und dann: Stift weg, Laptop zu, Mensch sein.'},
-  {tradition:'Loslassen',deko:'🌿',loslassen:true,
-   text:'Ordnung ist ein Mittel — nicht das Ziel.',
-   uebung:'Heute: Eine halbe Stunde ohne Plan. Kein To-Do, keine Struktur. Was kommt von allein? Lass es kommen — ohne es zu bewerten.'},
-  {tradition:'Loslassen',deko:'🎈',loslassen:true,
-   text:'Spielen ist keine Belohnung. Es ist Nahrung.',
-   uebung:'Was hättest du als Kind einfach so gemacht — ohne Grund? Zeichnen, singen, herumliegen, tanzen? Gönn dir heute fünf Minuten davon.'},
-  {tradition:'Loslassen',deko:'🕊️',loslassen:true,
-   text:'Du musst diesen Tag nicht meistern. Du darfst ihn bewohnen.',
-   uebung:'Was wäre, wenn heute "gut genug" wirklich gut genug wäre? Einen Atemzug lang glauben, dass es so ist.'},
-  {tradition:'Selbstwirksamkeit',deko:'🌿',
-   text:'Ich nehme mich wahr — nicht isoliert, sondern in der Situation.',
-   uebung:'Betritt den nächsten Raum bewusst. Spür, dass du ihn veränderst — einfach weil du da bist. Du bist nicht jemand, der einen Raum nutzt. Du bist jemand, der ihn bewohnt.'},
-];
-
-// Täglicher Index: wechselt jeden Tag, aber bleibt den ganzen Tag gleich
-function showOverlay(){
-  document.getElementById('praxis-overlay').style.display='flex';
-  // Einmal pro Tag dieselbe Weisheit — wechselt täglich
-  var dayIndex=Math.floor((today.getFullYear()*1000+today.getMonth()*31+today.getDate()))%PRAXIS.length;
-  var p=PRAXIS[dayIndex];
-  // Sofort die tägliche Weisheit anzeigen (kein Laden-Placeholder mehr)
-  document.getElementById('praxis-tradition').textContent=p.tradition;
-  document.getElementById('praxis-deko').textContent=p.deko;
-  document.getElementById('praxis-text').textContent=p.text;
-  document.getElementById('praxis-uebung').textContent=p.uebung;
-
-  // Hole letzte Reflexionseinträge — wenn vorhanden, Claude personalisiert die Übung
-  var entries=[];
-  try{entries=JSON.parse(localStorage.getItem('reflex_v1')||'[]');}catch(e){}
-  var recentEntries=entries.slice(0,5);
-
-  if(!recentEntries.length){
-    return; // Kein Eintrag — statische Weisheit bleibt
-  }
-
-  var entriesText=recentEntries.map(function(e){
-    return '"'+e.lf+'" — '+e.text;
-  }).join('\n');
-
-  var h=today.getHours();
-  var tageszeit=h<11?'Morgen':h<17?'Mittag':'Abend';
-
-  fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',
-      max_tokens:300,
-      system:'Du bist Sandras stiller innerer Begleiter. Sandra ist DaZ-Lehrerin und Künstlerin in Wien, lebt mit Lotte (Hund), Rudi & Timmy (Katzen). Sie arbeitet mit Stoizismus, Buddhismus und ACT.\n\nAntworte NUR mit einem JSON-Objekt, kein Markdown, keine Erklärung:\n{"tradition":"Stoizismus|Buddhismus|ACT","deko":"ein einzelnes Emoji","text":"ein kurzer poetischer Satz (max 12 Wörter) der auf ihre Einträge eingeht","uebung":"eine konkrete kleine Übung (2-3 Sätze) die direkt auf ihre Einträge reagiert"}\n\nDie Übung soll sich anfühlen als hätte jemand ihre Worte wirklich gelesen.',
-      messages:[{role:'user',content:'Tageszeit: '+tageszeit+'\n\nSandras letzte Reflexionseinträge:\n'+entriesText}]
-    })
-  })
-  .then(function(r){return r.json();})
-  .then(function(data){
-    var text=data.content&&data.content[0]&&data.content[0].text||'';
-    text=text.trim().replace(/```json|```/g,'').trim();
-    var parsed=JSON.parse(text);
-    document.getElementById('praxis-tradition').textContent=parsed.tradition||p.tradition;
-    document.getElementById('praxis-deko').textContent=parsed.deko||p.deko;
-    document.getElementById('praxis-text').textContent=parsed.text||p.text;
-    document.getElementById('praxis-uebung').textContent=parsed.uebung||p.uebung;
-  })
-  .catch(function(){
-    // Fallback auf statische Übung
-    document.getElementById('praxis-tradition').textContent=p.tradition;
-    document.getElementById('praxis-deko').textContent=p.deko;
-    document.getElementById('praxis-text').textContent=p.text;
-    document.getElementById('praxis-uebung').textContent=p.uebung;
-  });
-}
-
-function closeOverlay(){
-  var el=document.getElementById('praxis-overlay');
-  el.classList.add('leaving');
-  setTimeout(function(){el.style.display='none';},400);
-}
-
-
-// ── STOISCHE TAGESABSICHT ──
-var stoicPlanKey='stoic_plan_'+today.toISOString().slice(0,10);
-function saveStoicPlan(){
-  var val=document.getElementById('stoicPlanInput').value;
-  try{localStorage.setItem(stoicPlanKey,val);}catch(e){}
-}
-function loadStoicPlan(){
-  var val='';try{val=localStorage.getItem(stoicPlanKey)||'';}catch(e){}
-  document.getElementById('stoicPlanInput').value=val;
-}
-loadStoicPlan();
-
-// ── STOISCHE MORGEN-FRAGEN ──
-var STOIC_MORGEN=[
-  'Was ist heute wirklich in meiner Macht?',
-  'Welche Haltung möchte ich heute kultivieren?',
-  'Was könnte mich heute aus der Ruhe bringen — und wie kann ich vorbereitet sein?',
-  'Welchem Menschen werde ich heute begegnen? Was wünsche ich ihnen?',
-  'Was würde eine weise Frau heute als Erstes tun?',
-  'Wofür bin ich dankbar — bevor der Tag beginnt?',
-  'Was ist das Eine, das heute wirklich zählt?',
-  'Wie will ich mich heute fühlen — und welche Handlung bringt mich dorthin?',
-  'Was kann ich loslassen, das mir gestern schwer fiel?',
-  'Welche meiner Tugenden brauche ich heute am meisten?',
-  'Marcus Aurelius schrieb: "Der Hinderung des Handelns liegt kein Hindernis im Weg." — Was bedeutet das für meinen heutigen Tag?',
-  'Was tue ich heute zum Wohle anderer — ohne Erwartung?',
-];
-
-// ── STOISCHE ABEND-FRAGEN ──
-var STOIC_ABEND=[
-  'Wo habe ich heute meine Werte gelebt?',
-  'Was hätte ich besser machen können — ohne mich zu verurteilen?',
-  'Was war heute in meiner Macht, und habe ich es genutzt?',
-  'Welchen Moment des Tages möchte ich bewusst festhalten?',
-  'Was hat mir heute Kraft gegeben? Was hat mich geschwächt?',
-  'Habe ich heute jemandem Gutes getan — auch kleines?',
-  'Was habe ich heute gelernt — über die Welt, über mich?',
-  'Gab es einen Moment, in dem ich meine Reaktion wählen konnte? Wie habe ich gewählt?',
-  'Was war mein "Nächstbestes" heute — wo ich umdisponieren musste?',
-  'Habe ich heute die Unterscheidung gehalten: was liegt an mir, was nicht?',
-  'Was verdient morgen meine Aufmerksamkeit — ruhig und klar?',
-  'Epiktet: "Es macht uns nicht Dinge unruhig, sondern unsere Meinungen darüber." — Was bedeutet das für heute?',
-];
-
-var stoicMorgenIdx=Math.floor(Math.random()*STOIC_MORGEN.length);
-var stoicAbendIdx=Math.floor(Math.random()*STOIC_ABEND.length);
-
-function initStoicReflex(){
-  document.getElementById('stoicMorgenQ').textContent=STOIC_MORGEN[stoicMorgenIdx];
-  document.getElementById('stoicAbendQ').textContent=STOIC_ABEND[stoicAbendIdx];
-}
-function nextStoicMorgenQ(){
-  stoicMorgenIdx=(stoicMorgenIdx+1)%STOIC_MORGEN.length;
-  document.getElementById('stoicMorgenQ').textContent=STOIC_MORGEN[stoicMorgenIdx];
-}
-function nextStoicAbendQ(){
-  stoicAbendIdx=(stoicAbendIdx+1)%STOIC_ABEND.length;
-  document.getElementById('stoicAbendQ').textContent=STOIC_ABEND[stoicAbendIdx];
-}
-
-function loadStoicData(key){try{return JSON.parse(localStorage.getItem(key)||'[]');}catch(e){return[];}}
-function saveStoicData(key,d){try{localStorage.setItem(key,JSON.stringify(d));}catch(e){}}
-
-function saveStoicMorgen(){
-  var text=document.getElementById('stoicMorgenText').value.trim();
-  if(!text)return;
-  var entries=loadStoicData('stoic_morgen_v1');
-  var now=new Date();
-  entries.unshift({text:text,q:STOIC_MORGEN[stoicMorgenIdx],date:now.getDate()+'.'+(now.getMonth()+1)+'.'+now.getFullYear(),time:String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')});
-  if(entries.length>60)entries=entries.slice(0,60);
-  saveStoicData('stoic_morgen_v1',entries);
-  document.getElementById('stoicMorgenText').value='';
-  var s=document.getElementById('stoicMorgenSaved');s.style.display='inline';setTimeout(function(){s.style.display='none';},2000);
-  nextStoicMorgenQ();
-  renderStoicMorgenEntries();
-}
-
-function saveStoicAbend(){
-  var text=document.getElementById('stoicAbendText').value.trim();
-  if(!text)return;
-  var entries=loadStoicData('stoic_abend_v1');
-  var now=new Date();
-  entries.unshift({text:text,q:STOIC_ABEND[stoicAbendIdx],date:now.getDate()+'.'+(now.getMonth()+1)+'.'+now.getFullYear(),time:String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')});
-  if(entries.length>60)entries=entries.slice(0,60);
-  saveStoicData('stoic_abend_v1',entries);
-  document.getElementById('stoicAbendText').value='';
-  var s=document.getElementById('stoicAbendSaved');s.style.display='inline';setTimeout(function(){s.style.display='none';},2000);
-  nextStoicAbendQ();
-  renderStoicAbendEntries();
-}
-
-function toggleStoicMorgenEntries(){
-  var el=document.getElementById('stoicMorgenEntries');
-  if(el.style.display==='none'){renderStoicMorgenEntries();el.style.display='flex';}
-  else{el.style.display='none';}
-}
-function toggleStoicAbendEntries(){
-  var el=document.getElementById('stoicAbendEntries');
-  if(el.style.display==='none'){renderStoicAbendEntries();el.style.display='flex';}
-  else{el.style.display='none';}
-}
-
-function renderStoicMorgenEntries(){
-  var entries=loadStoicData('stoic_morgen_v1');
-  var el=document.getElementById('stoicMorgenEntries');
-  if(!entries.length){el.innerHTML='<div style="font-size:19px;color:var(--muted);font-style:italic;">Noch keine Einträge.</div>';return;}
-  el.innerHTML=entries.slice(0,10).map(function(e){
-    return'<div><div class="stoic-entry-date">'+e.date+' · '+e.time+'</div><div class="stoic-entry-q">'+e.q+'</div><div class="stoic-entry-text">'+e.text+'</div></div>';
-  }).join('<hr style="border:none;border-top:1px solid rgba(26,39,68,0.1);margin:.3rem 0;">');
-}
-function renderStoicAbendEntries(){
-  var entries=loadStoicData('stoic_abend_v1');
-  var el=document.getElementById('stoicAbendEntries');
-  if(!entries.length){el.innerHTML='<div style="font-size:19px;color:var(--muted);font-style:italic;">Noch keine Einträge.</div>';return;}
-  el.innerHTML=entries.slice(0,10).map(function(e){
-    return'<div><div class="stoic-entry-date">'+e.date+' · '+e.time+'</div><div class="stoic-entry-q">'+e.q+'</div><div class="stoic-entry-text">'+e.text+'</div></div>';
-  }).join('<hr style="border:none;border-top:1px solid rgba(26,39,68,0.1);margin:.3rem 0;">');
-}
-
-initStoicReflex();
-
-// ── STOISCHE ELEMENTE SICHTBARKEIT nach Tageszeit ──
-// Morgenreflexion: immer sichtbar; Abendbilanz: ab 16:30
-(function(){
-  var h=today.getHours(),m=today.getMinutes();
-  var isAbend=(h>16)||(h===16&&m>=30);
-  // Abendbilanz nur ab 16:30 hervorheben (immer sichtbar, aber badge ändert sich)
-  if(!isAbend){
-    var badge=document.querySelector('#stoicAbendReflex .stoic-reflex-badge');
-    if(badge){badge.style.opacity='.35';}
-  }
-})();
-
-
-var ALL_APPS=[
-  // Morgen
-  {icon:'🌅',text:'Morgenroutine',sub:'Sanft in den Tag',href:'morgenroutine.html',phasen:['morgen']},
-  {icon:'🪥',text:'Bad Früh',sub:'Weleda-Ritual',href:'Bad_Frueh.html',phasen:['morgen']},
-  {icon:'🍵',text:'Tee des Tages',sub:'Mein 7-Tage-Teeplan',href:'tee-des-tages.html',phasen:['morgen']},
-  {icon:'❤️',text:'Blutdruck',sub:'Messung & Verlauf',href:'Blutdruck.html',phasen:['morgen']},
-  {icon:'⚖️',text:'Mein Gewicht',sub:'Täglich, nüchtern',href:'Wiegen.html',phasen:['morgen']},
-  {icon:'💊',text:'Medikamentenplan',sub:'Rudi, Timmy & Lotte',href:'Medikamente_Tiere.html',phasen:['morgen']},
-  {icon:'🐱',text:'Katzen Medikamente',sub:'Rudi & Timmy',href:'Katzen_Medikamente.html',phasen:['morgen','abend']},
-  {icon:'🗺️',text:'Lotte Runden',sub:'Spaziergänge & Routen',href:'Lotte_Runden.html',phasen:['morgen','abend']},
-  {icon:'📅',text:'Kalender',sub:'Mein Tageskalender',href:'https://sandrahnat-maker.github.io/Kalender_2203/',phasen:['morgen','vormittag','abend']},
-
-  // Unterwegs
-  {icon:'📋',text:'VHS Kursvorbereitung',sub:'Checklisten & Materialien',href:'VHS_Kursvorbereitung.html',phasen:['morgen','vormittag']},
-  {icon:'📚',text:'Lernplan',sub:'DaZF — Sandra Hnat-Gerersdorfer',href:'Lernplan.html',phasen:['morgen','vormittag']},
-
-  // Abend — Essen & Haushalt
-  {icon:'🥗',text:'Ernährungsplan',sub:'4-Wochen, LP(a)-freundlich',href:'Ernaehrungsplan_4Wochen.html',phasen:['abend']},
-  {icon:'🛒',text:'Einkaufsliste',sub:'LP(a)-freundlich & vegetarisch',href:'Einkaufsliste.html',phasen:['abend']},
-  {icon:'🏠',text:'Haushaltsplan',sub:'Schritt für Schritt, sanft',href:'Haushaltsplan.html',phasen:['abend']},
-
-  // Abend — Sport & Körper
-  {icon:'☀️',text:'Aufwärmen',sub:'Sonnengruß mit Mady Morrison',href:'Aufwaermen.html',phasen:['abend']},
-  {icon:'💪',text:'Körpergewicht Training',sub:'Audio-geführt',href:'Koerpergewicht_Training_Audio.html',phasen:['abend']},
-  {icon:'🏄',text:'Balance Board Training',sub:'Audio-geführt',href:'Balanceboard_Training_Audio.html',phasen:['abend']},
-  {icon:'🧘',text:'Sonntags-Yoga',sub:'Audio-geführt',href:'Sonntags_Yoga_Audio.html',phasen:['abend']},
-  {icon:'🤸',text:'Dehnplan',sub:'Persönlicher Dehnplan',href:'Dehnplan.html',phasen:['abend']},
-  {icon:'💪',text:'Kalkschulter Training',sub:'Sanfte Schulterübungen',href:'Kalkschulter.html',phasen:['abend']},
-  {icon:'🌸',text:'Beckenboden',sub:'Mit Liebe & Geduld',href:'Beckenboden.html',phasen:['abend']},
-  {icon:'🚿',text:'Duschen & Fertig',sub:'Schnell & bewusst',href:'Duschen.html',phasen:['abend']},
-  {icon:'✨',text:'Körperpflege Tagesplan',sub:'Vollständige Routine',href:'Koerperpflege_Tagesplan.html',phasen:['abend']},
-  {icon:'😊',text:'Gesichtsyoga',sub:'Entspannung & Leuchten',href:'Gesichtsyoga.html',phasen:['abend']},
-  {icon:'🌿',text:'Meine Pflanzen',sub:'Galerie & Pflege',href:'Pflanzen_Galerie.html',phasen:['abend']},
-
-  // Abend
-  {icon:'🛁',text:'Bad Abend Routine',sub:'Mein Abendritual mit Liebe',href:'Bad_Abend.html',phasen:['abend']},
-  {icon:'🌿',text:'Naturkosmetik Tagesplan',sub:'Lavera & Benecos',href:'Naturkosmetik_Tagesplan.html',phasen:['abend']},
-  {icon:'🫀',text:'Kiefer & Kaumuskel',sub:'Sanfte Bruxismus-Übungen',href:'Kiefer_Bruxismus.html',phasen:['abend']},
-
-  // Nur über "alle Apps"
-  {icon:'📋',text:'Hausverkauf Guide',sub:'Weidlingbach',href:'hausverkauf-guide.html',phasen:['morgen']},
-  {icon:'✅',text:'Hausverkauf Checkliste',sub:'Alle Schritte',href:'Hausverkauf_Checkliste.html',phasen:['morgen']},
-  {icon:'🛒',text:'Futter-Bestellplaner',sub:'Rudi, Timmy & Lotte',href:'Futter_Bestellplaner.html',phasen:['abend']},
-  {icon:'💆',text:'Haarpflege',sub:'Meine Haarpflegeroutine',href:'Haarpflege.html',phasen:['abend']},
-  {icon:'💅',text:'Nagelpflege',sub:'Mit Sorgfalt & Freude',href:'Nagelpflege.html',phasen:['abend']},
-];
-
-var showingAllApps=false;
-
-function renderApps(phase){
-  var list=document.getElementById('apps-list');
-  var btn=document.getElementById('alle-apps-btn');
-  var label=document.getElementById('apps-label');
-  if(!list)return;
-
-  var phaseApps=ALL_APPS.filter(function(a){return a.phasen.indexOf(phase)>=0;});
-  var appsToShow=showingAllApps?ALL_APPS:phaseApps;
-
-  label.textContent=showingAllApps?'Alle Apps':'Jetzt passend';
-  btn.textContent=showingAllApps?'↑ weniger anzeigen':'alle Apps anzeigen ↓';
-
-  list.innerHTML=appsToShow.map(function(a){
-    return '<a class="al" href="'+a.href+'"><span class="al-icon">'+a.icon+'</span>'
-      +'<div><div class="al-text">'+a.text+'</div><div class="al-sub">'+a.sub+'</div></div>'
-      +'<span class="al-arr">›</span></a>';
-  }).join('');
-}
-
-function toggleAllApps(){
-  showingAllApps=!showingAllApps;
-  renderApps(currentPhase||getPhaseByTime());
-}
-
-// Apps auch beim Phasenwechsel neu rendern
-var _origShowPhase=showPhase;
-showPhase=function(p){
-  _origShowPhase(p);
-  renderApps(p);
-};
-
-
-
-// closeOverlay triggert Stimmungs-Check
-var _origCloseOverlay=closeOverlay;
-closeOverlay=function(){
-  _origCloseOverlay.apply(this,arguments);
-
-};
-
-// ── INNEHALTEN ──
-function schliesseInnehalten(){
-  var antwort=document.getElementById('innehalten-antwort').value.trim();
-  // Antwort in localStorage speichern (Datum + Text)
-  if(antwort){
-    try{
-      var key='innehalten_'+today.toISOString().slice(0,10);
-      localStorage.setItem(key,antwort);
-    }catch(e){}
-  }
-  var el=document.getElementById('innehalten-overlay');
-  el.classList.add('leaving');
-  setTimeout(function(){
-    el.style.display='none';
-    // Nach Innehalten: Praxis-Overlay zeigen
-    showOverlay();
-  },450);
-}
-
-// Enter-Taste schließt auch
-document.getElementById('innehalten-antwort').addEventListener('keydown',function(e){
-  if(e.key==='Enter'){schliesseInnehalten();}
-});
-
-// ── INIT ──
-// Innehalten-Overlay ist bereits sichtbar (HTML), Praxis-Overlay wird danach gezeigt
-loadIntention(false);
-showPhase(getPhaseByTime());
-updateWaveDoneBadges();
-updateWaveTea();
-loadNotiz();
-
-// ══════════════════════════════════════════
-// 3-EBENEN-TAGESSTRUKTUR
-// ══════════════════════════════════════════
-
-var FIX_TASKS = [
-  {name:"Euthyrox & Rückenübungen", note:"noch im Bett", cat:"körper", phase:"morgen", phaseIdx:0},
-  {name:"Rudi — Magenschutz", note:"erstes nach dem Aufstehen", cat:"tiere", phase:"morgen", phaseIdx:1},
-  {name:"Blutdruck & Gewicht", note:"nüchtern, ruhig", cat:"körper", phase:"morgen", phaseIdx:2},
-  {name:"Knirscherschiene raus", note:"Kiefer entspannen", cat:"körper", phase:"morgen", phaseIdx:3},
-  {name:"Wasser · Tee · Frühstück", note:"bewusst genießen", cat:"ernährung", phase:"morgen", phaseIdx:4},
-  {name:"Medikamente", note:"zum Frühstück", cat:"körper", phase:"morgen", phaseIdx:5},
-  {name:"Rudi & Timmy füttern", note:"Futter & Schmusezeit", cat:"tiere", phase:"morgen", phaseIdx:6},
-  {name:"Bad Früh", note:"FM4 oder Podcast mitnehmen 🎵", cat:"pflege", phase:"morgen", phaseIdx:7},
-  {name:"Lotte raus", note:"Morgenrunde", cat:"tiere", phase:"morgen", phaseIdx:8},
-  {name:"Tiermedikamente", note:"Lotte + Rudi", cat:"tiere", phase:"morgen", phaseIdx:9},
-  {name:"Rudi — Gabapentin", note:"vor dem Rausgehen", cat:"tiere", phase:"morgen", phaseIdx:13},
-  {name:"Katzen füttern Abend", note:"Rudi & Timmy — ca. 18:00", cat:"tiere", phase:"abend", phaseIdx:0},
-  {name:"Abendessen", note:"schön kochen, bewusst genießen", cat:"ernährung", phase:"abend", phaseIdx:1},
-  {name:"Haushalt — täglich", note:"Küche, aufräumen, das Nötigste", cat:"zuhause", phase:"abend", phaseIdx:2},
-  {name:"Lotte — Futter & Medikamente", note:"für alle Tiere", cat:"tiere", phase:"abend", phaseIdx:9},
-  {name:"Bad Abend", note:"Loslassen, abschließen. Bereit für's Bett.", cat:"pflege", phase:"abend", phaseIdx:10},
-  {name:"Bett vorbereiten", note:"Atorvastatin, Melatonin, Handcreme", cat:"körper", phase:"abend", phaseIdx:11},
-];
-
-// Wochentags-Vorschläge: 0=So,1=Mo,2=Di,3=Mi,4=Do,5=Fr,6=Sa
-var HEUTE_VORSCHLAEGE = {
-  0: [ // Sonntag
-    {name:"Haushalt & Wohnung", note:"die Woche vorbereiten", phase:"abend", phaseIdx:2},
-    {name:"Montag vorbereiten", note:"Spiele & Materialien gestalten", phase:"abend", phaseIdx:4},
-    {name:"Kreativzeit 🎨", note:"zeichnen, malen, drucken — für mich allein", phase:"abend", phaseIdx:6},
-  ],
-  1: [ // Montag
-    {name:"Unterricht vorbereiten", note:"Was brauche ich heute?", phase:"morgen", phaseIdx:10},
-    {name:"Uni-Aufgabe", note:"DaZF — ein Schritt nach vorne", phase:"morgen", phaseIdx:11},
-    {name:"Wie war das heute?", note:"kurz abschließen", phase:"abend", phaseIdx:7},
-  ],
-  2: [ // Dienstag
-    {name:"Mittwoch vorbereiten", note:"Spiele & Materialien", phase:"abend", phaseIdx:4},
-    {name:"Unterricht dokumentieren", note:"kurz abschließen", phase:"abend", phaseIdx:7},
-    {name:"Sport & Bewegung", note:"Aufwärmen + Yoga oder Dehnen", phase:"abend", phaseIdx:0},
-  ],
-  3: [ // Mittwoch
-    {name:"Donnerstag vorbereiten", note:"Spiele & Arbeitsblätter gestalten", phase:"abend", phaseIdx:4},
-    {name:"Unterricht dokumentieren", note:"kurz abschließen", phase:"abend", phaseIdx:7},
-    {name:"Uni-Aufgabe", note:"DaZF — Pflichtaufgabe", phase:"morgen", phaseIdx:11},
-  ],
-  4: [ // Donnerstag
-    {name:"Unterricht dokumentieren", note:"kurz abschließen", phase:"abend", phaseIdx:7},
-    {name:"Sport & Bewegung", note:"Aufwärmen + Yoga oder Kraft", phase:"abend", phaseIdx:0},
-    {name:"Zeit mit Thomas", note:"Abend genießen", phase:"abend", phaseIdx:3},
-  ],
-  5: [ // Freitag
-    {name:"Kreativzeit 🎨", note:"zeichnen, collagen, freies Gestalten", phase:"abend", phaseIdx:6},
-    {name:"Berufliche To-Dos", note:"Steuer, Zukunft, Korrespondenz", phase:"morgen", phaseIdx:11},
-    {name:"Entspannen", note:"Freiheit — kein Plan", phase:"abend", phaseIdx:8},
-  ],
-  6: [ // Samstag
-    {name:"Einkauf & Vorrat", note:"für die neue Woche", phase:"abend", phaseIdx:2},
-    {name:"Kreativzeit 🎨", note:"zeichnen, malen, collage", phase:"abend", phaseIdx:6},
-    {name:"Entspannung & Ruhe", note:"Sitzbad, Haarpflege, Ruhetag", phase:"abend", phaseIdx:0},
-  ],
-};
-
-var EINLADUNG_TASKS = [
-  {name:"Tiefe Körperpflege", note:"Peeling, Maske, Fußpflege — wenn Zeit & Lust", cat:"pflege", phase:"abend", phaseIdx:0},
-  {name:"Gesichtsyoga & Kiefer", note:"sanft & bewusst", cat:"pflege", phase:"abend", phaseIdx:0},
-  {name:"Kreativzeit 🎨", note:"zeichnen, malen, collage, drucken", cat:"seele", phase:"abend", phaseIdx:6},
-  {name:"Langer Spaziergang mit Lotte", note:"mehr als die Pflicht-Runde", cat:"tiere", phase:"morgen", phaseIdx:8},
-  {name:"Pflanzen besorgen & gestalten", note:"Frühjahrscheck", cat:"zuhause", phase:"abend", phaseIdx:2},
-  {name:"Finanzen & Planung", note:"wenn der Kopf klar ist", cat:"arbeit", phase:"morgen", phaseIdx:11},
-  {name:"Soziales", note:"Freundinnen, Familie, schreiben", cat:"seele", phase:"abend", phaseIdx:3},
-  {name:"Tiefe Lektüre", note:"Widdascheck, Plutzar oder ein Roman", cat:"lernen", phase:"abend", phaseIdx:11},
-];
-
-var dreiVisible = true;
-
-// Linked tasks use taskState (single source of truth)
-// Unlinked einladung tasks use their own key in taskState
-function getDreiKey(ebene, idx) {
-  var task = null;
-  if (ebene === 'fix') task = FIX_TASKS[idx];
-  else if (ebene === 'heute') {
-    var vorschlaege = HEUTE_VORSCHLAEGE[getViewDate().getDay()] || HEUTE_VORSCHLAEGE[1];
-    task = vorschlaege[idx];
-  }
-  if (task && task.phase) return task.phase + '_' + task.phaseIdx;
-  return 'einladung_' + idx;
-}
-
-function dreiClick(ebeneNum, idx) {
-  var ebene = ['fix','heute','einladung'][ebeneNum];
-  toggleDreiTask(ebene, idx);
-}
-
-function toggleDreiTask(ebene, idx) {
-  var task = null;
-  if (ebene === 'fix') task = FIX_TASKS[idx];
-  else if (ebene === 'heute') {
-    var vorschlaege = HEUTE_VORSCHLAEGE[getViewDate().getDay()] || HEUTE_VORSCHLAEGE[1];
-    task = vorschlaege[idx];
-  } else if (ebene === 'einladung') task = EINLADUNG_TASKS[idx];
-
-  if (task && task.phase !== undefined) {
-    // Linked: use the phase task toggle, which handles state + UI
-    toggleTask(task.phase, task.phaseIdx);
-    // Also scroll to and open that phase
-    showPhase(task.phase);
-    setTimeout(function() {
-      var phaseEl = document.getElementById('wave-' + task.phase);
-      if (phaseEl) phaseEl.scrollIntoView({behavior:'smooth', block:'center'});
-    }, 100);
-  } else {
-    // Unlinked (einladung or no phase): local taskState key
-    var key = 'einladung_' + idx;
-    taskState[key] = !taskState[key];
-    saveTaskState();
-    if (taskState[key]) showLebenMoment();
-  }
-  renderDrei();
-}
-
-function toggleDreiBlock() {
-  dreiVisible = !dreiVisible;
-  var wrap = document.getElementById('dreiWrap');
-  var btn = wrap.querySelector('.drei-toggle');
-  var blocks = wrap.querySelectorAll('.ebene-block');
-  blocks.forEach(function(b) { b.style.display = dreiVisible ? '' : 'none'; });
-  btn.textContent = dreiVisible ? 'minimieren ↑' : 'aufklappen ↓';
-}
-
-function renderDrei() {
-  var day = getViewDate().getDay();
-
-  // FIX
-  var fixDone = FIX_TASKS.filter(function(t, i) {
-    var key = t.phase ? t.phase + '_' + t.phaseIdx : 'fix_' + i;
-    return !!taskState[key];
-  }).length;
-  document.getElementById('fixCount').textContent = fixDone + ' / ' + FIX_TASKS.length;
-  var fixEl = document.getElementById('fixTasks');
-  fixEl.innerHTML = '';
-  FIX_TASKS.forEach(function(t, i) {
-    var key = t.phase ? t.phase + '_' + t.phaseIdx : 'fix_' + i;
-    var done = !!taskState[key];
-    var div = document.createElement('div');
-    div.className = 'drei-task' + (done ? ' done' : '');
-    div.dataset.ebene = '0';
-    div.dataset.idx = i;
-    var linkBtn = t.href ? '<a class="drei-link" href="' + t.href + '" onclick="event.stopPropagation()">öffnen ›</a>' : '';
-    div.innerHTML = '<div class="drei-check"></div>'
-      + '<div style="flex:1;min-width:0;">'
-      + '<div class="drei-task-name">' + t.name + '</div>'
-      + '<div class="drei-task-note">' + t.note + '</div>'
-      + linkBtn
-      + '</div>'
-      + '<div class="drei-task-cat">' + t.cat + '</div>';
-    div.addEventListener('click', function() { dreiClick(+this.dataset.ebene, +this.dataset.idx); });
-    fixEl.appendChild(div);
+  phase.aufgaben.forEach(function(a, i) {
+    var key = p + '_' + i;
+    var erledigt = !!taskState[key];
+    html += '<div class="aufgabe'+(erledigt?' erledigt':'')+'" onclick="toggleAufgabe(\''+p+'\','+i+')">' +
+      '<div class="aufg-kreis">'+(erledigt?'✓':'')+'</div>' +
+      '<div class="aufg-inhalt">' +
+      '<div class="aufg-name">'+a.name+'</div>' +
+      '<div class="aufg-note">'+a.note+'</div>' +
+      '</div></div>';
   });
 
-  // HEUTE GEWÄHLT
-  var vorschlaege = HEUTE_VORSCHLAEGE[day] || HEUTE_VORSCHLAEGE[1];
-  var tagnamen = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
-  document.getElementById('heuteTagSub').textContent = tagnamen[day];
-  var heuteEl = document.getElementById('heuteTasks');
-  heuteEl.innerHTML = '';
-  vorschlaege.forEach(function(t, i) {
-    var key = t.phase ? t.phase + '_' + t.phaseIdx : 'heute_' + i;
-    var done = !!taskState[key];
-    var div = document.createElement('div');
-    div.className = 'heute-slot' + (done ? ' done' : '');
-    var hLinkBtn = t.href ? '<a class="drei-link" href="' + t.href + '" onclick="event.stopPropagation()">öffnen ›</a>' : '';
-    div.innerHTML = '<div class="heute-slot-dot"></div>'
-      + '<div style="flex:1;">'
-      + '<div class="heute-slot-text">' + t.name + '</div>'
-      + (t.note ? '<div class="drei-task-note" style="padding-left:0;">' + t.note + '</div>' : '')
-      + hLinkBtn
-      + '</div>'
-      + '<span class="heute-slot-check">' + (done ? '✦' : '○') + '</span>';
-    div.dataset.ebene = '1';
-    div.dataset.idx = i;
-    div.addEventListener('click', function() { dreiClick(+this.dataset.ebene, +this.dataset.idx); });
-    heuteEl.appendChild(div);
-  });
-
-  // EINLADUNG
-  var einlEl = document.getElementById('einladungTasks');
-  einlEl.innerHTML = '';
-  EINLADUNG_TASKS.forEach(function(t, i) {
-    var key = t.phase ? t.phase + '_' + t.phaseIdx : 'einladung_' + i;
-    var done = !!taskState[key];
-    var div = document.createElement('div');
-    div.className = 'drei-task' + (done ? ' done' : '');
-    div.dataset.ebene = '2';
-    div.dataset.idx = i;
-    var eLinkBtn = t.href ? '<a class="drei-link" href="' + t.href + '" onclick="event.stopPropagation()">öffnen ›</a>' : '';
-    div.innerHTML = '<div class="drei-check"></div>'
-      + '<div style="flex:1;min-width:0;">'
-      + '<div class="drei-task-name">' + t.name + '</div>'
-      + '<div class="drei-task-note">' + t.note + '</div>'
-      + eLinkBtn
-      + '</div>'
-      + '<div class="drei-task-cat">' + t.cat + '</div>';
-    div.addEventListener('click', function() { dreiClick(+this.dataset.ebene, +this.dataset.idx); });
-    einlEl.appendChild(div);
-  });
+  html += '</div>';
+  inhalt.innerHTML = html;
 }
 
-// Initial render
-renderDrei();
+function toggleAufgabe(p, i) {
+  var key = p + '_' + i;
+  taskState[key] = !taskState[key];
+  speichereTaskState();
+  if (taskState[key]) zeigeToast();
+  renderPhase(p);
+}
 
+var toastTimer = null;
+var toastIdx = 0;
+function zeigeToast() {
+  var toast = document.getElementById('toast');
+  toast.textContent = PIPPI_SAETZE[toastIdx % PIPPI_SAETZE.length];
+  toastIdx++;
+  toast.classList.add('sichtbar');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() { toast.classList.remove('sichtbar'); }, 2000);
+}
+
+function zeigGutenTag() {
+  var farben = ['var(--rot)','var(--gelb)','var(--blau)','var(--grün)','var(--lila)','var(--orange)'];
+  var k = document.getElementById('konfetti');
+  k.style.display = 'block';
+  k.innerHTML = '';
+  for (var i = 0; i < 40; i++) {
+    var s = document.createElement('div');
+    s.className = 'konfetti-stück';
+    s.style.cssText = 'left:'+Math.random()*100+'%;top:-10px;' +
+      'background:'+farben[Math.floor(Math.random()*farben.length)]+';' +
+      'border-radius:'+(Math.random()>0.5?'50%':'2px')+';' +
+      'animation-delay:'+(Math.random()*0.8)+'s;' +
+      'animation-duration:'+(1+Math.random())+'s;' +
+      'width:'+(8+Math.random()*8)+'px;height:'+(8+Math.random()*8)+'px;';
+    k.appendChild(s);
+  }
+  setTimeout(function() { k.style.display = 'none'; }, 2500);
+}
+
+// Reflexion
+var reflexFragen = [...REFLEX_FRAGEN];
+var aktFrage = Math.floor(Math.random() * reflexFragen.length);
+document.getElementById('reflexFrage').textContent = reflexFragen[aktFrage];
+
+function speichereReflex() {
+  var text = document.getElementById('reflexText').value.trim();
+  if (!text) return;
+  var toast = document.getElementById('toast');
+  toast.textContent = '✦ festgehalten!';
+  toast.classList.add('sichtbar');
+  setTimeout(function() { toast.classList.remove('sichtbar'); }, 2000);
+  document.getElementById('reflexText').value = '';
+  aktFrage = (aktFrage + 1) % reflexFragen.length;
+  document.getElementById('reflexFrage').textContent = reflexFragen[aktFrage];
+}
+
+// Init
+zeigePhase(aktivePhase);
 </script>
 </body>
 </html>
