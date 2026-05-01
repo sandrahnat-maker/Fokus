@@ -4,459 +4,181 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#fdf6ee">
-<title>Haushalts-Zirkus</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Haushaltsplan</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-@keyframes wimpel-swing{0%,100%{transform:rotate(-4deg) skewX(2deg);}50%{transform:rotate(4deg) skewX(-2deg);}}
-@keyframes wimpel-swing2{0%,100%{transform:rotate(3deg) skewX(-1deg);}50%{transform:rotate(-3deg) skewX(1deg);}}
-@keyframes wimpel-swing3{0%,100%{transform:rotate(-2deg);}50%{transform:rotate(5deg);}}
-@keyframes rope-sway{0%,100%{transform:scaleX(1);}50%{transform:scaleX(1.008);}}
-@keyframes tier-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(.75);}}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-@keyframes spotlight{0%{left:-100%;}60%,100%{left:220%;}}
-@keyframes confetti-fall{0%{transform:translateY(-20px) rotate(0deg);opacity:.8;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
-@keyframes celebrate-pop{0%{transform:scale(0.5);opacity:0;}60%{transform:scale(1.18);}100%{transform:scale(1);opacity:1;}}
-
-:root{
-  --bg:#fdf6ee;--card:#fffbf5;--text:#1e1208;--muted:rgba(30,18,8,0.45);
-  --crimson:#b8294a;--crimson-l:rgba(184,41,74,0.10);
-  --gold:#c9893a;--gold-l:rgba(201,137,58,0.13);
-  --navy:#1a2744;--navy-l:rgba(26,39,68,0.07);
-  --sage:#5e8a5a;--sage-l:rgba(94,138,90,0.12);
-  --violet:#6a3f7a;
-  --border:rgba(184,41,74,0.13);--shadow:rgba(30,18,8,0.08);
-}
+:root{--gelb:#FFD93D;--rot:#E84855;--blau:#3D87CB;--grün:#4CAF72;--orange:#FF6B35;--lila:#9B5DE5;--creme:#FFF8E7;--dunkel:#1a0a00;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html{font-size:16px;}
-body{
-  background:var(--bg);font-family:"Raleway",sans-serif;color:var(--text);
-  min-height:100vh;padding-bottom:5rem;
-  background-image:repeating-linear-gradient(
-    -6deg,
-    rgba(184,41,74,0.022) 0px,rgba(184,41,74,0.022) 28px,
-    transparent 28px,transparent 56px,
-    rgba(201,137,58,0.018) 56px,rgba(201,137,58,0.018) 84px,
-    transparent 84px,transparent 112px
-  );
-}
-
-/* WIMPELKETTE */
-.wimpelkette{position:relative;width:100%;height:48px;overflow:hidden;display:block;background:var(--bg);}
-.wimpelkette svg{width:100%;height:48px;overflow:visible;animation:rope-sway 5s ease-in-out infinite;}
-.wimpel-1{animation:wimpel-swing 2.8s ease-in-out infinite;}
-.wimpel-2{animation:wimpel-swing2 3.2s ease-in-out infinite 0.3s;}
-.wimpel-3{animation:wimpel-swing3 2.5s ease-in-out infinite 0.6s;}
-.wimpel-4{animation:wimpel-swing 3.0s ease-in-out infinite 0.9s;}
-.wimpel-5{animation:wimpel-swing2 2.7s ease-in-out infinite 1.2s;}
-.wimpel-6{animation:wimpel-swing3 3.4s ease-in-out infinite 1.5s;}
-.wimpel-7{animation:wimpel-swing 2.9s ease-in-out infinite 1.8s;}
-.wimpel-8{animation:wimpel-swing2 2.6s ease-in-out infinite 2.1s;}
-.wimpel-9{animation:wimpel-swing3 3.1s ease-in-out infinite 2.4s;}
-
-/* HEADER */
-header{
-  padding:1rem 1.2rem .85rem;
-  border-bottom:2px solid var(--border);
-  background:rgba(255,251,245,0.85);
-  backdrop-filter:blur(3px);
-  position:relative;
-}
-.header-back{display:inline-flex;align-items:center;gap:.35rem;font-size:13px;color:var(--crimson);text-decoration:none;font-family:"IM Fell English",serif;font-style:italic;margin-bottom:.5rem;opacity:.75;}
-.header-back:active{opacity:1;}
-.header-title{font-family:"Playfair Display",serif;font-size:24px;font-style:italic;color:var(--text);line-height:1.3;}
-.header-sub{font-size:12px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:.2rem;font-family:"Raleway",sans-serif;font-weight:400;}
-
-/* TIERE */
-.tier-zeile{display:flex;align-items:center;justify-content:center;gap:.2rem;padding:.35rem 1rem;font-size:.85rem;user-select:none;pointer-events:none;overflow:hidden;}
-.tier-zeile .tier{display:inline-block;animation:tier-float 3s ease-in-out infinite;opacity:.55;font-size:1rem;}
-.tier-zeile .tier:nth-child(2){animation-delay:.4s;}
-.tier-zeile .tier:nth-child(3){animation-delay:.8s;}
-.tier-zeile .tier:nth-child(4){animation-delay:1.2s;}
-.tier-zeile .tier:nth-child(5){animation-delay:1.6s;}
-.tier-linie{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(184,41,74,0.2),transparent);}
-
-/* INTENTION-BANNER — Tages-Motto */
-.intention-wrap{
-  margin:1rem 1rem 0;background:var(--card);border-radius:4px 4px 16px 16px;
-  border:1px solid var(--border);box-shadow:0 3px 18px var(--shadow);overflow:hidden;position:relative;
-}
-.intention-wrap::before{
-  content:'';display:block;height:7px;
-  background:repeating-linear-gradient(90deg,var(--crimson) 0%,var(--crimson) 20%,var(--gold) 20%,var(--gold) 40%,var(--navy) 40%,var(--navy) 60%,var(--violet) 60%,var(--violet) 80%,var(--sage) 80%,var(--sage) 100%);
-  opacity:.65;
-}
-.intention-top{padding:.9rem 1.1rem .4rem;display:flex;align-items:center;gap:.5rem;}
-.intention-dot{width:7px;height:7px;border-radius:50%;background:var(--crimson);animation:pulse 3s ease-in-out infinite;}
-.intention-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--crimson);font-weight:500;}
-.intention-text{padding:.1rem 1.1rem 1rem;font-family:"Playfair Display",serif;font-size:20px;font-style:italic;color:var(--text);line-height:1.55;}
-
-/* FORTSCHRITT GESAMT */
-.progress-wrap{margin:1rem 1rem 0;}
-.progress-bar-bg{height:6px;border-radius:3px;background:rgba(184,41,74,0.1);overflow:hidden;}
-.progress-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--crimson),var(--gold));transition:width .5s cubic-bezier(.34,1.2,.64,1);}
-.progress-label{display:flex;justify-content:space-between;margin-top:.3rem;}
-.progress-text{font-size:12px;color:var(--muted);font-family:"IM Fell English",serif;font-style:italic;}
-.progress-pct{font-size:12px;color:var(--crimson);font-family:"IM Fell English",serif;font-style:italic;}
-
-/* TAGESBLOCK — Accordion */
-.block-wrap{margin:.75rem 1rem 0;}
-.block-header{
-  display:flex;align-items:center;gap:.65rem;
-  padding:.7rem .95rem;background:var(--card);
-  border-radius:12px;border:1px solid var(--border);
-  box-shadow:0 2px 10px var(--shadow);cursor:pointer;
-  position:relative;overflow:hidden;
-  transition:all .2s;
-}
-.block-header::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
-  border-radius:4px 0 0 4px;
-}
-.block-header.morgen::before{background:var(--crimson);}
-.block-header.schreibtisch::before{background:var(--navy);}
-.block-header.mittag::before{background:var(--gold);}
-.block-header.haushalt::before{background:var(--sage);}
-.block-header.ich::before{background:var(--violet);}
-.block-header.abend::before{background:var(--navy);}
-
-.block-header.open{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-color:transparent;}
+@keyframes fallen{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+body{background:var(--creme);font-family:'Nunito',sans-serif;color:var(--dunkel);min-height:100vh;padding-bottom:5rem;
+  background-image:repeating-linear-gradient(-12deg,transparent 0,transparent 60px,rgba(255,217,61,.06) 60px,rgba(255,217,61,.06) 80px,transparent 80px,transparent 140px,rgba(76,175,114,.04) 140px,rgba(76,175,114,.04) 160px);}
+.vk-header{background:var(--gelb);border-bottom:3px solid var(--dunkel);padding:.8rem 1.1rem .7rem;}
+.vk-header::before{content:'';display:block;height:6px;margin-bottom:.5rem;background:repeating-linear-gradient(90deg,var(--rot) 0,var(--rot) 20%,var(--gelb) 20%,var(--gelb) 40%,var(--grün) 40%,var(--grün) 60%,var(--blau) 60%,var(--blau) 80%,var(--lila) 80%,var(--lila) 100%);border-radius:3px;}
+.vk-back{display:inline-flex;align-items:center;gap:.3rem;font-family:'Caveat',cursive;font-size:1rem;color:var(--dunkel);text-decoration:none;background:none;border:none;cursor:pointer;opacity:.7;margin-bottom:.3rem;padding:0;}
+.vk-eyebrow{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;opacity:.6;font-weight:700;margin-bottom:.15rem;}
+.vk-title{font-family:'Fredoka One',cursive;font-size:1.8rem;line-height:1.1;}
+.vk-sub{font-family:'Caveat',cursive;font-size:1rem;opacity:.65;margin-top:.1rem;}
+/* PROGRESS */
+.progress-wrap{margin:1rem 1rem 0;background:white;border:3px solid var(--dunkel);border-radius:14px;box-shadow:3px 3px 0 var(--dunkel);padding:.8rem 1rem;}
+.progress-row{display:flex;justify-content:space-between;font-family:'Fredoka One',cursive;font-size:.9rem;margin-bottom:.4rem;}
+.progress-pct{color:var(--grün);}
+.vk-prog-bar{height:12px;background:rgba(26,10,0,.1);border-radius:20px;overflow:hidden;border:2px solid var(--dunkel);}
+.vk-prog-fill{height:100%;background:linear-gradient(90deg,var(--grün),var(--gelb));border-radius:20px;transition:width .4s;}
+/* MOTTO */
+.motto-card{margin:1rem 1rem 0;background:var(--orange);border:3px solid var(--dunkel);border-radius:14px;padding:.7rem .9rem;box-shadow:3px 3px 0 var(--dunkel);}
+.motto-text{font-family:'Caveat',cursive;font-size:1.05rem;color:white;font-weight:600;}
+/* BLÖCKE */
+.block-wrap{margin:.8rem 1rem 0;}
+.block-header{display:flex;align-items:center;gap:.6rem;padding:.7rem .9rem;background:white;border:3px solid var(--dunkel);border-radius:14px 14px 0 0;cursor:pointer;box-shadow:3px 3px 0 var(--dunkel);transition:transform .1s;}
+.block-header:active{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--dunkel);}
+.block-header.open{border-radius:14px 14px 0 0;box-shadow:3px 0 0 var(--dunkel);}
+.block-morgen .block-header,.block-header.morgen{background:var(--gelb);}
+.block-schreibtisch .block-header,.block-header.schreibtisch{background:var(--blau);color:white;}
+.block-mittag .block-header,.block-header.mittag{background:var(--orange);color:white;}
+.block-haushalt .block-header,.block-header.haushalt{background:var(--grün);color:white;}
+.block-ich .block-header,.block-header.ich{background:var(--lila);color:white;}
+.block-abend .block-header,.block-header.abend{background:#1a2744;color:white;}
 .block-icon{font-size:1.3rem;flex-shrink:0;}
-.block-info{flex:1;min-width:0;}
-.block-name{font-family:"Playfair Display",serif;font-size:18px;color:var(--text);}
-.block-sub{font-family:"IM Fell English",serif;font-size:14px;font-style:italic;color:var(--muted);margin-top:.05rem;}
-.block-badge{
-  flex-shrink:0;font-size:11px;font-family:"Raleway",sans-serif;
-  font-weight:500;letter-spacing:.08em;padding:.18rem .55rem;
-  border-radius:20px;background:var(--crimson-l);color:var(--crimson);
-  border:1px solid rgba(184,41,74,0.18);
-}
-.block-badge.done-all{background:var(--sage-l);color:var(--sage);border-color:rgba(94,138,90,0.3);}
-.block-arr{font-size:.8rem;color:var(--muted);margin-left:.2rem;transition:transform .25s;flex-shrink:0;}
+.block-info{flex:1;}
+.block-name{font-family:'Fredoka One',cursive;font-size:1rem;line-height:1.2;}
+.block-sub{font-family:'Caveat',cursive;font-size:.9rem;opacity:.75;margin-top:.05rem;}
+.block-badge{font-family:'Fredoka One',cursive;font-size:.8rem;background:rgba(26,10,0,.15);border-radius:20px;padding:.15rem .5rem;flex-shrink:0;}
+.block-badge.done-all{background:rgba(76,175,114,.3);color:var(--dunkel);}
+.block-arr{font-size:.75rem;opacity:.6;flex-shrink:0;transition:transform .2s;}
 .block-header.open .block-arr{transform:rotate(180deg);}
-
-/* BLOCK CONTENT */
-.block-content{
-  display:none;background:var(--card);
-  border:1px solid var(--border);border-top:none;
-  border-radius:0 0 12px 12px;
-  box-shadow:0 4px 14px var(--shadow);
-  overflow:hidden;position:relative;
-}
-.block-content::after{
-  content:'';position:absolute;top:0;left:-100%;width:55%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.055),transparent);
-  animation:spotlight 10s ease-in-out infinite;pointer-events:none;
-}
-.block-content.open{display:block;animation:fadeIn .3s ease;}
-.block-mood{
-  font-family:"IM Fell English",serif;font-size:16px;font-style:italic;
-  color:var(--muted);line-height:1.65;padding:.75rem 1rem .65rem;
-  border-bottom:1px dashed rgba(184,41,74,0.18);
-}
-
-/* RAUM-SEKTION */
-.raum-section{border-bottom:1px solid rgba(184,41,74,0.07);}
-.raum-section:last-child{border-bottom:none;}
-.raum-label{
-  display:flex;align-items:center;gap:.5rem;
-  padding:.6rem 1rem .4rem;
-  font-size:11px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--muted);font-weight:500;
-}
-.raum-icon{font-size:1rem;opacity:.7;}
-
-/* TASK */
-.task-item{
-  display:flex;align-items:flex-start;gap:.6rem;
-  padding:.5rem 1rem;border-bottom:1px solid rgba(184,41,74,0.06);
-  cursor:pointer;transition:opacity .2s;
-}
+.block-content{display:none;background:white;border:3px solid var(--dunkel);border-top:none;border-radius:0 0 14px 14px;overflow:hidden;}
+.block-content.open{display:block;}
+.block-mood{font-family:'Caveat',cursive;font-size:1rem;color:rgba(26,10,0,.55);padding:.6rem 1rem .4rem;border-bottom:2px dashed rgba(26,10,0,.08);line-height:1.4;}
+/* RAUM */
+.raum-section{padding:.2rem 0;}
+.raum-label{font-family:'Fredoka One',cursive;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(26,10,0,.45);padding:.4rem 1rem .2rem;display:flex;align-items:center;gap:.3rem;}
+/* TASKS */
+.task-item{display:flex;align-items:flex-start;gap:.65rem;padding:.55rem 1rem;border-bottom:2px dashed rgba(26,10,0,.08);cursor:pointer;transition:background .15s;}
 .task-item:last-child{border-bottom:none;}
-.task-item.done{opacity:.28;}
-.task-item.done .task-name{text-decoration:line-through;text-decoration-color:rgba(184,41,74,0.3);}
-.task-check{
-  width:16px;height:16px;border-radius:50%;border:1px solid rgba(184,41,74,0.3);
-  flex-shrink:0;margin-top:3px;transition:all .25s;
-  display:flex;align-items:center;justify-content:center;font-size:9px;color:transparent;
-}
-.task-item.done .task-check{background:var(--sage-l);border-color:var(--sage);color:var(--sage);}
-.task-item.done .task-check::after{content:'✦';}
-.task-name{font-size:16px;color:var(--text);line-height:1.35;}
-.task-note{font-size:13px;font-style:italic;color:var(--muted);margin-top:2px;font-family:"IM Fell English",serif;}
-
+.task-item:active{background:rgba(255,217,61,.2);}
+.task-item.done{opacity:.3;}
+.task-item.done .task-name{text-decoration:line-through;}
+.task-check{width:22px;height:22px;border:3px solid var(--dunkel);border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:.75rem;background:white;transition:all .2s;}
+.task-item.done .task-check{background:var(--grün);border-color:var(--grün);color:white;}
+.task-item.done .task-check::after{content:'✓';}
+.task-name{font-size:1rem;font-weight:700;line-height:1.3;}
+.task-note{font-family:'Caveat',cursive;font-size:.95rem;color:rgba(26,10,0,.5);margin-top:.05rem;}
 /* GROSSE AUFGABEN */
-.gross-wrap{margin:.75rem 1rem 0;}
-.gross-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem;padding-left:.2rem;font-weight:500;}
-.gross-item{
-  display:flex;align-items:flex-start;gap:.6rem;
-  padding:.6rem .9rem;background:var(--card);
-  border-radius:10px;border:1px solid var(--border);
-  margin-bottom:.35rem;cursor:pointer;transition:opacity .2s;
-}
+.gross-wrap{margin:1rem 1rem 0;}
+.gross-label{font-family:'Fredoka One',cursive;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(26,10,0,.45);margin-bottom:.5rem;padding-left:.2rem;}
+.gross-item{display:flex;align-items:flex-start;gap:.65rem;padding:.6rem .9rem;background:white;border:3px solid var(--dunkel);border-radius:12px;margin-bottom:.5rem;cursor:pointer;box-shadow:3px 3px 0 var(--dunkel);transition:transform .1s,box-shadow .1s;}
+.gross-item:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--dunkel);}
 .gross-item.done{opacity:.3;}
-.gross-item.done .task-name{text-decoration:line-through;text-decoration-color:rgba(184,41,74,0.3);}
-.gross-check{
-  width:18px;height:18px;border-radius:4px;
-  border:1px solid rgba(184,41,74,0.3);flex-shrink:0;margin-top:2px;
-  display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;
-  transition:all .25s;
-}
-.gross-item.done .gross-check{background:var(--sage-l);border-color:var(--sage);color:var(--sage);}
-.gross-item.done .gross-check::after{content:'✦';}
-.gross-raum{font-size:11px;color:var(--crimson);letter-spacing:.08em;text-transform:uppercase;margin-top:3px;opacity:.7;}
-
-/* MANEGE-LINIE */
-.manege-line{display:flex;align-items:center;gap:.5rem;padding:.1rem 1rem;color:var(--crimson);opacity:.3;font-size:11px;letter-spacing:.3em;user-select:none;}
-.manege-line::before,.manege-line::after{content:'';flex:1;height:1px;background:currentColor;}
-
-/* KONFETTI */
-.confetti-wrap{position:fixed;top:0;left:0;right:0;height:100vh;pointer-events:none;z-index:999;overflow:hidden;}
-.cdot{position:absolute;animation:confetti-fall linear forwards;border-radius:2px;}
-
+.gross-item.done .task-name{text-decoration:line-through;}
+.gross-check{width:22px;height:22px;border:3px solid var(--dunkel);border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:.75rem;background:white;transition:all .2s;}
+.gross-item.done .gross-check{background:var(--lila);border-color:var(--lila);color:white;}
+.gross-item.done .gross-check::after{content:'✓';}
+.gross-raum{font-size:.8rem;color:rgba(26,10,0,.4);font-family:'Caveat',cursive;margin-top:.15rem;}
 /* TOAST */
-#haushalt-toast{
-  position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%) translateY(20px);
-  background:var(--navy);border-radius:20px;padding:.5rem 1.2rem;
-  font-family:"IM Fell English",serif;font-size:17px;font-style:italic;
-  color:#f8e8b8;box-shadow:0 4px 20px rgba(26,39,68,0.18);
-  opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;
-  white-space:nowrap;z-index:500;
-}
+#haushalt-toast{position:fixed;bottom:4rem;left:50%;transform:translateX(-50%) translateY(10px);background:var(--dunkel);color:var(--gelb);font-family:'Caveat',cursive;font-size:1.1rem;padding:.5rem 1.2rem;border-radius:20px;opacity:0;transition:all .3s;z-index:200;white-space:nowrap;pointer-events:none;}
 #haushalt-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
-/* ZURÜCK LINK */
-.nav-bottom{
-  position:fixed;bottom:0;left:0;right:0;
-  background:rgba(253,246,238,0.95);backdrop-filter:blur(6px);
-  border-top:1px solid var(--border);
-  padding:.6rem 1rem;display:flex;justify-content:center;
-  z-index:100;
-}
-.nav-back-btn{
-  font-family:"IM Fell English",serif;font-size:16px;font-style:italic;
-  color:var(--crimson);text-decoration:none;opacity:.7;
-  display:flex;align-items:center;gap:.4rem;
-}
-.nav-back-btn:active{opacity:1;}
+/* KONFETTI */
+.confetti-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;}
+.cdot{position:absolute;border-radius:2px;animation:fallen 3s ease-in forwards;}
+/* SEPARATOR */
+.vk-sep{text-align:center;padding:.8rem;font-size:1rem;opacity:.3;letter-spacing:.3em;}
 </style>
 </head>
 <body>
-
-<div class="wimpelkette">
-<svg viewBox="0 0 400 48" preserveAspectRatio="none">
-  <line x1="0" y1="8" x2="400" y2="8" stroke="rgba(26,39,68,0.18)" stroke-width="1"/>
-  <polygon class="wimpel-1" points="20,8 36,8 28,36" fill="#b8294a" opacity=".75" transform-origin="28 8"/>
-  <polygon class="wimpel-2" points="60,8 76,8 68,36" fill="#c9893a" opacity=".7" transform-origin="68 8"/>
-  <polygon class="wimpel-3" points="100,8 116,8 108,36" fill="#1a2744" opacity=".65" transform-origin="108 8"/>
-  <polygon class="wimpel-4" points="140,8 156,8 148,36" fill="#6a3f7a" opacity=".7" transform-origin="148 8"/>
-  <polygon class="wimpel-5" points="180,8 196,8 188,36" fill="#5e8a5a" opacity=".68" transform-origin="188 8"/>
-  <polygon class="wimpel-6" points="220,8 236,8 228,36" fill="#b8294a" opacity=".72" transform-origin="228 8"/>
-  <polygon class="wimpel-7" points="260,8 276,8 268,36" fill="#c9893a" opacity=".68" transform-origin="268 8"/>
-  <polygon class="wimpel-8" points="300,8 316,8 308,36" fill="#1a2744" opacity=".65" transform-origin="308 8"/>
-  <polygon class="wimpel-9" points="340,8 356,8 348,36" fill="#6a3f7a" opacity=".7" transform-origin="348 8"/>
-</svg>
+<div class="vk-header">
+  <button class="vk-back" onclick="history.back()">← zurück</button>
+  <div class="vk-eyebrow">Zuhause</div>
+  <div class="vk-title">🏠 Haushaltsplan</div>
+  <div class="vk-sub">Schritt für Schritt · sanft</div>
 </div>
 
-<header>
-  <a href="index.html" class="header-back">← Mein Leben</a>
-  <div class="header-title">Mein Haushalt</div>
-  <div class="header-sub">Ordnung ist ein Mittel — nicht das Ziel</div>
-</header>
-
-<div class="tier-zeile">
-  <div class="tier-linie"></div>
-  <span class="tier">🧺</span>
-  <span class="tier">🌿</span>
-  <span class="tier">🫧</span>
-  <span class="tier">🏠</span>
-  <span class="tier">🌸</span>
-  <span class="tier">✨</span>
-  <span class="tier">🧹</span>
-  <div class="tier-linie"></div>
-</div>
-
-<!-- TAGES-MOTTO -->
-<div class="intention-wrap">
-  <div class="intention-top"><div class="intention-dot"></div><div class="intention-label">Heute putze ich</div></div>
-  <div class="intention-text" id="tagesMottoText">wird geladen…</div>
-</div>
-
-<!-- FORTSCHRITT -->
 <div class="progress-wrap">
-  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
-  <div class="progress-label">
+  <div class="progress-row">
     <span class="progress-text" id="progressText">0 von 0 erledigt</span>
     <span class="progress-pct" id="progressPct">0 %</span>
   </div>
+  <div class="vk-prog-bar"><div class="vk-prog-fill" id="progressFill" style="width:0%"></div></div>
 </div>
 
-<div class="manege-line">✦ ✦ ✦</div>
-
-<!-- BLÖCKE -->
+<div class="motto-card">
+  <div class="motto-text" id="tagesMottoText"></div>
+</div>
 
 <!-- 1. MORGENROUTINE -->
 <div class="block-wrap">
   <div class="block-header morgen" onclick="toggleBlock('morgen')">
     <div class="block-icon">🌅</div>
-    <div class="block-info">
-      <div class="block-name">Morgenroutine</div>
-      <div class="block-sub">Schlafzimmer · Bad wartet schon auf dich</div>
-    </div>
+    <div class="block-info"><div class="block-name">Morgenroutine</div><div class="block-sub">Schlafzimmer · Bad wartet schon</div></div>
     <div class="block-badge" id="badge-morgen">0 / 3</div>
     <div class="block-arr">▼</div>
   </div>
   <div class="block-content" id="content-morgen">
     <div class="block-mood">Der Raum wartet schon auf dich. Alles liegt bereit.</div>
-    <div class="raum-section">
-      <div class="raum-label"><span class="raum-icon">🌙</span> Schlafzimmer</div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="morgen">
-        <div class="task-check"></div>
-        <div><div class="task-name">Bett machen</div><div class="task-note">Bettzeug aufschütteln, Kissen aufstellen</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="morgen">
-        <div class="task-check"></div>
-        <div><div class="task-name">Medikamente griffbereit</div><div class="task-note">Euthyrox, Sertralin, Magenschutz — in Reihenfolge</div></div>
-      </div>
-    </div>
-    <div class="raum-section">
-      <div class="raum-label"><span class="raum-icon">🛁</span> Bad</div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="morgen">
-        <div class="task-check"></div>
-        <div><div class="task-name">Bad frisch herrichten</div><div class="task-note">Waschbecken sauber, frisches Handtuch bereit</div></div>
-      </div>
-    </div>
+    <div class="raum-label">🌙 Schlafzimmer</div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="morgen"><div class="task-check"></div><div><div class="task-name">Bett machen</div><div class="task-note">Bettzeug aufschütteln, Kissen aufstellen</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="morgen"><div class="task-check"></div><div><div class="task-name">Medikamente griffbereit</div><div class="task-note">Euthyrox, Sertralin, Magenschutz — in Reihenfolge</div></div></div>
+    <div class="raum-label">🛁 Bad</div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="morgen"><div class="task-check"></div><div><div class="task-name">Bad frisch herrichten</div><div class="task-note">Waschbecken sauber, frisches Handtuch bereit</div></div></div>
   </div>
 </div>
 
-<!-- 2. SCHREIBTISCHBLOCK -->
+<!-- 2. SCHREIBTISCH -->
 <div class="block-wrap">
   <div class="block-header schreibtisch" onclick="toggleBlock('schreibtisch')">
     <div class="block-icon">📚</div>
-    <div class="block-info">
-      <div class="block-name">Schreibtischblock</div>
-      <div class="block-sub">Atelier · kein visuelles Rauschen</div>
-    </div>
+    <div class="block-info"><div class="block-name">Schreibtischblock</div><div class="block-sub">Atelier · kein visuelles Rauschen</div></div>
     <div class="block-badge" id="badge-schreibtisch">0 / 2</div>
     <div class="block-arr">▼</div>
   </div>
   <div class="block-content" id="content-schreibtisch">
     <div class="block-mood">Eine freie Fläche. Nicht perfekt — nur klar.</div>
-    <div class="raum-section">
-      <div class="raum-label"><span class="raum-icon">🖊️</span> Schreibtisch</div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="schreibtisch">
-        <div class="task-check"></div>
-        <div><div class="task-name">Schreibtisch frei machen</div><div class="task-note">Uni-Unterlagen verräumt, eine freie Arbeitsfläche</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="schreibtisch">
-        <div class="task-check"></div>
-        <div><div class="task-name">Offene Zettel an ihren Platz</div><div class="task-note">Notizen, Aufgaben, Papiere — nichts auf dem Tisch lassen</div></div>
-      </div>
-    </div>
+    <div class="raum-label">🖊️ Schreibtisch</div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="schreibtisch"><div class="task-check"></div><div><div class="task-name">Schreibtisch frei machen</div><div class="task-note">Uni-Unterlagen verräumt, eine freie Arbeitsfläche</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="schreibtisch"><div class="task-check"></div><div><div class="task-name">Offene Zettel an ihren Platz</div><div class="task-note">Notizen, Aufgaben, Papiere — nichts auf dem Tisch lassen</div></div></div>
   </div>
 </div>
 
-<!-- 3. MITTAGSPAUSE -->
+<!-- 3. MITTAG -->
 <div class="block-wrap">
   <div class="block-header mittag" onclick="toggleBlock('mittag')">
     <div class="block-icon">☀️</div>
-    <div class="block-info">
-      <div class="block-name">Mittagspause</div>
-      <div class="block-sub">Küche · kleiner Reset</div>
-    </div>
+    <div class="block-info"><div class="block-name">Mittagspause</div><div class="block-sub">Küche · kleiner Reset</div></div>
     <div class="block-badge" id="badge-mittag">0 / 2</div>
     <div class="block-arr">▼</div>
   </div>
   <div class="block-content" id="content-mittag">
-    <div class="block-mood">Geschirr direkt weg — damit die Nachmittagsstimmung sich nicht mit Küchenunordnung mischt.</div>
-    <div class="raum-section">
-      <div class="raum-label"><span class="raum-icon">🍳</span> Küche</div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="mittag">
-        <div class="task-check"></div>
-        <div><div class="task-name">Geschirr wegräumen</div><div class="task-note">Direkt nach dem Essen — nicht bis später warten</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="mittag">
-        <div class="task-check"></div>
-        <div><div class="task-name">Küche kurz wischen</div><div class="task-note">Arbeitsfläche frei für den Nachmittag</div></div>
-      </div>
-    </div>
+    <div class="block-mood">Geschirr direkt weg — damit die Abendstimmung sich nicht mit Küchenunordnung mischt.</div>
+    <div class="raum-label">🍳 Küche</div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="mittag"><div class="task-check"></div><div><div class="task-name">Geschirr wegräumen</div><div class="task-note">Direkt nach dem Essen — nicht bis später warten</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="mittag"><div class="task-check"></div><div><div class="task-name">Küche kurz wischen</div><div class="task-note">Arbeitsfläche frei</div></div></div>
   </div>
 </div>
 
-<!-- 4. HAUSHALTSBLOCK — DER KERNBLOCK -->
+<!-- 4. HAUSHALTSBLOCK -->
 <div class="block-wrap">
   <div class="block-header haushalt" onclick="toggleBlock('haushalt')">
     <div class="block-icon">🧹</div>
-    <div class="block-info">
-      <div class="block-name">Haushaltsblock</div>
-      <div class="block-sub">In der Reihenfolge deines Morgens</div>
-    </div>
+    <div class="block-info"><div class="block-name">Haushaltsblock</div><div class="block-sub">In der Reihenfolge deines Abends</div></div>
     <div class="block-badge" id="badge-haushalt">0 / 12</div>
     <div class="block-arr">▼</div>
   </div>
   <div class="block-content" id="content-haushalt">
     <div class="block-mood">Du putzt nicht die Wohnung. Du bereitest deinen nächsten Morgen vor.</div>
-
-    <div class="raum-section">
-      <div class="raum-label"><span class="raum-icon">🌙</span> Schlafzimmer — dein Start</div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
-        <div class="task-check"></div>
-        <div><div class="task-name">Nachtkästchen abwischen</div><div class="task-note">Nur das Nötigste zurück: Lampe, Buch, Wasser</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
-        <div class="task-check"></div>
-        <div><div class="task-name">Kleidung verräumen</div><div class="task-note">Kein „vielleicht noch mal tragen"-Stapel</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
-        <div class="task-check"></div>
-        <div><div class="task-name">Fenster kurz lüften + Boden fegen</div><div class="task-note">5 Minuten frische Luft, Boden saugen oder fegen</div></div>
-      </div>
-    </div>
-
-    <div class="raum-section">
-      <div class="raum-label"><span class="raum-icon">🛁</span> Bad — dein Ritual</div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
-        <div class="task-check"></div>
-        <div><div class="task-name">Waschbecken + Armatur reinigen</div><div class="task-note">Essigreiniger, kurz schrubben, trocken wischen</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
-        <div class="task-check"></div>
-        <div><div class="task-name">WC reinigen</div><div class="task-note">Innen schrubben + Außenseite abwischen</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
-        <div class="task-check"></div>
-        <div><div class="task-name">Fenstersims: Produkte prüfen</div><div class="task-note">Leere Flaschen weg, Sims abwischen, sinnvoll zurück</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
-        <div class="task-check"></div>
-        <div><div class="task-name">Badboden fegen + wischen</div><div class="task-note">Sauger oder Besen, dann feuchtes Tuch</div></div>
-      </div>
-    </div>
-
-    <div class="raum-section">
-      <div class="raum-label"><span class="raum-icon">🍳</span> Küche — dein Frühstück</div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
-        <div class="task-check"></div>
-        <div><div class="task-name">Abwasch erledigen</div><div class="task-note">Alles Schmutzige rein, Geschirrspüler einschalten</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
-        <div class="task-check"></div>
-        <div><div class="task-name">Teetasse + Frühstück vorbereiten</div><div class="task-note">Teefach offen, Tasse bereit, Zutaten sichtbar</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
-        <div class="task-check"></div>
-        <div><div class="task-name">Küchenboden fegen</div><div class="task-note">Besonders unter dem Tisch und vor dem Herd</div></div>
-      </div>
-    </div>
-
-    <div class="raum-section">
-      <div class="raum-label"><span class="raum-icon">🛋️</span> Wohnzimmer — dein Abend</div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="haushalt">
-        <div class="task-check"></div>
-        <div><div class="task-name">Abendstimmung herstellen</div><div class="task-note">Kissen zurecht, Lottedecke falten, Kerze bereit — nicht sauber machen, nur ankommen lassen</div></div>
-      </div>
-    </div>
+    <div class="raum-label">🌙 Schlafzimmer</div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="haushalt"><div class="task-check"></div><div><div class="task-name">Nachtkästchen abwischen</div><div class="task-note">Nur das Nötigste zurück: Lampe, Buch, Wasser</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="haushalt"><div class="task-check"></div><div><div class="task-name">Kleidung verräumen</div><div class="task-note">Kein „vielleicht noch mal tragen"-Stapel</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="haushalt"><div class="task-check"></div><div><div class="task-name">Fenster kurz lüften + Boden fegen</div><div class="task-note">5 Minuten frische Luft</div></div></div>
+    <div class="raum-label">🛁 Bad</div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="haushalt"><div class="task-check"></div><div><div class="task-name">Waschbecken + Armatur reinigen</div><div class="task-note">Essigreiniger, kurz schrubben, trocken wischen</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="haushalt"><div class="task-check"></div><div><div class="task-name">WC reinigen</div><div class="task-note">Innen schrubben + Außenseite abwischen</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="haushalt"><div class="task-check"></div><div><div class="task-name">Fenstersims: Produkte prüfen</div><div class="task-note">Leere Flaschen weg, Sims abwischen</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="haushalt"><div class="task-check"></div><div><div class="task-name">Badboden fegen + wischen</div><div class="task-note">Sauger oder Besen, dann feuchtes Tuch</div></div></div>
+    <div class="raum-label">🍳 Küche</div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="haushalt"><div class="task-check"></div><div><div class="task-name">Abwasch erledigen</div><div class="task-note">Alles Schmutzige rein, Geschirrspüler einschalten</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="haushalt"><div class="task-check"></div><div><div class="task-name">Teetasse + Frühstück vorbereiten</div><div class="task-note">Teefach offen, Tasse bereit, Zutaten sichtbar</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="haushalt"><div class="task-check"></div><div><div class="task-name">Küchenboden fegen</div><div class="task-note">Besonders unter dem Tisch und vor dem Herd</div></div></div>
+    <div class="raum-label">🛋️ Wohnzimmer</div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="haushalt"><div class="task-check"></div><div><div class="task-name">Abendstimmung herstellen</div><div class="task-note">Kissen zurecht, Lottedecke falten, Kerze bereit</div></div></div>
   </div>
 </div>
 
@@ -464,26 +186,15 @@ header{
 <div class="block-wrap">
   <div class="block-header ich" onclick="toggleBlock('ich')">
     <div class="block-icon">🌸</div>
-    <div class="block-info">
-      <div class="block-name">Ich-Block</div>
-      <div class="block-sub">Bad herrichten für dein Pflegegefühl</div>
-    </div>
+    <div class="block-info"><div class="block-name">Ich-Block</div><div class="block-sub">Bad herrichten für dein Pflegegefühl</div></div>
     <div class="block-badge" id="badge-ich">0 / 2</div>
     <div class="block-arr">▼</div>
   </div>
   <div class="block-content" id="content-ich">
     <div class="block-mood">Körperpflege fühlt sich besser an, wenn der Raum schon bereit ist.</div>
-    <div class="raum-section">
-      <div class="raum-label"><span class="raum-icon">🛁</span> Bad für den Ich-Block</div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="ich">
-        <div class="task-check"></div>
-        <div><div class="task-name">Bad als Ritual herrichten</div><div class="task-note">Handtücher bereit, Körperöl + Pflegeprodukte auf Platz</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="ich">
-        <div class="task-check"></div>
-        <div><div class="task-name">Bad danach in Ordnung lassen</div><div class="task-note">Nicht bis morgen warten — 2 Minuten jetzt</div></div>
-      </div>
-    </div>
+    <div class="raum-label">🛁 Bad für den Ich-Block</div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="ich"><div class="task-check"></div><div><div class="task-name">Bad als Ritual herrichten</div><div class="task-note">Handtücher bereit, Körperöl + Pflegeprodukte auf Platz</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="ich"><div class="task-check"></div><div><div class="task-name">Bad danach in Ordnung lassen</div><div class="task-note">2 Minuten jetzt — nicht bis morgen warten</div></div></div>
   </div>
 </div>
 
@@ -491,224 +202,142 @@ header{
 <div class="block-wrap">
   <div class="block-header abend" onclick="toggleBlock('abend')">
     <div class="block-icon">🌙</div>
-    <div class="block-info">
-      <div class="block-name">Abendroutine</div>
-      <div class="block-sub">Abschluss geben · nicht aufräumen</div>
-    </div>
+    <div class="block-info"><div class="block-name">Abendroutine</div><div class="block-sub">Abschluss geben · nicht aufräumen</div></div>
     <div class="block-badge" id="badge-abend">0 / 2</div>
     <div class="block-arr">▼</div>
   </div>
   <div class="block-content" id="content-abend">
     <div class="block-mood">Nicht sauber machen. Den Tag ankommen lassen.</div>
-    <div class="raum-section">
-      <div class="raum-label"><span class="raum-icon">🛋️</span> Wohnzimmer + Küche</div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="abend">
-        <div class="task-check"></div>
-        <div><div class="task-name">Küche für den Morgen schließen</div><div class="task-note">Reste wegräumen, Arbeitsfläche frei — Tasse für morgen</div></div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this)" data-block="abend">
-        <div class="task-check"></div>
-        <div><div class="task-name">Wohnzimmer abschließen</div><div class="task-note">Kissen zurecht, Lotte-Platz schön, Kerze auspusten</div></div>
-      </div>
-    </div>
+    <div class="raum-label">🛋️ Wohnzimmer + Küche</div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="abend"><div class="task-check"></div><div><div class="task-name">Küche für den Morgen schließen</div><div class="task-note">Reste wegräumen, Arbeitsfläche frei — Tasse für morgen</div></div></div>
+    <div class="task-item" onclick="toggleTask(this)" data-block="abend"><div class="task-check"></div><div><div class="task-name">Wohnzimmer abschließen</div><div class="task-note">Kissen zurecht, Lotte-Platz schön, Kerze auspusten</div></div></div>
   </div>
 </div>
 
-<div class="manege-line">✦ ✦ ✦</div>
+<div class="vk-sep">✦ · ✦ · ✦</div>
 
 <!-- GROSSE AUFGABEN -->
 <div class="gross-wrap">
-  <div class="gross-label">Große Aufgaben · wenn Zeit und Muße da sind</div>
+  <div class="gross-label">🎪 Große Aufgaben · wenn Zeit & Muße da sind</div>
   <div id="grossContainer"></div>
 </div>
 
-<!-- TOAST -->
 <div id="haushalt-toast"></div>
-
-<!-- KONFETTI -->
 <div class="confetti-wrap" id="confettiWrap"></div>
 
-<!-- BOTTOM NAV -->
-<nav class="nav-bottom">
-  <a href="index.html" class="nav-back-btn">← zurück zu Mein Leben</a>
-</nav>
-
 <script>
-// ══ DATEN ══
+var TAGES_MOTTOS={0:'Sonntag · Pflanzen gießen & den Raum für die neue Woche vorbereiten',1:'Montag · Küche & Wohnzimmer — frischer Start',2:'Dienstag · Bad & WC — das Ritual des Morgens verdient einen sauberen Rahmen',3:'Mittwoch · Vorzimmer & Flur — der erste Blick nach Hause',4:'Donnerstag · Wohnzimmer — Lottes Platz, dein Abend',5:'Freitag · Atelier & Schreibtisch — Woche abschließen',6:'Samstag · Schlafzimmer & Wäsche — das Bett, das wartet'};
 
-var TAGES_MOTTOS = {
-  0: 'Sonntag · Pflanzen gießen & den Raum für die neue Woche vorbereiten',
-  1: 'Montag · Küche & Wohnzimmer — frischer Start in die Woche',
-  2: 'Dienstag · Bad & WC — das Ritual des Morgens verdient einen sauberen Rahmen',
-  3: 'Mittwoch · Vorzimmer & Flur — der erste Blick nach Hause',
-  4: 'Donnerstag · Wohnzimmer — Lottes Platz, dein Abend',
-  5: 'Freitag · Atelier & Schreibtisch — Woche abschließen, Platz für Neues',
-  6: 'Samstag · Schlafzimmer & Wäsche — das Bett, das wartet'
-};
-
-var GROSS_AUFGABEN = [
-  {raum:'🎨 Atelier', text:'Papierberg Schreibtisch (1h): Alle Papiere in Stapel: Uni, VHS, privat, weg. Dann jeden Stapel abheften oder entsorgen.', done:false},
-  {raum:'🎨 Atelier', text:'Boden Atelier: Alle Mappen, Ordner, losen Papiere vom Boden — einen Heimplatz für jede Kategorie.', done:false},
-  {raum:'🚪 Vorzimmer', text:'Ablagebank komplett leeren: Jeden Gegenstand bewusst entscheiden. Nur Ausgangs-Dinge gehören dort hin.', done:false},
-  {raum:'🚪 Vorzimmer', text:'Garderobe komplett: Jeden Mantel durchgehen. Was wurde letztes Jahr nicht getragen? Weggeben-Sackerl.', done:false},
-  {raum:'🛋️ Wohnzimmer', text:'Bücherwand: Staubwischen hinter Büchern, eine Reihe neu ordnen.', done:false},
-  {raum:'🍳 Küche', text:'Oberschränke: Einen Schrank ausräumen. Abgelaufenes entsorgen, neu gruppieren.', done:false},
-  {raum:'🍳 Küche', text:'Kühlschrank komplett: Alles raus, alle Fächer mit Essigreiniger abwischen, neu einräumen.', done:false},
-  {raum:'🛁 Bad', text:'Badewannenrand + Fugen: Schimmelentferner, 10 Min einwirken, alte Zahnbürste zum Schrubben.', done:false},
-  {raum:'🌙 Schlafzimmer', text:'Wäsche sortieren: Alle Wäschestapel zusammentragen. Falten, einräumen. Was passt nicht mehr?', done:false},
-  {raum:'🗃️ Allgemein', text:'Weggeben-Sackerl: Durch die ganze Wohnung, einen großen Sack befüllen. Kleidung → Caritas. Bücher → Bücherschrank Mariahilf.', done:false},
-  {raum:'🌱 Balkon', text:'Balkon-Regal: Alle Töpfe und Geräte raus, Regal abwischen, Töpfe mit Frühjahrspflanzen neu bepflanzen.', done:false},
+var GROSS_AUFGABEN=[
+  {raum:'🎨 Atelier',text:'Papierberg Schreibtisch (1h): Alle Papiere in Stapel: Uni, VHS, privat, weg.'},
+  {raum:'🎨 Atelier',text:'Boden Atelier: Alle Mappen, Ordner, losen Papiere vom Boden.'},
+  {raum:'🚪 Vorzimmer',text:'Ablagebank komplett leeren: Jeden Gegenstand bewusst entscheiden.'},
+  {raum:'🚪 Vorzimmer',text:'Garderobe komplett: Jeden Mantel durchgehen. Weggeben-Sackerl.'},
+  {raum:'🛋️ Wohnzimmer',text:'Bücherwand: Staubwischen hinter Büchern, eine Reihe neu ordnen.'},
+  {raum:'🍳 Küche',text:'Oberschränke: Einen Schrank ausräumen. Abgelaufenes entsorgen.'},
+  {raum:'🍳 Küche',text:'Kühlschrank komplett: Alles raus, alle Fächer abwischen, neu einräumen.'},
+  {raum:'🛁 Bad',text:'Badewannenrand + Fugen: Schimmelentferner, 10 Min einwirken, schrubben.'},
+  {raum:'🌙 Schlafzimmer',text:'Wäsche sortieren: Alle Stapel zusammentragen. Falten, einräumen.'},
+  {raum:'🗃️ Allgemein',text:'Weggeben-Sackerl: Durch die ganze Wohnung, einen großen Sack befüllen.'},
+  {raum:'🌱 Balkon',text:'Balkon-Regal: Alle Töpfe und Geräte raus, Regal abwischen, neu bepflanzen.'},
 ];
 
-// ══ STATE ══
+var blockState={};
+var grossDone=[];
 
-var blockState = {};  // blockId -> array of done indices
-var grossDone = [];
-
-function loadState() {
-  try {
-    var s = JSON.parse(localStorage.getItem('haushalt_v2') || 'null');
-    if (s) { blockState = s.blocks || {}; grossDone = s.gross || []; }
-  } catch(e) {}
-}
-function saveState() {
-  try { localStorage.setItem('haushalt_v2', JSON.stringify({blocks: blockState, gross: grossDone})); } catch(e) {}
-}
-
-// ══ INIT ══
+function loadState(){try{var s=JSON.parse(localStorage.getItem('haushalt_v2')||'null');if(s){blockState=s.blocks||{};grossDone=s.gross||[];}}catch(e){}}
+function saveState(){try{localStorage.setItem('haushalt_v2',JSON.stringify({blocks:blockState,gross:grossDone}));}catch(e){}}
 
 loadState();
 
-// Tages-Motto
-var dow = new Date().getDay();
-document.getElementById('tagesMottoText').textContent = TAGES_MOTTOS[dow];
+document.getElementById('tagesMottoText').textContent=TAGES_MOTTOS[new Date().getDay()];
 
-// Große Aufgaben rendern
-var gc = document.getElementById('grossContainer');
-GROSS_AUFGABEN.forEach(function(g, i) {
-  if (grossDone.indexOf(i) >= 0) g.done = true;
-  var div = document.createElement('div');
-  div.className = 'gross-item' + (g.done ? ' done' : '');
-  div.innerHTML = '<div class="gross-check"></div><div><div class="task-name">' + g.text + '</div><div class="gross-raum">' + g.raum + '</div></div>';
-  div.addEventListener('click', function() {
-    g.done = !g.done;
-    var idx = grossDone.indexOf(i);
-    if (g.done && idx < 0) grossDone.push(i);
-    else if (!g.done && idx >= 0) grossDone.splice(idx, 1);
-    div.classList.toggle('done', g.done);
-    saveState();
-    updateProgress();
+var gc=document.getElementById('grossContainer');
+GROSS_AUFGABEN.forEach(function(g,i){
+  var done=grossDone.indexOf(i)>=0;
+  var div=document.createElement('div');
+  div.className='gross-item'+(done?' done':'');
+  div.innerHTML='<div class="gross-check"></div><div><div class="task-name">'+g.text+'</div><div class="gross-raum">'+g.raum+'</div></div>';
+  div.addEventListener('click',function(){
+    var idx=grossDone.indexOf(i);
+    if(idx<0){grossDone.push(i);div.classList.add('done');}
+    else{grossDone.splice(idx,1);div.classList.remove('done');}
+    saveState();updateProgress();
   });
   gc.appendChild(div);
 });
 
-// Gespeicherten Task-Zustand wiederherstellen
-document.querySelectorAll('.task-item').forEach(function(item, globalIdx) {
-  var block = item.dataset.block;
-  var blockItems = Array.from(document.querySelectorAll('.task-item[data-block="' + block + '"]'));
-  var idx = blockItems.indexOf(item);
-  if (blockState[block] && blockState[block].indexOf(idx) >= 0) {
-    item.classList.add('done');
-  }
+document.querySelectorAll('.task-item').forEach(function(item){
+  var block=item.dataset.block;
+  var blockItems=Array.from(document.querySelectorAll('.task-item[data-block="'+block+'"]'));
+  var idx=blockItems.indexOf(item);
+  if(blockState[block]&&blockState[block].indexOf(idx)>=0){item.classList.add('done');}
 });
 
 updateAllBadges();
 updateProgress();
 
-// ══ TOGGLE BLOCK ══
-
-function toggleBlock(id) {
-  var header = document.querySelector('.block-header.' + id);
-  var content = document.getElementById('content-' + id);
-  var isOpen = header.classList.contains('open');
-  // Alle schließen
-  document.querySelectorAll('.block-header').forEach(function(h) { h.classList.remove('open'); });
-  document.querySelectorAll('.block-content').forEach(function(c) { c.classList.remove('open'); });
-  if (!isOpen) {
-    header.classList.add('open');
-    content.classList.add('open');
-  }
+function toggleBlock(id){
+  var header=document.querySelector('.block-header.'+id);
+  var content=document.getElementById('content-'+id);
+  var isOpen=header.classList.contains('open');
+  document.querySelectorAll('.block-header').forEach(function(h){h.classList.remove('open');});
+  document.querySelectorAll('.block-content').forEach(function(c){c.classList.remove('open');});
+  if(!isOpen){header.classList.add('open');content.classList.add('open');}
 }
 
-// ══ TOGGLE TASK ══
-
-function toggleTask(item) {
-  var block = item.dataset.block;
-  var blockItems = Array.from(document.querySelectorAll('.task-item[data-block="' + block + '"]'));
-  var idx = blockItems.indexOf(item);
+function toggleTask(item){
+  var block=item.dataset.block;
+  var blockItems=Array.from(document.querySelectorAll('.task-item[data-block="'+block+'"]'));
+  var idx=blockItems.indexOf(item);
   item.classList.toggle('done');
-  if (!blockState[block]) blockState[block] = [];
-  var pos = blockState[block].indexOf(idx);
-  if (item.classList.contains('done')) {
-    if (pos < 0) blockState[block].push(idx);
-    var allDone = blockItems.every(function(i) { return i.classList.contains('done'); });
-    if (allDone) showToast('✦ ' + block + ' — alles erledigt!');
-  } else {
-    if (pos >= 0) blockState[block].splice(pos, 1);
+  if(!blockState[block])blockState[block]=[];
+  var pos=blockState[block].indexOf(idx);
+  if(item.classList.contains('done')){
+    if(pos<0)blockState[block].push(idx);
+    var allDone=blockItems.every(function(i){return i.classList.contains('done');});
+    if(allDone)showToast('🎪 Alles erledigt!');
+  }else{
+    if(pos>=0)blockState[block].splice(pos,1);
   }
   saveState();
   updateBadge(block);
   updateProgress();
 }
 
-// ══ BADGES ══
-
-function updateBadge(block) {
-  var items = document.querySelectorAll('.task-item[data-block="' + block + '"]');
-  var done = document.querySelectorAll('.task-item[data-block="' + block + '"].done').length;
-  var badge = document.getElementById('badge-' + block);
-  if (!badge) return;
-  badge.textContent = done + ' / ' + items.length;
-  badge.classList.toggle('done-all', done === items.length);
+function updateBadge(block){
+  var items=document.querySelectorAll('.task-item[data-block="'+block+'"]');
+  var done=document.querySelectorAll('.task-item[data-block="'+block+'"].done').length;
+  var badge=document.getElementById('badge-'+block);
+  if(!badge)return;
+  badge.textContent=done+' / '+items.length;
+  badge.classList.toggle('done-all',done===items.length);
 }
 
-function updateAllBadges() {
-  ['morgen','schreibtisch','mittag','haushalt','ich','abend'].forEach(updateBadge);
+function updateAllBadges(){['morgen','schreibtisch','mittag','haushalt','ich','abend'].forEach(updateBadge);}
+
+function updateProgress(){
+  var total=document.querySelectorAll('.task-item').length+GROSS_AUFGABEN.length;
+  var done=document.querySelectorAll('.task-item.done').length+grossDone.length;
+  var pct=total>0?Math.round(done/total*100):0;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=done+' von '+total+' erledigt';
+  document.getElementById('progressPct').textContent=pct+' %';
+  if(done===total&&total>0){launchConfetti();showToast('🎊 Alles erledigt — was für ein Tag!');}
 }
 
-// ══ PROGRESS ══
+var toastTimer=null;
+function showToast(msg){var t=document.getElementById('haushalt-toast');t.textContent=msg;t.classList.add('show');if(toastTimer)clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('show');},2800);}
 
-function updateProgress() {
-  var total = document.querySelectorAll('.task-item').length + GROSS_AUFGABEN.length;
-  var done = document.querySelectorAll('.task-item.done').length + grossDone.length;
-  var pct = total > 0 ? Math.round(done / total * 100) : 0;
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressText').textContent = done + ' von ' + total + ' erledigt';
-  document.getElementById('progressPct').textContent = pct + ' %';
-  if (done === total && total > 0) { launchConfetti(); showToast('🎊 Alles erledigt — was für ein Tag!'); }
-}
-
-// ══ TOAST ══
-
-function showToast(msg) {
-  var t = document.getElementById('haushalt-toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function() { t.classList.remove('show'); }, 2800);
-}
-
-// ══ KONFETTI ══
-
-function launchConfetti() {
-  var wrap = document.getElementById('confettiWrap');
-  wrap.innerHTML = '';
-  var colors = ['#b8294a','#c9893a','#1a2744','#6a3f7a','#5e8a5a','#f8e8b8'];
-  for (var i = 0; i < 60; i++) {
-    var d = document.createElement('div');
-    d.className = 'cdot';
-    d.style.cssText = [
-      'left:' + Math.random() * 100 + '%',
-      'top:-20px',
-      'width:' + (6 + Math.random() * 8) + 'px',
-      'height:' + (6 + Math.random() * 8) + 'px',
-      'background:' + colors[Math.floor(Math.random() * colors.length)],
-      'animation-duration:' + (2 + Math.random() * 3) + 's',
-      'animation-delay:' + Math.random() * 1.5 + 's',
-      'opacity:0.8'
-    ].join(';');
+function launchConfetti(){
+  var wrap=document.getElementById('confettiWrap');wrap.innerHTML='';
+  var colors=['#FFD93D','#E84855','#3D87CB','#4CAF72','#FF6B35','#9B5DE5'];
+  for(var i=0;i<60;i++){
+    var d=document.createElement('div');d.className='cdot';
+    d.style.cssText='left:'+Math.random()*100+'%;top:-20px;width:'+(6+Math.random()*8)+'px;height:'+(6+Math.random()*8)+'px;background:'+colors[Math.floor(Math.random()*colors.length)]+';animation-duration:'+(2+Math.random()*3)+'s;animation-delay:'+Math.random()*1.5+'s;border-radius:'+(Math.random()>.5?'50%':'2px')+';opacity:.9;';
     wrap.appendChild(d);
   }
-  setTimeout(function() { wrap.innerHTML = ''; }, 6000);
+  setTimeout(function(){wrap.innerHTML='';},6000);
 }
 </script>
 </body>
