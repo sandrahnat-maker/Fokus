@@ -405,7 +405,7 @@ var PHASES={
     {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
     {name:"Blutdruck & Gewicht",note:"nüchtern, ruhig",cat:"körper",links:[{href:"Blutdruck.html",label:"Blutdruck"},{href:"Wiegen.html",label:"Gewicht"}]},
     {name:"Knirscherschiene raus",note:"Kiefer entspannen",cat:"körper",links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
-    {name:"Wasser · Tee · Frühstück",note:"bewusst genießen",cat:"ernährung",links:[{href:"tee-des-tages.html",label:"Tee"},{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"}]},
+    {name:"Wasser · Tee · Frühstück",note:"bewusst genießen",cat:"ernährung",links:[{href:"tee-des-tages.html",label:"Tee"},{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"Wochenplan.html",label:"Wochenplan"}]},
     {name:"Medikamente",note:"zum Frühstück",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
     {name:"Rudi & Timmy",note:"Futter & Schmusezeit 🐱",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
     {name:"Bad Früh",note:"FM4 oder Podcast 🎵",cat:"pflege",links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
@@ -415,14 +415,14 @@ var PHASES={
     {name:"Uni-Aufgabe — ein Schritt",note:"einen Schritt, nicht alles",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
     {name:"Tee & Pause",note:"wirklich innehalten 🍵",cat:"seele",links:[{href:"tee-des-tages.html",label:"Tee"}]},
     {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Schnell essen & fertig machen",note:"und raus! 🎪",cat:"ernährung"},
+    {name:"Schnell essen & fertig machen",note:"und raus! 🎪",cat:"ernährung",links:[{href:"Wochenplan.html",label:"Wochenplan"}]},
   ]},
   vormittag:{mood:null,tasks:[]},
   mittag:{mood:'',tasks:[]},
   nachmittag:{mood:'',tasks:[]},
   abend:{mood:"Du bist zuhause. Jetzt gehört der Rest dir. 🌙",tasks:[
     {name:"Katzen füttern",note:"Rudi & Timmy — ca. 18:00 🐱",cat:"tiere"},
-    {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"}]},
+    {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
     {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",cat:"zuhause",links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
     {name:"Zeit mit Thomas",note:"1–1,5 Stunden — einfach da sein ❤️",cat:"seele"},
     {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
@@ -591,6 +591,7 @@ var ALL_APPS=[
   {icon:'🛒',text:'Futter-Bestellplaner',sub:'Rudi, Timmy & Lotte',href:'Futter_Bestellplaner.html',phasen:['abend']},
   {icon:'💆',text:'Haarpflege',sub:'Meine Haarpflegeroutine',href:'Haarpflege.html',phasen:['abend']},
   {icon:'💅',text:'Nagelpflege',sub:'Mit Sorgfalt & Freude',href:'Nagelpflege.html',phasen:['abend']},
+  {icon:'🥗',text:'Wochenplan Abnehmen',sub:'5 kg · Mahlzeiten & Bewegung',href:'Wochenplan.html',phasen:['morgen','abend']},
 ];
 var showingAllApps=false;
 function renderApps(phase){
