@@ -37,6 +37,28 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
 .praxis-deko{font-size:2.5rem;margin-bottom:.7rem;}
 .praxis-text{font-family:'Caveat',cursive;font-size:1.4rem;font-weight:700;text-align:center;line-height:1.4;margin-bottom:1rem;max-width:300px;}
 .praxis-uebung{font-family:'Caveat',cursive;font-size:1rem;text-align:center;color:rgba(26,10,0,.6);line-height:1.6;max-width:290px;background:white;border:var(--border);border-radius:14px;padding:.8rem 1rem;box-shadow:3px 3px 0 var(--dunkel);margin-bottom:1.2rem;}
+/* NÄCHSTE AUFGABE WIDGET */
+.naechste-wrap{margin:1rem 1rem 0;}
+.naechste-karte{background:white;border:var(--border);border-radius:16px;box-shadow:4px 4px 0 var(--dunkel);overflow:hidden;}
+.naechste-karte::before{content:'';display:block;height:6px;background:repeating-linear-gradient(90deg,var(--orange) 0,var(--orange) 25%,var(--gelb) 25%,var(--gelb) 50%,var(--rot) 50%,var(--rot) 75%,var(--lila) 75%,var(--lila) 100%);}
+.naechste-label{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);padding:.5rem 1rem .1rem;font-weight:700;}
+.naechste-phase-badge{display:inline-block;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,107,53,.12);color:var(--orange);border-radius:8px;padding:.1rem .5rem;margin-left:.4rem;vertical-align:middle;}
+.naechste-body{display:flex;align-items:center;gap:.8rem;padding:.6rem 1rem .8rem;}
+@keyframes pulsieren{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+.naechste-check-btn{width:48px;height:48px;border-radius:50%;border:var(--border);background:white;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;box-shadow:3px 3px 0 var(--dunkel);flex-shrink:0;transition:transform .1s,box-shadow .1s,background .2s;animation:pulsieren 2.5s ease-in-out infinite;}
+.naechste-check-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--dunkel);}
+.naechste-info{flex:1;min-width:0;}
+.naechste-name{font-family:'Fredoka One',cursive;font-size:1.15rem;line-height:1.2;margin-bottom:.15rem;}
+.naechste-note{font-family:'Caveat',cursive;font-size:.95rem;color:rgba(26,10,0,.5);line-height:1.3;}
+.naechste-links{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.3rem;}
+.naechste-link{font-size:.75rem;color:var(--blau);background:rgba(61,135,203,.1);border:1px solid rgba(61,135,203,.3);border-radius:10px;padding:.05rem .4rem;text-decoration:none;}
+.naechste-alles-fertig{padding:.8rem 1rem 1rem;text-align:center;}
+.naechste-alles-emoji{font-size:2rem;display:block;margin-bottom:.3rem;}
+.naechste-alles-text{font-family:'Caveat',cursive;font-size:1.1rem;color:var(--grün);font-weight:700;}
+.naechste-fortschritt{padding:.2rem 1rem .6rem;}
+.naechste-bar-wrap{background:rgba(26,10,0,.08);border-radius:10px;height:6px;overflow:hidden;}
+.naechste-bar{height:6px;border-radius:10px;background:var(--grün);transition:width .4s ease;}
+.naechste-bar-label{font-family:'Caveat',cursive;font-size:.8rem;color:rgba(26,10,0,.4);margin-top:.2rem;}
 /* GUTER TAG */
 .guter-tag-btn{width:calc(100% - 2rem);margin:1rem 1rem 0;background:var(--grün);color:white;border:var(--border);border-radius:16px;padding:.8rem 1rem;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;box-shadow:4px 4px 0 var(--dunkel);display:flex;align-items:center;justify-content:center;gap:.4rem;transition:transform .1s,box-shadow .1s;}
 .guter-tag-btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--dunkel);}
@@ -258,6 +280,12 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
   🌟 Das ist ein guter Tag für mich
 </button>
 
+
+<!-- NÄCHSTE AUFGABE -->
+<div class="naechste-wrap">
+  <div class="naechste-karte" id="naechsteKarte"></div>
+</div>
+
 <!-- IMPULS -->
 <div class="impuls-karte">
   <div class="impuls-label">✦ Mein heutiger Impuls</div>
@@ -391,7 +419,8 @@ var MONTHS_DE=['Jänner','Februar','März','April','Mai','Juni','Juli','August',
 
 document.getElementById('datumZeile').textContent=DAYS_DE[today.getDay()]+', '+today.getDate()+'. '+MONTHS_DE[today.getMonth()]+' '+today.getFullYear();
 
-var storageKey='tasks_'+today.toISOString().slice(0,10);
+function localDateKey(){var d=today;return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+var storageKey='tasks_'+localDateKey();
 var taskState={};
 try{taskState=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch(e){}
 function saveTaskState(){localStorage.setItem(storageKey,JSON.stringify(taskState));}
@@ -401,29 +430,34 @@ function getViewDate(){return today;}
 
 var PHASES={
   morgen:{mood:"Erst ich. Dann die Welt. 🌈",tasks:[
-    {name:"Euthyrox & Rückenübungen",note:"noch im Bett",cat:"körper",links:[{href:"Ruecken.html",label:"Rücken"}]},
+    {name:"Euthyrox",note:"noch im Bett",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Rückenübungen",note:"noch im Bett",cat:"körper",links:[{href:"Ruecken.html",label:"Rücken"}]},
     {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Blutdruck & Gewicht",note:"nüchtern, ruhig",cat:"körper",links:[{href:"Blutdruck.html",label:"Blutdruck"},{href:"Wiegen.html",label:"Gewicht"}]},
+    {name:"Blutdruck messen",note:"nüchtern, ruhig",cat:"körper",links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
+    {name:"Gewicht messen",note:"nüchtern",cat:"körper",links:[{href:"Wiegen.html",label:"Gewicht"}]},
     {name:"Knirscherschiene raus",note:"Kiefer entspannen",cat:"körper",links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
-    {name:"Wasser · Tee · Frühstück",note:"bewusst genießen",cat:"ernährung",links:[{href:"tee-des-tages.html",label:"Tee"},{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"Wochenplan.html",label:"Wochenplan"}]},
-    {name:"Medikamente",note:"zum Frühstück",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Rudi & Timmy",note:"Futter & Schmusezeit 🐱",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
+    {name:"Wasser trinken",note:"ein großes Glas",cat:"ernährung"},
+    {name:"Tee zubereiten",note:"Tee des Tages 🍵",cat:"ernährung",links:[{href:"tee-des-tages.html",label:"Tee"}]},
+    {name:"Frühstück",note:"bewusst & ohne Zwang",cat:"ernährung",links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
+    {name:"Medikamente",note:"Sertralin zum Frühstück",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Rudi füttern",note:"Futter & Schmusezeit 🐱",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
+    {name:"Timmy füttern",note:"Schmusezeit 🐱",cat:"tiere"},
     {name:"Bad Früh",note:"FM4 oder Podcast 🎵",cat:"pflege",links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
     {name:"Duschen",note:"warm & frisch in den Tag 🚿",cat:"pflege"},
     {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch 🐾",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
-    {name:"Tiermedikamente",note:"Lotte + Rudi",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"}]},
+    {name:"Tiermedikamente prüfen",note:"Lotte + Rudi",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"}]},
+    {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
     {name:"Unterricht vorbereiten",note:"Was brauche ich heute?",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste"}]},
     {name:"Uni-Aufgabe — ein Schritt",note:"einen Schritt, nicht alles",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
     {name:"Tee & Pause",note:"wirklich innehalten 🍵",cat:"seele",links:[{href:"tee-des-tages.html",label:"Tee"}]},
-    {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Schnell essen & fertig machen",note:"und raus! 🎪",cat:"ernährung",links:[{href:"Wochenplan.html",label:"Wochenplan"}]},
+    {name:"Schnell essen & fertig machen",note:"und raus! 🎪",cat:"ernährung",links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
   ]},
   vormittag:{mood:null,tasks:[]},
   mittag:{mood:'',tasks:[]},
   nachmittag:{mood:'',tasks:[]},
   abend:{mood:"Du bist zuhause. Jetzt gehört der Rest dir. 🌙",tasks:[
     {name:"Katzen füttern",note:"Rudi & Timmy — ca. 18:00 🐱",cat:"tiere"},
-    {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",links:[{href:"Ernaehrungsplan_4Wochen.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
+    {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"}]},
     {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",cat:"zuhause",links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
     {name:"Zeit mit Thomas",note:"1–1,5 Stunden — einfach da sein ❤️",cat:"seele"},
     {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
@@ -431,9 +465,11 @@ var PHASES={
     {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",cat:"seele"},
     {name:"Wie war das heute?",note:"Abschluss & Reflexion",cat:"seele"},
     {name:"Freizeit 🎪",note:"was auch immer sich gut anfühlt",cat:"seele"},
-    {name:"Lotte — Futter & Medikamente",note:"für alle Tiere",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"},{href:"Katzen_Medikamente.html",label:"Katzen"}]},
+    {name:"Lotte — Futter",note:"Abendportion",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"}]},
+    {name:"Lotte — Medikamente",note:"Abendgabe",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen"}]},
     {name:"Bad Abend",note:"Loslassen, abschließen 🛁",cat:"pflege",links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
-    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Handcreme",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",cat:"pflege"},
     {name:"Lesen",note:"kein Handy — echtes Buch 📖",cat:"seele"},
     {name:"Schlafen",note:"früh genug, du weißt warum 🌙",cat:"körper"},
   ]}
@@ -450,7 +486,7 @@ function zeigePhase(p){
     var tasks=PHASES[w].tasks;
     if(tasks.length){var allDone=tasks.every(function(_,i){return!!taskState[w+'_'+i];});if(allDone)el.classList.add('done-all');}
   });
-  renderPhase(p);renderApps(p);
+  renderPhase(p);renderApps(p);renderNaechste();
 }
 
 function renderPhase(p){
@@ -502,7 +538,7 @@ function konfetti(){
 
 function schliesseInnehalten(){
   var a=document.getElementById('innehaltенAntwort').value.trim();
-  if(a){try{localStorage.setItem('innehalten_'+today.toISOString().slice(0,10),a);}catch(e){}}
+  if(a){try{localStorage.setItem('innehalten_'+localDateKey(),a);}catch(e){}}
   var el=document.getElementById('innehaltенOverlay');
   el.classList.add('leaving');
   setTimeout(function(){el.style.display='none';zeigePraxis();},350);
@@ -547,7 +583,7 @@ function zeigePraxis(){
   fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,system:'Du bist Sandras stiller innerer Begleiter. Sandra ist DaZ-Lehrerin und Künstlerin in Wien, lebt mit Lotte (Hund), Rudi & Timmy (Katzen). Antworte NUR mit einem JSON-Objekt:\n{"tradition":"...","deko":"ein Emoji","text":"ein kurzer poetischer Satz (max 12 Wörter)","uebung":"eine konkrete kleine Übung (2-3 Sätze)"}',messages:[{role:'user',content:'Tageszeit: '+tageszeit+'\nSandras letzte Reflexionen:\n'+text}]})}).then(function(r){return r.json();}).then(function(data){var t=data.content&&data.content[0]&&data.content[0].text||'';t=t.trim().replace(/```json|```/g,'').trim();var parsed=JSON.parse(t);if(parsed.tradition)document.getElementById('praxisTradition').textContent=parsed.tradition;if(parsed.deko)document.getElementById('praxisDeko').textContent=parsed.deko;if(parsed.text)document.getElementById('praxisText').textContent=parsed.text;if(parsed.uebung)document.getElementById('praxisUebung').textContent=parsed.uebung;}).catch(function(){});
 }
 
-var impulsKey='intention_'+today.toISOString().slice(0,10);
+var impulsKey='intention_'+localDateKey();
 function ladeImpuls(force){
   var saved=localStorage.getItem(impulsKey);
   if(saved&&!force){var el=document.getElementById('impulsText');el.textContent=saved;el.className='impuls-text';return;}
@@ -592,7 +628,7 @@ var ALL_APPS=[
   {icon:'🛒',text:'Futter-Bestellplaner',sub:'Rudi, Timmy & Lotte',href:'Futter_Bestellplaner.html',phasen:['abend']},
   {icon:'💆',text:'Haarpflege',sub:'Meine Haarpflegeroutine',href:'Haarpflege.html',phasen:['abend']},
   {icon:'💅',text:'Nagelpflege',sub:'Mit Sorgfalt & Freude',href:'Nagelpflege.html',phasen:['abend']},
-  {icon:'🥗',text:'Wochenplan Abnehmen',sub:'5 kg · Mahlzeiten & Bewegung',href:'Wochenplan.html',phasen:['morgen','abend']},
+  {icon:'🥗',text:'Ernährung',sub:'Intuitiv & gesund',href:'Ernaehrung.html',phasen:['morgen','abend']},
 ];
 var showingAllApps=false;
 function renderApps(phase){
@@ -640,24 +676,21 @@ function loadNotiz(){var text='';try{text=localStorage.getItem('notizen_v1')||''
 loadNotiz();
 
 var FIX_TASKS=[
-  {name:"Euthyrox & Rückenübungen",note:"noch im Bett",cat:"körper",phase:"morgen",phaseIdx:0},
-  {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere",phase:"morgen",phaseIdx:1},
-  {name:"Blutdruck & Gewicht",note:"nüchtern, ruhig",cat:"körper",phase:"morgen",phaseIdx:2},
-  {name:"Knirscherschiene raus",note:"Kiefer entspannen",cat:"körper",phase:"morgen",phaseIdx:3},
-  {name:"Wasser · Tee · Frühstück",note:"bewusst genießen",cat:"ernährung",phase:"morgen",phaseIdx:4},
-  {name:"Medikamente",note:"zum Frühstück",cat:"körper",phase:"morgen",phaseIdx:5},
-  {name:"Rudi & Timmy füttern",note:"Futter & Schmusezeit",cat:"tiere",phase:"morgen",phaseIdx:6},
-  {name:"Lotte raus",note:"Morgenrunde",cat:"tiere",phase:"morgen",phaseIdx:7},
-  {name:"Bad Früh",note:"FM4 oder Podcast",cat:"pflege",phase:"morgen",phaseIdx:8},
-  {name:"Duschen",note:"warm & frisch in den Tag",cat:"pflege",phase:"morgen",phaseIdx:9},
-  {name:"Tiermedikamente",note:"Lotte + Rudi",cat:"tiere",phase:"morgen",phaseIdx:10},
-  {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",cat:"tiere",phase:"morgen",phaseIdx:14},
-  {name:"Katzen füttern Abend",note:"Rudi & Timmy — ca. 18:00",cat:"tiere",phase:"abend",phaseIdx:0},
+  {name:"Euthyrox",note:"noch im Bett",cat:"körper",phase:"morgen",phaseIdx:0},
+  {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere",phase:"morgen",phaseIdx:2},
+  {name:"Blutdruck messen",note:"nüchtern, ruhig",cat:"körper",phase:"morgen",phaseIdx:3},
+  {name:"Gewicht messen",note:"nüchtern",cat:"körper",phase:"morgen",phaseIdx:4},
+  {name:"Frühstück",note:"bewusst & ohne Zwang",cat:"ernährung",phase:"morgen",phaseIdx:8},
+  {name:"Medikamente",note:"Sertralin zum Frühstück",cat:"körper",phase:"morgen",phaseIdx:9},
+  {name:"Rudi füttern",note:"Futter & Schmusezeit",cat:"tiere",phase:"morgen",phaseIdx:10},
+  {name:"Timmy füttern",note:"Schmusezeit",cat:"tiere",phase:"morgen",phaseIdx:11},
+  {name:"Lotte raus",note:"Morgenrunde",cat:"tiere",phase:"morgen",phaseIdx:14},
+  {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",cat:"tiere",phase:"morgen",phaseIdx:16},
+  {name:"Katzen füttern",note:"Rudi & Timmy — ca. 18:00",cat:"tiere",phase:"abend",phaseIdx:0},
   {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",phase:"abend",phaseIdx:1},
-  {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",cat:"zuhause",phase:"abend",phaseIdx:2},
-  {name:"Lotte — Futter & Medikamente",note:"für alle Tiere",cat:"tiere",phase:"abend",phaseIdx:9},
-  {name:"Bad Abend",note:"Loslassen, abschließen",cat:"pflege",phase:"abend",phaseIdx:10},
-  {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Handcreme",cat:"körper",phase:"abend",phaseIdx:11},
+  {name:"Lotte — Futter",note:"Abendportion",cat:"tiere",phase:"abend",phaseIdx:9},
+  {name:"Lotte — Medikamente",note:"Abendgabe",cat:"tiere",phase:"abend",phaseIdx:10},
+  {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin",cat:"körper",phase:"abend",phaseIdx:12},
 ];
 var HEUTE_VORSCHLAEGE={
   0:[{name:"Haushalt & Wohnung",note:"die Woche vorbereiten",phase:"abend",phaseIdx:2},{name:"Montag vorbereiten",note:"Spiele & Materialien",phase:"abend",phaseIdx:4},{name:"Kreativzeit 🎨",note:"zeichnen, malen",phase:"abend",phaseIdx:6}],
@@ -720,6 +753,64 @@ function renderDrei(){
     div.addEventListener('click',function(){dreiClick(+this.dataset.ebene,+this.dataset.idx);});einlEl.appendChild(div);
   });
 }
+
+
+// ── NÄCHSTE AUFGABE WIDGET ──────────────────────────────────────────
+function getNaechsteAufgabe(){
+  var phase=currentPhase||getPhaseByTime();
+  var aktPhase=phase==='vormittag'?'abend':phase;
+  var tasks=PHASES[aktPhase].tasks;
+  for(var i=0;i<tasks.length;i++){
+    if(!taskState[aktPhase+'_'+i])return{phase:aktPhase,idx:i,task:tasks[i]};
+  }
+  var anderePhase=aktPhase==='morgen'?'abend':'morgen';
+  var andereTasks=PHASES[anderePhase].tasks;
+  for(var j=0;j<andereTasks.length;j++){
+    if(!taskState[anderePhase+'_'+j])return{phase:anderePhase,idx:j,task:andereTasks[j]};
+  }
+  return null;
+}
+
+function renderNaechste(){
+  var karte=document.getElementById('naechsteKarte');
+  if(!karte)return;
+  var info=getNaechsteAufgabe();
+  var total=0,done=0;
+  ['morgen','abend'].forEach(function(p){
+    PHASES[p].tasks.forEach(function(_,i){total++;if(taskState[p+'_'+i])done++;});
+  });
+  var pct=total>0?Math.round(done/total*100):0;
+  var fortschritt='<div class="naechste-fortschritt"><div class="naechste-bar-wrap"><div class="naechste-bar" style="width:'+pct+'%"></div></div><div class="naechste-bar-label">'+done+' von '+total+' Aufgaben erledigt</div></div>';
+  if(!info){
+    karte.innerHTML='<div class="naechste-label">✦ Nächste Aufgabe</div><div class="naechste-alles-fertig"><span class="naechste-alles-emoji">🎉</span><div class="naechste-alles-text">Alles erledigt — was für ein Tag! ✦</div></div>'+fortschritt;
+    return;
+  }
+  var t=info.task;
+  var phaseName=info.phase==='morgen'?'Bevor ich':'Ankommen';
+  var linksHtml='';
+  if(t.links&&t.links.length){linksHtml='<div class="naechste-links">';t.links.forEach(function(l){linksHtml+='<a class="naechste-link" href="'+l.href+'">'+l.label+' ›</a>';});linksHtml+='</div>';}
+  karte.innerHTML='<div class="naechste-label">✦ Nächste Aufgabe <span class="naechste-phase-badge">'+phaseName+'</span></div>'
+    +'<div class="naechste-body">'
+    +'<button class="naechste-check-btn" id="naechsteBtn" onclick="hakeNaechsteAb()">○</button>'
+    +'<div class="naechste-info"><div class="naechste-name">'+t.name+'</div><div class="naechste-note">'+t.note+'</div>'+linksHtml+'</div>'
+    +'</div>'+fortschritt;
+}
+
+function hakeNaechsteAb(){
+  var info=getNaechsteAufgabe();
+  if(!info)return;
+  taskState[info.phase+'_'+info.idx]=true;
+  saveTaskState();
+  zeigeToast();
+  var btn=document.getElementById('naechsteBtn');
+  if(btn){btn.textContent='✓';btn.style.background='var(--grün)';btn.style.borderColor='var(--grün)';}
+  setTimeout(function(){
+    renderNaechste();
+    zeigePhase(currentPhase||getPhaseByTime());
+    if(typeof renderDrei==='function')renderDrei();
+  },400);
+}
+// ───────────────────────────────────────────────────────────────────
 
 // INIT
 ladeImpuls(false);
