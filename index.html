@@ -457,8 +457,9 @@ var PHASES={
   nachmittag:{mood:'',tasks:[]},
   abend:{mood:"Du bist zuhause. Jetzt gehört der Rest dir. 🌙",tasks:[
     {name:"Katzen füttern",note:"Rudi & Timmy — ca. 18:00 🐱",cat:"tiere"},
-    {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"}]},
+    {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
     {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",cat:"zuhause",links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
+    {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",cat:"körper",links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
     {name:"Zeit mit Thomas",note:"1–1,5 Stunden — einfach da sein ❤️",cat:"seele"},
     {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
     {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
@@ -469,6 +470,7 @@ var PHASES={
     {name:"Lotte — Medikamente",note:"Abendgabe",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen"}]},
     {name:"Bad Abend",note:"Loslassen, abschließen 🛁",cat:"pflege",links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
     {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Taillen-Training 💪",note:"Core · Rotation · täglich",cat:"körper",links:[{href:"Taillen_Training.html",label:"Training öffnen"}]},
     {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",cat:"pflege"},
     {name:"Lesen",note:"kein Handy — echtes Buch 📖",cat:"seele"},
     {name:"Schlafen",note:"früh genug, du weißt warum 🌙",cat:"körper"},
@@ -616,6 +618,8 @@ var ALL_APPS=[
   {icon:'🤸',text:'Dehnplan',sub:'Persönlicher Dehnplan',href:'Dehnplan.html',phasen:['abend']},
   {icon:'💪',text:'Kalkschulter Training',sub:'Sanfte Schulterübungen',href:'Kalkschulter.html',phasen:['abend']},
   {icon:'🌸',text:'Beckenboden',sub:'Mit Liebe & Geduld',href:'Beckenboden.html',phasen:['abend']},
+  {icon:'🏋️',text:'Taillen-Training',sub:'Core · Rotation · täglich',href:'Taillen_Training.html',phasen:['abend']},
+  {icon:'🏃',text:'Lauf-App',sub:'Intervall-Training Lotte',href:'lauf-app.html',phasen:['morgen','abend']},
   {icon:'🚿',text:'Duschen & Fertig',sub:'Schnell & bewusst',href:'Duschen.html',phasen:['abend']},
   {icon:'✨',text:'Körperpflege Tagesplan',sub:'Vollständige Routine',href:'Koerperpflege_Tagesplan.html',phasen:['abend']},
   {icon:'😊',text:'Gesichtsyoga',sub:'Entspannung & Leuchten',href:'Gesichtsyoga.html',phasen:['abend']},
@@ -629,6 +633,7 @@ var ALL_APPS=[
   {icon:'💆',text:'Haarpflege',sub:'Meine Haarpflegeroutine',href:'Haarpflege.html',phasen:['abend']},
   {icon:'💅',text:'Nagelpflege',sub:'Mit Sorgfalt & Freude',href:'Nagelpflege.html',phasen:['abend']},
   {icon:'🥗',text:'Ernährung',sub:'Intuitiv & gesund',href:'Ernaehrung.html',phasen:['morgen','abend']},
+  {icon:'📊',text:'Wochenplan',sub:'Abnehmen · 5 kg · sanft',href:'Wochenplan.html',phasen:['morgen','abend']},
 ];
 var showingAllApps=false;
 function renderApps(phase){
@@ -691,6 +696,7 @@ var FIX_TASKS=[
   {name:"Lotte — Futter",note:"Abendportion",cat:"tiere",phase:"abend",phaseIdx:9},
   {name:"Lotte — Medikamente",note:"Abendgabe",cat:"tiere",phase:"abend",phaseIdx:10},
   {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin",cat:"körper",phase:"abend",phaseIdx:12},
+  {name:"Taillen-Training 💪",note:"Core · Rotation · täglich",cat:"körper",href:"Taillen_Training.html",phase:"abend",phaseIdx:13},
 ];
 var HEUTE_VORSCHLAEGE={
   0:[{name:"Haushalt & Wohnung",note:"die Woche vorbereiten",phase:"abend",phaseIdx:2},{name:"Montag vorbereiten",note:"Spiele & Materialien",phase:"abend",phaseIdx:4},{name:"Kreativzeit 🎨",note:"zeichnen, malen",phase:"abend",phaseIdx:6}],
@@ -731,7 +737,8 @@ function renderDrei(){
   FIX_TASKS.forEach(function(t,i){
     var key=t.phase?t.phase+'_'+t.phaseIdx:'fix_'+i;var done=!!taskState[key];
     var div=document.createElement('div');div.className='drei-task'+(done?' done':'');div.dataset.ebene='0';div.dataset.idx=i;
-    div.innerHTML='<div class="drei-check"></div><div style="flex:1;min-width:0;"><div class="drei-task-name">'+t.name+'</div><div class="drei-task-note">'+t.note+'</div></div><div class="drei-task-cat">'+t.cat+'</div>';
+    var linkHtml=t.href?'<a href="'+t.href+'" onclick="event.stopPropagation()" style="font-size:.72rem;color:var(--crimson);text-decoration:none;border:1px solid rgba(184,41,74,0.25);border-radius:20px;padding:.05rem .45rem;margin-left:.3rem;white-space:nowrap;">öffnen ›</a>':'';
+    div.innerHTML='<div class="drei-check"></div><div style="flex:1;min-width:0;"><div class="drei-task-name">'+t.name+linkHtml+'</div><div class="drei-task-note">'+t.note+'</div></div><div class="drei-task-cat">'+t.cat+'</div>';
     div.addEventListener('click',function(){dreiClick(+this.dataset.ebene,+this.dataset.idx);});fixEl.appendChild(div);
   });
   var vorschlaege=HEUTE_VORSCHLAEGE[day]||HEUTE_VORSCHLAEGE[1];
