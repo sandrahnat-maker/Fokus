@@ -62,6 +62,8 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
 /* GUTER TAG */
 .guter-tag-btn{width:calc(100% - 2rem);margin:1rem 1rem 0;background:var(--grün);color:white;border:var(--border);border-radius:16px;padding:.8rem 1rem;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;box-shadow:4px 4px 0 var(--dunkel);display:flex;align-items:center;justify-content:center;gap:.4rem;transition:transform .1s,box-shadow .1s;}
 .guter-tag-btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--dunkel);}
+.vortag-btn{display:flex;align-items:center;justify-content:center;gap:.4rem;width:calc(100% - 2rem);margin:.6rem 1rem 0;background:var(--orange);color:white;border:var(--border);border-radius:16px;padding:.8rem 1rem;font-family:'Fredoka One',cursive;font-size:1rem;box-shadow:4px 4px 0 var(--dunkel);text-decoration:none;transition:transform .1s,box-shadow .1s;}
+.vortag-btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--dunkel);}
 .gutertag-overlay{display:none;position:fixed;inset:0;z-index:900;background:rgba(255,248,231,.97);flex-direction:column;align-items:center;justify-content:center;padding:2rem;}
 .gutертag-liste{font-family:'Caveat',cursive;font-size:1.2rem;line-height:2;text-align:center;}
 /* IMPULS */
@@ -280,6 +282,11 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
   🌟 Das ist ein guter Tag für mich
 </button>
 
+
+<!-- VORTRAG BUTTON -->
+<a class="vortag-btn" href="Vortag.html">
+  📅 Zum Vortag
+</a>
 
 <!-- NÄCHSTE AUFGABE -->
 <div class="naechste-wrap">
@@ -597,6 +604,7 @@ function ladeImpuls(force){
 }
 
 var ALL_APPS=[
+  {icon:'📅',text:'Zum Vortag',sub:'Gestern nachschauen',href:'Vortag.html',phasen:['morgen','vormittag','abend']},
   {icon:'🌅',text:'Morgenroutine',sub:'Sanft in den Tag',href:'morgenroutine.html',phasen:['morgen']},
   {icon:'🪥',text:'Bad Früh',sub:'Weleda-Ritual',href:'Bad_Frueh.html',phasen:['morgen']},
   {icon:'🍵',text:'Tee des Tages',sub:'Mein 7-Tage-Teeplan',href:'tee-des-tages.html',phasen:['morgen']},
