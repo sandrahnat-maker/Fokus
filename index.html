@@ -272,7 +272,13 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
 
 <!-- HEADER -->
 <div class="vk-header">
-  <div class="vk-date" id="datumZeile"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;">
+    <div class="vk-date" id="datumZeile"></div>
+    <div style="display:flex;gap:.4rem;flex-shrink:0;">
+      <button id="btnVortag" onclick="switchDay(-1)" style="font-size:.75rem;font-family:'Fredoka One',cursive;color:rgba(26,10,0,.45);background:none;border:1px solid rgba(26,10,0,.2);border-radius:12px;padding:.1rem .5rem;cursor:pointer;">← Vortag</button>
+      <button id="btnHeute" onclick="switchDay(0)" style="display:none;font-size:.75rem;font-family:'Fredoka One',cursive;color:var(--crimson);background:none;border:1px solid rgba(184,41,74,.3);border-radius:12px;padding:.1rem .5rem;cursor:pointer;">Heute ✓</button>
+    </div>
+  </div>
   <div class="vk-title">🏡 Villa Kunterbunt</div>
   <div class="vk-motto">Dieses Leben wähle ich — in fröhlicher Gelassenheit.</div>
 </div>
@@ -281,12 +287,6 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
 <button class="guter-tag-btn" onclick="document.getElementById('guterTagOverlay').style.display='flex'">
   🌟 Das ist ein guter Tag für mich
 </button>
-
-
-<!-- VORTRAG BUTTON -->
-<a class="vortag-btn" href="Vortag.html">
-  📅 Zum Vortag
-</a>
 
 <!-- NÄCHSTE AUFGABE -->
 <div class="naechste-wrap">
@@ -420,18 +420,38 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
 <div style="height:2rem;"></div>
 
 <script>
-var today=new Date();
+var realToday=new Date();
+var dayOffset=0;
+var today=new Date(realToday);
 var DAYS_DE=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
 var MONTHS_DE=['Jänner','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
 
-document.getElementById('datumZeile').textContent=DAYS_DE[today.getDay()]+', '+today.getDate()+'. '+MONTHS_DE[today.getMonth()]+' '+today.getFullYear();
+function updateDateDisplay(){
+  document.getElementById('datumZeile').textContent=DAYS_DE[today.getDay()]+', '+today.getDate()+'. '+MONTHS_DE[today.getMonth()]+' '+today.getFullYear();
+  document.getElementById('btnVortag').style.display=dayOffset<0?'none':'inline-block';
+  document.getElementById('btnHeute').style.display=dayOffset<0?'inline-block':'none';
+}
+updateDateDisplay();
+
+function switchDay(offset){
+  dayOffset=offset;
+  today=new Date(realToday);
+  today.setDate(today.getDate()+offset);
+  storageKey='tasks_'+localDateKey();
+  try{taskState=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch(e){taskState={};}
+  updateDateDisplay();
+  renderDrei();
+  var phase=getPhaseByTime();
+  renderApps(phase);
+  renderPhase(phase);
+  renderNaechste();
+}
 
 function localDateKey(){var d=today;return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 var storageKey='tasks_'+localDateKey();
 var taskState={};
 try{taskState=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch(e){}
 function saveTaskState(){localStorage.setItem(storageKey,JSON.stringify(taskState));}
-(function(){Object.keys(localStorage).forEach(function(k){if(k.startsWith('tasks_')&&k!==storageKey)localStorage.removeItem(k);});})();
 
 function getViewDate(){return today;}
 
