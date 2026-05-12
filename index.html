@@ -340,10 +340,16 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
     <span class="tab-tee" id="tab-tee-vormittag"></span>
     <span class="tab-done">✓ fertig</span>
   </div>
+  <div class="phase-tab" id="tab-nachhause" onclick="zeigePhase('nachhause')">
+    <span class="tab-icon">🏠</span>
+    <span class="tab-name">Ankommen</span>
+    <span class="tab-zeit">17–19 Uhr</span>
+    <span class="tab-done">✓ fertig</span>
+  </div>
   <div class="phase-tab" id="tab-abend" onclick="zeigePhase('abend')">
     <span class="tab-icon">🌙</span>
-    <span class="tab-name">Ankommen</span>
-    <span class="tab-zeit">ab 18:00</span>
+    <span class="tab-name">Abend</span>
+    <span class="tab-zeit">ab 19:00</span>
     <span class="tab-tee" id="tab-tee-abend"></span>
     <span class="tab-done">✓ fertig</span>
   </div>
@@ -460,13 +466,13 @@ var PHASES={
     {name:"Euthyrox",note:"noch im Bett",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
     {name:"Rückenübungen",note:"noch im Bett",cat:"körper",links:[{href:"Ruecken.html",label:"Rücken"}]},
     {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Blutdruck messen",note:"nüchtern, ruhig",cat:"körper",links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
+    {name:"Blutdruck messen",note:"nüchtern, ruhig · Werte notieren 📋",cat:"körper",links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
     {name:"Gewicht messen",note:"nüchtern",cat:"körper",links:[{href:"Wiegen.html",label:"Gewicht"}]},
     {name:"Knirscherschiene raus",note:"Kiefer entspannen",cat:"körper",links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
     {name:"Wasser trinken",note:"ein großes Glas",cat:"ernährung"},
     {name:"Tee zubereiten",note:"Tee des Tages 🍵",cat:"ernährung",links:[{href:"tee-des-tages.html",label:"Tee"}]},
     {name:"Frühstück",note:"bewusst & ohne Zwang",cat:"ernährung",links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
-    {name:"Medikamente",note:"Sertralin zum Frühstück",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Rosenwurz",note:"zum Frühstück — Adaptogen & Stressschutz 🌿",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
     {name:"Rudi füttern",note:"Futter & Schmusezeit 🐱",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
     {name:"Timmy füttern",note:"Schmusezeit 🐱",cat:"tiere"},
     {name:"Bad Früh",note:"FM4 oder Podcast 🎵",cat:"pflege",links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
@@ -482,6 +488,11 @@ var PHASES={
   vormittag:{mood:null,tasks:[]},
   mittag:{mood:'',tasks:[]},
   nachmittag:{mood:'',tasks:[]},
+  nachhause:{mood:"Ankommen. Durchatmen. Du bist da. 🏠",tasks:[
+    {name:"Yoga Nidra 🧘",note:"20 Min. Tiefenentspannung — direkt nach dem Ankommen",cat:"körper",links:[{href:"yoga-nidra.html",label:"App öffnen"}]},
+    {name:"Atemübung 🫁",note:"4 sek ein · 6–8 sek aus · 5 Min. — senkt Blutdruck",cat:"körper"},
+    {name:"Langsamer Spaziergang mit Lotte 🌿",note:"schlendernd, kein Sport — echtes Runterkommen",cat:"tiere",links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+  ]},
   abend:{mood:"Du bist zuhause. Jetzt gehört der Rest dir. 🌙",tasks:[
     {name:"Katzen füttern",note:"Rudi & Timmy — ca. 18:00 🐱",cat:"tiere"},
     {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
@@ -491,12 +502,11 @@ var PHASES={
     {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",cat:"arbeit",links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
     {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",cat:"lernen",links:[{href:"Lernplan.html",label:"Lernplan"}]},
     {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",cat:"seele"},
-    {name:"Wie war das heute?",note:"Abschluss & Reflexion",cat:"seele"},
     {name:"Freizeit 🎪",note:"was auch immer sich gut anfühlt",cat:"seele"},
     {name:"Lotte — Futter",note:"Abendportion",cat:"tiere",links:[{href:"Medikamente_Tiere.html",label:"Medikamente"}]},
     {name:"Lotte — Medikamente",note:"Abendgabe",cat:"tiere",links:[{href:"Katzen_Medikamente.html",label:"Katzen"}]},
     {name:"Bad Abend",note:"Loslassen, abschließen 🛁",cat:"pflege",links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
-    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium (Glycinat/Malat) 🌿",cat:"körper",links:[{href:"Medikamente.html",label:"Medikamente"}]},
     {name:"Taillen-Training 💪",note:"Core · Rotation · täglich",cat:"körper",links:[{href:"Taillen_Training.html",label:"Training öffnen"}]},
     {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",cat:"pflege"},
     {name:"Lesen",note:"kein Handy — echtes Buch 📖",cat:"seele"},
@@ -505,15 +515,16 @@ var PHASES={
 };
 
 var currentPhase=null;
-function getPhaseByTime(){var h=today.getHours(),m=today.getMinutes(),t=h*60+m;if(t<13*60+15)return'morgen';if(t<18*60)return'vormittag';return'abend';}
+function getPhaseByTime(){var h=today.getHours(),m=today.getMinutes(),t=h*60+m;if(t<13*60+15)return'morgen';if(t<17*60)return'vormittag';if(t<19*60)return'nachhause';return'abend';}
 
 function zeigePhase(p){
   currentPhase=p;
-  ['morgen','vormittag','abend'].forEach(function(w){
+  ['morgen','vormittag','nachhause','abend'].forEach(function(w){
     var el=document.getElementById('tab-'+w);
+    if(!el)return;
     el.className='phase-tab'+(w===p?' aktiv aktiv-'+w:'');
     var tasks=PHASES[w].tasks;
-    if(tasks.length){var allDone=tasks.every(function(_,i){return!!taskState[w+'_'+i];});if(allDone)el.classList.add('done-all');}
+    if(tasks&&tasks.length){var allDone=tasks.every(function(_,i){return!!taskState[w+'_'+i];});if(allDone)el.classList.add('done-all');}
   });
   renderPhase(p);renderApps(p);renderNaechste();
 }
@@ -714,7 +725,7 @@ var FIX_TASKS=[
   {name:"Blutdruck messen",note:"nüchtern, ruhig",cat:"körper",phase:"morgen",phaseIdx:3},
   {name:"Gewicht messen",note:"nüchtern",cat:"körper",phase:"morgen",phaseIdx:4},
   {name:"Frühstück",note:"bewusst & ohne Zwang",cat:"ernährung",phase:"morgen",phaseIdx:8},
-  {name:"Medikamente",note:"Sertralin zum Frühstück",cat:"körper",phase:"morgen",phaseIdx:9},
+  {name:"Rosenwurz",note:"zum Frühstück — Adaptogen 🌿",cat:"körper",phase:"morgen",phaseIdx:9},
   {name:"Rudi füttern",note:"Futter & Schmusezeit",cat:"tiere",phase:"morgen",phaseIdx:10},
   {name:"Timmy füttern",note:"Schmusezeit",cat:"tiere",phase:"morgen",phaseIdx:11},
   {name:"Lotte raus",note:"Morgenrunde",cat:"tiere",phase:"morgen",phaseIdx:14},
@@ -723,7 +734,7 @@ var FIX_TASKS=[
   {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",phase:"abend",phaseIdx:1},
   {name:"Lotte — Futter",note:"Abendportion",cat:"tiere",phase:"abend",phaseIdx:9},
   {name:"Lotte — Medikamente",note:"Abendgabe",cat:"tiere",phase:"abend",phaseIdx:10},
-  {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin",cat:"körper",phase:"abend",phaseIdx:12},
+  {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium 🌿",cat:"körper",phase:"abend",phaseIdx:12},
   {name:"Taillen-Training 💪",note:"Core · Rotation · täglich",cat:"körper",href:"Taillen_Training.html",phase:"abend",phaseIdx:13},
 ];
 var HEUTE_VORSCHLAEGE={
@@ -744,6 +755,9 @@ var EINLADUNG_TASKS=[
   {name:"Finanzen & Planung",note:"wenn der Kopf klar ist",cat:"arbeit",phase:"morgen",phaseIdx:12},
   {name:"Soziales",note:"Freundinnen, Familie, schreiben",cat:"seele",phase:"abend",phaseIdx:3},
   {name:"Tiefe Lektüre",note:"Widdascheck, Plutzar oder ein Roman",cat:"lernen",phase:"abend",phaseIdx:11},
+  {name:"Kalium-reiche Mahlzeit 🍌",note:"Banane, Spinat, Kartoffel, Linsen — gut für den Blutdruck",cat:"ernährung",phase:"abend",phaseIdx:1},
+  {name:"Langsamer Spaziergang 🌿",note:"bewusst schlenderndes Gehen — kein Sport, echtes Runterkommen",cat:"körper",phase:"morgen",phaseIdx:14},
+  {name:"Salzarm kochen 🧂",note:"max. 5–6g/Tag — Brot & Käse im Blick",cat:"ernährung",phase:"abend",phaseIdx:1},
 ];
 var dreiVisible=true;
 function toggleDreiBlock(){dreiVisible=!dreiVisible;var wrap=document.getElementById('dreiWrap');var btn=wrap.querySelector('.drei-toggle');var blocks=wrap.querySelectorAll('.ebene-block');blocks.forEach(function(b){b.style.display=dreiVisible?'':'none';});btn.textContent=dreiVisible?'minimieren ↑':'aufklappen ↓';}
