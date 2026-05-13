@@ -500,6 +500,20 @@ let phaseElapsed = 0;
 let running = false;
 let paused = false;
 let interval = null;
+
+// ── Wake Lock ──
+let wakeLock = null;
+async function requestWakeLock() {
+  if ('wakeLock' in navigator) {
+    try { wakeLock = await navigator.wakeLock.request('screen'); } catch(e) {}
+  }
+}
+async function releaseWakeLock() {
+  if (wakeLock) { try { await wakeLock.release(); } catch(e) {} wakeLock = null; }
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && running && !paused) requestWakeLock();
+});
 let synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
 let volume = 0.9;
 let voices = [];
@@ -512,13 +526,18 @@ PHASES.forEach(p => {
 });
 
 function loadVoices() {
-  if (!synth) return;
-  voices = synth.getVoices();
+  try {
+    if (!synth) return;
+    const v = synth.getVoices();
+    if (v && v.length) voices = v;
+  } catch(e) { voices = []; }
 }
-loadVoices();
-if (synth && typeof synth.onvoiceschanged !== 'undefined') {
-  synth.onvoiceschanged = loadVoices;
-}
+try { loadVoices(); } catch(e) {}
+try {
+  if (synth && typeof synth.onvoiceschanged !== 'undefined') {
+    synth.onvoiceschanged = loadVoices;
+  }
+} catch(e) {}
 
 // Show warning if no speech support
 if (!synth) {
@@ -534,16 +553,18 @@ function getGermanVoice() {
 }
 
 function speak(text) {
-  if (!synth) return;
-  if (synth) synth.cancel();
-  const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = 'de-AT';
-  utt.rate = 0.78;
-  utt.pitch = 0.95;
-  utt.volume = volume;
-  const v = getGermanVoice();
-  if (v) utt.voice = v;
-  synth.speak(utt);
+  try {
+    if (!synth) return;
+    synth.cancel();
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'de-AT';
+    utt.rate = 0.78;
+    utt.pitch = 0.95;
+    utt.volume = volume;
+    const v = getGermanVoice();
+    if (v) utt.voice = v;
+    synth.speak(utt);
+  } catch(e) {}
 }
 
 function setVolume(val) {
@@ -654,6 +675,7 @@ function startSession() {
   updateRing();
 
   interval = setInterval(tick, 1000);
+  requestWakeLock();
 }
 
 function togglePause() {
@@ -675,7 +697,7 @@ function finish() {
   clearInterval(interval);
   if (synth) synth.cancel();
   running = false;
-  document.getElementById('orb').classList.remove('active');
+  releaseWakeLock();
   document.getElementById('ringProgress').style.strokeDashoffset = 528;
   document.getElementById('timerDisplay').textContent = '00:00';
   document.getElementById('timerLabel').textContent = 'Fertig';
@@ -698,6 +720,7 @@ function restart() {
   if (synth) synth.cancel();
   running = false;
   paused = false;
+  releaseWakeLock();
   elapsed = 0;
   phaseElapsed = 0;
   currentPhase = 0;
