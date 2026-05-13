@@ -14,7 +14,7 @@ html{font-size:16px;}
 @keyframes reingehüpft{from{transform:scale(.96) translateY(8px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}
 @keyframes fallen{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
 @keyframes schaukeln{0%,100%{transform:rotate(-3deg);}50%{transform:rotate(3deg);}}
-body{background:var(--creme);font-family:'Nunito',sans-serif;color:var(--dunkel);min-height:100vh;padding-bottom:5rem;background-image:repeating-linear-gradient(-12deg,transparent 0,transparent 60px,rgba(255,217,61,.05) 60px,rgba(255,217,61,.05) 80px,transparent 80px,transparent 140px,rgba(232,72,85,.03) 140px,rgba(232,72,85,.03) 160px);}
+body{background:var(--creme);font-family:'Nunito',sans-serif;color:var(--dunkel);min-height:100vh;padding-bottom:5rem;overflow-x:hidden;background-image:repeating-linear-gradient(-12deg,transparent 0,transparent 60px,rgba(255,217,61,.05) 60px,rgba(255,217,61,.05) 80px,transparent 80px,transparent 140px,rgba(232,72,85,.03) 140px,rgba(232,72,85,.03) 160px);}
 body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;background:repeating-linear-gradient(90deg,var(--orange) 0,var(--orange) 28px,var(--gelb) 28px,var(--gelb) 56px,var(--rot) 56px,var(--rot) 84px,var(--blau) 84px,var(--blau) 112px,var(--grün) 112px,var(--grün) 140px);z-index:100;}
 /* HEADER */
 .vk-header{background:var(--gelb);border-bottom:var(--border);padding:.8rem 1.1rem .7rem;}
@@ -50,7 +50,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
 .naechste-info{flex:1;min-width:0;}
 .naechste-name{font-family:'Fredoka One',cursive;font-size:1.15rem;line-height:1.2;margin-bottom:.15rem;}
 .naechste-note{font-family:'Caveat',cursive;font-size:.95rem;color:rgba(26,10,0,.5);line-height:1.3;}
-.naechste-links{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.3rem;}
+.naechste-links{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.3rem;overflow:hidden;}
 .naechste-link{font-size:.75rem;color:var(--blau);background:rgba(61,135,203,.1);border:1px solid rgba(61,135,203,.3);border-radius:10px;padding:.05rem .4rem;text-decoration:none;}
 .naechste-alles-fertig{padding:.8rem 1rem 1rem;text-align:center;}
 .naechste-alles-emoji{font-size:2rem;display:block;margin-bottom:.3rem;}
@@ -120,7 +120,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
 .phase-tab.aktiv-abend{background:var(--lila);color:white;}
 .tab-icon{font-size:1.2rem;display:block;}
 .tab-name{font-family:'Fredoka One',cursive;font-size:.68rem;display:block;margin-top:.1rem;}
-.tab-zeit{font-size:.6rem;opacity:.6;font-weight:600;}
+.tab-zeit{font-size:.55rem;opacity:.6;font-weight:600;display:block;line-height:1.3;word-break:break-all;}
 .tab-tee{font-size:.58rem;color:var(--rot);opacity:.7;display:block;margin-top:.1rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .tab-done{font-size:.7rem;color:var(--grün);display:none;margin-top:.1rem;}
 .phase-tab.done-all .tab-done{display:block;}
@@ -131,7 +131,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
 .phase-kopf-vormittag{background:var(--orange);color:white;}
 .phase-kopf-abend{background:var(--lila);color:white;}
 .phase-mood{font-family:'Caveat',cursive;font-size:1.1rem;font-weight:600;line-height:1.3;}
-.task-item{display:flex;align-items:flex-start;gap:.6rem;padding:.55rem 1rem;border-bottom:2px dashed rgba(26,10,0,.08);cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:transparent;}
+.task-item{display:flex;align-items:flex-start;gap:.6rem;padding:.55rem 1rem;border-bottom:2px dashed rgba(26,10,0,.08);cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:transparent;overflow:hidden;}
 .task-item:last-child{border-bottom:none;}
 .task-item:active{background:rgba(255,217,61,.2);}
 .task-item.done{opacity:.28;}
@@ -142,7 +142,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:6px;backgro
 .task-name{font-size:.95rem;font-weight:700;line-height:1.3;}
 .task-note{font-family:'Caveat',cursive;font-size:.9rem;color:rgba(26,10,0,.5);margin-top:.05rem;}
 .task-cat{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;margin-left:auto;flex-shrink:0;padding-top:3px;opacity:.3;color:var(--rot);}
-.task-links{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.25rem;}
+.task-links{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.25rem;overflow:hidden;}
 .task-link{font-size:.75rem;color:var(--blau);background:rgba(61,135,203,.1);border:1px solid rgba(61,135,203,.3);border-radius:10px;padding:.05rem .4rem;text-decoration:none;}
 .task-link:active{background:rgba(61,135,203,.25);}
 .unterwegs-karte{margin:.6rem 1rem 0;background:var(--orange);border:var(--border);border-radius:16px;padding:1.5rem 1.2rem;text-align:center;box-shadow:4px 4px 0 var(--dunkel);}
@@ -508,17 +508,18 @@ var PHASES={
     {name:"Atemübung 🫁",note:"4 sek ein · 6–8 sek aus · 5 Min. — senkt Blutdruck",cat:"körper",dur:5,links:[{href:"atemübung.html",label:"App öffnen"}]},
   ]},
   abend:{mood:"Du bist zuhause. Jetzt gehört der Rest dir. 🌙",tasks:[
-    {name:"Katzen füttern",note:"Rudi & Timmy 🐱",cat:"tiere",dur:5},
+    {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",cat:"körper",dur:25,links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
+    {name:"Duschen",note:"nach dem Training 🚿",cat:"pflege",dur:10},
+    {name:"Katzen füttern",note:"Rudi & Timmy — 18:00 🐱",cat:"tiere",dur:5},
     {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",dur:45,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
     {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",cat:"zuhause",dur:20,links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
-    {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",cat:"körper",dur:25,links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
     {name:"Zeit mit Thomas",note:"1–1,5 Stunden — einfach da sein ❤️",cat:"seele",flex:true},
     {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",cat:"arbeit",dur:30,flex:true,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
     {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",cat:"lernen",dur:30,flex:true,links:[{href:"Lernplan.html",label:"Lernplan"}]},
     {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",cat:"seele",dur:45,flex:true},
     {name:"Freizeit 🎪",note:"was auch immer sich gut anfühlt",cat:"seele",dur:30,flex:true},
     {name:"Lotte — Futter",note:"Abendportion",cat:"tiere",dur:5},
-    {name:"Lotte — Medikamente",note:"Abendgabe",cat:"tiere",dur:3},
+    {name:"Alle Tiere — Medikamente",note:"Lotte + Rudi + Timmy Abendgabe 🐾🐱🐱",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
     {name:"Bad Abend",note:"Loslassen, abschließen 🛁",cat:"pflege",dur:20,links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
     {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium (Glycinat/Malat) 🌿",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
     {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",cat:"pflege",dur:5},
@@ -623,7 +624,7 @@ function renderPhase(p){
     if(t.links&&t.links.length){linksHtml='<div class="task-links">';t.links.forEach(function(l){linksHtml+='<a class="task-link" href="'+l.href+'">'+l.label+' ›</a>';});linksHtml+='</div>';}
     var z=zeiten[i];
     var zeitBadge=z
-      ? '<span style="font-size:.6rem;color:rgba(26,10,0,.38);background:rgba(26,10,0,.05);border:1px solid rgba(26,10,0,.08);border-radius:8px;padding:.1rem .45rem;white-space:nowrap;flex-shrink:0;align-self:flex-start;margin-top:4px;line-height:1.5;">'+(z.flex?'~':'⏰\u202f')+minToStr(z.startMin)+(z.durMin&&!z.flex?' · '+durStr(z.durMin):z.durMin?' · '+durStr(z.durMin):'')+'</span>'
+      ? '<span style="font-size:.6rem;color:rgba(26,10,0,.38);background:rgba(26,10,0,.05);border:1px solid rgba(26,10,0,.08);border-radius:8px;padding:.1rem .45rem;white-space:nowrap;flex-shrink:0;align-self:flex-start;margin-top:4px;line-height:1.5;max-width:5.5rem;overflow:hidden;text-overflow:ellipsis;">'+(z.flex?'~':'⏰\u202f')+minToStr(z.startMin)+(z.durMin&&!z.flex?' · '+durStr(z.durMin):z.durMin?' · '+durStr(z.durMin):'')+'</span>'
       : '';
     html+='<div class="task-item'+(done?' done':'')+'" onclick="toggleTask(\''+p+'\','+i+')">'
       +'<div class="task-check"></div>'
@@ -826,34 +827,34 @@ var FIX_TASKS=[
   {name:"Timmy füttern",note:"Schmusezeit",cat:"tiere",phase:"morgen",phaseIdx:11},
   {name:"Lotte raus",note:"Morgenrunde",cat:"tiere",phase:"morgen",phaseIdx:14},
   {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",cat:"tiere",phase:"morgen",phaseIdx:16},
-  {name:"Katzen füttern",note:"Rudi & Timmy — ca. 18:00",cat:"tiere",phase:"abend",phaseIdx:0},
-  {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",phase:"abend",phaseIdx:1},
-  {name:"Lotte — Futter",note:"Abendportion",cat:"tiere",phase:"abend",phaseIdx:9},
-  {name:"Lotte — Medikamente",note:"Abendgabe",cat:"tiere",phase:"abend",phaseIdx:10},
-  {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium 🌿",cat:"körper",phase:"abend",phaseIdx:12},
-  {name:"Taillen-Training 💪",note:"Core · Rotation · täglich",cat:"körper",href:"Taillen_Training.html",phase:"abend",phaseIdx:13},
+  {name:"Katzen füttern",note:"Rudi & Timmy — ca. 18:00",cat:"tiere",phase:"abend",phaseIdx:2},
+  {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",phase:"abend",phaseIdx:3},
+  {name:"Lotte — Futter",note:"Abendportion",cat:"tiere",phase:"abend",phaseIdx:10},
+  {name:"Alle Tiere — Medikamente",note:"Abendgabe",cat:"tiere",phase:"abend",phaseIdx:11},
+  {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium 🌿",cat:"körper",phase:"abend",phaseIdx:13},
+  {name:"Taillen-Training 💪",note:"Core · Rotation · täglich",cat:"körper",href:"Taillen_Training.html",phase:"abend",phaseIdx:0},
 ];
 var HEUTE_VORSCHLAEGE={
-  0:[{name:"Haushalt & Wohnung",note:"die Woche vorbereiten",phase:"abend",phaseIdx:2},{name:"Montag vorbereiten",note:"Spiele & Materialien",phase:"abend",phaseIdx:4},{name:"Kreativzeit 🎨",note:"zeichnen, malen",phase:"abend",phaseIdx:6}],
+  0:[{name:"Haushalt & Wohnung",note:"die Woche vorbereiten",phase:"abend",phaseIdx:4},{name:"Montag vorbereiten",note:"Spiele & Materialien",phase:"abend",phaseIdx:6},{name:"Kreativzeit 🎨",note:"zeichnen, malen",phase:"abend",phaseIdx:8}],
   1:[{name:"Unterricht vorbereiten",note:"Was brauche ich heute?",phase:"morgen",phaseIdx:11},{name:"Uni-Aufgabe",note:"DaZF — ein Schritt",phase:"morgen",phaseIdx:12},{name:"Wie war das heute?",note:"kurz abschließen",phase:"abend",phaseIdx:7}],
-  2:[{name:"Mittwoch vorbereiten",note:"Spiele & Materialien",phase:"abend",phaseIdx:4},{name:"Unterricht dokumentieren",note:"kurz abschließen",phase:"abend",phaseIdx:7},{name:"Sport & Bewegung",note:"Aufwärmen + Yoga",phase:"abend",phaseIdx:0}],
-  3:[{name:"Donnerstag vorbereiten",note:"Spiele & Arbeitsblätter",phase:"abend",phaseIdx:4},{name:"Unterricht dokumentieren",note:"kurz abschließen",phase:"abend",phaseIdx:7},{name:"Uni-Aufgabe",note:"DaZF — Pflichtaufgabe",phase:"morgen",phaseIdx:12}],
-  4:[{name:"Unterricht dokumentieren",note:"kurz abschließen",phase:"abend",phaseIdx:7},{name:"Sport & Bewegung",note:"Aufwärmen + Yoga",phase:"abend",phaseIdx:0},{name:"Zeit mit Thomas",note:"Abend genießen",phase:"abend",phaseIdx:3}],
-  5:[{name:"Kreativzeit 🎨",note:"zeichnen, collagen",phase:"abend",phaseIdx:6},{name:"Berufliche To-Dos",note:"Steuer, Zukunft",phase:"morgen",phaseIdx:12},{name:"Entspannen",note:"Freiheit — kein Plan",phase:"abend",phaseIdx:8}],
-  6:[{name:"Einkauf & Vorrat",note:"für die neue Woche",phase:"abend",phaseIdx:2},{name:"Kreativzeit 🎨",note:"zeichnen, malen, collage",phase:"abend",phaseIdx:6},{name:"Entspannung & Ruhe",note:"Sitzbad, Haarpflege",phase:"abend",phaseIdx:0}],
+  2:[{name:"Mittwoch vorbereiten",note:"Spiele & Materialien",phase:"abend",phaseIdx:6},{name:"Unterricht dokumentieren",note:"kurz abschließen",phase:"abend",phaseIdx:7},{name:"Sport & Bewegung",note:"Aufwärmen + Yoga",phase:"abend",phaseIdx:0}],
+  3:[{name:"Donnerstag vorbereiten",note:"Spiele & Arbeitsblätter",phase:"abend",phaseIdx:6},{name:"Unterricht dokumentieren",note:"kurz abschließen",phase:"abend",phaseIdx:7},{name:"Uni-Aufgabe",note:"DaZF — Pflichtaufgabe",phase:"morgen",phaseIdx:12}],
+  4:[{name:"Unterricht dokumentieren",note:"kurz abschließen",phase:"abend",phaseIdx:7},{name:"Sport & Bewegung",note:"Aufwärmen + Yoga",phase:"abend",phaseIdx:0},{name:"Zeit mit Thomas",note:"Abend genießen",phase:"abend",phaseIdx:5}],
+  5:[{name:"Kreativzeit 🎨",note:"zeichnen, collagen",phase:"abend",phaseIdx:8},{name:"Berufliche To-Dos",note:"Steuer, Zukunft",phase:"morgen",phaseIdx:12},{name:"Entspannen",note:"Freiheit — kein Plan",phase:"abend",phaseIdx:9}],
+  6:[{name:"Einkauf & Vorrat",note:"für die neue Woche",phase:"abend",phaseIdx:4},{name:"Kreativzeit 🎨",note:"zeichnen, malen, collage",phase:"abend",phaseIdx:8},{name:"Entspannung & Ruhe",note:"Sitzbad, Haarpflege",phase:"abend",phaseIdx:0}],
 };
 var EINLADUNG_TASKS=[
   {name:"Tiefe Körperpflege",note:"Peeling, Maske, Fußpflege",cat:"pflege",phase:"abend",phaseIdx:0},
   {name:"Gesichtsyoga & Kiefer",note:"sanft & bewusst",cat:"pflege",phase:"abend",phaseIdx:0},
-  {name:"Kreativzeit 🎨",note:"zeichnen, malen, collage",cat:"seele",phase:"abend",phaseIdx:6},
+  {name:"Kreativzeit 🎨",note:"zeichnen, malen, collage",cat:"seele",phase:"abend",phaseIdx:8},
   {name:"Langer Spaziergang mit Lotte",note:"mehr als die Pflicht-Runde",cat:"tiere",phase:"morgen",phaseIdx:10},
-  {name:"Pflanzen besorgen & gestalten",note:"Frühjahrscheck",cat:"zuhause",phase:"abend",phaseIdx:2},
+  {name:"Pflanzen besorgen & gestalten",note:"Frühjahrscheck",cat:"zuhause",phase:"abend",phaseIdx:4},
   {name:"Finanzen & Planung",note:"wenn der Kopf klar ist",cat:"arbeit",phase:"morgen",phaseIdx:12},
-  {name:"Soziales",note:"Freundinnen, Familie, schreiben",cat:"seele",phase:"abend",phaseIdx:3},
-  {name:"Tiefe Lektüre",note:"Widdascheck, Plutzar oder ein Roman",cat:"lernen",phase:"abend",phaseIdx:11},
-  {name:"Kalium-reiche Mahlzeit 🍌",note:"Banane, Spinat, Kartoffel, Linsen — gut für den Blutdruck",cat:"ernährung",phase:"abend",phaseIdx:1},
+  {name:"Soziales",note:"Freundinnen, Familie, schreiben",cat:"seele",phase:"abend",phaseIdx:5},
+  {name:"Tiefe Lektüre",note:"Widdascheck, Plutzar oder ein Roman",cat:"lernen",phase:"abend",phaseIdx:15},
+  {name:"Kalium-reiche Mahlzeit 🍌",note:"Banane, Spinat, Kartoffel, Linsen — gut für den Blutdruck",cat:"ernährung",phase:"abend",phaseIdx:3},
   {name:"Langsamer Spaziergang 🌿",note:"bewusst schlenderndes Gehen — kein Sport, echtes Runterkommen",cat:"körper",phase:"morgen",phaseIdx:14},
-  {name:"Salzarm kochen 🧂",note:"max. 5–6g/Tag — Brot & Käse im Blick",cat:"ernährung",phase:"abend",phaseIdx:1},
+  {name:"Salzarm kochen 🧂",note:"max. 5–6g/Tag — Brot & Käse im Blick",cat:"ernährung",phase:"abend",phaseIdx:3},
 ];
 var dreiVisible=true;
 function toggleDreiBlock(){dreiVisible=!dreiVisible;var wrap=document.getElementById('dreiWrap');var btn=wrap.querySelector('.drei-toggle');var blocks=wrap.querySelectorAll('.ebene-block');blocks.forEach(function(b){b.style.display=dreiVisible?'':'none';});btn.textContent=dreiVisible?'minimieren ↑':'aufklappen ↓';}
