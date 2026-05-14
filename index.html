@@ -51,10 +51,6 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;backgro
 .vk-overlay-btn{background:var(--crimson);color:white;border:1px solid var(--border-col);border-radius:30px;padding:.55rem 1.8rem;font-family:'Raleway',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;box-shadow:0 2px 12px var(--shadow);margin:.2rem;transition:transform .1s,box-shadow .1s;max-width:100%;box-sizing:border-box;}
 .vk-overlay-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(30,18,8,.1);}
 .vk-overlay-btn.skip{background:var(--card);color:var(--text);}
-.praxis-tradition{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--crimson);margin-bottom:.6rem;font-weight:700;font-family:'Raleway',sans-serif;}
-.praxis-deko{font-size:2.5rem;margin-bottom:.7rem;}
-.praxis-text{font-family:'Playfair Display',serif;font-size:1.35rem;text-align:center;line-height:1.4;margin-bottom:1rem;max-width:100%;box-sizing:border-box;}
-.praxis-uebung{font-family:'IM Fell English',serif;font-size:1rem;text-align:center;color:rgba(30,18,8,.65);line-height:1.7;width:100%;max-width:100%;box-sizing:border-box;background:var(--card);border:1px solid var(--border-col);border-radius:14px;padding:.8rem 1rem;box-shadow:0 2px 12px var(--shadow);margin-bottom:1.2rem;font-style:italic;}
 /* NÄCHSTE AUFGABE WIDGET */
 .naechste-wrap{margin:1rem 1rem 0;}
 .naechste-karte{background:var(--card);border:1px solid var(--border-col);border-radius:16px;box-shadow:0 2px 12px var(--shadow);overflow:hidden;}
@@ -78,7 +74,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;backgro
 .naechste-bar{height:5px;border-radius:10px;background:linear-gradient(90deg,var(--sage),var(--navy));transition:width .4s ease;}
 .naechste-bar-label{font-family:'Caveat',cursive;font-size:.8rem;color:rgba(30,18,8,.4);margin-top:.2rem;}
 /* GUTER TAG */
-.guter-tag-btn{width:calc(100% - 2rem);margin:1rem 1rem 0;background:var(--sage);color:white;border:1px solid var(--border-col);border-radius:14px;padding:.8rem 1rem;font-family:'Raleway',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;box-shadow:0 2px 12px var(--shadow);display:flex;align-items:center;justify-content:center;gap:.4rem;transition:transform .1s,box-shadow .1s;}
+.guter-tag-btn{width:calc(100% - 2rem);margin:1rem 1rem 0;background:var(--sage);color:white;border:1px solid var(--border-col);border-radius:20px;padding:.35rem .8rem;font-family:'Raleway',sans-serif;font-weight:700;font-size:.75rem;cursor:pointer;box-shadow:0 2px 8px var(--shadow);display:flex;align-items:center;justify-content:center;gap:.3rem;transition:transform .1s,box-shadow .1s;}
 .guter-tag-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(30,18,8,.1);}
 .vortag-btn{display:flex;align-items:center;justify-content:center;gap:.4rem;width:calc(100% - 2rem);margin:.6rem 1rem 0;background:linear-gradient(135deg,#F5E6C0,#FDEBD0);color:var(--text);border:1px solid var(--border-col);border-radius:14px;padding:.8rem 1rem;font-family:'Raleway',sans-serif;font-weight:700;font-size:.95rem;box-shadow:0 2px 12px var(--shadow);text-decoration:none;transition:transform .1s,box-shadow .1s;}
 .vortag-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(30,18,8,.1);}
@@ -161,6 +157,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;backgro
 .task-name{font-size:.95rem;font-weight:700;line-height:1.3;font-family:'Raleway',sans-serif;}
 .task-note{font-family:'IM Fell English',serif;font-size:.9rem;color:var(--muted);margin-top:.05rem;font-style:italic;}
 .task-cat{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;margin-left:auto;flex-shrink:0;padding-top:3px;opacity:.3;color:var(--crimson);display:none;}
+.task-zirkus{font-family:'IM Fell English',serif;font-size:.82rem;color:var(--crimson);margin-top:.18rem;font-style:italic;opacity:.7;line-height:1.35;}
 .task-links{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.25rem;overflow:hidden;}
 .task-link{font-size:.75rem;color:var(--navy);background:var(--navy-l);border:1px solid rgba(26,39,68,.15);border-radius:10px;padding:.05rem .4rem;text-decoration:none;}
 .task-link:active{background:rgba(26,39,68,.14);}
@@ -238,15 +235,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;backgro
   <button class="vk-overlay-btn skip" onclick="schliesseInnehalten()">überspringen</button>
 </div>
 
-<!-- PRAXIS OVERLAY -->
-<div id="praxisOverlay" class="vk-overlay" style="display:none;">
-  <div class="vk-overlay-stripe"></div>
-  <div class="praxis-tradition" id="praxisTradition"></div>
-  <div class="praxis-deko" id="praxisDeko"></div>
-  <div class="praxis-text" id="praxisText"></div>
-  <div class="praxis-uebung" id="praxisUebung"></div>
-  <button class="vk-overlay-btn" onclick="schliessePraxis()">weiter in den Tag ›</button>
-</div>
+
 
 <!-- TOAST & KONFETTI -->
 <div class="vk-toast" id="vkToast"></div>
@@ -257,19 +246,62 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;backgro
   <div class="vk-overlay-stripe" style="width:100%;margin-bottom:1.5rem;"></div>
   <div style="font-size:2.5rem;margin-bottom:1rem;">🌟</div>
   <div class="gutертag-liste" style="font-family:'Caveat',cursive;font-size:1.2rem;line-height:2.1;text-align:center;">
-    Das ist ein guter Tag für mich.<br>
-    Ich habe Zeit für die Tiere und genieße sie mit ihnen.<br>
-    Ich habe guten Kontakt zu den Schülerinnen und Schülern.<br>
-    Ich spüre Liebe bewusst.<br>
-    Ich bin achtsam statt im Automodus.<br>
-    Ich entdecke Wunder und freue mich darüber.<br>
-    Ich lächle.<br>
-    Ich finde etwas schön.
+    Heute bin ich ganz da.<br>
+    <br>
+    Lotte, Rudi, Timmy —<br>
+    ich sehe sie wirklich.<br>
+    <br>
+    Meinen Schülerinnen und Schülern<br>
+    begegne ich mit offenem Herzen.<br>
+    <br>
+    Ich lasse Liebe ankommen.<br>
+    Ich bemerke das Wunder im Kleinen.<br>
+    Ich lächle — und meine es so.<br>
+    <br>
+    Irgendwas heute wird schön sein.<br>
+    Ich werde es sehen.
   </div>
   <button class="vk-overlay-btn" style="margin-top:1.5rem;" onclick="document.getElementById('guterTagOverlay').style.display='none'">schließen</button>
 </div>
 
-<!-- ZIRKUSZELT -->
+<!-- ZIRKUSPRINZESSIN OVERLAY -->
+<div id="zirkusprinzessinOverlay" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(26,39,68,.96);flex-direction:column;align-items:center;justify-content:center;padding:2rem;box-sizing:border-box;overflow-y:auto;">
+  <div style="width:100%;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--crimson),var(--gold),var(--violet),var(--sage));margin-bottom:1.5rem;flex-shrink:0;"></div>
+  <div style="font-size:2rem;margin-bottom:.4rem;animation:schaukeln 3s ease-in-out infinite;">👑</div>
+  <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);text-align:center;margin-bottom:.2rem;">Die Zirkusprinzessin</div>
+  <div style="font-family:'IM Fell English',serif;font-style:italic;color:rgba(232,213,163,.7);font-size:.9rem;margin-bottom:1.4rem;">Aufrecht · Strahlend · Liebevoll · Leicht</div>
+
+  <div style="width:100%;display:flex;flex-direction:column;gap:.7rem;max-width:420px;">
+
+    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--crimson);border-radius:4px;padding:.9rem 1rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🎪 Aufrechte Haltung</div>
+      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:rgba(250,245,236,.8);line-height:1.55;font-style:italic;">Eine goldene Kordel zieht deinen Scheitel sanft nach oben. So gehst du heute durch die Welt.</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--gold);border-radius:4px;padding:.9rem 1rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🤸‍♀️ Graziöse Stärke</div>
+      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:rgba(250,245,236,.8);line-height:1.55;font-style:italic;">Dein Körper ist dein Instrument. Du pflegst ihn mit Freude — und er trägt dich leicht.</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--violet);border-radius:4px;padding:.9rem 1rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">✨ Süßes Styling</div>
+      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:rgba(250,245,236,.8);line-height:1.55;font-style:italic;">Ein Detail reicht. Ein Hauch Gold, ein Leuchten in den Augen — die Magie liegt im Kleinen.</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--sage);border-radius:4px;padding:.9rem 1rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🌸 Liebes Wesen & Lächeln</div>
+      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:rgba(250,245,236,.8);line-height:1.55;font-style:italic;">Fröhlichkeit ist dein Kern — kein Müssen, kein Erzwingen. Du findest das Lächeln in Rudi, Timmy, Lotte.</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.05);border-left:3px solid #5B8DB8;border-radius:4px;padding:.9rem 1rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🎭 Freude an der Arbeit</div>
+      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:rgba(250,245,236,.8);line-height:1.55;font-style:italic;">Vorbereitung ist die Probe. Unterricht ist der Auftritt. Du trittst auf — ganz da, ganz du.</div>
+    </div>
+
+  </div>
+
+  <button class="vk-overlay-btn" style="margin-top:1.5rem;background:var(--gold);color:var(--navy);border-color:var(--gold);" onclick="document.getElementById('zirkusprinzessinOverlay').style.display='none'">✦ in den Tag ›</button>
+</div>
 <div aria-hidden="true" style="width:100%;line-height:0;display:block;overflow:hidden;">
 <svg viewBox="0 0 400 96" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
 
@@ -337,10 +369,11 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;backgro
   <div class="vk-motto">Liebe · Phantasie · Lebendigkeit</div>
 </div>
 
-<!-- GUTER TAG BUTTON -->
-<button class="guter-tag-btn" onclick="document.getElementById('guterTagOverlay').style.display='flex'">
-  🌟 Das ist ein guter Tag für mich
-</button>
+<!-- BUTTONS: ZIRKUSPRINZESSIN + GUTER TAG -->
+<div style="display:flex;gap:.4rem;margin:.6rem 1rem 0;">
+  <button onclick="document.getElementById('zirkusprinzessinOverlay').style.display='flex'" style="background:none;border:1px solid rgba(201,137,58,.35);border-radius:20px;padding:.2rem .65rem;font-size:.75rem;color:var(--gold);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">👑 Prinzessin</button>
+  <button onclick="document.getElementById('guterTagOverlay').style.display='flex'" style="background:none;border:1px solid rgba(94,138,90,.35);border-radius:20px;padding:.2rem .65rem;font-size:.75rem;color:var(--sage);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🌟 Guter Tag</button>
+</div>
 
 <!-- NÄCHSTE AUFGABE -->
 <div class="naechste-wrap">
@@ -352,30 +385,6 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;backgro
   <div class="impuls-label">✦ Mein heutiger Impuls</div>
   <div class="impuls-text laden" id="impulsText">Einen Moment …</div>
   <div class="impuls-refresh"><button class="impuls-refresh-btn" onclick="ladeImpuls(true)">↺ neuer Impuls</button></div>
-</div>
-
-<!-- WAS HEUTE ZÄHLT -->
-<div class="drei-wrap" id="dreiWrap">
-  <div class="drei-header">
-    <div class="drei-title">✦ Was heute zählt</div>
-    <button class="drei-toggle" onclick="toggleDreiBlock()">minimieren ↑</button>
-  </div>
-  <div class="ebene-block">
-    <div class="ebene-stripe fix"></div>
-    <div class="ebene-head"><span class="ebene-icon">🌿</span><span class="ebene-label fix">Täglich fix</span><span class="ebene-count" id="fixCount"></span></div>
-    <div id="fixTasks"></div>
-  </div>
-  <div class="ebene-block">
-    <div class="ebene-stripe heute"></div>
-    <div class="ebene-head"><span class="ebene-icon">🎯</span><span class="ebene-label heute">Heute gewählt</span><span class="ebene-sub" id="heuteTagSub"></span></div>
-    <div id="heuteTasks"></div>
-  </div>
-  <div class="ebene-block">
-    <div class="ebene-stripe einladung"></div>
-    <div class="ebene-head"><span class="ebene-icon">🌸</span><span class="ebene-label einladung">Nächstes Abenteuer 🎪</span></div>
-    <div id="einladungTasks"></div>
-    <div class="drei-einladung-note">Kein Müssen. Nur eine offene Tür — du entscheidest, ob du eintrittst.</div>
-  </div>
 </div>
 
 <!-- PHASEN TABS -->
@@ -419,61 +428,67 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;backgro
   <button class="alle-apps-btn" id="alleAppsBtn" onclick="toggleAlleApps()">alle Apps anzeigen ↓</button>
 </div>
 
-<!-- STOISCHE REFLEXION -->
+<!-- REFLEXION & NOTIZEN — zusammengefasst, aufklappbar -->
 <div class="vk-sep">✦ · ✦ · ✦</div>
-<div class="stoic-wrap">
-  <div style="height:5px;background:repeating-linear-gradient(90deg,var(--blau) 0,var(--blau) 25%,var(--lila) 25%,var(--lila) 50%,var(--gelb) 50%,var(--gelb) 75%,var(--blau) 75%,var(--blau) 100%);opacity:.5;"></div>
-  <div class="stoic-head"><span style="font-size:1rem;">🌅</span><span class="stoic-label">Morgenreflexion</span><span class="stoic-badge">Stoizismus</span></div>
-  <div class="stoic-body">
-    <div class="stoic-q" id="stoicMorgenQ"></div>
-    <button class="stoic-next" onclick="naechsteMorgenFrage()">↺ andere Frage</button>
-    <textarea class="stoic-textarea" id="stoicMorgenText" placeholder="Gedanken zum Morgen …" rows="3"></textarea>
-    <div class="stoic-row">
-      <button class="stoic-save" onclick="speichereStoicMorgenBtn()">✦ speichern</button>
-      <span class="stoic-saved" id="stoicMorgenSaved" style="display:none;">gespeichert ✓</span>
-      <button class="stoic-toggle" onclick="toggleStoicMorgenEntries()">Einträge</button>
-    </div>
-    <div class="stoic-entries" id="stoicMorgenEntries" style="display:none;"></div>
+<div class="stoic-wrap" id="reflexBlock">
+  <div style="height:5px;background:linear-gradient(90deg,var(--navy),var(--violet),var(--crimson),var(--gold));opacity:.5;"></div>
+  <div class="stoic-head" style="cursor:pointer;" onclick="toggleReflexBlock()">
+    <span style="font-size:1rem;">🪞</span>
+    <span class="stoic-label">Reflexion &amp; Notizen</span>
+    <span class="stoic-badge" id="reflexBlockBadge" style="margin-left:auto;">aufklappen ↓</span>
   </div>
-</div>
+  <div id="reflexBlockInhalt" style="display:none;">
 
-<div class="stoic-wrap" style="margin-top:.8rem;">
-  <div style="height:5px;background:repeating-linear-gradient(90deg,var(--lila) 0,var(--lila) 25%,var(--blau) 25%,var(--blau) 50%,var(--gelb) 50%,var(--gelb) 75%,var(--lila) 75%,var(--lila) 100%);opacity:.5;"></div>
-  <div class="stoic-head"><span style="font-size:1rem;">🌙</span><span class="stoic-label" style="color:var(--lila);">Abendbilanz</span><span class="stoic-badge" style="background:rgba(155,93,229,.12);color:var(--lila);">Abend</span></div>
-  <div class="stoic-body">
-    <div class="stoic-q" id="stoicAbendQ" style="color:var(--lila);"></div>
-    <button class="stoic-next" onclick="naechsteAbendFrage()">↺ andere Frage</button>
-    <textarea class="stoic-textarea" id="stoicAbendText" placeholder="Wie war dieser Tag …" rows="3"></textarea>
-    <div class="stoic-row">
-      <button class="stoic-save" style="background:var(--lila);" onclick="speichereStoicAbendBtn()">✦ speichern</button>
-      <span class="stoic-saved" id="stoicAbendSaved" style="display:none;">gespeichert ✓</span>
-      <button class="stoic-toggle" onclick="toggleStoicAbendEntries()">Einträge</button>
+    <!-- Morgenreflexion -->
+    <div style="border-top:1px dashed rgba(30,18,8,.1);padding:.6rem 1rem .2rem;">
+      <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:.4rem;">🌅 Morgenreflexion · Stoizismus</div>
+      <div class="stoic-q" id="stoicMorgenQ"></div>
+      <button class="stoic-next" onclick="naechsteMorgenFrage()">↺ andere Frage</button>
+      <textarea class="stoic-textarea" id="stoicMorgenText" placeholder="Gedanken zum Morgen …" rows="3"></textarea>
+      <div class="stoic-row">
+        <button class="stoic-save" onclick="speichereStoicMorgenBtn()">✦ speichern</button>
+        <span class="stoic-saved" id="stoicMorgenSaved" style="display:none;">gespeichert ✓</span>
+        <button class="stoic-toggle" onclick="toggleStoicMorgenEntries()">Einträge</button>
+      </div>
+      <div class="stoic-entries" id="stoicMorgenEntries" style="display:none;"></div>
     </div>
-    <div class="stoic-entries" id="stoicAbendEntries" style="display:none;"></div>
-  </div>
-</div>
 
-<!-- REFLEXION -->
-<div class="reflex-wrap" style="margin-top:.8rem;">
-  <div style="height:5px;background:repeating-linear-gradient(90deg,var(--rot) 0,var(--rot) 25%,var(--gelb) 25%,var(--gelb) 50%,var(--rot) 50%,var(--rot) 75%,var(--gelb) 75%,var(--gelb) 100%);opacity:.5;"></div>
-  <div class="reflex-head"><div class="reflex-title">✦ Meine Reflexion</div><button class="reflex-toggle" onclick="toggleReflexEntries()" id="reflexToggle">Einträge</button></div>
-  <div class="reflex-body">
-    <div class="reflex-leitfrage" id="reflexLeitfrage"></div>
-    <textarea class="reflex-textarea" id="reflexText" placeholder="Was bewegt mich heute …" rows="3"></textarea>
-    <div class="reflex-row">
-      <button class="reflex-save" onclick="speichereReflex()">✦ festhalten</button>
-      <span class="reflex-saved" id="reflexSaved">gespeichert ✓</span>
+    <!-- Abendbilanz -->
+    <div style="border-top:1px dashed rgba(30,18,8,.1);padding:.6rem 1rem .2rem;">
+      <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--violet);font-weight:700;margin-bottom:.4rem;">🌙 Abendbilanz</div>
+      <div class="stoic-q" id="stoicAbendQ" style="color:var(--violet);"></div>
+      <button class="stoic-next" onclick="naechsteAbendFrage()">↺ andere Frage</button>
+      <textarea class="stoic-textarea" id="stoicAbendText" placeholder="Wie war dieser Tag …" rows="3"></textarea>
+      <div class="stoic-row">
+        <button class="stoic-save" style="background:var(--violet);" onclick="speichereStoicAbendBtn()">✦ speichern</button>
+        <span class="stoic-saved" id="stoicAbendSaved" style="display:none;">gespeichert ✓</span>
+        <button class="stoic-toggle" onclick="toggleStoicAbendEntries()">Einträge</button>
+      </div>
+      <div class="stoic-entries" id="stoicAbendEntries" style="display:none;"></div>
     </div>
-    <div class="reflex-entries" id="reflexEntries"></div>
-  </div>
-</div>
 
-<!-- NOTIZEN -->
-<div class="reflex-wrap" style="margin-top:.8rem;">
-  <div style="height:5px;background:var(--gelb);opacity:.6;"></div>
-  <div class="reflex-head"><div class="reflex-title">📝 Meine Notizen</div><button class="reflex-toggle" onclick="loescheNotiz()" id="notizClear" style="display:none;">löschen</button></div>
-  <div class="reflex-body">
-    <textarea class="notiz-textarea" id="notizText" placeholder="Notizen, Ideen, was auch immer …" rows="4" oninput="speichereNotiz()"></textarea>
+    <!-- Meine Reflexion -->
+    <div style="border-top:1px dashed rgba(30,18,8,.1);padding:.6rem 1rem .2rem;">
+      <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--crimson);font-weight:700;margin-bottom:.4rem;">✦ Meine Reflexion</div>
+      <div class="reflex-leitfrage" id="reflexLeitfrage"></div>
+      <textarea class="reflex-textarea" id="reflexText" placeholder="Was bewegt mich heute …" rows="3"></textarea>
+      <div class="reflex-row">
+        <button class="reflex-save" onclick="speichereReflex()">✦ festhalten</button>
+        <span class="reflex-saved" id="reflexSaved">gespeichert ✓</span>
+        <button class="stoic-toggle" onclick="toggleReflexEntries()" id="reflexToggle">Einträge</button>
+      </div>
+      <div class="reflex-entries" id="reflexEntries"></div>
+    </div>
+
+    <!-- Notizen -->
+    <div style="border-top:1px dashed rgba(30,18,8,.1);padding:.6rem 1rem .8rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem;">
+        <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:700;">📝 Notizen</div>
+        <button class="stoic-toggle" onclick="loescheNotiz()" id="notizClear" style="display:none;">löschen</button>
+      </div>
+      <textarea class="notiz-textarea" id="notizText" placeholder="Notizen, Ideen, was auch immer …" rows="4" oninput="speichereNotiz()"></textarea>
+    </div>
+
   </div>
 </div>
 
@@ -501,7 +516,6 @@ function switchDay(offset){
   try{taskState=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch(e){taskState={};}
   updateDateDisplay();
   updateWaveTea();
-  renderDrei();
   var phase=getPhaseByTime();
   renderApps(phase);
   renderPhase(phase);
@@ -531,54 +545,53 @@ function getUnterwegsZeit(){return UNTERWEGS_ZEITEN[today.getDay()]||null;}
 
 var PHASES={
   morgen:{mood:null,tasks:[
-    {name:"Euthyrox",note:"noch im Bett",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Rückenübungen",note:"noch im Bett",cat:"körper",dur:10,links:[{href:"Ruecken.html",label:"Rücken"}]},
-    {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere",dur:3,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Blutdruck messen",note:"nüchtern, ruhig · Werte notieren 📋",cat:"körper",dur:5,links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
-    {name:"Gewicht messen",note:"nüchtern",cat:"körper",dur:2,links:[{href:"Wiegen.html",label:"Gewicht"}]},
-    {name:"Knirscherschiene raus",note:"Kiefer entspannen",cat:"körper",dur:2,links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
-    {name:"Wasser trinken",note:"ein großes Glas",cat:"ernährung",dur:2},
-    {name:"Tee zubereiten",note:"Tee des Tages 🍵",cat:"ernährung",dur:5,links:[{href:"tee-des-tages.html",label:"Tee"}]},
-    {name:"Frühstück",note:"bewusst & ohne Zwang",cat:"ernährung",dur:20,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
-    {name:"Rosenwurz",note:"zum Frühstück — Adaptogen & Stressschutz 🌿",cat:"körper",dur:1,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Rudi füttern",note:"Futter & Schmusezeit 🐱",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
-    {name:"Timmy füttern",note:"Schmusezeit 🐱",cat:"tiere",dur:5},
-    {name:"Bad Früh",note:"FM4 oder Podcast 🎵",cat:"pflege",dur:15,links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
-    {name:"Duschen",note:"warm & frisch in den Tag 🚿",cat:"pflege",dur:15},
-    {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch 🐾",cat:"tiere",dur:30,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
-    {name:"Tiere — Medikamente geben",note:"Lotte + Rudi prüfen & geben",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-App"},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
-    {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",cat:"tiere",dur:2,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Unterricht vorbereiten",note:"Was brauche ich heute?",cat:"arbeit",dur:30,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste"}]},
-    {name:"Uni-Aufgabe — ein Schritt",note:"einen Schritt, nicht alles",cat:"lernen",dur:30,links:[{href:"Lernplan.html",label:"Lernplan"}]},
-    {name:"Tee & Pause",note:"wirklich innehalten 🍵",cat:"seele",dur:10,links:[{href:"tee-des-tages.html",label:"Tee"}]},
-    {name:"Schnell essen & fertig machen",note:"und raus! 🎪",cat:"ernährung",dur:15,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
+    {name:"Euthyrox",note:"noch im Bett",zirkus:"👑 Die Prinzessin bereitet sich vor — auch das Unsichtbare gehört zur Kunst.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Rückenübungen",note:"noch im Bett",zirkus:"👑 Aufrechte Haltung beginnt hier — die Wirbelsäule ist das Stativ der Artistin.",cat:"körper",dur:10,links:[{href:"Ruecken.html",label:"Rücken"}]},
+    {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",zirkus:"👑 Ein liebes Wesen sorgt für seine Tiere — das ist ihre stille Stärke.",cat:"tiere",dur:3,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
+    {name:"Blutdruck messen",note:"nüchtern, ruhig · Werte notieren 📋",zirkus:"👑 Die Prinzessin kennt ihren Körper — Wissen ist keine Schwäche, sondern Eleganz.",cat:"körper",dur:5,links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
+    {name:"Gewicht messen",note:"nüchtern",zirkus:"👑 Sie beobachtet sich mit Mitgefühl, nicht mit Strenge — das ist der Unterschied.",cat:"körper",dur:2,links:[{href:"Wiegen.html",label:"Gewicht"}]},
+    {name:"Knirscherschiene raus",note:"Kiefer entspannen",zirkus:"👑 Ein entspannter Kiefer, ein offenes Lächeln — die Bühne ist bereit.",cat:"körper",dur:2,links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
+    {name:"Wasser trinken",note:"ein großes Glas",zirkus:"👑 Jede Artistin braucht Energie — das erste Glas ist das Fundament des Tages.",cat:"ernährung",dur:2},
+    {name:"Tee zubereiten",note:"Tee des Tages 🍵",zirkus:"👑 Das Ritual des Zubereitens ist selbst ein kleiner Auftritt — langsam, bewusst.",cat:"ernährung",dur:5,links:[{href:"tee-des-tages.html",label:"Tee"}]},
+    {name:"Frühstück",note:"bewusst & ohne Zwang",zirkus:"👑 Sie nährt sich mit Freude, nicht mit Pflicht — das ist königliche Haltung.",cat:"ernährung",dur:20,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
+    {name:"Rosenwurz",note:"zum Frühstück — Adaptogen & Stressschutz 🌿",zirkus:"👑 Die Prinzessin wappnet sich — mit Würde und Pflanzenkraft.",cat:"körper",dur:1,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Rudi füttern",note:"Futter & Schmusezeit 🐱",zirkus:"👑 Liebe zeigt sich in kleinen täglichen Gesten — das ist ihr Herzstück.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
+    {name:"Timmy füttern",note:"Schmusezeit 🐱",zirkus:"👑 Ein liebes Wesen hält inne für die, die sie liebt — auch für zwei Minuten.",cat:"tiere",dur:5},
+    {name:"Bad Früh",note:"FM4 oder Podcast 🎵",zirkus:"👑 Die Artistin pflegt sich als Instrument — der Körper ist ihre Bühne.",cat:"pflege",dur:15,links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
+    {name:"Duschen",note:"warm & frisch in den Tag 🚿",zirkus:"👑 Sie tritt frisch und strahlend auf — nicht gehetzt, sondern bereit.",cat:"pflege",dur:15},
+    {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch 🐾",zirkus:"👑 Die Prinzessin bewegt sich durch die Welt — aufrecht, lächelnd, mit einer treuen Begleiterin.",cat:"tiere",dur:30,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+    {name:"Tiere — Medikamente geben",note:"Lotte + Rudi prüfen & geben",zirkus:"👑 Wer für andere sorgt, zeigt die größte Stärke — leise, zuverlässig, täglich.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-App"},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
+    {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",zirkus:"👑 Dieser kleine Handgriff sagt: Ich sehe dich. Ich bin da.",cat:"tiere",dur:2,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
+    {name:"Unterricht vorbereiten",note:"Was brauche ich heute?",zirkus:"👑 Jede Vorstellung beginnt mit Vorbereitung — das ist das Handwerk der Meisterin.",cat:"arbeit",dur:30,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste"}]},
+    {name:"Uni-Aufgabe — ein Schritt",note:"einen Schritt, nicht alles",zirkus:"👑 Große Nummern entstehen durch viele kleine Schritte — heute ist einer davon.",cat:"lernen",dur:30,links:[{href:"Lernplan.html",label:"Lernplan"}]},
+    {name:"Tee & Pause",note:"wirklich innehalten 🍵",zirkus:"👑 Zwischen den Akten darf die Prinzessin atmen — das ist keine Schwäche, das ist Stil.",cat:"seele",dur:10,links:[{href:"tee-des-tages.html",label:"Tee"}]},
+    {name:"Schnell essen & fertig machen",note:"und raus! 🎪",zirkus:"👑 Die Manege ruft — und sie kommt. Bereit, strahlend, ganz da.",cat:"ernährung",dur:15,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
   ]},
   vormittag:{mood:null,tasks:[]},
   mittag:{mood:'',tasks:[]},
   nachmittag:{mood:'',tasks:[]},
   nachhause:{mood:null,tasks:[
-    {name:"Lotte raus 🌿",note:"sie zuerst — schlendernd, echtes Runterkommen",cat:"tiere",dur:25,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
-    {name:"Yoga Nidra 🧘",note:"20 Min. Tiefenentspannung — direkt nach dem Ankommen",cat:"körper",dur:20,links:[{href:"yoga-nidra.html",label:"App öffnen"}]},
-    {name:"Atemübung 🫁",note:"4 sek ein · 6–8 sek aus · 5 Min. — senkt Blutdruck",cat:"körper",dur:5,links:[{href:"atemübung.html",label:"App öffnen"}]},
+    {name:"Lotte raus 🌿",note:"sie zuerst — schlendernd, echtes Runterkommen",zirkus:"👑 Die Artistin kehrt nach Hause zurück — und gibt der Treuen zuerst, was sie braucht.",cat:"tiere",dur:25,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+    {name:"Yoga Nidra 🧘",note:"20 Min. Tiefenentspannung — direkt nach dem Ankommen",zirkus:"👑 Zwischen Auftritt und Abend liegt das stille Gold der Erholung.",cat:"körper",dur:20,links:[{href:"yoga-nidra.html",label:"App öffnen"}]},
+    {name:"Atemübung 🫁",note:"4 sek ein · 6–8 sek aus · 5 Min. — senkt Blutdruck",zirkus:"👑 Der Atem ist das Instrument der Prinzessin — sie stimmt ihn täglich neu.",cat:"körper",dur:5,links:[{href:"atemübung.html",label:"App öffnen"}]},
   ]},
   abend:{mood:"Du bist zuhause. Jetzt gehört der Rest dir. 🌙",tasks:[
-    {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",cat:"körper",dur:25,links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
-    {name:"Duschen",note:"nach dem Training 🚿",cat:"pflege",dur:10},
-    {name:"Katzen füttern",note:"Rudi & Timmy — 18:00 🐱",cat:"tiere",dur:5},
-    {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",dur:45,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
-    {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",cat:"zuhause",dur:20,links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
-    {name:"Zeit mit Thomas",note:"1–1,5 Stunden — einfach da sein ❤️",cat:"seele",flex:true},
-    {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",cat:"arbeit",dur:30,flex:true,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
-    {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",cat:"lernen",dur:30,flex:true,links:[{href:"Lernplan.html",label:"Lernplan"}]},
-    {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",cat:"seele",dur:45,flex:true},
-    {name:"Freizeit 🎪",note:"was auch immer sich gut anfühlt",cat:"seele",dur:30,flex:true},
-    {name:"Lotte — Futter",note:"Abendportion",cat:"tiere",dur:5},
-    {name:"Alle Tiere — Medikamente",note:"Lotte + Rudi + Timmy Abendgabe 🐾🐱🐱",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
-    {name:"Bad Abend",note:"Loslassen, abschließen 🛁",cat:"pflege",dur:20,links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
-    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium (Glycinat/Malat) 🌿",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",cat:"pflege",dur:5},
-    {name:"Lesen",note:"kein Handy — echtes Buch 📖",cat:"seele",dur:30,flex:true},
-    {name:"Schlafen",note:"früh genug, du weißt warum 🌙",cat:"körper",dur:0},
+    {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",zirkus:"👑 Der Körper der Artistin ist ihr Werkzeug — sie pflegt ihn täglich mit Freude.",cat:"körper",dur:25,links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
+    {name:"Duschen",note:"nach dem Training 🚿",zirkus:"👑 Nach dem Vorhang kommt das Ritual — frisch, gepflegt, ganz bei sich.",cat:"pflege",dur:10},
+    {name:"Katzen füttern",note:"Rudi & Timmy — 18:00 🐱",zirkus:"👑 Pünktlichkeit ist eine Form der Liebe — sie wissen, dass sie zählen.",cat:"tiere",dur:5},
+    {name:"Abendessen",note:"schön kochen, bewusst genießen",zirkus:"👑 Die Tafel der Prinzessin ist kein Kompromiss — sie genießt, was sie sich zubereitet.",cat:"ernährung",dur:45,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
+    {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",zirkus:"👑 Ein schönes Zuhause ist die Kulisse für ein schönes Leben — sie sorgt dafür.",cat:"zuhause",dur:20,links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
+    {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",zirkus:"👑 Morgen wird eine neue Nummer gespielt — heute legt sie das Fundament dafür.",cat:"arbeit",dur:30,flex:true,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
+    {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",zirkus:"👑 Wissen trägt die Prinzessin weiter — Schritt für Schritt, ohne Hast.",cat:"lernen",dur:30,flex:true,links:[{href:"Lernplan.html",label:"Lernplan"}]},
+    {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",zirkus:"👑 Die Künstlerin braucht ihren Raum — hier entsteht, was sie ist.",cat:"seele",dur:45,flex:true},
+    {name:"Freizeit 🎪",note:"was auch immer sich gut anfühlt",zirkus:"👑 Auch Königinnen ruhen sich aus — mit Freude, ohne schlechtes Gewissen.",cat:"seele",dur:30,flex:true},
+    {name:"Lotte — Futter",note:"Abendportion",zirkus:"👑 Der letzte Gang des Tages für die Treue — kleine Geste, große Liebe.",cat:"tiere",dur:5},
+    {name:"Alle Tiere — Medikamente",note:"Lotte + Rudi + Timmy Abendgabe 🐾🐱🐱",zirkus:"👑 Sie hütet ihre kleine Schar — jeden Abend, zuverlässig wie ein Herzschlag.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
+    {name:"Bad Abend",note:"Loslassen, abschließen 🛁",zirkus:"👑 Das Abendwasser wäscht den Tag fort — sie tritt ins Bett als sie selbst.",cat:"pflege",dur:20,links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
+    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium (Glycinat/Malat) 🌿",zirkus:"👑 Die Prinzessin bereitet ihre Ruhe mit derselben Sorgfalt vor wie ihren Auftritt.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",zirkus:"👑 Hände, die Unterricht geben, und Füße, die Lotte tragen — sie verdienen Fürsorge.",cat:"pflege",dur:5},
+    {name:"Lesen",note:"kein Handy — echtes Buch 📖",zirkus:"👑 Die Welt in Büchern nährt die Phantasie — das ist ihr Lebensquell.",cat:"seele",dur:30,flex:true},
+    {name:"Schlafen",note:"früh genug, du weißt warum 🌙",zirkus:"👑 Auch die Zirkusprinzessin braucht ihre Nacht — damit morgen alles wieder leuchtet.",cat:"körper",dur:0},
   ]}
 };
 
@@ -680,9 +693,10 @@ function renderPhase(p){
     var zeitBadge=z
       ? '<span style="font-size:.6rem;color:rgba(26,10,0,.38);background:rgba(26,10,0,.05);border:1px solid rgba(26,10,0,.08);border-radius:8px;padding:.1rem .45rem;white-space:nowrap;flex-shrink:0;align-self:flex-start;margin-top:4px;line-height:1.5;">'+(z.flex?'~\u202f':'⏰\u202f')+minToStr(z.startMin)+(z.durMin?' · '+durStr(z.durMin):'')+'</span>'
       : '';
+    var zirkusHtml=t.zirkus?'<div class="task-zirkus">'+t.zirkus+'</div>':'';
     html+='<div class="task-item'+(done?' done':'')+'" onclick="toggleTask(\''+p+'\','+i+')">'
       +'<div class="task-check"></div>'
-      +'<div style="flex:1;min-width:0;"><div class="task-name">'+t.name+'</div><div class="task-note">'+t.note+'</div>'+linksHtml+'</div>'
+      +'<div style="flex:1;min-width:0;"><div class="task-name">'+t.name+'</div><div class="task-note">'+t.note+'</div>'+zirkusHtml+linksHtml+'</div>'
       +zeitBadge
       +'</div>';
   });
@@ -695,7 +709,6 @@ function toggleTask(p,i){
   saveTaskState();
   if(taskState[p+'_'+i])zeigeToast();
   zeigePhase(p);
-  if(typeof renderDrei==='function')renderDrei();
 }
 
 function updateWaveTea(){
@@ -732,47 +745,9 @@ function schliesseInnehalten(){
   if(a){try{localStorage.setItem('innehalten_'+localDateKey(),a);}catch(e){}}
   var el=document.getElementById('innehaltенOverlay');
   el.classList.add('leaving');
-  setTimeout(function(){el.style.display='none';zeigePraxis();},350);
+  setTimeout(function(){el.style.display='none';},350);
 }
 document.getElementById('innehaltенAntwort').addEventListener('keydown',function(e){if(e.key==='Enter')schliesseInnehalten();});
-
-function schliessePraxis(){var el=document.getElementById('praxisOverlay');el.classList.add('leaving');setTimeout(function(){el.style.display='none';},350);}
-
-var PRAXIS=[
-  {tradition:'Stoizismus',deko:'🌾',text:'Was liegt wirklich in meiner Macht — heute?',uebung:'Du kannst keine Dinge kontrollieren, aber deine Haltung zu ihnen. Welche Haltung willst du heute kultivieren?'},
-  {tradition:'Buddhismus',deko:'🌀',text:'Dieser Moment ist genug.',uebung:'Atme dreimal tief. Beim dritten Ausatmen: Lass alles los, was nicht jetzt ist. Nur dieser Atemzug.'},
-  {tradition:'ACT',deko:'🧭',text:'Wer willst du sein — unabhängig davon, wie du dich fühlst?',uebung:'Du kannst müde und trotzdem fürsorglich sein. Unsicher und trotzdem kreativ. Nenn einen Wert, der heute dein Anker ist.'},
-  {tradition:'Zen',deko:'🍵',text:'Tu eine Sache. Vollständig. Dann die nächste.',uebung:'Heute beim Teetrinken: nur Tee trinken. Kein Handy, kein Planen. Nur der Tee, die Wärme, deine Hände.'},
-  {tradition:'Loslassen',deko:'🍂',text:'Was darf heute unfertig bleiben?',uebung:'Nenne eine Sache, die du loslässt — nicht für immer, nur für heute. Streich sie gedanklich durch. Der Rest darf warten.'},
-  {tradition:'Loslassen',deko:'🎈',text:'Spielen ist keine Belohnung. Es ist Nahrung.',uebung:'Was hättest du als Kind einfach so gemacht — ohne Grund? Zeichnen, singen, herumliegen? Gönn dir heute fünf Minuten davon.'},
-  {tradition:'Stoizismus',deko:'⏳',text:'Memento mori — nicht als Drohung, sondern als Einladung.',uebung:'Dieser Tag ist ein Geschenk. Was möchte ich heute wirklich tun? Was würde ich bereuen, nicht getan zu haben?'},
-  {tradition:'ACT',deko:'🎭',text:'Auch unangenehme Gefühle dürfen mitfahren.',uebung:'Stell dir dein Leben als Bus vor. Du fährst. Manchmal sitzen laute Passagiere hinten — sie dürfen mitfahren. Du wählst die Richtung.'},
-  {tradition:'Buddhismus',deko:'🫶',text:'Mitgefühl beginnt bei dir selbst.',uebung:'Leg eine Hand auf dein Herz. Sag innerlich: Das ist schwer. Viele Menschen fühlen das. Ich bin nicht allein damit.'},
-  {tradition:'Ikigai',deko:'🌺',text:'Was macht dich lebendig — ganz ehrlich?',uebung:'Heute nur eine Frage: Was macht dich lebendig? Du musst die Antwort nicht laut sagen. Nur einen Moment damit sitzen.'},
-  {tradition:'Loslassen',deko:'🕊️',text:'Du musst diesen Tag nicht meistern. Du darfst ihn bewohnen.',uebung:'Was wäre, wenn heute gut genug wirklich gut genug wäre? Einen Atemzug lang glauben, dass es so ist.'},
-  {tradition:'Stoizismus',deko:'🔥',text:'Der Wille ist der Weg.',uebung:'Was auch immer heute nicht klappt — deine Haltung dazu bleibt dir. Das ist keine kleine Sache. Das ist alles.'},
-  {tradition:'Körper',deko:'🥗',text:'Ich esse das nicht, weil ich mir etwas Gutes tue.',uebung:'Nicht Verbot — sondern Fürsorge. Sag es heute einmal laut, wenn du etwas weglässt. Spür den Unterschied: Selbstbestimmung statt Kontrolle.'},
-  {tradition:'Zen',deko:'🍽️',text:'Langsam essen ist auch eine Form der Achtsamkeit.',uebung:'Leg heute beim Essen einmal das Besteck hin. Kaue bewusst. Der Körper braucht 15–20 Minuten, um Sattheit zu melden — gib ihm die Zeit.'},
-  {tradition:'Körper',deko:'😴',text:'Schlaf ist kein Luxus. Er ist Stoffwechsel.',uebung:'Unter 7 Stunden erhöht sich Ghrelin — das Hungerhormon. Heute Abend: eine Stunde früher ins Bett. Kein Handy. Nur Dunkelheit und Stille.'},
-  {tradition:'Bewegung',deko:'🐾',text:'Jeder Schritt zählt — auch der unscheinbare.',uebung:'NEAT: alles, was du im Alltag bewegst, summiert sich auf 200–400 kcal extra — ohne dass es sich wie Sport anfühlt. Wo kannst du heute einen kleinen Umweg wählen?'},
-  {tradition:'Körper',deko:'🧠',text:'Stress speichert. Ruhe löst.',uebung:'Cortisol fördert Fetteinlagerung. Deine Kunstzeit und Meditation wirken direkt auf den Stoffwechsel. Was tust du heute bewusst für dein Nervensystem?'},
-  {tradition:'Ernährung',deko:'🥚',text:'Protein am Morgen dämpft Heißhunger den ganzen Tag.',uebung:'Eier, Hülsenfrüchte, Joghurt — schon beim Frühstück. Nicht weil du musst, sondern weil du merkst: du bist länger satt, ruhiger, fokussierter.'},
-];
-
-function zeigePraxis(){
-  var el=document.getElementById('praxisOverlay');el.style.display='flex';el.classList.remove('leaving');
-  var idx=Math.floor((today.getFullYear()*1000+today.getMonth()*31+today.getDate()))%PRAXIS.length;
-  var p=PRAXIS[idx];
-  document.getElementById('praxisTradition').textContent=p.tradition;
-  document.getElementById('praxisDeko').textContent=p.deko;
-  document.getElementById('praxisText').textContent=p.text;
-  document.getElementById('praxisUebung').textContent=p.uebung;
-  var entries=[];try{entries=JSON.parse(localStorage.getItem('reflex_v1')||'[]');}catch(e){}
-  var recent=entries.slice(0,5);if(!recent.length)return;
-  var h=today.getHours();var tageszeit=h<11?'Morgen':h<17?'Mittag':'Abend';
-  var text=recent.map(function(e){return'"'+e.lf+'" — '+e.text;}).join('\n');
-  fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,system:'Du bist Sandras stiller innerer Begleiter. Sandra ist DaZ-Lehrerin und Künstlerin in Wien, lebt mit Lotte (Hund), Rudi & Timmy (Katzen). Antworte NUR mit einem JSON-Objekt:\n{"tradition":"...","deko":"ein Emoji","text":"ein kurzer poetischer Satz (max 12 Wörter)","uebung":"eine konkrete kleine Übung (2-3 Sätze)"}',messages:[{role:'user',content:'Tageszeit: '+tageszeit+'\nSandras letzte Reflexionen:\n'+text}]})}).then(function(r){return r.json();}).then(function(data){var t=data.content&&data.content[0]&&data.content[0].text||'';t=t.trim().replace(/```json|```/g,'').trim();var parsed=JSON.parse(t);if(parsed.tradition)document.getElementById('praxisTradition').textContent=parsed.tradition;if(parsed.deko)document.getElementById('praxisDeko').textContent=parsed.deko;if(parsed.text)document.getElementById('praxisText').textContent=parsed.text;if(parsed.uebung)document.getElementById('praxisUebung').textContent=parsed.uebung;}).catch(function(){});
-}
 
 var impulsKey='intention_'+localDateKey();
 function ladeImpuls(force){
@@ -837,6 +812,14 @@ function renderApps(phase){
 }
 function toggleAlleApps(){showingAllApps=!showingAllApps;renderApps(currentPhase||getPhaseByTime());}
 
+function toggleReflexBlock(){
+  var el=document.getElementById('reflexBlockInhalt');
+  var badge=document.getElementById('reflexBlockBadge');
+  var open=el.style.display==='none';
+  el.style.display=open?'block':'none';
+  badge.textContent=open?'zuklappen ↑':'aufklappen ↓';
+}
+
 var STOIC_MORGEN=['Was ist heute wirklich in meiner Macht?','Welche Haltung möchte ich heute kultivieren?','Was würde eine weise Frau heute als Erstes tun?','Wofür bin ich dankbar — bevor der Tag beginnt?','Was ist das Eine, das heute wirklich zählt?','Was kann ich loslassen, das mir gestern schwer fiel?','Welche meiner Tugenden brauche ich heute am meisten?'];
 var STOIC_ABEND=['Wo habe ich heute meine Werte gelebt?','Was hätte ich besser machen können — ohne mich zu verurteilen?','Welchen Moment des Tages möchte ich bewusst festhalten?','Was hat mir heute Kraft gegeben? Was hat mich geschwächt?','Habe ich heute jemandem Gutes getan — auch kleines?','Was habe ich heute gelernt — über die Welt, über mich?','Was verdient morgen meine Aufmerksamkeit — ruhig und klar?'];
 var stoicMorgenIdx=Math.floor(Math.random()*STOIC_MORGEN.length);
@@ -869,91 +852,6 @@ function speichereNotiz(){var text=document.getElementById('notizText').value;tr
 function loescheNotiz(){if(!confirm('Notizen löschen?'))return;document.getElementById('notizText').value='';try{localStorage.removeItem('notizen_v1');}catch(e){}document.getElementById('notizClear').style.display='none';}
 function loadNotiz(){var text='';try{text=localStorage.getItem('notizen_v1')||'';}catch(e){}document.getElementById('notizText').value=text;document.getElementById('notizClear').style.display=text?'inline':'none';}
 loadNotiz();
-
-var FIX_TASKS=[
-  {name:"Euthyrox",note:"noch im Bett",cat:"körper",phase:"morgen",phaseIdx:0},
-  {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",cat:"tiere",phase:"morgen",phaseIdx:2},
-  {name:"Blutdruck messen",note:"nüchtern, ruhig",cat:"körper",phase:"morgen",phaseIdx:3},
-  {name:"Gewicht messen",note:"nüchtern",cat:"körper",phase:"morgen",phaseIdx:4},
-  {name:"Frühstück",note:"bewusst & ohne Zwang",cat:"ernährung",phase:"morgen",phaseIdx:8},
-  {name:"Rosenwurz",note:"zum Frühstück — Adaptogen 🌿",cat:"körper",phase:"morgen",phaseIdx:9},
-  {name:"Rudi füttern",note:"Futter & Schmusezeit",cat:"tiere",phase:"morgen",phaseIdx:10},
-  {name:"Timmy füttern",note:"Schmusezeit",cat:"tiere",phase:"morgen",phaseIdx:11},
-  {name:"Lotte raus",note:"Morgenrunde",cat:"tiere",phase:"morgen",phaseIdx:14},
-  {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",cat:"tiere",phase:"morgen",phaseIdx:16},
-  {name:"Katzen füttern",note:"Rudi & Timmy — ca. 18:00",cat:"tiere",phase:"abend",phaseIdx:2},
-  {name:"Abendessen",note:"schön kochen, bewusst genießen",cat:"ernährung",phase:"abend",phaseIdx:3},
-  {name:"Lotte — Futter",note:"Abendportion",cat:"tiere",phase:"abend",phaseIdx:10},
-  {name:"Alle Tiere — Medikamente",note:"Abendgabe",cat:"tiere",phase:"abend",phaseIdx:11},
-  {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium 🌿",cat:"körper",phase:"abend",phaseIdx:13},
-  {name:"Taillen-Training 💪",note:"Core · Rotation · täglich",cat:"körper",href:"Taillen_Training.html",phase:"abend",phaseIdx:0},
-];
-var HEUTE_VORSCHLAEGE={
-  0:[{name:"Haushalt & Wohnung",note:"die Woche vorbereiten",phase:"abend",phaseIdx:4},{name:"Montag vorbereiten",note:"Spiele & Materialien",phase:"abend",phaseIdx:6},{name:"Kreativzeit 🎨",note:"zeichnen, malen",phase:"abend",phaseIdx:8}],
-  1:[{name:"Unterricht vorbereiten",note:"Was brauche ich heute?",phase:"morgen",phaseIdx:11},{name:"Uni-Aufgabe",note:"DaZF — ein Schritt",phase:"morgen",phaseIdx:12},{name:"Wie war das heute?",note:"kurz abschließen",phase:"abend",phaseIdx:7}],
-  2:[{name:"Mittwoch vorbereiten",note:"Spiele & Materialien",phase:"abend",phaseIdx:6},{name:"Unterricht dokumentieren",note:"kurz abschließen",phase:"abend",phaseIdx:7},{name:"Sport & Bewegung",note:"Aufwärmen + Yoga",phase:"abend",phaseIdx:0}],
-  3:[{name:"Donnerstag vorbereiten",note:"Spiele & Arbeitsblätter",phase:"abend",phaseIdx:6},{name:"Unterricht dokumentieren",note:"kurz abschließen",phase:"abend",phaseIdx:7},{name:"Uni-Aufgabe",note:"DaZF — Pflichtaufgabe",phase:"morgen",phaseIdx:12}],
-  4:[{name:"Unterricht dokumentieren",note:"kurz abschließen",phase:"abend",phaseIdx:7},{name:"Sport & Bewegung",note:"Aufwärmen + Yoga",phase:"abend",phaseIdx:0},{name:"Zeit mit Thomas",note:"Abend genießen",phase:"abend",phaseIdx:5}],
-  5:[{name:"Kreativzeit 🎨",note:"zeichnen, collagen",phase:"abend",phaseIdx:8},{name:"Berufliche To-Dos",note:"Steuer, Zukunft",phase:"morgen",phaseIdx:12},{name:"Entspannen",note:"Freiheit — kein Plan",phase:"abend",phaseIdx:9}],
-  6:[{name:"Einkauf & Vorrat",note:"für die neue Woche",phase:"abend",phaseIdx:4},{name:"Kreativzeit 🎨",note:"zeichnen, malen, collage",phase:"abend",phaseIdx:8},{name:"Entspannung & Ruhe",note:"Sitzbad, Haarpflege",phase:"abend",phaseIdx:0}],
-};
-var EINLADUNG_TASKS=[
-  {name:"Tiefe Körperpflege",note:"Peeling, Maske, Fußpflege",cat:"pflege",phase:"abend",phaseIdx:0},
-  {name:"Gesichtsyoga & Kiefer",note:"sanft & bewusst",cat:"pflege",phase:"abend",phaseIdx:0},
-  {name:"Kreativzeit 🎨",note:"zeichnen, malen, collage",cat:"seele",phase:"abend",phaseIdx:8},
-  {name:"Langer Spaziergang mit Lotte",note:"mehr als die Pflicht-Runde",cat:"tiere",phase:"morgen",phaseIdx:10},
-  {name:"Pflanzen besorgen & gestalten",note:"Frühjahrscheck",cat:"zuhause",phase:"abend",phaseIdx:4},
-  {name:"Finanzen & Planung",note:"wenn der Kopf klar ist",cat:"arbeit",phase:"morgen",phaseIdx:12},
-  {name:"Soziales",note:"Freundinnen, Familie, schreiben",cat:"seele",phase:"abend",phaseIdx:5},
-  {name:"Tiefe Lektüre",note:"Widdascheck, Plutzar oder ein Roman",cat:"lernen",phase:"abend",phaseIdx:15},
-  {name:"Kalium-reiche Mahlzeit 🍌",note:"Banane, Spinat, Kartoffel, Linsen — gut für den Blutdruck",cat:"ernährung",phase:"abend",phaseIdx:3},
-  {name:"Langsamer Spaziergang 🌿",note:"bewusst schlenderndes Gehen — kein Sport, echtes Runterkommen",cat:"körper",phase:"morgen",phaseIdx:14},
-  {name:"Salzarm kochen 🧂",note:"max. 5–6g/Tag — Brot & Käse im Blick",cat:"ernährung",phase:"abend",phaseIdx:3},
-];
-var dreiVisible=true;
-function toggleDreiBlock(){dreiVisible=!dreiVisible;var wrap=document.getElementById('dreiWrap');var btn=wrap.querySelector('.drei-toggle');var blocks=wrap.querySelectorAll('.ebene-block');blocks.forEach(function(b){b.style.display=dreiVisible?'':'none';});btn.textContent=dreiVisible?'minimieren ↑':'aufklappen ↓';}
-function dreiClick(ebeneNum,idx){toggleDreiTask(['fix','heute','einladung'][ebeneNum],idx);}
-function toggleDreiTask(ebene,idx){
-  var task=null;
-  if(ebene==='fix')task=FIX_TASKS[idx];
-  else if(ebene==='heute'){var v=HEUTE_VORSCHLAEGE[today.getDay()]||HEUTE_VORSCHLAEGE[1];task=v[idx];}
-  else if(ebene==='einladung')task=EINLADUNG_TASKS[idx];
-  if(task&&task.phase!==undefined){toggleTask(task.phase,task.phaseIdx);zeigePhase(task.phase);}
-  else{var key='einladung_'+idx;taskState[key]=!taskState[key];saveTaskState();if(taskState[key])zeigeToast();}
-  renderDrei();
-}
-function renderDrei(){
-  var day=today.getDay();
-  var fixDone=FIX_TASKS.filter(function(t,i){var key=t.phase?t.phase+'_'+t.phaseIdx:'fix_'+i;return!!taskState[key];}).length;
-  document.getElementById('fixCount').textContent=fixDone+' / '+FIX_TASKS.length;
-  var fixEl=document.getElementById('fixTasks');fixEl.innerHTML='';
-  FIX_TASKS.forEach(function(t,i){
-    var key=t.phase?t.phase+'_'+t.phaseIdx:'fix_'+i;var done=!!taskState[key];
-    var div=document.createElement('div');div.className='drei-task'+(done?' done':'');div.dataset.ebene='0';div.dataset.idx=i;
-    var linkHtml=t.href?'<a href="'+t.href+'" onclick="event.stopPropagation()" style="font-size:.72rem;color:var(--crimson);text-decoration:none;border:1px solid rgba(184,41,74,0.25);border-radius:20px;padding:.05rem .45rem;margin-left:.3rem;white-space:nowrap;">öffnen ›</a>':'';
-    div.innerHTML='<div class="drei-check"></div><div style="flex:1;min-width:0;"><div class="drei-task-name">'+t.name+linkHtml+'</div><div class="drei-task-note">'+t.note+'</div></div><div class="drei-task-cat">'+t.cat+'</div>';
-    div.addEventListener('click',function(){dreiClick(+this.dataset.ebene,+this.dataset.idx);});fixEl.appendChild(div);
-  });
-  var vorschlaege=HEUTE_VORSCHLAEGE[day]||HEUTE_VORSCHLAEGE[1];
-  var tagnamen=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
-  document.getElementById('heuteTagSub').textContent=tagnamen[day];
-  var heuteEl=document.getElementById('heuteTasks');heuteEl.innerHTML='';
-  vorschlaege.forEach(function(t,i){
-    var key=t.phase?t.phase+'_'+t.phaseIdx:'heute_'+i;var done=!!taskState[key];
-    var div=document.createElement('div');div.className='heute-slot'+(done?' done':'');
-    div.innerHTML='<div class="heute-slot-dot"></div><div style="flex:1;"><div class="heute-slot-text">'+t.name+'</div>'+(t.note?'<div class="drei-task-note" style="padding-left:0;">'+t.note+'</div>':'')+'</div><span class="heute-slot-check">'+(done?'✦':'○')+'</span>';
-    div.dataset.ebene='1';div.dataset.idx=i;
-    div.addEventListener('click',function(){dreiClick(+this.dataset.ebene,+this.dataset.idx);});heuteEl.appendChild(div);
-  });
-  var einlEl=document.getElementById('einladungTasks');einlEl.innerHTML='';
-  EINLADUNG_TASKS.forEach(function(t,i){
-    var key=t.phase?t.phase+'_'+t.phaseIdx:'einladung_'+i;var done=!!taskState[key];
-    var div=document.createElement('div');div.className='drei-task'+(done?' done':'');div.dataset.ebene='2';div.dataset.idx=i;
-    div.innerHTML='<div class="drei-check"></div><div style="flex:1;min-width:0;"><div class="drei-task-name">'+t.name+'</div><div class="drei-task-note">'+t.note+'</div></div><div class="drei-task-cat">'+(t.cat||'')+'</div>';
-    div.addEventListener('click',function(){dreiClick(+this.dataset.ebene,+this.dataset.idx);});einlEl.appendChild(div);
-  });
-}
-
 
 // ── NÄCHSTE AUFGABE WIDGET ──────────────────────────────────────────
 function getNaechsteAufgabe(){
@@ -1007,7 +905,6 @@ function hakeNaechsteAb(){
   setTimeout(function(){
     renderNaechste();
     zeigePhase(currentPhase||getPhaseByTime());
-    if(typeof renderDrei==='function')renderDrei();
   },400);
 }
 // ───────────────────────────────────────────────────────────────────
@@ -1015,7 +912,7 @@ function hakeNaechsteAb(){
 // INIT
 ladeImpuls(false);
 zeigePhase(getPhaseByTime());
-renderDrei();
+renderNaechste();
 </script>
 </body>
 </html>
