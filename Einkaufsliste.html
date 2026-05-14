@@ -4,16 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Einkaufsliste</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IM+Fell+English:ital@0;1&family=Raleway:wght@400;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#faf3e8;--white:#fffdf8;--text:#2e2010;
-  --muted:rgba(20,10,0,0.62);--gold:#c8943a;--gold2:#e8b86a;
-  --sage:#7a9a5a;--border:rgba(180,130,70,0.15);
+  --bg:#fdf6ee;--card:#fffbf5;--text:#1e1208;--muted:rgba(30,18,8,.45);
+  --crimson:#b8294a;--crimson-l:rgba(184,41,74,.10);
+  --gold:#c9893a;--gold-l:rgba(201,137,58,.12);
+  --navy:#1a2744;--navy-l:rgba(26,39,68,.07);
+  --sage:#5e8a5a;--sage-l:rgba(94,138,90,.10);
+  --violet:#6a3f7a;--border-col:rgba(184,41,74,.15);--shadow:rgba(30,18,8,.08);
 }
 html{font-size:18px;}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--text);padding:.8rem;padding-bottom:3rem}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--text);padding:.8rem;padding-bottom:3rembackground-image:repeating-linear-gradient(-4deg,rgba(184,41,74,.022) 0px,rgba(184,41,74,.022) 32px,transparent 32px,transparent 64px,rgba(201,137,58,.018) 64px,rgba(201,137,58,.018) 96px,transparent 96px,transparent 128px);}
 h1{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;font-weight:400;color:var(--text);text-align:center;margin-bottom:.3rem}
 .sub{font-size:13px;color:var(--muted);font-style:italic;text-align:center;margin-bottom:.8rem}
 .tabs{display:flex;gap:5px;margin-bottom:.7rem}
@@ -42,6 +45,8 @@ h1{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;font-we
 .brand-sub{font-size:13px;opacity:.85;margin-top:.15rem;font-style:italic}
 .brand-where{font-size:13px;color:var(--muted);margin-top:.2rem;font-style:italic}
 .pflege-app{font-size:13px;font-weight:600;margin-top:.2rem}
+
+body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#b8294a 0,#b8294a 20%,#c9893a 20%,#c9893a 40%,#1a2744 40%,#1a2744 60%,#6a3f7a 60%,#6a3f7a 80%,#5e8a5a 80%,#5e8a5a 100%);z-index:100;opacity:.7;}
 </style>
 </head>
 <body>

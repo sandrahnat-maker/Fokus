@@ -2,26 +2,27 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#fdf6ee">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Intuitiv & Gesund Essen</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --crimson: #8B1A2B;
-    --gold: #C9A84C;
-    --navy: #1B2A4A;
-    --violet: #6B4E8A;
-    --sage: #7A9E7E;
-    --cream: #FAF6EE;
-    --warm-white: #FDFAF4;
+    --bg:#fdf6ee;--card:#fffbf5;--text:#1e1208;--muted:rgba(30,18,8,.45);
+    --crimson:#b8294a;--crimson-l:rgba(184,41,74,.10);
+    --gold:#c9893a;--gold-l:rgba(201,137,58,.12);
+    --navy:#1a2744;--navy-l:rgba(26,39,68,.07);
+    --sage:#5e8a5a;--sage-l:rgba(94,138,90,.10);
+    --violet:#6a3f7a;--border-col:rgba(184,41,74,.15);--shadow:rgba(30,18,8,.08);
+    --cream:var(--bg);--warm-white:var(--card);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background-color: var(--cream);
+    background-color: var(--bg);
     font-family: 'Raleway', sans-serif;
-    color: var(--navy);
+    color: var(--text);
     min-height: 100vh;
     padding: 0 0 3rem 0;
   }
@@ -30,7 +31,7 @@
   .wimpelkette {
     width: 100%;
     overflow: hidden;
-    background: var(--navy);
+    background: rgba(26,39,68,.06);
     padding: 0.4rem 0;
     display: flex;
     align-items: center;
@@ -83,7 +84,7 @@
 
   /* Hunger-Skala */
   .card {
-    background: var(--warm-white);
+    background: var(--card);
     border: 1.5px solid var(--gold);
     border-radius: 12px;
     padding: 1.5rem;
@@ -145,7 +146,7 @@
   }
 
   .mahlzeit-card {
-    background: var(--warm-white);
+    background: var(--card);
     border-radius: 10px;
     padding: 1.1rem;
     border-top: 4px solid var(--crimson);
@@ -160,7 +161,7 @@
   .mahlzeit-title {
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
-    color: var(--navy);
+    color: var(--text);
     margin-bottom: 0.3rem;
   }
   .mahlzeit-desc {
@@ -188,7 +189,7 @@
   }
 
   .anker-item {
-    background: var(--warm-white);
+    background: var(--card);
     border-left: 4px solid var(--sage);
     border-radius: 0 8px 8px 0;
     padding: 0.8rem 1rem;
@@ -203,7 +204,7 @@
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--navy);
+    color: var(--text);
     margin-bottom: 0.2rem;
   }
 
@@ -222,7 +223,7 @@
     padding: 0.4rem 1rem;
     font-family: 'Raleway', sans-serif;
     font-size: 0.85rem;
-    color: var(--navy);
+    color: var(--text);
     cursor: pointer;
     transition: all 0.2s;
   }
@@ -245,7 +246,7 @@
   }
 
   .food-item {
-    background: var(--warm-white);
+    background: var(--card);
     border: 1px solid #e8e0d0;
     border-radius: 8px;
     padding: 0.5rem 0.7rem;
@@ -291,6 +292,8 @@
     margin: 1.5rem 0;
     opacity: 0.5;
   }
+
+body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#b8294a 0,#b8294a 20%,#c9893a 20%,#c9893a 40%,#1a2744 40%,#1a2744 60%,#6a3f7a 60%,#6a3f7a 80%,#5e8a5a 80%,#5e8a5a 100%);z-index:100;opacity:.7;}
 </style>
 </head>
 <body>

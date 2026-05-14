@@ -5,17 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Atemübung</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IM+Fell+English:ital@0;1&family=Raleway:wght@400;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --sage:    #7A9E7E;
-  --sage-dk: #4A6B4E;
-  --sage-lt: #B8D4BC;
-  --mist:    #E8F0E9;
-  --stone:   #3D4A3E;
-  --gold:    #C4A35A;
-  --cream:   #F7F3EC;
-  --soft:    rgba(122,158,126,0.15);
+  --sage:    #5e8a5a;
+  --sage-dk: #3a5a3e;
+  --sage-lt: #a8c8ac;
+  --mist:    #f0ece4;
+  --stone:   #1a2744;
+  --gold:    #c9893a;
+  --cream:   #fdf6ee;
+  --soft:    rgba(94,138,90,0.15);
+  --crimson: #b8294a;
+  --violet:  #6a3f7a;
+  --navy:    #1a2744;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -23,7 +26,7 @@
 html, body {
   height: 100%;
   overflow: hidden;
-  background: var(--stone);
+  background: var(--navy);
   font-family: 'Raleway', sans-serif;
   color: var(--mist);
   user-select: none;
@@ -34,9 +37,9 @@ html, body {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 110%, rgba(74,107,78,0.5) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 40% at 20% 20%, rgba(122,158,126,0.12) 0%, transparent 60%),
-    linear-gradient(170deg, #2A3A2B 0%, #3D4A3E 40%, #2C3A2E 100%);
+    radial-gradient(ellipse 80% 60% at 50% 110%, rgba(106,63,122,0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 20% 20%, rgba(184,41,74,0.08) 0%, transparent 60%),
+    linear-gradient(170deg, #0e1830 0%, #1a2744 40%, #0d1828 100%);
 }
 
 /* subtle leaf texture */
@@ -45,8 +48,8 @@ html, body {
   position: fixed;
   inset: 0;
   background-image:
-    radial-gradient(circle at 15% 85%, rgba(122,158,126,0.06) 0%, transparent 40%),
-    radial-gradient(circle at 85% 15%, rgba(196,163,90,0.04) 0%, transparent 40%);
+    radial-gradient(circle at 15% 85%, rgba(94,138,90,0.06) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(201,137,58,0.05) 0%, transparent 40%);
   pointer-events: none;
 }
 
@@ -81,14 +84,14 @@ html, body {
   font-family: 'Playfair Display', serif;
   font-weight: 300;
   font-size: 1.9rem;
-  color: var(--sage-lt);
+  color: var(--gold);
   letter-spacing: 0.08em;
 }
 .header p {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'IM Fell English', serif;
   font-style: italic;
   font-size: 0.9rem;
-  color: var(--gold);
+  color: var(--sage-lt);
   opacity: 0.8;
   margin-top: 3px;
   letter-spacing: 0.05em;
@@ -114,12 +117,12 @@ html, body {
 }
 .ring-track {
   fill: none;
-  stroke: rgba(122,158,126,0.12);
+  stroke: rgba(184,41,74,0.12);
   stroke-width: 1.5;
 }
 .ring-fill {
   fill: none;
-  stroke: var(--sage);
+  stroke: var(--crimson);
   stroke-width: 1.5;
   stroke-linecap: round;
   transform-origin: center;
@@ -134,13 +137,13 @@ html, body {
   height: 200px;
   border-radius: 50%;
   background: radial-gradient(circle at 38% 35%,
-    rgba(184,212,188,0.9) 0%,
-    rgba(122,158,126,0.7) 40%,
-    rgba(74,107,78,0.5) 70%,
-    rgba(44,58,46,0.3) 100%);
+    rgba(200,160,200,0.9) 0%,
+    rgba(106,63,122,0.7) 40%,
+    rgba(26,39,68,0.5) 70%,
+    rgba(13,24,40,0.3) 100%);
   box-shadow:
-    0 0 60px rgba(122,158,126,0.3),
-    0 0 120px rgba(122,158,126,0.1),
+    0 0 60px rgba(106,63,122,0.35),
+    0 0 120px rgba(184,41,74,0.15),
     inset 0 0 40px rgba(255,255,255,0.05);
   display: flex;
   align-items: center;
@@ -161,7 +164,7 @@ html, body {
   transition: opacity 0.4s ease;
 }
 .orb-count {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'IM Fell English', serif;
   font-size: 2.8rem;
   font-weight: 300;
   color: rgba(255,255,255,0.95);
@@ -188,12 +191,12 @@ html, body {
   width: 6px; height: 6px;
   border-radius: 50%;
   background: rgba(122,158,126,0.25);
-  border: 1px solid rgba(122,158,126,0.4);
+  border: 1px solid rgba(201,137,58,0.4);
   transition: all 0.5s ease;
 }
-.pdot.ein  { background: var(--sage-lt); border-color: var(--sage-lt); transform: scale(1.4); }
+.pdot.ein  { background: #a8c8ac; border-color: #a8c8ac; transform: scale(1.4); }
 .pdot.halt { background: var(--gold);    border-color: var(--gold);    transform: scale(1.4); }
-.pdot.aus  { background: var(--sage-dk); border-color: var(--sage-dk); transform: scale(1.4); }
+.pdot.aus  { background: var(--crimson); border-color: var(--crimson); transform: scale(1.4); }
 
 /* ── Info strip ── */
 .info-strip {
@@ -206,9 +209,9 @@ html, body {
   text-align: center;
 }
 .info-val {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'IM Fell English', serif;
   font-size: 1.5rem;
-  color: var(--sage-lt);
+  color: var(--gold);
   line-height: 1;
 }
 .info-lbl {
@@ -226,7 +229,7 @@ html, body {
 
 /* ── Rounds display ── */
 .rounds-display {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'IM Fell English', serif;
   font-size: 0.85rem;
   color: rgba(184,212,188,0.5);
   letter-spacing: 0.1em;
@@ -248,8 +251,8 @@ html, body {
 }
 
 .btn-start {
-  background: linear-gradient(135deg, var(--sage-dk), #3A5A3E);
-  border: 1px solid rgba(122,158,126,0.4);
+  background: linear-gradient(135deg, var(--navy), #0e1830);
+  border: 1px solid rgba(201,137,58,0.4);
   border-radius: 50px;
   padding: 14px 48px;
   color: var(--mist);
@@ -259,7 +262,7 @@ html, body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 4px 24px rgba(74,107,78,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  box-shadow: 0 4px 24px rgba(26,39,68,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
   transition: all 0.2s;
   min-width: 180px;
 }
@@ -321,7 +324,7 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background: rgba(44,58,46,0.95);
+  background: rgba(26,39,68,0.97);
   animation: fadeIn 1s ease;
 }
 .done-msg.show { display: flex; }
@@ -329,12 +332,12 @@ html, body {
   font-family: 'Playfair Display', serif;
   font-weight: 300;
   font-size: 2rem;
-  color: var(--sage-lt);
+  color: var(--gold);
 }
 .done-sub {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'IM Fell English', serif;
   font-style: italic;
-  color: var(--gold);
+  color: var(--sage-lt);
   opacity: 0.8;
   font-size: 1rem;
 }
@@ -348,7 +351,7 @@ html, body {
 .btn-again {
   margin-top: 16px;
   background: none;
-  border: 1px solid rgba(122,158,126,0.4);
+  border: 1px solid rgba(201,137,58,0.4);
   border-radius: 30px;
   padding: 10px 32px;
   color: var(--sage-lt);
@@ -377,7 +380,7 @@ html, body {
 <!-- Wimpelkette -->
 <div class="wimpel">
   <svg viewBox="0 0 800 36" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <line x1="0" y1="4" x2="800" y2="4" stroke="#7A9E7E" stroke-width="0.6" opacity="0.4"/>
+    <line x1="0" y1="4" x2="800" y2="4" stroke="#c9893a" stroke-width="0.6" opacity="0.4"/>
     <g id="wFlags"></g>
   </svg>
 </div>
@@ -458,7 +461,7 @@ html, body {
 <script>
 // ── Wimpelkette ──
 const wFlagsEl = document.getElementById('wFlags');
-const wColors = ['#7A9E7E','#C4A35A','#4A6B4E','#B8D4BC','#3D4A3E'];
+const wColors = ['#b8294a','#c9893a','#1a2744','#6a3f7a','#5e8a5a'];
 for (let i = 0; i < 40; i++) {
   const x = i * 21;
   const tri = document.createElementNS('http://www.w3.org/2000/svg','polygon');

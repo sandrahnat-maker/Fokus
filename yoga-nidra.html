@@ -2,24 +2,22 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#fdf6ee">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yoga Nidra · Tiefenentspannung</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IM+Fell+English:ital@0;1&family=Raleway:wght@400;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --crimson: #8B1A1A;
-    --gold: #C9A84C;
-    --gold-light: #E8D5A3;
-    --navy: #1A2744;
-    --violet: #4A2C6E;
-    --sage: #6B8C6B;
-    --cream: #F5EED8;
-    --dark: #0D1520;
-  }
+  :root{--bg:#fdf6ee;--card:#fffbf5;--text:#1e1208;--muted:rgba(30,18,8,.45);
+  --crimson:#b8294a;--crimson-l:rgba(184,41,74,.10);
+  --gold:#c9893a;--gold-l:rgba(201,137,58,.12);
+  --navy:#1a2744;--navy-l:rgba(26,39,68,.07);
+  --sage:#5e8a5a;--sage-l:rgba(94,138,90,.10);
+  --violet:#6a3f7a;--border-col:rgba(184,41,74,.15);--shadow:rgba(30,18,8,.08);
+  --up-col:#b8294a;--down-col:#5e8a5a;--same-col:#888;}
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
+  body {background-image:repeating-linear-gradient(-4deg,rgba(184,41,74,.022) 0px,rgba(184,41,74,.022) 32px,transparent 32px,transparent 64px,rgba(201,137,58,.018) 64px,rgba(201,137,58,.018) 96px,transparent 96px,transparent 128px);
     background: var(--dark);
     color: var(--cream);
     font-family: 'Raleway', sans-serif;
@@ -255,9 +253,9 @@
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    box-shadow: 0 4px 20px rgba(139,26,26,0.4);
+    box-shadow: 0 4px 20px rgba(184,41,74,0.4);
   }
-  .btn-main:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(139,26,26,0.5); }
+  .btn-main:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(184,41,74,0.5); }
   .btn-main:active { transform: translateY(0); }
   .btn-main:disabled { opacity: 0.4; cursor: default; transform: none; }
 
@@ -311,6 +309,8 @@
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
   .hidden { display: none !important; }
+
+body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#b8294a 0,#b8294a 20%,#c9893a 20%,#c9893a 40%,#1a2744 40%,#1a2744 60%,#6a3f7a 60%,#6a3f7a 80%,#5e8a5a 80%,#5e8a5a 100%);z-index:100;opacity:.7;}
 </style>
 </head>
 <body>
@@ -324,7 +324,7 @@
 <!-- Wimpelkette -->
 <div class="wimpel">
   <svg viewBox="0 0 800 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <line x1="0" y1="5" x2="800" y2="5" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+    <line x1="0" y1="5" x2="800" y2="5" stroke="#c9893a" stroke-width="0.8" opacity="0.5"/>
     <g id="flags"></g>
   </svg>
 </div>
@@ -376,7 +376,7 @@
 
 <script>
 // ── Wimpelkette ─────────────────────────────────────────
-const colors = ['#8B1A1A','#C9A84C','#1A2744','#4A2C6E','#6B8C6B'];
+const colors = ['#b8294a','#c9893a','#1a2744','#6a3f7a','#5e8a5a'];
 const flagsEl = document.getElementById('flags');
 for (let i = 0; i < 32; i++) {
   const x = i * 26;
@@ -542,7 +542,7 @@ try {
 // Show warning if no speech support
 if (!synth) {
   const vol = document.querySelector('.vol-row');
-  if (vol) vol.innerHTML = '<span style="font-size:.8rem;color:#C9A84C;opacity:.7;">⚠️ Sprachausgabe nicht verfügbar — Texte erscheinen trotzdem auf dem Bildschirm.</span>';
+  if (vol) vol.innerHTML = '<span style="font-size:.8rem;color:#c9893a;opacity:.7;">⚠️ Sprachausgabe nicht verfügbar — Texte erscheinen trotzdem auf dem Bildschirm.</span>';
 }
 
 function getGermanVoice() {

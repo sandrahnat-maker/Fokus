@@ -2,34 +2,22 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#fdf6ee">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>💊 Rudi, Timmy & Lotte – Medikamentenplan</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IM+Fell+English:ital@0;1&family=Raleway:wght@400;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --rudi: #2563a8;
-    --rudi-light: #dbeafe;
-    --rudi-mid: #93c5fd;
-    --timmy: #c4704a;
-    --timmy-light: #fdf0e0;
-    --timmy-mid: #e8b86a;
-    --ok: #7a9a5a;
-    --ok-light: #edf5e8;
-    --warn: #c8943a;
-    --warn-light: #fdf6e0;
-    --danger: #c4704a;
-    --danger-light: #fde8dc;
-    --bg: #faf3e8;
-    --card: #fffdf8;
-    --text: #2e2010;
-    --muted: rgba(20,10,0,0.58);
-    --border: rgba(180,130,70,0.15);
-  }
+  :root{--bg:#fdf6ee;--card:#fffbf5;--text:#1e1208;--muted:rgba(30,18,8,.45);
+  --crimson:#b8294a;--crimson-l:rgba(184,41,74,.10);
+  --gold:#c9893a;--gold-l:rgba(201,137,58,.12);
+  --navy:#1a2744;--navy-l:rgba(26,39,68,.07);
+  --sage:#5e8a5a;--sage-l:rgba(94,138,90,.10);
+  --violet:#6a3f7a;--border-col:rgba(184,41,74,.15);--shadow:rgba(30,18,8,.08);}
   html { font-size: 18px; }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
+  body {background:var(--bg);background-image:repeating-linear-gradient(-4deg,rgba(184,41,74,.022) 0px,rgba(184,41,74,.022) 32px,transparent 32px,transparent 64px,rgba(201,137,58,.018) 64px,rgba(201,137,58,.018) 96px,transparent 96px,transparent 128px);
     font-family: 'Cormorant Garamond', Georgia, serif;
     background: var(--bg);
     color: var(--text);
@@ -37,13 +25,13 @@
   }
 
   header {
-    background: linear-gradient(135deg,#f5ede0,#faf3e8);
+    background: linear-gradient(135deg,#f5ede0,#fdf6ee);
     color: var(--text);
     padding: 1.2rem 1.2rem 1rem;
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid var(--border);
-    box-shadow: 0 1px 8px rgba(180,120,40,0.07);
+    box-shadow: 0 1px 8px rgba(30,18,8,.08);
   }
 
   header::before {
@@ -323,7 +311,7 @@
     padding: 0.3rem 0.7rem;
     border-radius: 8px;
     border: 1px solid var(--border);
-    background: white;
+    background:var(--card);
     color: var(--muted);
     cursor: pointer;
     transition: all 0.15s;
@@ -359,7 +347,7 @@
   .modal-overlay.active { display: flex; }
 
   .modal {
-    background: white;
+    background:var(--card);
     border-radius: 16px;
     padding: 1.5rem;
     width: 90%;
@@ -448,6 +436,8 @@
     .status-block { min-width: 100px; }
     .days-left { font-size: 1.3rem; }
   }
+
+body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#b8294a 0,#b8294a 20%,#c9893a 20%,#c9893a 40%,#1a2744 40%,#1a2744 60%,#6a3f7a 60%,#6a3f7a 80%,#5e8a5a 80%,#5e8a5a 100%);z-index:100;opacity:.7;}
 </style>
 </head>
 <body>

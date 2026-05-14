@@ -2,14 +2,20 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#fdf6ee">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Weidlingbach</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IM+Fell+English:ital@0;1&family=Raleway:wght@400;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#faf3e8;--white:#fffdf8;--text:#2e2010;--muted:rgba(20,10,0,0.55);--gold:#c8943a;--sage:#7a9a5a;--terra:#c4704a;--lav:#9a7ab8;--border:rgba(180,130,70,0.15);}
+:root{--bg:#fdf6ee;--card:#fffbf5;--text:#1e1208;--muted:rgba(30,18,8,.45);
+  --crimson:#b8294a;--crimson-l:rgba(184,41,74,.10);
+  --gold:#c9893a;--gold-l:rgba(201,137,58,.12);
+  --navy:#1a2744;--navy-l:rgba(26,39,68,.07);
+  --sage:#5e8a5a;--sage-l:rgba(94,138,90,.10);
+  --violet:#6a3f7a;--border-col:rgba(184,41,74,.15);--shadow:rgba(30,18,8,.08);}
 html{font-size:18px;}*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-body{background:var(--bg);font-family:"Cormorant Garamond",Georgia,serif;color:var(--text);padding-bottom:5rem;}
-header{background:linear-gradient(135deg,#f5ede0,#faf3e8);border-bottom:1px solid var(--border);padding:1rem 1.1rem .8rem;text-align:center;box-shadow:0 1px 8px rgba(180,120,40,0.07);}
+body{background-image:repeating-linear-gradient(-4deg,rgba(184,41,74,.022) 0px,rgba(184,41,74,.022) 32px,transparent 32px,transparent 64px,rgba(201,137,58,.018) 64px,rgba(201,137,58,.018) 96px,transparent 96px,transparent 128px);background:var(--bg);font-family:"Cormorant Garamond",Georgia,serif;color:var(--text);padding-bottom:5rem;}
+header{background:linear-gradient(135deg,#f5ede0,#fdf6ee);border-bottom:1px solid var(--border);padding:1rem 1.1rem .8rem;text-align:center;box-shadow:0 1px 8px rgba(30,18,8,.08);}
 .ht{font-family:"Playfair Display",serif;font-size:22px;font-style:italic;color:var(--text);}
 .hs{font-size:13px;color:var(--muted);font-style:italic;margin-top:.2rem;}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;padding:.9rem .9rem .5rem;}
@@ -31,9 +37,11 @@ header{background:linear-gradient(135deg,#f5ede0,#faf3e8);border-bottom:1px soli
 .dbtns{display:grid;grid-template-columns:1fr 1fr;gap:.25rem;flex-shrink:0;width:128px;}
 .db{padding:.3rem .2rem;border-radius:6px;border:1.5px solid var(--border);background:var(--bg);font-size:12px;cursor:pointer;font-family:"Cormorant Garamond",serif;color:var(--muted);text-align:center;transition:all .15s;}
 .db.on{color:#fff;}.db.b.on{background:var(--sage);border-color:var(--sage);}.db.v.on{background:var(--gold);border-color:var(--gold);}.db.s.on{background:var(--lav);border-color:var(--lav);}.db.w.on{background:var(--terra);border-color:var(--terra);}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);padding:.5rem 0;box-shadow:0 -2px 12px rgba(180,120,40,0.07);}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);padding:.5rem 0;box-shadow:0 -2px 12px rgba(30,18,8,.08);}
 .nb{display:flex;flex-direction:column;align-items:center;gap:.2rem;background:none;border:none;cursor:pointer;padding:.35rem 0;font-family:"Cormorant Garamond",serif;}
 .ni{font-size:1.2rem;}.nl{font-size:11px;color:var(--muted);}.nb.on .nl{color:var(--gold);}
+
+body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#b8294a 0,#b8294a 20%,#c9893a 20%,#c9893a 40%,#1a2744 40%,#1a2744 60%,#6a3f7a 60%,#6a3f7a 80%,#5e8a5a 80%,#5e8a5a 100%);z-index:100;opacity:.7;}
 </style>
 </head>
 <body>

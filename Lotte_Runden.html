@@ -36,9 +36,11 @@ body{background:var(--bg);font-family:"Raleway",sans-serif;color:var(--text);min
 .header-title{font-family:"Playfair Display",serif;font-size:22px;font-style:italic;color:var(--text);line-height:1.2;}
 .header-sub{font-family:"IM Fell English",serif;font-size:14px;font-style:italic;color:var(--muted);margin-top:.15rem;}
 .rainbow-stripe{height:5px;background:repeating-linear-gradient(90deg,var(--crimson) 0%,var(--crimson) 20%,var(--gold) 20%,var(--gold) 40%,var(--navy) 40%,var(--navy) 60%,var(--violet) 60%,var(--violet) 80%,var(--sage) 80%,var(--sage) 100%);opacity:.6;margin-bottom:.2rem;}
+
+body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#b8294a 0,#b8294a 20%,#c9893a 20%,#c9893a 40%,#1a2744 40%,#1a2744 60%,#6a3f7a 60%,#6a3f7a 80%,#5e8a5a 80%,#5e8a5a 100%);z-index:100;opacity:.7;}
 </style>
 <style>
-header{background:linear-gradient(135deg,#f5ede0,#faf3e8);border-bottom:1px solid var(--border);padding:1rem 1.2rem .9rem;text-align:center;box-shadow:0 1px 8px rgba(180,120,40,0.07);}
+header{background:rgba(255,251,245,.95);border-bottom:1px solid var(--border-col);padding:.9rem 1.2rem .8rem;text-align:center;}
 .ht{font-family:"Playfair Display",serif;font-size:22px;font-style:italic;color:var(--text);}
 .hs{font-size:13px;color:var(--muted);font-style:italic;margin-top:.2rem;}
 
