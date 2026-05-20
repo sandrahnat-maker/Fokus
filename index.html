@@ -220,6 +220,34 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;backgro
 .kdot{position:absolute;animation:fallen 1.5s ease-in forwards;}
 /* SEP */
 .vk-sep{text-align:center;padding:.8rem;font-size:1rem;opacity:.3;letter-spacing:.3em;user-select:none;}
+/* FOKUS KATEGORIEN */
+.fokus-karte{margin:1rem 1rem 0;background:var(--card);border:1px solid var(--border-col);border-radius:16px;box-shadow:0 2px 12px var(--shadow);overflow:hidden;}
+.fokus-karte::before{content:'';display:block;height:4px;background:linear-gradient(90deg,var(--gold),var(--crimson),var(--violet),var(--sage),var(--navy));}
+.fokus-head{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem .3rem;cursor:pointer;}
+.fokus-head-label{font-family:'Raleway',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;}
+.fokus-toggle-btn{font-family:'Caveat',cursive;font-size:.85rem;color:rgba(30,18,8,.4);background:none;border:none;cursor:pointer;}
+.fokus-body{padding:.3rem 1rem .8rem;display:none;}
+.fokus-bühne-label{font-family:'IM Fell English',serif;font-size:.85rem;color:rgba(30,18,8,.5);font-style:italic;margin-bottom:.5rem;}
+.fokus-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.8rem;}
+.fokus-chip{padding:.25rem .75rem;border-radius:20px;border:1px solid var(--border-col);background:var(--bg);font-family:'Raleway',sans-serif;font-size:.78rem;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;}
+.fokus-chip:active{transform:scale(.97);}
+.fokus-chip.aktiv{background:var(--gold);border-color:var(--gold);color:white;}
+.fokus-kat-liste{display:flex;flex-direction:column;gap:.3rem;}
+.fokus-kat-item{display:flex;align-items:flex-start;gap:.5rem;padding:.35rem .6rem;border-radius:10px;border:1px solid transparent;transition:border-color .2s;}
+.fokus-kat-item.highlight{border-color:rgba(201,137,58,.35);background:rgba(201,137,58,.04);}
+.fokus-kat-emoji{font-size:1rem;width:22px;flex-shrink:0;padding-top:2px;}
+.fokus-kat-name{font-family:'Raleway',sans-serif;font-size:.78rem;font-weight:700;color:var(--text);min-width:80px;padding-top:3px;}
+.fokus-kat-input{flex:1;border:none;border-bottom:1px dashed rgba(30,18,8,.15);outline:none;background:transparent;font-family:'Caveat',cursive;font-size:.95rem;color:var(--text);padding:.1rem .2rem;}
+.fokus-kat-input::placeholder{color:rgba(30,18,8,.25);font-style:italic;}
+.fokus-kat-dot{width:6px;height:6px;border-radius:50%;background:rgba(30,18,8,.12);flex-shrink:0;margin-top:6px;transition:background .3s;}
+.fokus-kat-dot.gefüllt{background:var(--gold);}
+.fokus-save-row{display:flex;align-items:center;gap:.5rem;margin-top:.7rem;}
+.fokus-save-btn{background:var(--crimson);color:white;border:none;border-radius:20px;padding:.3rem .9rem;font-family:'Raleway',sans-serif;font-weight:700;font-size:.8rem;cursor:pointer;}
+.fokus-gespeichert{font-family:'Caveat',cursive;font-size:.85rem;color:var(--sage);display:none;}
+/* TASK FOKUS HIGHLIGHT */
+.task-item.fokus-match{background:rgba(201,137,58,.07);border-left:3px solid var(--gold);padding-left:calc(1rem - 3px);}
+.task-item.fokus-match .task-name{color:var(--brown,#5a3a1a);}
+.task-item.fokus-dimmed{opacity:.35;}
 </style>
 </head>
 <body>
@@ -386,6 +414,30 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:3px;backgro
   <div class="impuls-label">✦ Mein heutiger Impuls</div>
   <div class="impuls-text laden" id="impulsText">Einen Moment …</div>
   <div class="impuls-refresh"><button class="impuls-refresh-btn" onclick="ladeImpuls(true)">↺ neuer Impuls</button></div>
+</div>
+
+<!-- FOKUS KATEGORIEN -->
+<div class="fokus-karte">
+  <div class="fokus-head" onclick="toggleFokusBlock()">
+    <span class="fokus-head-label">✦ Mein heutiger Fokus</span>
+    <span class="fokus-toggle-btn" id="fokusBtnLabel">aufklappen ↓</span>
+  </div>
+  <div class="fokus-body" id="fokusBody">
+    <div class="fokus-bühne-label">Welcher Bereich bekommt heute die Hauptbühne?</div>
+    <div class="fokus-chips">
+      <button class="fokus-chip" onclick="waehleFokus(this,'Tiere')">🐾 Tiere</button>
+      <button class="fokus-chip" onclick="waehleFokus(this,'Unterrichten')">📚 Unterrichten</button>
+      <button class="fokus-chip" onclick="waehleFokus(this,'Uni')">🎓 Uni</button>
+      <button class="fokus-chip" onclick="waehleFokus(this,'Zuhause')">🏡 Zuhause</button>
+      <button class="fokus-chip" onclick="waehleFokus(this,'Körper')">🌿 Körper</button>
+      <button class="fokus-chip" onclick="waehleFokus(this,'Psyche')">✨ Psyche</button>
+    </div>
+    <div class="fokus-kat-liste" id="fokusKatListe"></div>
+    <div class="fokus-save-row">
+      <button class="fokus-save-btn" onclick="speichereFokus()">✦ festhalten</button>
+      <span class="fokus-gespeichert" id="fokusGespeichert">gespeichert ✦</span>
+    </div>
+  </div>
 </div>
 
 <!-- PHASEN TABS -->
@@ -695,7 +747,9 @@ function renderPhase(p){
       ? '<span style="font-size:.6rem;color:rgba(26,10,0,.38);background:rgba(26,10,0,.05);border:1px solid rgba(26,10,0,.08);border-radius:8px;padding:.1rem .45rem;white-space:nowrap;flex-shrink:0;align-self:flex-start;margin-top:4px;line-height:1.5;">'+(z.flex?'~\u202f':'⏰\u202f')+minToStr(z.startMin)+(z.durMin?' · '+durStr(z.durMin):'')+'</span>'
       : '';
     var zirkusHtml=t.zirkus?'<div class="task-zirkus">'+t.zirkus+'</div>':'';
-    html+='<div class="task-item'+(done?' done':'')+'" onclick="toggleTask(\''+p+'\','+i+')">'
+    var fokusMatch=taskMatchesFokus(t);
+    var fokusKlasse=fokusMatch===true?' fokus-match':fokusMatch===false?' fokus-dimmed':'';
+    html+='<div class="task-item'+(done?' done':'')+fokusKlasse+'" onclick="toggleTask(\''+p+'\','+i+')">'
       +'<div class="task-check"></div>'
       +'<div style="flex:1;min-width:0;"><div class="task-name">'+t.name+'</div><div class="task-note">'+t.note+'</div>'+zirkusHtml+linksHtml+'</div>'
       +zeitBadge
@@ -909,6 +963,117 @@ function hakeNaechsteAb(){
   },400);
 }
 // ───────────────────────────────────────────────────────────────────
+
+// ── FOKUS KATEGORIEN ──────────────────────────────────────────────
+var FOKUS_KATS=[
+  {key:'Tiere',emoji:'🐾',ph:'Lotte, Rudi, Timmy — was brauchen sie?'},
+  {key:'Unterrichten',emoji:'📚',ph:'Welcher Kurs, welche Vorbereitung?'},
+  {key:'Uni',emoji:'🎓',ph:'Lektüre, Aufgabe, Reflexion?'},
+  {key:'Zuhause',emoji:'🏡',ph:'Haushalt, Weidlingbach, etwas Schönes?'},
+  {key:'Körper',emoji:'🌿',ph:'Bewegung, Ernährung, Schulter, Schlaf?'},
+  {key:'Psyche',emoji:'✨',ph:'Was brauche ich heute innerlich?'}
+];
+
+// Mapping: task.cat → Fokus-Kategorie-Key
+var CAT_MAP={
+  'tiere':'Tiere',
+  'arbeit':'Unterrichten',
+  'lernen':'Uni',
+  'zuhause':'Zuhause',
+  'körper':'Körper','pflege':'Körper','ernährung':'Körper',
+  'seele':'Psyche'
+};
+
+var aktiverFokus=null;
+var fokusOffen=false;
+
+function toggleFokusBlock(){
+  fokusOffen=!fokusOffen;
+  document.getElementById('fokusBody').style.display=fokusOffen?'block':'none';
+  document.getElementById('fokusBtnLabel').textContent=fokusOffen?'zuklappen ↑':'aufklappen ↓';
+  if(fokusOffen)renderFokusKats();
+}
+
+function renderFokusKats(){
+  var liste=document.getElementById('fokusKatListe');
+  liste.innerHTML='';
+  for(var i=0;i<FOKUS_KATS.length;i++){
+    var k=FOKUS_KATS[i];
+    var val='';try{val=localStorage.getItem('fokus_kat_'+k.key)||'';}catch(e){}
+    var hl=aktiverFokus===k.key?' highlight':'';
+    var filled=val.trim().length>0?' gefüllt':'';
+    var item=document.createElement('div');
+    item.className='fokus-kat-item'+hl;
+    item.id='fokusItem_'+k.key;
+    item.innerHTML='<span class="fokus-kat-emoji">'+k.emoji+'</span>'
+      +'<span class="fokus-kat-name">'+k.key+'</span>'
+      +'<input class="fokus-kat-input" id="fokusInput_'+k.key+'" type="text" placeholder="'+k.ph+'" value="'+val.replace(/"/g,'&quot;')+'" oninput="fokusInputChanged(\''+k.key+'\')">'
+      +'<span class="fokus-kat-dot'+filled+'" id="fokusDot_'+k.key+'"></span>';
+    liste.appendChild(item);
+  }
+  // Fokus-Chip wiederherstellen
+  var savedFokus='';try{savedFokus=localStorage.getItem('fokus_haupt')||'';}catch(e){}
+  if(savedFokus){
+    aktiverFokus=savedFokus;
+    var chips=document.querySelectorAll('.fokus-chip');
+    for(var j=0;j<chips.length;j++){
+      if(chips[j].textContent.indexOf(savedFokus)!==-1)chips[j].classList.add('aktiv');
+    }
+    highlightFokusKat(savedFokus);
+  }
+}
+
+function fokusInputChanged(key){
+  var inp=document.getElementById('fokusInput_'+key);
+  var dot=document.getElementById('fokusDot_'+key);
+  if(inp&&dot){dot.className='fokus-kat-dot'+(inp.value.trim().length>0?' gefüllt':'');}
+}
+
+function waehleFokus(btn,name){
+  var chips=document.querySelectorAll('.fokus-chip');
+  for(var i=0;i<chips.length;i++)chips[i].classList.remove('aktiv');
+  if(aktiverFokus===name){
+    aktiverFokus=null;
+    try{localStorage.removeItem('fokus_haupt');}catch(e){}
+    for(var j=0;j<FOKUS_KATS.length;j++){
+      var el=document.getElementById('fokusItem_'+FOKUS_KATS[j].key);
+      if(el)el.classList.remove('highlight');
+    }
+  }else{
+    btn.classList.add('aktiv');
+    aktiverFokus=name;
+    try{localStorage.setItem('fokus_haupt',name);}catch(e){}
+    highlightFokusKat(name);
+  }
+  // Tasks in aktueller Phase neu rendern mit Highlighting
+  if(currentPhase&&currentPhase!=='vormittag')renderPhase(currentPhase);
+}
+
+function highlightFokusKat(name){
+  for(var i=0;i<FOKUS_KATS.length;i++){
+    var el=document.getElementById('fokusItem_'+FOKUS_KATS[i].key);
+    if(el){
+      if(FOKUS_KATS[i].key===name)el.classList.add('highlight');
+      else el.classList.remove('highlight');
+    }
+  }
+}
+
+function speichereFokus(){
+  for(var i=0;i<FOKUS_KATS.length;i++){
+    var inp=document.getElementById('fokusInput_'+FOKUS_KATS[i].key);
+    if(inp)try{localStorage.setItem('fokus_kat_'+FOKUS_KATS[i].key,inp.value);}catch(e){}
+  }
+  var s=document.getElementById('fokusGespeichert');
+  s.style.display='inline';
+  setTimeout(function(){s.style.display='none';},2000);
+}
+
+function taskMatchesFokus(t){
+  if(!aktiverFokus||!t.cat)return null;
+  return CAT_MAP[t.cat]===aktiverFokus;
+}
+// ─────────────────────────────────────────────────────────────────
 
 // INIT
 ladeImpuls(false);
