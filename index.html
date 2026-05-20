@@ -1076,6 +1076,26 @@ function taskMatchesFokus(t){
 // ─────────────────────────────────────────────────────────────────
 
 // INIT
+// Epiktet-Notiz vorausfüllen (nur wenn noch keine Notiz vorhanden)
+(function(){
+  try{
+    var existing=localStorage.getItem('notizen_v1')||'';
+    if(!existing){
+      var notiz='✦ Epiktets Frage — ' + (new Date().getDate())+'.'+(new Date().getMonth()+1)+'.'+(new Date().getFullYear()) + '\n\n'
+        +'"Handle ich gerade aus Freiheit — oder aus Angst?"\n\n'
+        +'Meine Ängste, die ich erkenne:\n'
+        +'— Angst, etwas zu vergessen\n'
+        +'— Angst, verurteilt zu werden\n'
+        +'— Angst, zu spät zu kommen\n'
+        +'— Angst, nicht gepflegt genug zu sein\n'
+        +'— Angst, zu dick zu sein\n\n'
+        +'Was ich weiß: Der Richter bin ich. Und nur ich.\n'
+        +'Was ich spüre, wenn ich fließe: beim Unterricht planen — das ist meins.\n'
+        +'Das gute Leben: Fröhlichkeit, das Schöne entdecken, die Natur.';
+      localStorage.setItem('notizen_v1', notiz);
+    }
+  }catch(e){}
+})();
 ladeImpuls(false);
 zeigePhase(getPhaseByTime());
 renderNaechste();
