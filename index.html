@@ -872,7 +872,7 @@ function toggleTask(p,i){
 }
 
 function updateWaveTea(){
-  var teas=["Hibiskus & Hagebutte","Grüner Tee & Ingwer","Weißdorn","Brennnessel & Löwenzahn","Rooibos & Zimt","Lavendel & Kamille","Artischocke & Mariendistel"];
+  var teas=["Hibiskus & Hagebutte","Grüner Tee & Ingwer","Kurkuma-Gewürztee","Brennnessel & Löwenzahn","Rooibos & Zimt","Lavendel & Kamille","Artischocke & Mariendistel"];
   var t='🍵 '+teas[(today.getDay()+6)%7];
   ['morgen','vormittag','abend'].forEach(function(p){var el=document.getElementById('tab-tee-'+p);if(el)el.textContent=t;});
   // Zeiten je Wochentag aktualisieren
@@ -914,7 +914,7 @@ function ladeImpuls(force){
   var saved=localStorage.getItem(impulsKey);
   if(saved&&!force){var el=document.getElementById('impulsText');el.textContent=saved;el.className='impuls-text';return;}
   var el=document.getElementById('impulsText');el.className='impuls-text laden';el.textContent='Einen Moment …';
-  var teas=["Hibiskus & Hagebutte","Grüner Tee & Ingwer","Weißdorn","Brennnessel & Löwenzahn","Rooibos & Zimt","Lavendel & Kamille","Artischocke & Mariendistel"];
+  var teas=["Hibiskus & Hagebutte","Grüner Tee & Ingwer","Kurkuma-Gewürztee","Brennnessel & Löwenzahn","Rooibos & Zimt","Lavendel & Kamille","Artischocke & Mariendistel"];
   var tea=teas[today.getDay()];var h=today.getHours();var tageszeit=h<11?'Morgen':h<17?'Mittag':'Abend';
   var jahreszeit=['Winter','Winter','Frühling','Frühling','Frühling','Sommer','Sommer','Sommer','Herbst','Herbst','Herbst','Winter'][today.getMonth()];
   fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:'Du bist Sandras stiller innerer Begleiter. Sandra ist DaZ-Lehrerin und Künstlerin in Wien. Ihr Lebensmotto: Dieses Leben wähle ich — in fröhlicher Gelassenheit.\nSchreib einen einzigen poetischen Satz als Tages-Intention — wie ein Atemzug. Maximal 20 Wörter. Auf Deutsch. Kein Anführungszeichen.',messages:[{role:'user',content:DAYS_DE[today.getDay()]+', '+jahreszeit+', '+tageszeit+'. Tee: '+tea+'.'}]})}).then(function(r){return r.json();}).then(function(data){var text=data.content&&data.content.find&&data.content.find(function(b){return b.type==='text';});text=text?text.text.trim().replace(/^["„]|[""]$/g,''):'';if(text){localStorage.setItem(impulsKey,text);el.textContent=text;el.className='impuls-text';}}).catch(function(){var f=['In meiner Phantasie tanzend die ganze Welt umarmen.','Dieses Leben wähle ich — in fröhlicher Gelassenheit.','Heute darf alles leicht sein.','Was kommt, darf kommen. Was geht, darf gehen.','Geh langsam. Fühl mehr.'];el.textContent=f[Math.floor(Math.random()*f.length)];el.className='impuls-text';});
