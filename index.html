@@ -704,7 +704,7 @@ function getUnterwegsZeit(){return UNTERWEGS_ZEITEN[today.getDay()]||null;}
 var PHASES={
   morgen:{mood:null,tasks:[
     {name:"Euthyrox",note:"noch im Bett",zirkus:"Tablette. Noch im Bett. Immerhin.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Rückenübungen",note:"noch im Bett",zirkus:"Rücken. Noch im Bett. Du weißt warum.",cat:"körper",dur:10,links:[{href:"Ruecken.html",label:"Rücken"}]},
+    {name:"Rückenübungen",note:"noch im Bett",zirkus:"Du kannst stolz auf dich sein!",cat:"körper",dur:10,links:[{href:"Ruecken.html",label:"Rücken"}]},
     {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",zirkus:"Rudi wartet. Und er ist nicht geduldig.",cat:"tiere",dur:3,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
     {name:"Blutdruck messen",note:"nüchtern, ruhig · Werte notieren 📋",zirkus:"Es wird schon...",cat:"körper",dur:5,links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
     {name:"Gewicht messen",note:"nüchtern",zirkus:"Auch das wird schon...",cat:"körper",dur:2,links:[{href:"Wiegen.html",label:"Gewicht"}]},
@@ -713,8 +713,7 @@ var PHASES={
     {name:"Tee zubereiten",note:"Tee des Tages 🍵",zirkus:"Der ist gut für dich und deinen Blutdruck!!!",cat:"ernährung",dur:5,links:[{href:"tee-des-tages.html",label:"Tee"}]},
     {name:"Frühstück",note:"bewusst & ohne Zwang",zirkus:"Mach dir doch bitte deinen Porridge!",cat:"ernährung",dur:20,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
     {name:"Rosenwurz",note:"zum Frühstück — Adaptogen & Stressschutz 🌿",zirkus:"Das kleine Grüne. Wirkt angeblich. Vertrauen.",cat:"körper",dur:1,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Rudi füttern",note:"Futter & Schmusezeit 🐱",zirkus:"Rudi. Futter. Sonst wird er laut.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
-    {name:"Timmy füttern",note:"Schmusezeit 🐱",zirkus:"Timmy. Kurz. Er entscheidet wann es genug ist.",cat:"tiere",dur:5},
+    {name:"Rudi & Timmy füttern",note:"Futter & Schmusezeit 🐱🐱",zirkus:"Ich muss sie gerade nicht mögen — ich füttere sie trotzdem.",cat:"tiere",dur:10,links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
     {name:"Bad Früh",note:"FM4 oder Podcast 🎵",zirkus:"Du willst doch gut aussehen, oder?!",cat:"pflege",dur:15,links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
     {name:"Duschen",note:"warm & frisch in den Tag 🚿",zirkus:"Duschen. Du weißt, dass du es danach bereust wenn nicht.",cat:"pflege",dur:15},
     {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch 🐾",zirkus:"Sie liebt dich so sehr! Das willst du ihr doch nicht antun, oder!?",cat:"tiere",dur:30,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
@@ -736,20 +735,20 @@ var PHASES={
   abend:{mood:"Du bist zuhause. Die Natur wartet morgen wieder. 🌸",tasks:[
     {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",zirkus:"Training. Du hast es gewählt. Na dann.",cat:"körper",dur:25,links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
     {name:"Duschen",note:"nach dem Training 🚿",zirkus:"Duschen nach dem Training. Pflicht. Keine Diskussion.",cat:"pflege",dur:10},
-    {name:"Katzen füttern",note:"Rudi & Timmy — 18:00 🐱",zirkus:"18 Uhr. Rudi und Timmy wissen die Uhrzeit. Wirklich.",cat:"tiere",dur:5},
+    {name:"Katzen füttern",note:"Rudi & Timmy — 18:00 🐱",zirkus:"Ich muss sie gerade nicht mögen — ich füttere sie trotzdem.",cat:"tiere",dur:5},
     {name:"Abendessen",note:"schön kochen, bewusst genießen",zirkus:"Kochen. Oder zumindest etwas Warmes.",cat:"ernährung",dur:45,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
-    {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",zirkus:"Haushalt. Du hasst es. Es muss trotzdem sein. Leider.",cat:"zuhause",dur:20,links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
+    {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",zirkus:"Das ist auch Gestaltung für dein geliebtes Leben!",cat:"zuhause",dur:20,links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
     {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",zirkus:"Wichtig: Spaß haben! Wenn nötig, tanzt du ihnen etwas vor.",cat:"arbeit",dur:30,flex:true,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
     {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",zirkus:"Deadline naht? Dann wäre jetzt ein guter Moment.",cat:"lernen",dur:30,flex:true,links:[{href:"Lernplan.html",label:"Lernplan"}]},
     {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",zirkus:"Du willst Künstlerin sein??? Na dann.",cat:"seele",dur:45,flex:true},
-    {name:"Freizeit 🌸",note:"was auch immer sich gut anfühlt",zirkus:"Freizeit. Einfach so. Ohne Grund.",cat:"seele",dur:30,flex:true},
+    {name:"Freizeit 🌸",note:"was auch immer sich gut anfühlt",zirkus:"Entspannung!",cat:"seele",dur:30,flex:true},
     {name:"Lotte — Futter",note:"Abendportion",zirkus:"Sie freut sich schon SO darauf. Schau sie an.",cat:"tiere",dur:5},
     {name:"Alle Tiere — Medikamente",note:"Lotte + Rudi + Timmy Abendgabe 🐾🐱🐱",zirkus:"Alle drei. Jeden Abend. Du bist ihr Mensch.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
-    {name:"Bad Abend",note:"Loslassen, abschließen 🛁",zirkus:"Bad. Tag verabschieden. Endlich.",cat:"pflege",dur:20,links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
+    {name:"Bad Abend",note:"Loslassen, abschließen 🛁",zirkus:"Frisch ins Bett!",cat:"pflege",dur:20,links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
     {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium (Glycinat/Malat) 🌿",zirkus:"Tabletten. Dann schlafen. In dieser Reihenfolge.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
     {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",zirkus:"Handcreme. Fußcreme. Du machst das nie. Heute schon.",cat:"pflege",dur:5},
-    {name:"Lesen",note:"kein Handy — echtes Buch 📖",zirkus:"Buch. Kein Handy. Du weißt den Unterschied.",cat:"seele",dur:30,flex:true},
-    {name:"Schlafen",note:"früh genug, du weißt warum 🌙",zirkus:"Schlafen. Der Tag ist fertig. Du auch.",cat:"körper",dur:0},
+    {name:"Lesen",note:"kein Handy — echtes Buch 📖",zirkus:"Die Nahrung einer Künstlerin.",cat:"seele",dur:30,flex:true},
+    {name:"Schlafen",note:"früh genug, du weißt warum 🌙",zirkus:"Und morgen frisch und erholt fühlen.",cat:"körper",dur:0},
   ]}
 };
 
@@ -818,7 +817,7 @@ function renderPhase(p){
     var zeitInfo=uz
       ? '<div style="font-family:\'Caveat\',cursive;font-size:1rem;color:white;opacity:.85;margin-top:.3rem;">⏰ '+uz.von+' – '+uz.bis+' · '+uz.dauer+'</div>'
       : '<div style="font-family:\'Caveat\',cursive;font-size:1rem;color:white;opacity:.85;margin-top:.3rem;">Heute kein Unterricht 🌿</div>';
-    inhalt.innerHTML='<div class="unterwegs-karte"><span class="unterwegs-emoji">🌿</span><div class="unterwegs-satz">Ich unterrichte.<br>Ich bewege mich.<br>Ich bin lebendig.</div>'+zeitInfo+'</div>';
+    inhalt.innerHTML='<div class="unterwegs-karte"><span class="unterwegs-emoji">🌿</span><div class="unterwegs-satz">Ich unterrichte.<br>Ich bewege mich.<br>Ich bin lebendig.</div>'+zeitInfo+'<button onclick="zeigeNotizen()" style="margin-top:1rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:.4rem 1.1rem;font-size:.85rem;color:white;cursor:pointer;font-family:\'Raleway\',sans-serif;font-weight:600;letter-spacing:.04em;">📝 Erledigungen</button></div>';
     return;
   }
   var phase=PHASES[p];
@@ -972,6 +971,17 @@ function renderApps(phase){
 }
 function toggleAlleApps(){showingAllApps=!showingAllApps;renderApps(currentPhase||getPhaseByTime());}
 
+
+function zeigeNotizen(){
+  var el=document.getElementById('reflexBlockInhalt');
+  var badge=document.getElementById('reflexBlockBadge');
+  el.style.display='block';
+  badge.textContent='zuklappen ↑';
+  setTimeout(function(){
+    var notiz=document.getElementById('notizText');
+    if(notiz){notiz.scrollIntoView({behavior:'smooth',block:'center'});notiz.focus();}
+  },100);
+}
 function toggleReflexBlock(){
   var el=document.getElementById('reflexBlockInhalt');
   var badge=document.getElementById('reflexBlockBadge');
