@@ -355,7 +355,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
     <div style="font-size:3rem;margin-bottom:.8rem;animation:schaukeln 2.5s ease-in-out infinite;">🌺</div>
     <div class="innehalten-frage" style="font-size:2rem;color:var(--text);margin-bottom:1.5rem;">Mach doch<br>was du willst!</div>
     <input class="vk-overlay-input" id="innehaltенAntwort" type="text" placeholder="…" autocomplete="off" style="margin-bottom:1.2rem;font-size:1.1rem;">
-    <button class="los-btn" onclick="schliesseInnehalten()" style="font-size:1.2rem;padding:.9rem 2rem;">Eh! Ich mach das jetzt einfach... 🌸</button>
+    <button class="los-btn" onclick="schliesseInnehalten()" style="font-size:1.2rem;padding:.9rem 2rem;">Mach ich eh! 🌸</button>
     <button class="weiter-btn" onclick="schliesseInnehalten()">oder auch nicht</button>
   </div>
 </div>
@@ -703,52 +703,53 @@ function getUnterwegsZeit(){return UNTERWEGS_ZEITEN[today.getDay()]||null;}
 
 var PHASES={
   morgen:{mood:null,tasks:[
-    {name:"Euthyrox",note:"noch im Bett",zirkus:"Tablette. Noch im Bett. Immerhin.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Rückenübungen",note:"noch im Bett",zirkus:"Du kannst stolz auf dich sein!",cat:"körper",dur:10,links:[{href:"Ruecken.html",label:"Rücken"}]},
-    {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",zirkus:"Rudi wartet. Und er ist nicht geduldig.",cat:"tiere",dur:3,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Blutdruck messen",note:"nüchtern, ruhig · Werte notieren 📋",zirkus:"Es wird schon...",cat:"körper",dur:5,links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
-    {name:"Gewicht messen",note:"nüchtern",zirkus:"Auch das wird schon...",cat:"körper",dur:2,links:[{href:"Wiegen.html",label:"Gewicht"}]},
-    {name:"Knirscherschiene raus",note:"Kiefer entspannen",zirkus:"Schiene raus. Was auch immer du letzte Nacht durchgekämpft hast — es ist vorbei.",cat:"körper",dur:2,links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
-    {name:"Wasser trinken",note:"ein großes Glas",zirkus:"Wasser. Bevor der Kaffee kommt. Du schaffst das.",cat:"ernährung",dur:2},
-    {name:"Tee zubereiten",note:"Tee des Tages 🍵",zirkus:"Der ist gut für dich und deinen Blutdruck!!!",cat:"ernährung",dur:5,links:[{href:"tee-des-tages.html",label:"Tee"}]},
-    {name:"Frühstück",note:"bewusst & ohne Zwang",zirkus:"Mach dir doch bitte deinen Porridge!",cat:"ernährung",dur:20,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
-    {name:"Rosenwurz",note:"zum Frühstück — Adaptogen & Stressschutz 🌿",zirkus:"Das kleine Grüne. Wirkt angeblich. Vertrauen.",cat:"körper",dur:1,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Rudi & Timmy füttern",note:"Futter & Schmusezeit 🐱🐱",zirkus:"Ich muss sie gerade nicht mögen — ich füttere sie trotzdem.",cat:"tiere",dur:10,links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
-    {name:"Bad Früh",note:"FM4 oder Podcast 🎵",zirkus:"Du willst doch gut aussehen, oder?!",cat:"pflege",dur:15,links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
-    {name:"Duschen",note:"warm & frisch in den Tag 🚿",zirkus:"Duschen. Du weißt, dass du es danach bereust wenn nicht.",cat:"pflege",dur:15},
-    {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch 🐾",zirkus:"Sie liebt dich so sehr! Das willst du ihr doch nicht antun, oder!?",cat:"tiere",dur:30,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
-    {name:"Tiere — Medikamente geben",note:"Lotte + Rudi prüfen & geben",zirkus:"Mach schon! Das ist doch wirklich keine Hexerei.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-App"},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
-    {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",zirkus:"Rudi. Gabapentin. Er hasst es. Du machst es trotzdem.",cat:"tiere",dur:2,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Unterricht vorbereiten",note:"Was brauche ich heute?",zirkus:"Wichtig: Spaß haben! Wenn nötig, tanzt du ihnen etwas vor.",cat:"arbeit",dur:30,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste"}]},
-    {name:"Uni-Aufgabe — ein Schritt",note:"einen Schritt, nicht alles",zirkus:"Dein Traumjob! Das ist so ein riesengroßes Privileg!",cat:"lernen",dur:30,links:[{href:"Lernplan.html",label:"Lernplan"}]},
-    {name:"Tee & Pause",note:"wirklich innehalten 🍵",zirkus:"Pause. Echte Pause. Nicht Handy-Pause.",cat:"seele",dur:10,links:[{href:"tee-des-tages.html",label:"Tee"}]},
-    {name:"Schnell essen & fertig machen",note:"und raus! 🌺",zirkus:"Los. Du hast Hunger und einen Plan.",cat:"ernährung",dur:15,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
+    {name:"Euthyrox",note:"noch im Bett",zirkus:"Mein Leben beginnt mit einer Tablette. Schöner Anfang.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Rückenübungen",note:"noch im Bett",zirkus:"Ich forme meinen Rücken — noch bevor ich aufgestanden bin. Bin ich gut.",cat:"körper",dur:10,links:[{href:"Ruecken.html",label:"Rücken"}]},
+    {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",zirkus:"Rudi. Mein erster Pinselstrich des Tages.",cat:"tiere",dur:3,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
+    {name:"Blutdruck messen",note:"nüchtern, ruhig · Werte notieren 📋",zirkus:"Ich sammle Daten über mein eigenes Meisterwerk.",cat:"körper",dur:5,links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
+    {name:"Gewicht messen",note:"nüchtern",zirkus:"Kunst braucht Mut. Auch diese Art.",cat:"körper",dur:2,links:[{href:"Wiegen.html",label:"Gewicht"}]},
+    {name:"Knirscherschiene raus",note:"Kiefer entspannen",zirkus:"Vorhang auf. Die Nacht ist vorbei. Ich mach jetzt was Schönes draus.",cat:"körper",dur:2,links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
+    {name:"Wasser trinken",note:"ein großes Glas",zirkus:"Mein Leben, meine Leinwand — und die braucht Wasser.",cat:"ernährung",dur:2},
+    {name:"Tee zubereiten",note:"Tee des Tages 🍵",zirkus:"Ich wähle meinen Tee wie eine Farbe. Heute genau diese.",cat:"ernährung",dur:5,links:[{href:"tee-des-tages.html",label:"Tee"}]},
+    {name:"Frühstück",note:"bewusst & ohne Zwang",zirkus:"Der erste schöne Moment, den ich mir heute baue.",cat:"ernährung",dur:20,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
+    {name:"Rosenwurz",note:"zum Frühstück — Adaptogen & Stressschutz 🌿",zirkus:"Kleines grünes Ding. Großer Auftritt in meinem Leben.",cat:"körper",dur:1,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Rudi & Timmy füttern",note:"Futter & Schmusezeit 🐱🐱",zirkus:"Zwei kleine Kreaturen, deren Leben ich mitgestalte. Ob sie's verdient haben — egal.",cat:"tiere",dur:10,links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
+    {name:"Bad Früh",note:"FM4 oder Podcast 🎵",zirkus:"Ich arbeite an mir. Buchstäblich.",cat:"pflege",dur:15,links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
+    {name:"Duschen",note:"warm & frisch in den Tag 🚿",zirkus:"Frisch lackiert in den Tag. Ich bin mein eigenes Kunstwerk.",cat:"pflege",dur:15},
+    {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch 🐾",zirkus:"Mein Morgenspaziergang. Meine Stadt. Mein Kapitel eins.",cat:"tiere",dur:30,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+    {name:"Tiere — Medikamente geben",note:"Lotte + Rudi prüfen & geben",zirkus:"Pflege ist auch Gestaltung. Manchmal die wichtigste.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-App"},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
+    {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",zirkus:"Er hasst es. Ich mach's trotzdem. So sieht Liebe manchmal aus.",cat:"tiere",dur:2,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
+    {name:"Unterricht vorbereiten",note:"Was brauche ich heute?",zirkus:"Ich entwerfe Stunden, die Menschen weiterbringen. Das ist ziemlich viel.",cat:"arbeit",dur:30,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste"}]},
+    {name:"Uni-Aufgabe — ein Schritt",note:"einen Schritt, nicht alles",zirkus:"Ich baue gerade mein Berufsleben um. Ein Satz reicht heute.",cat:"lernen",dur:30,links:[{href:"Lernplan.html",label:"Lernplan"}]},
+    {name:"Tee & Pause",note:"wirklich innehalten 🍵",zirkus:"Auch Pausen gehören zum Werk. Die Profis wissen das.",cat:"seele",dur:10,links:[{href:"tee-des-tages.html",label:"Tee"}]},
+    {name:"Schnell essen & fertig machen",note:"und raus! 🌺",zirkus:"Der Tag gehört mir. Ich geh ihn jetzt abholen.",cat:"ernährung",dur:15,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
   ]},
   vormittag:{mood:null,tasks:[]},
   mittag:{mood:'',tasks:[]},
   nachmittag:{mood:'',tasks:[]},
   nachhause:{mood:null,tasks:[
-    {name:"Lotte raus 🌿",note:"sie zuerst — schlendernd, echtes Runterkommen",zirkus:"Sie liebt dich so sehr! Das willst du ihr doch nicht antun, oder!?",cat:"tiere",dur:25,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
-    {name:"Yoga Nidra 🧘",note:"20 Min. Tiefenentspannung — direkt nach dem Ankommen",zirkus:"Du wirst dich einfach großartig fühlen! ❤️",cat:"körper",dur:20,links:[{href:"yoga-nidra.html",label:"App öffnen"}]},
-    {name:"Atemübung 🫁",note:"4 sek ein · 6–8 sek aus · 5 Min. — senkt Blutdruck",zirkus:"Atmen. Langsam. Du machst das seit Jahren falsch.",cat:"körper",dur:5,links:[{href:"atemübung.html",label:"App öffnen"}]},
+    {name:"Lotte raus 🌿",note:"sie zuerst — schlendernd, echtes Runterkommen",zirkus:"Mein Übergang. Ich gestalte ihn — mit ihr, im Schlendern.",cat:"tiere",dur:25,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+    {name:"Yoga Nidra 🧘",note:"20 Min. Tiefenentspannung — direkt nach dem Ankommen",zirkus:"Ich pflege mich wie ein gutes Instrument. Das klingt dann auch besser.",cat:"körper",dur:20,links:[{href:"yoga-nidra.html",label:"App öffnen"}]},
+    {name:"Atemübung 🫁",note:"4 sek ein · 6–8 sek aus · 5 Min. — senkt Blutdruck",zirkus:"Atmen als Kunstform. Ich üb's.",cat:"körper",dur:5,links:[{href:"atemübung.html",label:"App öffnen"}]},
   ]},
   abend:{mood:"Du bist zuhause. Die Natur wartet morgen wieder. 🌸",tasks:[
-    {name:"Katzen füttern",note:"Rudi & Timmy — 18:00 🐱",zirkus:"Ich muss sie gerade nicht mögen — ich füttere sie trotzdem.",cat:"tiere",dur:5},
-    {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",zirkus:"Training. Du hast es gewählt. Na dann.",cat:"körper",dur:25,links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
-    {name:"Duschen",note:"nach dem Training 🚿",zirkus:"Duschen nach dem Training. Pflicht. Keine Diskussion.",cat:"pflege",dur:10},
-    {name:"Abendessen",note:"schön kochen, bewusst genießen",zirkus:"Kochen. Oder zumindest etwas Warmes.",cat:"ernährung",dur:45,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
-    {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",zirkus:"Das ist auch Gestaltung für dein geliebtes Leben!",cat:"zuhause",dur:20,links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
-    {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",zirkus:"Wichtig: Spaß haben! Wenn nötig, tanzt du ihnen etwas vor.",cat:"arbeit",dur:30,flex:true,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
-    {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",zirkus:"Deadline naht? Dann wäre jetzt ein guter Moment.",cat:"lernen",dur:30,flex:true,links:[{href:"Lernplan.html",label:"Lernplan"}]},
-    {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",zirkus:"Du willst Künstlerin sein??? Na dann.",cat:"seele",dur:45,flex:true},
-    {name:"Freizeit 🌸",note:"was auch immer sich gut anfühlt",zirkus:"Entspannung!",cat:"seele",dur:30,flex:true},
-    {name:"Lotte — Futter",note:"Abendportion",zirkus:"Sie freut sich schon SO darauf. Schau sie an.",cat:"tiere",dur:5},
-    {name:"Alle Tiere — Medikamente",note:"Lotte + Rudi + Timmy Abendgabe 🐾🐱🐱",zirkus:"Alle drei. Jeden Abend. Du bist ihr Mensch.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
-    {name:"Bad Abend",note:"Loslassen, abschließen 🛁",zirkus:"Frisch ins Bett!",cat:"pflege",dur:20,links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
-    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium (Glycinat/Malat) 🌿",zirkus:"Tabletten. Dann schlafen. In dieser Reihenfolge.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",zirkus:"Handcreme. Fußcreme. Du machst das nie. Heute schon.",cat:"pflege",dur:5},
-    {name:"Lesen",note:"kein Handy — echtes Buch 📖",zirkus:"Die Nahrung einer Künstlerin.",cat:"seele",dur:30,flex:true},
-    {name:"Schlafen",note:"früh genug, du weißt warum 🌙",zirkus:"Und morgen frisch und erholt fühlen.",cat:"körper",dur:0},
+    {name:"Katzen füttern",note:"Rudi & Timmy — 18:00 🐱",zirkus:"Ich eröffne den Abend. Mit Katzenfutter. Glamourös.",cat:"tiere",dur:5},
+    {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",zirkus:"Ich arbeite an meiner Skulptur. Die bin ich selbst.",cat:"körper",dur:25,links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
+    {name:"Duschen",note:"nach dem Training 🚿",zirkus:"Frisch für den Rest meines Abends. Den ich selbst entworfen habe.",cat:"pflege",dur:10},
+    {name:"Abendessen",note:"schön kochen, bewusst genießen",zirkus:"Kochen ist Gestaltung. Essen ist Genuss. Beides gehört mir.",cat:"ernährung",dur:45,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
+    {name:"Pflanzen 🌿",note:"gießen, schauen, da sein",zirkus:"Lebendige Kunst. Braucht Wasser. Wie ich.",cat:"zuhause",dur:5,links:[{href:"Pflanzen.html",label:"Pflanzen"}]},
+    {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",zirkus:"Ein schöner Raum ist kein Zufall. Der wird gemacht. Von mir.",cat:"zuhause",dur:20,links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
+    {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",zirkus:"Morgen sitzt wer vor mir und lernt. Das will ich gut gemacht haben.",cat:"arbeit",dur:30,flex:true,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
+    {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",zirkus:"Meine Zukunft baut sich Seite für Seite. Heute eine.",cat:"lernen",dur:30,flex:true,links:[{href:"Lernplan.html",label:"Lernplan"}]},
+    {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",zirkus:"Das hier. Genau das. Das ist der Grund für alles andere.",cat:"seele",dur:45,flex:true},
+    {name:"Freizeit 🌸",note:"was auch immer sich gut anfühlt",zirkus:"Ich wähle, wie ich mich erhole. Das ist auch Kunst.",cat:"seele",dur:30,flex:true},
+    {name:"Lotte — Futter",note:"Abendportion",zirkus:"Ihr Lieblingsmoment des Tages. Von mir inszeniert.",cat:"tiere",dur:5},
+    {name:"Alle Tiere — Medikamente",note:"Lotte + Rudi + Timmy Abendgabe 🐾🐱🐱",zirkus:"Drei Leben, die ich mitgestalte. Jeden Abend aufs Neue.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
+    {name:"Bad Abend",note:"Loslassen, abschließen 🛁",zirkus:"Der letzte schöne Moment, den ich mir heute noch baue.",cat:"pflege",dur:20,links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
+    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium (Glycinat/Malat) 🌿",zirkus:"Ich bereite mein Morgen vor. Schon jetzt. Ziemlich clever.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",zirkus:"Bis in die Fingerspitzen gepflegt. Mein Leben, meine Hände.",cat:"pflege",dur:5},
+    {name:"Lesen",note:"kein Handy — echtes Buch 📖",zirkus:"Ich füttere meine Phantasie. Die braucht das.",cat:"seele",dur:30,flex:true},
+    {name:"Schlafen",note:"früh genug, du weißt warum 🌙",zirkus:"Ich gestalte morgen — indem ich heute gut schlafe. Gute Nacht.",cat:"körper",dur:0},
   ]}
 };
 
@@ -1057,10 +1058,11 @@ function renderNaechste(){
   var phaseName=info.phase==='morgen'?'Bevor ich':'Ankommen';
   var linksHtml='';
   if(t.links&&t.links.length){linksHtml='<div class="naechste-links">';t.links.forEach(function(l){linksHtml+='<a class="naechste-link" href="'+l.href+'">'+l.label+' ›</a>';});linksHtml+='</div>';}
+  var zirkusHtml=t.zirkus?'<div class="naechste-note" style="margin-top:.25rem;color:var(--crimson);font-style:italic;">'+t.zirkus+'</div>':'';
   karte.innerHTML='<div class="naechste-label">🌺 Nächste Aufgabe <span class="naechste-phase-badge">'+phaseName+'</span></div>'
     +'<div class="naechste-body">'
     +'<button class="naechste-check-btn" id="naechsteBtn" onclick="hakeNaechsteAb()">○</button>'
-    +'<div class="naechste-info"><div class="naechste-name">'+t.name+'</div><div class="naechste-note">'+t.note+'</div>'+linksHtml+'</div>'
+    +'<div class="naechste-info"><div class="naechste-name">'+t.name+'</div><div class="naechste-note">'+t.note+'</div>'+zirkusHtml+linksHtml+'</div>'
     +'</div>'+fortschritt;
 }
 
