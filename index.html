@@ -353,7 +353,8 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
   <!-- Inhalt -->
   <div class="innehalten-inhalt" style="padding:3rem 2rem 220px;">
     <div style="font-size:3rem;margin-bottom:.8rem;animation:schaukeln 2.5s ease-in-out infinite;">🌺</div>
-    <div class="innehalten-frage" style="font-size:2rem;color:var(--text);margin-bottom:1.5rem;">Mach doch<br>was du willst!</div>
+    <div class="innehalten-frage" style="font-size:2rem;color:var(--text);margin-bottom:.6rem;">Mach doch<br>was du willst!</div>
+    <div style="font-family:'IM Fell English',serif;font-size:1rem;font-style:italic;color:rgba(42,26,8,.45);margin-bottom:1.4rem;letter-spacing:.01em;text-align:center;">Handle ich gerade aus Freiheit — oder aus Angst?</div>
     <input class="vk-overlay-input" id="innehaltенAntwort" type="text" placeholder="…" autocomplete="off" style="margin-bottom:1.2rem;font-size:1.1rem;">
     <button class="los-btn" onclick="schliesseInnehalten()" style="font-size:1.2rem;padding:.9rem 2rem;">Mach ich eh! 🌸</button>
     <button class="weiter-btn" onclick="schliesseInnehalten()">oder auch nicht</button>
@@ -534,8 +535,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
       <button class="fokus-chip" onclick="waehleFokus(this,'Unterrichten')">📚 Unterrichten</button>
       <button class="fokus-chip" onclick="waehleFokus(this,'Uni')">🎓 Uni</button>
       <button class="fokus-chip" onclick="waehleFokus(this,'Zuhause')">🏡 Zuhause</button>
-      <button class="fokus-chip" onclick="waehleFokus(this,'Körper')">🌿 Körper</button>
-      <button class="fokus-chip" onclick="waehleFokus(this,'Psyche')">✨ Psyche</button>
+      <button class="fokus-chip" onclick="waehleFokus(this,'Ich')">🌺 Ich</button>
     </div>
     <div class="fokus-kat-liste" id="fokusKatListe"></div>
     <div class="fokus-save-row">
@@ -1087,8 +1087,7 @@ var FOKUS_KATS=[
   {key:'Unterrichten',emoji:'📚',ph:'Welcher Kurs, welche Vorbereitung?'},
   {key:'Uni',emoji:'🎓',ph:'Lektüre, Aufgabe, Reflexion?'},
   {key:'Zuhause',emoji:'🏡',ph:'Haushalt, Weidlingbach, etwas Schönes?'},
-  {key:'Körper',emoji:'🌿',ph:'Bewegung, Ernährung, Schulter, Schlaf?'},
-  {key:'Psyche',emoji:'✨',ph:'Was brauche ich heute innerlich?'}
+  {key:'Ich',emoji:'🌺',ph:'Körper, Seele, Pflege — was brauche ich heute?'}
 ];
 
 // Mapping: task.cat → Fokus-Kategorie-Key
@@ -1097,8 +1096,8 @@ var CAT_MAP={
   'arbeit':'Unterrichten',
   'lernen':'Uni',
   'zuhause':'Zuhause',
-  'körper':'Körper','pflege':'Körper','ernährung':'Körper',
-  'seele':'Psyche'
+  'körper':'Ich','pflege':'Ich','ernährung':'Ich',
+  'seele':'Ich'
 };
 
 var aktiverFokus=null;
