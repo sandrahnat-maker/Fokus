@@ -248,6 +248,36 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
 .task-item.fokus-match{background:rgba(201,137,58,.07);border-left:3px solid var(--gold);padding-left:calc(1rem - 3px);}
 .task-item.fokus-match .task-name{color:var(--brown,#5a3a1a);}
 .task-item.fokus-dimmed{opacity:.35;}
+/* MEINE AUFGABEN WIDGET */
+.maufg-wrap{margin:.8rem 1rem 0;background:var(--card);border:1px solid var(--border-col);border-radius:16px;box-shadow:0 2px 12px var(--shadow);overflow:hidden;}
+.maufg-wrap::before{content:'';display:block;height:4px;background:linear-gradient(90deg,var(--crimson),var(--gold),var(--sage));}
+.maufg-head{display:flex;align-items:center;justify-content:space-between;padding:.55rem 1rem .3rem;cursor:pointer;}
+.maufg-head-label{font-family:'Raleway',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--crimson);font-weight:700;}
+.maufg-toggle{font-family:'Caveat',cursive;font-size:.85rem;color:rgba(30,18,8,.4);background:none;border:none;cursor:pointer;}
+.maufg-body{padding:.5rem 1rem .9rem;display:block;}
+.maufg-input-row{display:flex;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap;}
+.maufg-inp{flex:1;min-width:120px;border:1px solid var(--border-col);border-radius:10px;padding:.45rem .7rem;font-family:'Caveat',cursive;font-size:1rem;background:var(--bg);outline:none;color:var(--text);}
+.maufg-inp:focus{border-color:var(--gold);}
+.maufg-inp::placeholder{color:rgba(30,18,8,.28);font-style:italic;}
+.maufg-phase-sel{border:1px solid var(--border-col);border-radius:10px;padding:.45rem .6rem;font-family:'Raleway',sans-serif;font-size:.78rem;background:var(--bg);color:var(--text);outline:none;cursor:pointer;}
+.maufg-phase-sel:focus{border-color:var(--gold);}
+.maufg-add-btn{background:var(--crimson);color:white;border:none;border-radius:20px;padding:.42rem .9rem;font-family:'Raleway',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;white-space:nowrap;}
+.maufg-add-btn:active{transform:translate(1px,1px);}
+.maufg-list{display:flex;flex-direction:column;gap:.3rem;margin-top:.2rem;}
+.maufg-item{display:flex;align-items:flex-start;gap:.5rem;padding:.4rem .5rem;border-radius:10px;border:1px solid var(--border-col);background:var(--bg);cursor:pointer;transition:background .15s;}
+.maufg-item:active{background:var(--crimson-l);}
+.maufg-item.done{opacity:.3;}
+.maufg-item.done .maufg-item-name{text-decoration:line-through;}
+.maufg-check{width:18px;height:18px;border:1px solid var(--border-col);border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:.65rem;background:var(--card);}
+.maufg-item.done .maufg-check{background:var(--sage);border-color:var(--sage);color:white;}
+.maufg-item.done .maufg-check::after{content:'✓';}
+.maufg-item-text{flex:1;min-width:0;}
+.maufg-item-name{font-family:'Raleway',sans-serif;font-size:.88rem;font-weight:600;line-height:1.25;}
+.maufg-item-phase{font-family:'IM Fell English',serif;font-size:.75rem;font-style:italic;opacity:.5;margin-top:.05rem;}
+.maufg-del{background:none;border:none;color:rgba(30,18,8,.2);font-size:.85rem;cursor:pointer;padding:0 .1rem;line-height:1;flex-shrink:0;}
+.maufg-del:hover{color:var(--crimson);}
+.maufg-empty{font-family:'IM Fell English',serif;font-style:italic;font-size:.85rem;color:rgba(30,18,8,.3);text-align:center;padding:.5rem 0;}
+
 /* ENERGETISCHES INNEHALTEN OVERLAY */
 .innehalten-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
 .mohn-float{position:absolute;font-size:2rem;animation:mohnTanz 4s ease-in-out infinite;}
@@ -510,6 +540,28 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
   <button onclick="document.getElementById('guterTagOverlay').style.display='flex'" style="background:none;border:1px solid rgba(94,138,90,.35);border-radius:20px;padding:.2rem .65rem;font-size:.75rem;color:var(--sage);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🌟 Guter Tag</button>
 </div>
 
+<!-- MEINE AUFGABEN -->
+<div class="maufg-wrap">
+  <div class="maufg-head" onclick="toggleMaufg()">
+    <span class="maufg-head-label">✦ Meine heutigen Aufgaben</span>
+    <span class="maufg-toggle" id="maufgToggleBtn">aufklappen ↓</span>
+  </div>
+  <div class="maufg-body" id="maufgBody" style="display:none;">
+    <div class="maufg-input-row">
+      <input class="maufg-inp" type="text" id="maufgInp" placeholder="Neue Aufgabe …" onkeydown="if(event.key==='Enter')maufgAdd()">
+      <select class="maufg-phase-sel" id="maufgPhase">
+        <option value="morgen">🌅 Morgen</option>
+        <option value="vormittag">🌾 Unterwegs</option>
+        <option value="nachhause">🏡 Nach Hause</option>
+        <option value="abend">🌙 Abend</option>
+        <option value="alle">✦ Alle</option>
+      </select>
+      <button class="maufg-add-btn" onclick="maufgAdd()">+ hinzu</button>
+    </div>
+    <div class="maufg-list" id="maufgList"></div>
+  </div>
+</div>
+
 <!-- NÄCHSTE AUFGABE -->
 <div class="naechste-wrap">
   <div class="naechste-karte" id="naechsteKarte"></div>
@@ -685,6 +737,14 @@ var storageKey='tasks_'+localDateKey();
 var taskState={};
 try{taskState=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch(e){}
 function saveTaskState(){localStorage.setItem(storageKey,JSON.stringify(taskState));}
+
+// Meine Aufgaben — früh initialisieren damit renderPhase darauf zugreifen kann
+var MAUFG_KEY='maufg_'+localDateKey();
+var maufgItems=[];
+try{maufgItems=JSON.parse(localStorage.getItem(MAUFG_KEY)||'[]');}catch(e){}
+function getMaufgForPhase(phase){
+  return maufgItems.filter(function(i){return !i.done&&(i.phase===phase||i.phase==='alle');});
+}
 
 function getViewDate(){return today;}
 
@@ -862,6 +922,25 @@ function renderPhase(p){
   });
   html+='</div>';
   inhalt.innerHTML=html;
+  // Eigene Aufgaben aus "Meine Aufgaben" anhängen
+  if(typeof getMaufgForPhase==='function' && typeof maufgItems!=='undefined'){
+    var extras=getMaufgForPhase(p);
+    if(extras.length){
+      var extHtml='<div class="phase-karte" style="margin-top:.5rem;">'
+        +'<div class="phase-kopf phase-kopf-'+p+'" style="padding:.5rem 1rem .4rem;">'
+        +'<div style="font-family:\'Raleway\',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--crimson);font-weight:700;">✦ Meine eigenen Aufgaben</div>'
+        +'</div>';
+      extras.forEach(function(item){
+        extHtml+='<div class="task-item" onclick="maufgToggleDone('+item.id+')">'
+          +'<div class="task-check"></div>'
+          +'<div style="flex:1;min-width:0;">'
+          +'<div class="task-name">'+item.name+'</div>'
+          +'</div></div>';
+      });
+      extHtml+='</div>';
+      inhalt.innerHTML+=extHtml;
+    }
+  }
 }
 
 function toggleTask(p,i){
@@ -1215,6 +1294,74 @@ function taskMatchesFokus(t){
 ladeImpuls(false);
 zeigePhase(getPhaseByTime());
 renderNaechste();
+
+// ── MEINE AUFGABEN ──────────────────────────────────────────────
+var PHASE_LABELS={morgen:'🌅 Morgen',vormittag:'🌾 Unterwegs',nachhause:'🏡 Nach Hause',abend:'🌙 Abend',alle:'✦ Alle Phasen'};
+var maufgOffen=false;
+
+function toggleMaufg(){
+  maufgOffen=!maufgOffen;
+  document.getElementById('maufgBody').style.display=maufgOffen?'block':'none';
+  document.getElementById('maufgToggleBtn').textContent=maufgOffen?'zuklappen ↑':'aufklappen ↓';
+  if(maufgOffen)renderMaufg();
+}
+
+function maufgSave(){localStorage.setItem(MAUFG_KEY,JSON.stringify(maufgItems));}
+
+function maufgAdd(){
+  var inp=document.getElementById('maufgInp');
+  var phase=document.getElementById('maufgPhase').value;
+  var name=inp.value.trim();
+  if(!name)return;
+  maufgItems.push({id:Date.now(),name:name,phase:phase,done:false});
+  maufgSave();
+  inp.value='';
+  renderMaufg();
+  // inject into phase tasks if a specific phase is chosen
+  if(phase!=='alle') injectMaufgIntoPhase(maufgItems[maufgItems.length-1]);
+}
+
+function maufgToggleDone(id){
+  var item=maufgItems.find(function(i){return i.id===id;});
+  if(item){item.done=!item.done;maufgSave();renderMaufg();}
+}
+
+function maufgDelete(id){
+  maufgItems=maufgItems.filter(function(i){return i.id!==id;});
+  maufgSave();renderMaufg();
+}
+
+function renderMaufg(){
+  var list=document.getElementById('maufgList');
+  if(!list)return;
+  list.innerHTML='';
+  if(maufgItems.length===0){
+    var e=document.createElement('div');e.className='maufg-empty';
+    e.textContent='Noch keine Aufgaben für heute.';list.appendChild(e);return;
+  }
+  maufgItems.forEach(function(item){
+    var div=document.createElement('div');
+    div.className='maufg-item'+(item.done?' done':'');
+    div.innerHTML='<div class="maufg-check"></div>'
+      +'<div class="maufg-item-text">'
+      +'<div class="maufg-item-name">'+item.name+'</div>'
+      +'<div class="maufg-item-phase">'+( PHASE_LABELS[item.phase]||item.phase)+'</div>'
+      +'</div>'
+      +'<button class="maufg-del" onclick="event.stopPropagation();maufgDelete('+item.id+')">✕</button>';
+    div.onclick=function(){maufgToggleDone(item.id);};
+    list.appendChild(div);
+  });
+}
+
+// Inject custom task into the live phase rendering so it appears in the tab
+function injectMaufgIntoPhase(item){
+  if(!currentPhase)return;
+  if(item.phase!==currentPhase&&item.phase!=='alle')return;
+  // re-render current phase to pick up new item via getMaufgForPhase
+  renderPhase(currentPhase);
+}
+
+// ────────────────────────────────────────────────────────────────
 </script>
 </body>
 </html>
