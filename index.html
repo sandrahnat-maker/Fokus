@@ -536,6 +536,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
 <!-- BUTTONS: ZIRKUSPRINZESSIN + GUTER TAG -->
 <div style="display:flex;gap:.4rem;margin:.6rem 1rem 0;">
   <button onclick="document.getElementById('zirkusprinzessinOverlay').style.display='flex'" style="background:none;border:1px solid rgba(201,137,58,.35);border-radius:20px;padding:.2rem .65rem;font-size:.75rem;color:var(--gold);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🌺 Ich</button>
+  <a href="Atelier.html" style="background:none;border:1px solid rgba(106,79,138,.35);border-radius:20px;padding:.2rem .65rem;font-size:.75rem;color:#6b4f8a;cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;text-decoration:none;">🎨 Atelier</a>
   <a href="Bikini_Checkliste.html" style="background:none;border:1px solid rgba(184,41,74,.35);border-radius:20px;padding:.2rem .65rem;font-size:.75rem;color:var(--crimson);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;text-decoration:none;">👙 Bikini</a>
   <button onclick="document.getElementById('guterTagOverlay').style.display='flex'" style="background:none;border:1px solid rgba(94,138,90,.35);border-radius:20px;padding:.2rem .65rem;font-size:.75rem;color:var(--sage);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🌟 Guter Tag</button>
 </div>
@@ -1000,6 +1001,7 @@ function ladeImpuls(force){
 }
 
 var ALL_APPS=[
+  {icon:'🎨',text:'Mein Atelier',sub:'Acht Räume · Lebensgestaltung',href:'Atelier.html',phasen:['morgen','vormittag','nachhause','abend']},
   {icon:'📅',text:'Zum Vortag',sub:'Gestern nachschauen',href:'Vortag.html',phasen:['morgen','vormittag','abend']},
   {icon:'🌅',text:'Morgenroutine',sub:'Sanft in den Tag',href:'morgenroutine.html',phasen:['morgen']},
   {icon:'🪥',text:'Bad Früh',sub:'Weleda-Ritual',href:'Bad_Frueh.html',phasen:['morgen']},
