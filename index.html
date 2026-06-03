@@ -532,6 +532,322 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
   <div class="vk-title">🌺 Sandras Welt</div>
   <div class="vk-motto">fröhlich · schrullig · lebendig</div>
 </div>
+<div class="stoic-wrap" id="reflexBlock">
+  <div style="height:5px;background:linear-gradient(90deg,var(--navy),var(--violet),var(--crimson),var(--gold));opacity:.5;"></div>
+  <div class="stoic-head" style="cursor:pointer;" onclick="toggleReflexBlock()">
+    <span style="font-size:1rem;">🪞</span>
+    <span class="stoic-label">Reflexion &amp; Notizen</span>
+    <span class="stoic-badge" id="reflexBlockBadge" style="margin-left:auto;">aufklappen ↓</span>
+  </div>
+  <div id="reflexBlockInhalt" style="display:none;">
+
+    <!-- Morgenreflexion -->
+    <div style="border-top:1px dashed rgba(30,18,8,.1);padding:.6rem 1rem .2rem;">
+      <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:.4rem;">🌅 Morgenreflexion · Stoizismus</div>
+      <div class="stoic-q" id="stoicMorgenQ"></div>
+      <button class="stoic-next" onclick="naechsteMorgenFrage()">↺ andere Frage</button>
+      <textarea class="stoic-textarea" id="stoicMorgenText" placeholder="Gedanken zum Morgen …" rows="3"></textarea>
+      <div class="stoic-row">
+        <button class="stoic-save" onclick="speichereStoicMorgenBtn()">✦ speichern</button>
+        <span class="stoic-saved" id="stoicMorgenSaved" style="display:none;">gespeichert ✓</span>
+        <button class="stoic-toggle" onclick="toggleStoicMorgenEntries()">Einträge</button>
+      </div>
+      <div class="stoic-entries" id="stoicMorgenEntries" style="display:none;"></div>
+    </div>
+
+    <!-- Stoischer Tagesfokus + Memento Mori -->
+    <div id="stoicTagesfokusBlock" style="border-top:1px dashed rgba(30,18,8,.1);padding:.7rem 1rem .6rem;background:linear-gradient(135deg,rgba(61,90,122,.04),rgba(107,72,107,.04));">
+      <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:.5rem;">🏛 Stoischer Tagesfokus</div>
+      <div id="stoicTagesthema" style="font-family:'IM Fell English',serif;font-size:.95rem;color:var(--navy);font-style:italic;line-height:1.55;margin-bottom:.35rem;"></div>
+      <div id="stoicTageszitat" style="font-family:'Caveat',cursive;font-size:.9rem;color:rgba(30,18,8,.55);line-height:1.5;margin-bottom:.4rem;"></div>
+      <div id="stoicDichotomie" style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem;"></div>
+      <div style="margin-top:.5rem;padding:.45rem .7rem;background:rgba(61,90,122,.07);border-radius:10px;display:flex;align-items:center;gap:.6rem;">
+        <span style="font-size:1rem;">⏳</span>
+        <div>
+          <div style="font-family:'Raleway',sans-serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);font-weight:700;">Memento Mori</div>
+          <div id="mementoText" style="font-family:'Caveat',cursive;font-size:.85rem;color:rgba(30,18,8,.6);line-height:1.4;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Abendbilanz -->
+    <div style="border-top:1px dashed rgba(30,18,8,.1);padding:.6rem 1rem .2rem;">
+      <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--violet);font-weight:700;margin-bottom:.4rem;">🌙 Abendbilanz</div>
+      <div class="stoic-q" id="stoicAbendQ" style="color:var(--violet);"></div>
+      <button class="stoic-next" onclick="naechsteAbendFrage()">↺ andere Frage</button>
+      <textarea class="stoic-textarea" id="stoicAbendText" placeholder="Wie war dieser Tag …" rows="3"></textarea>
+      <div class="stoic-row">
+        <button class="stoic-save" style="background:var(--violet);" onclick="speichereStoicAbendBtn()">✦ speichern</button>
+        <span class="stoic-saved" id="stoicAbendSaved" style="display:none;">gespeichert ✓</span>
+        <button class="stoic-toggle" onclick="toggleStoicAbendEntries()">Einträge</button>
+      </div>
+      <div class="stoic-entries" id="stoicAbendEntries" style="display:none;"></div>
+    </div>
+
+
+    <!-- Notizen -->
+    <div style="border-top:1px dashed rgba(30,18,8,.1);padding:.6rem 1rem .8rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem;">
+        <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:700;">📝 Notizen</div>
+        <button class="stoic-toggle" onclick="loescheNotiz()" id="notizClear" style="display:none;">löschen</button>
+      </div>
+      <textarea class="notiz-textarea" id="notizText" placeholder="Notizen, Ideen, was auch immer …" rows="4" oninput="speichereNotiz()"></textarea>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- BUTTONS: ZIRKUSPRINZESSIN + GUTER TAG -->
+<div style="display:flex;gap:.4rem;margin:.6rem 1rem 0;">
+  <button onclick="document.getElementById('zirkusprinzessinOverlay').style.display='flex'" style="background:none;border:1px solid rgba(201,137,58,.35);border-radius:20px;padding:.2rem .65rem;font-size:.75rem;color:var(--gold);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🌺 Ich</button>
+  <a href="Atelier.html" style="background:none;border:1px solid rgba(106,79,138,.35);border-radius:20px;padding:.2rem .65rem;font-size:.75rem;color:#6b4f8a;cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;text-decoration:none;">🎨 Atelier</a>
+  <a href="Bikini_Checkliste.html" style="background:none;border:1px solid rgba(184,41,74,.35);border-radius:20px;padding:.2rem .65rem;font-size:.75rem;color:var(--crimson);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;text-decoration:none;">👙 Bikini</a>
+  <button onclick="document.getElementById('guterTagOverlay').style.display='flex'" style="background:none;border:1px solid rgba(94,138,90,.35);border-radius:20px;padding:.2rem .65rem;font-size:.75rem;color:var(--sage);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🌟 Guter Tag</button>
+</div>
+
+<!-- MEINE AUFGABEN -->
+<div class="maufg-wrap">
+  <div class="maufg-head" onclick="toggleMaufg()">
+    <span class="maufg-head-label">✦ Meine heutigen Aufgaben</span>
+    <span class="maufg-toggle" id="maufgToggleBtn">aufklappen ↓</span>
+  </div>
+  <div class="maufg-body" id="maufgBody" style="display:none;">
+    <div class="maufg-input-row">
+      <input class="maufg-inp" type="text" id="maufgInp" placeholder="Neue Aufgabe …" onkeydown="if(event.key==='Enter')maufgAdd()">
+      <select class="maufg-phase-sel" id="maufgPhase">
+        <option value="morgen">🌅 Morgen</option>
+        <option value="vormittag">🌾 Unterwegs</option>
+        <option value="nachhause">🏡 Nach Hause</option>
+        <option value="abend">🌙 Abend</option>
+        <option value="alle">✦ Alle</option>
+      </select>
+      <button class="maufg-add-btn" onclick="maufgAdd()">+ hinzu</button>
+    </div>
+    <div class="maufg-list" id="maufgList"></div>
+  </div>
+</div>
+
+<!-- NÄCHSTE AUFGABE -->
+<div class="naechste-wrap">
+  <div class="naechste-karte" id="naechsteKarte"></div>
+</div>
+
+
+<!-- IMPULS -->
+<div class="impuls-karte">
+  <div class="impuls-label">🌸 Mein heutiger Impuls</div>
+  <div class="impuls-text laden" id="impulsText">Einen Moment …</div>
+  <div class="impuls-refresh"><button class="impuls-refresh-btn" onclick="ladeImpuls(true)">↺ neuer Impuls</button></div>
+</div>
+
+<!-- FOKUS KATEGORIEN -->
+<div class="fokus-karte">
+  <div class="fokus-head" onclick="toggleFokusBlock()">
+    <span class="fokus-head-label">✦ Mein heutiger Fokus</span>
+    <span class="fokus-toggle-btn" id="fokusBtnLabel">aufklappen ↓</span>
+  </div>
+  <div class="fokus-body" id="fokusBody">
+    <div class="fokus-bühne-label">Welcher Bereich bekommt heute die Hauptbühne?</div>
+    <div class="fokus-chips">
+      <button class="fokus-chip" onclick="waehleFokus(this,'Tiere')">🐾 Tiere</button>
+      <button class="fokus-chip" onclick="waehleFokus(this,'Unterrichten')">📚 Unterrichten</button>
+      <button class="fokus-chip" onclick="waehleFokus(this,'Uni')">🎓 Uni</button>
+      <button class="fokus-chip" onclick="waehleFokus(this,'Zuhause')">🏡 Zuhause</button>
+      <button class="fokus-chip" onclick="waehleFokus(this,'Ich')">🌺 Ich</button>
+    </div>
+    <div class="fokus-kat-liste" id="fokusKatListe"></div>
+    <div class="fokus-save-row">
+      <button class="fokus-save-btn" onclick="speichereFokus()">🌿 festhalten</button>
+      <span class="fokus-gespeichert" id="fokusGespeichert">gespeichert ✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- PHASEN TABS -->
+<div class="phasen-tabs">
+  <div class="phase-tab aktiv aktiv-morgen" id="tab-morgen" onclick="zeigePhase('morgen')">
+    <span class="tab-icon">🌅</span>
+    <span class="tab-name" style="font-size:.62rem;">Bevor ich</span>
+    <span class="tab-zeit" id="tab-zeit-morgen">7:30–?</span>
+    <span class="tab-tee" id="tab-tee-morgen"></span>
+    <span class="tab-done">✓ fertig</span>
+  </div>
+  <div class="phase-tab" id="tab-vormittag" onclick="zeigePhase('vormittag')">
+    <span class="tab-icon">🌾</span>
+    <span class="tab-name">Unterwegs</span>
+    <span class="tab-zeit" id="tab-zeit-vormittag">–</span>
+    <span class="tab-tee" id="tab-tee-vormittag"></span>
+    <span class="tab-done">✓ fertig</span>
+  </div>
+  <div class="phase-tab" id="tab-nachhause" onclick="zeigePhase('nachhause')">
+    <span class="tab-icon">🐾</span>
+    <span class="tab-name">Ankommen</span>
+    <span class="tab-zeit" id="tab-zeit-nachhause">–</span>
+    <span class="tab-done">✓ fertig</span>
+  </div>
+  <div class="phase-tab" id="tab-abend" onclick="zeigePhase('abend')">
+    <span class="tab-icon">🌸</span>
+    <span class="tab-name">Abend</span>
+    <span class="tab-zeit" id="tab-zeit-abend">ab 19:00</span>
+    <span class="tab-tee" id="tab-tee-abend"></span>
+    <span class="tab-done">✓ fertig</span>
+  </div>
+</div>
+
+<div id="phaseInhalt"></div>
+
+<!-- APPS -->
+<div class="vk-sep">🌺 · 🌾 · 🌿 · 🌺</div>
+<div class="apps-wrap">
+  <div class="apps-label" id="appsLabel">Jetzt passend</div>
+  <div id="appsList"></div>
+  <button class="alle-apps-btn" id="alleAppsBtn" onclick="toggleAlleApps()">alle Apps anzeigen ↓</button>
+</div>
+
+<!-- REFLEXION & NOTIZEN — zusammengefasst, aufklappbar -->
+<div class="vk-sep">🌸 · 🌿 · 🌸</div>
+
+<!-- TOAST & KONFETTI -->
+<div class="vk-toast" id="vkToast"></div>
+<div class="konfetti-wrap" id="konfettiWrap"></div>
+
+<!-- GUTER TAG OVERLAY -->
+<div class="gutertag-overlay" id="guterTagOverlay" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(255,248,231,.97);flex-direction:column;align-items:center;justify-content:center;padding:2rem;">
+  <div class="vk-overlay-stripe" style="width:100%;margin-bottom:1.5rem;"></div>
+  <div style="font-size:2.5rem;margin-bottom:1rem;">🌺</div>
+  <div class="gutертag-liste" style="font-family:'Caveat',cursive;font-size:1.2rem;line-height:2.1;text-align:center;">
+    Ich bin die fröhliche, schrullige Lehrerin.<br>
+    Das ist kein Fehler.<br>
+    <br>
+    Lotte, Rudi, Timmy —<br>
+    die drei haben mich im Griff.<br>
+    <br>
+    Meinen Schülerinnen begegne ich<br>
+    mit echtem Interesse.<br>
+    Nicht weil ich muss.<br>
+    <br>
+    Irgendwas heute wird unerwartet schön sein.<br>
+    Ich werde es sehen — wenn ich hinschaue.
+  </div>
+  <button class="vk-overlay-btn" style="margin-top:1.5rem;" onclick="document.getElementById('guterTagOverlay').style.display='none'">schließen</button>
+</div>
+
+<!-- ZIRKUSPRINZESSIN OVERLAY -->
+<div id="zirkusprinzessinOverlay" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(253,248,238,.97);flex-direction:column;align-items:center;justify-content:center;padding:2rem;box-sizing:border-box;overflow-y:auto;">
+  <div style="width:100%;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--crimson),var(--gold),var(--violet),var(--sage));margin-bottom:1.5rem;flex-shrink:0;"></div>
+  <div style="font-size:2rem;margin-bottom:.4rem;animation:schaukeln 3s ease-in-out infinite;">🌺</div>
+  <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);text-align:center;margin-bottom:.2rem;">🌺 Sandra — fröhlich & schrullig</div>
+  <div style="font-family:'IM Fell English',serif;font-style:italic;color:rgba(232,213,163,.7);font-size:.9rem;margin-bottom:1.4rem;">fröhlich · schrullig · lebendig · echt</div>
+
+  <div style="width:100%;display:flex;flex-direction:column;gap:.7rem;max-width:420px;">
+
+    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--crimson);border-radius:4px;padding:.9rem 1rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🌺 Handle ich aus Freiheit?</div>
+      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:var(--text);line-height:1.55;font-style:italic;">Nicht aus Angst, sondern weil ich es wähle — das ist der Unterschied.</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--gold);border-radius:4px;padding:.9rem 1rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">📚 Ich bin die fröhliche Lehrerin</div>
+      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:var(--text);line-height:1.55;font-style:italic;">Neugierig, warm, ein bisschen schrullig — das ist keine Schwäche, das bin ich.</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--violet);border-radius:4px;padding:.9rem 1rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🎨 Ich bin die Künstlerin</div>
+      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:var(--text);line-height:1.55;font-style:italic;">Das Schöne sehen, das Kleine bewundern — das ist meine Art, in der Welt zu sein.</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--sage);border-radius:4px;padding:.9rem 1rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🐾 Ich liebe meine Tiere</div>
+      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:var(--text);line-height:1.55;font-style:italic;">Rudi, Timmy, Lotte — sie erinnern mich jeden Tag daran, was zählt.</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.05);border-left:3px solid #5B8DB8;border-radius:4px;padding:.9rem 1rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🌾 Ich fließe, wenn ich wähle</div>
+      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:var(--text);line-height:1.55;font-style:italic;">Wenn ich aus Freude arbeite, nicht aus Angst — dann fließe ich. Das ist mein Kompass.</div>
+    </div>
+
+  </div>
+
+  <button class="vk-overlay-btn" style="margin-top:1.5rem;background:var(--gold);color:var(--navy);border-color:var(--gold);" onclick="document.getElementById('zirkusprinzessinOverlay').style.display='none'">🌺 in den Tag ›</button>
+</div>
+<div aria-hidden="true" style="width:100%;line-height:0;display:block;overflow:hidden;">
+<svg viewBox="0 0 400 96" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
+  <!-- Himmel -->
+  <defs>
+    <linearGradient id="himmel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4eaf7"/>
+      <stop offset="100%" stop-color="#f5e9c8"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="96" fill="url(#himmel)"/>
+  <!-- Wolken -->
+  <ellipse cx="70" cy="22" rx="28" ry="11" fill="white" opacity=".75"/>
+  <ellipse cx="90" cy="17" rx="20" ry="9" fill="white" opacity=".7"/>
+  <ellipse cx="310" cy="25" rx="24" ry="10" fill="white" opacity=".65"/>
+  <ellipse cx="330" cy="19" rx="18" ry="8" fill="white" opacity=".6"/>
+  <ellipse cx="190" cy="14" rx="16" ry="7" fill="white" opacity=".5"/>
+  <!-- Weizen-Feld -->
+  <rect x="0" y="68" width="400" height="28" fill="#e8c96a" opacity=".35"/>
+  <rect x="0" y="74" width="400" height="22" fill="#d4a83a" opacity=".18"/>
+  <!-- Weizen-Halme -->
+  <g opacity=".55" stroke="#b8962a" stroke-width="1">
+    <line x1="15" y1="96" x2="18" y2="70"/><line x1="35" y1="96" x2="32" y2="68"/><line x1="55" y1="96" x2="58" y2="71"/>
+    <line x1="75" y1="96" x2="72" y2="69"/><line x1="95" y1="96" x2="98" y2="72"/><line x1="115" y1="96" x2="112" y2="70"/>
+    <line x1="135" y1="96" x2="138" y2="68"/><line x1="155" y1="96" x2="152" y2="71"/><line x1="175" y1="96" x2="178" y2="69"/>
+    <line x1="195" y1="96" x2="192" y2="72"/><line x1="215" y1="96" x2="218" y2="70"/><line x1="235" y1="96" x2="232" y2="68"/>
+    <line x1="255" y1="96" x2="258" y2="71"/><line x1="275" y1="96" x2="272" y2="69"/><line x1="295" y1="96" x2="298" y2="72"/>
+    <line x1="315" y1="96" x2="312" y2="70"/><line x1="335" y1="96" x2="338" y2="68"/><line x1="355" y1="96" x2="352" y2="71"/>
+    <line x1="375" y1="96" x2="378" y2="69"/><line x1="395" y1="96" x2="392" y2="72"/>
+  </g>
+  <!-- Weizen-Körner oben -->
+  <g fill="#c9893a" opacity=".6">
+    <ellipse cx="18" cy="70" rx="3" ry="5"/><ellipse cx="32" cy="68" rx="3" ry="5"/><ellipse cx="58" cy="71" rx="3" ry="5"/>
+    <ellipse cx="72" cy="69" rx="3" ry="5"/><ellipse cx="98" cy="72" rx="3" ry="5"/><ellipse cx="112" cy="70" rx="3" ry="5"/>
+    <ellipse cx="138" cy="68" rx="3" ry="5"/><ellipse cx="152" cy="71" rx="3" ry="5"/><ellipse cx="178" cy="69" rx="3" ry="5"/>
+    <ellipse cx="192" cy="72" rx="3" ry="5"/><ellipse cx="218" cy="70" rx="3" ry="5"/><ellipse cx="232" cy="68" rx="3" ry="5"/>
+    <ellipse cx="258" cy="71" rx="3" ry="5"/><ellipse cx="272" cy="69" rx="3" ry="5"/><ellipse cx="298" cy="72" rx="3" ry="5"/>
+    <ellipse cx="312" cy="70" rx="3" ry="5"/><ellipse cx="338" cy="68" rx="3" ry="5"/><ellipse cx="352" cy="71" rx="3" ry="5"/>
+  </g>
+  <!-- Mohnblumen -->
+  <g>
+    <circle cx="45" cy="72" r="7" fill="#c0392b" opacity=".85"/>
+    <circle cx="45" cy="72" r="3" fill="#7a1a0a" opacity=".7"/>
+    <line x1="45" y1="79" x2="44" y2="92" stroke="#4a7c59" stroke-width="1.5"/>
+  </g>
+  <g>
+    <circle cx="160" cy="70" r="6" fill="#c0392b" opacity=".8"/>
+    <circle cx="160" cy="70" r="2.5" fill="#7a1a0a" opacity=".7"/>
+    <line x1="160" y1="76" x2="161" y2="90" stroke="#4a7c59" stroke-width="1.5"/>
+  </g>
+  <g>
+    <circle cx="260" cy="73" r="8" fill="#c0392b" opacity=".85"/>
+    <circle cx="260" cy="73" r="3.5" fill="#7a1a0a" opacity=".7"/>
+    <line x1="260" y1="81" x2="259" y2="96" stroke="#4a7c59" stroke-width="1.5"/>
+  </g>
+  <g>
+    <circle cx="355" cy="71" r="6" fill="#c0392b" opacity=".75"/>
+    <circle cx="355" cy="71" r="2.5" fill="#7a1a0a" opacity=".65"/>
+    <line x1="355" y1="77" x2="356" y2="92" stroke="#4a7c59" stroke-width="1.5"/>
+  </g>
+  <!-- Kleiner Vogel -->
+  <path d="M200,30 Q204,27 208,30" fill="none" stroke="#4a7c59" stroke-width="1.5" opacity=".6"/>
+  <path d="M215,24 Q219,21 223,24" fill="none" stroke="#4a7c59" stroke-width="1.5" opacity=".5"/>
+</svg>
+</div>
+<!-- HEADER -->
+<div class="vk-header">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;">
+    <div class="vk-date" id="datumZeile"></div>
+    <div style="display:flex;gap:.4rem;flex-shrink:0;">
+      <button id="btnVortag" onclick="switchDay(-1)" style="font-size:.75rem;font-family:'Fredoka One',cursive;color:rgba(26,10,0,.45);background:none;border:1px solid rgba(26,10,0,.2);border-radius:12px;padding:.1rem .5rem;cursor:pointer;">← Vortag</button>
+      <button id="btnHeute" onclick="switchDay(0)" style="display:none;font-size:.75rem;font-family:'Fredoka One',cursive;color:var(--crimson);background:none;border:1px solid rgba(184,41,74,.3);border-radius:12px;padding:.1rem .5rem;cursor:pointer;">Heute ✓</button>
+    </div>
+  </div>
+  <div class="vk-title">🌺 Sandras Welt</div>
+  <div class="vk-motto">fröhlich · schrullig · lebendig</div>
+</div>
 
 <!-- BUTTONS: ZIRKUSPRINZESSIN + GUTER TAG -->
 <div style="display:flex;gap:.4rem;margin:.6rem 1rem 0;">
@@ -641,68 +957,6 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
 
 <!-- REFLEXION & NOTIZEN — zusammengefasst, aufklappbar -->
 <div class="vk-sep">🌸 · 🌿 · 🌸</div>
-<div class="stoic-wrap" id="reflexBlock">
-  <div style="height:5px;background:linear-gradient(90deg,var(--navy),var(--violet),var(--crimson),var(--gold));opacity:.5;"></div>
-  <div class="stoic-head" style="cursor:pointer;" onclick="toggleReflexBlock()">
-    <span style="font-size:1rem;">🪞</span>
-    <span class="stoic-label">Reflexion &amp; Notizen</span>
-    <span class="stoic-badge" id="reflexBlockBadge" style="margin-left:auto;">aufklappen ↓</span>
-  </div>
-  <div id="reflexBlockInhalt" style="display:none;">
-
-    <!-- Morgenreflexion -->
-    <div style="border-top:1px dashed rgba(30,18,8,.1);padding:.6rem 1rem .2rem;">
-      <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:.4rem;">🌅 Morgenreflexion · Stoizismus</div>
-      <div class="stoic-q" id="stoicMorgenQ"></div>
-      <button class="stoic-next" onclick="naechsteMorgenFrage()">↺ andere Frage</button>
-      <textarea class="stoic-textarea" id="stoicMorgenText" placeholder="Gedanken zum Morgen …" rows="3"></textarea>
-      <div class="stoic-row">
-        <button class="stoic-save" onclick="speichereStoicMorgenBtn()">✦ speichern</button>
-        <span class="stoic-saved" id="stoicMorgenSaved" style="display:none;">gespeichert ✓</span>
-        <button class="stoic-toggle" onclick="toggleStoicMorgenEntries()">Einträge</button>
-      </div>
-      <div class="stoic-entries" id="stoicMorgenEntries" style="display:none;"></div>
-    </div>
-
-    <!-- Abendbilanz -->
-    <div style="border-top:1px dashed rgba(30,18,8,.1);padding:.6rem 1rem .2rem;">
-      <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--violet);font-weight:700;margin-bottom:.4rem;">🌙 Abendbilanz</div>
-      <div class="stoic-q" id="stoicAbendQ" style="color:var(--violet);"></div>
-      <button class="stoic-next" onclick="naechsteAbendFrage()">↺ andere Frage</button>
-      <textarea class="stoic-textarea" id="stoicAbendText" placeholder="Wie war dieser Tag …" rows="3"></textarea>
-      <div class="stoic-row">
-        <button class="stoic-save" style="background:var(--violet);" onclick="speichereStoicAbendBtn()">✦ speichern</button>
-        <span class="stoic-saved" id="stoicAbendSaved" style="display:none;">gespeichert ✓</span>
-        <button class="stoic-toggle" onclick="toggleStoicAbendEntries()">Einträge</button>
-      </div>
-      <div class="stoic-entries" id="stoicAbendEntries" style="display:none;"></div>
-    </div>
-
-    <!-- Meine Reflexion -->
-    <div style="border-top:1px dashed rgba(30,18,8,.1);padding:.6rem 1rem .2rem;">
-      <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--crimson);font-weight:700;margin-bottom:.4rem;">✦ Meine Reflexion</div>
-      <div class="reflex-leitfrage" id="reflexLeitfrage"></div>
-      <textarea class="reflex-textarea" id="reflexText" placeholder="Was bewegt mich heute …" rows="3"></textarea>
-      <div class="reflex-row">
-        <button class="reflex-save" onclick="speichereReflex()">🌿 festhalten</button>
-        <span class="reflex-saved" id="reflexSaved">gespeichert ✓</span>
-        <button class="stoic-toggle" onclick="toggleReflexEntries()" id="reflexToggle">Einträge</button>
-      </div>
-      <div class="reflex-entries" id="reflexEntries"></div>
-    </div>
-
-    <!-- Notizen -->
-    <div style="border-top:1px dashed rgba(30,18,8,.1);padding:.6rem 1rem .8rem;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem;">
-        <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:700;">📝 Notizen</div>
-        <button class="stoic-toggle" onclick="loescheNotiz()" id="notizClear" style="display:none;">löschen</button>
-      </div>
-      <textarea class="notiz-textarea" id="notizText" placeholder="Notizen, Ideen, was auch immer …" rows="4" oninput="speichereNotiz()"></textarea>
-    </div>
-
-  </div>
-</div>
-
 <div style="height:2rem;"></div>
 
 <script>
@@ -764,53 +1018,53 @@ function getUnterwegsZeit(){return UNTERWEGS_ZEITEN[today.getDay()]||null;}
 
 var PHASES={
   morgen:{mood:null,tasks:[
-    {name:"Euthyrox",note:"noch im Bett",zirkus:"Mein Leben beginnt mit einer Tablette. Schöner Anfang.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Rückenübungen",note:"noch im Bett",zirkus:"Ich forme meinen Rücken — noch bevor ich aufgestanden bin. Bin ich gut.",cat:"körper",dur:10,links:[{href:"Ruecken.html",label:"Rücken"}]},
-    {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",zirkus:"Rudi. Mein erster Pinselstrich des Tages.",cat:"tiere",dur:3,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Blutdruck messen",note:"nüchtern, ruhig · Werte notieren 📋",zirkus:"Ich sammle Daten über mein eigenes Meisterwerk.",cat:"körper",dur:5,links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
-    {name:"Gewicht messen",note:"nüchtern",zirkus:"Kunst braucht Mut. Auch diese Art.",cat:"körper",dur:2,links:[{href:"Wiegen.html",label:"Gewicht"}]},
-    {name:"Knirscherschiene raus",note:"Kiefer entspannen",zirkus:"Vorhang auf. Die Nacht ist vorbei. Ich mach jetzt was Schönes draus.",cat:"körper",dur:2,links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
-    {name:"Wasser trinken",note:"ein großes Glas",zirkus:"Mein Leben, meine Leinwand — und die braucht Wasser.",cat:"ernährung",dur:2},
-    {name:"Tee zubereiten",note:"Tee des Tages 🍵",zirkus:"Ich wähle meinen Tee wie eine Farbe. Heute genau diese.",cat:"ernährung",dur:5,links:[{href:"tee-des-tages.html",label:"Tee"}]},
-    {name:"Frühstück",note:"bewusst & ohne Zwang",zirkus:"Der erste schöne Moment, den ich mir heute baue.",cat:"ernährung",dur:20,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
-    {name:"Rosenwurz",note:"zum Frühstück — Adaptogen & Stressschutz 🌿",zirkus:"Kleines grünes Ding. Großer Auftritt in meinem Leben.",cat:"körper",dur:1,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Rudi & Timmy füttern",note:"Futter & Schmusezeit 🐱🐱",zirkus:"Zwei kleine Kreaturen, deren Leben ich mitgestalte. Ob sie's verdient haben — egal.",cat:"tiere",dur:10,links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
-    {name:"Bad Früh",note:"FM4 oder Podcast 🎵",zirkus:"Ich arbeite an mir. Buchstäblich.",cat:"pflege",dur:15,links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
-    {name:"Duschen",note:"warm & frisch in den Tag 🚿",zirkus:"Frisch lackiert in den Tag. Ich bin mein eigenes Kunstwerk.",cat:"pflege",dur:15},
-    {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch 🐾",zirkus:"Mein Morgenspaziergang. Meine Stadt. Mein Kapitel eins.",cat:"tiere",dur:30,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
-    {name:"Tiere — Medikamente geben",note:"Lotte + Rudi prüfen & geben",zirkus:"Pflege ist auch Gestaltung. Manchmal die wichtigste.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-App"},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
-    {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",zirkus:"Er hasst es. Ich mach's trotzdem. So sieht Liebe manchmal aus.",cat:"tiere",dur:2,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Unterricht vorbereiten",note:"Was brauche ich heute?",zirkus:"Ich entwerfe Stunden, die Menschen weiterbringen. Das ist ziemlich viel.",cat:"arbeit",dur:30,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste"}]},
-    {name:"Uni-Aufgabe — ein Schritt",note:"einen Schritt, nicht alles",zirkus:"Ich baue gerade mein Berufsleben um. Ein Satz reicht heute.",cat:"lernen",dur:30,links:[{href:"Lernplan.html",label:"Lernplan"}]},
-    {name:"Tee & Pause",note:"wirklich innehalten 🍵",zirkus:"Auch Pausen gehören zum Werk. Die Profis wissen das.",cat:"seele",dur:10,links:[{href:"tee-des-tages.html",label:"Tee"}]},
-    {name:"Schnell essen & fertig machen",note:"und raus! 🌺",zirkus:"Der Tag gehört mir. Ich geh ihn jetzt abholen.",cat:"ernährung",dur:15,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
+    {name:"Euthyrox",note:"noch im Bett",zirkus:"Mein erster Akt des Tages. Nicht glamourös — aber weise.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Rückenübungen",note:"noch im Bett",zirkus:"Noch im Bett und schon tugendhaft. Epiktet wäre stolz.",cat:"körper",dur:10,links:[{href:"Ruecken.html",label:"Rücken"}]},
+    {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",zirkus:"Rudi. Mein erster kleiner Akt der Fürsorge — bevor ich auch nur aufgestanden bin.",cat:"tiere",dur:3,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
+    {name:"Blutdruck messen",note:"nüchtern, ruhig · Werte notieren 📋",zirkus:"Daten sammeln, nicht urteilen. Das ist stoisch — und ziemlich vernünftig.",cat:"körper",dur:5,links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
+    {name:"Gewicht messen",note:"nüchtern",zirkus:"Zahlen sind Zahlen. Ich schaue hin. Das ist schon die halbe Übung.",cat:"körper",dur:2,links:[{href:"Wiegen.html",label:"Gewicht"}]},
+    {name:"Knirscherschiene raus",note:"Kiefer entspannen",zirkus:"Vorhang auf. Dieser Tag war nicht garantiert — ich nehme ihn.",cat:"körper",dur:2,links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
+    {name:"Wasser trinken",note:"ein großes Glas",zirkus:"Wasser. Das Einfachste. Manchmal ist das Einfachste das Klügste.",cat:"ernährung",dur:2},
+    {name:"Tee zubereiten",note:"Tee des Tages 🍵",zirkus:"Ich wähle meinen Tee mit Bedacht. Kleine Entscheidungen formen den Charakter.",cat:"ernährung",dur:5,links:[{href:"tee-des-tages.html",label:"Tee"}]},
+    {name:"Frühstück",note:"bewusst & ohne Zwang",zirkus:"Frühstück als stille Übung: genießen, ohne davon abzuhängen.",cat:"ernährung",dur:20,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
+    {name:"Rosenwurz",note:"zum Frühstück — Adaptogen & Stressschutz 🌿",zirkus:"Kleines Pflänzchen, große Wirkung. Ich vertraue der Vernunft — auch in Grün.",cat:"körper",dur:1,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Rudi & Timmy füttern",note:"Futter & Schmusezeit 🐱🐱",zirkus:"Rudi & Timmy. Ob sie's verdienen, ist nicht die Frage. Ich füttere, weil Fürsorge gut ist.",cat:"tiere",dur:10,links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
+    {name:"Bad Früh",note:"FM4 oder Podcast 🎵",zirkus:"Morgenroutine als kleines Ritual. Ordnung außen, Ruhe innen.",cat:"pflege",dur:15,links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
+    {name:"Duschen",note:"warm & frisch in den Tag 🚿",zirkus:"Frisch in den Tag — nicht um aufzufallen, sondern weil ich mich selbst achte.",cat:"pflege",dur:15},
+    {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch 🐾",zirkus:"Lotte wedelt. Die Stadt lebt. Ich bin ein Teil davon — das genügt vollständig.",cat:"tiere",dur:30,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+    {name:"Tiere — Medikamente geben",note:"Lotte + Rudi prüfen & geben",zirkus:"Kleine Pflicht, große Haltung. Ich tue es täglich — und das formt mich.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-App"},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
+    {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",zirkus:"Er hasst es. Ich mach's trotzdem. So sieht Liebe manchmal aus — leicht schrullig, aber konsequent.",cat:"tiere",dur:2,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
+    {name:"Unterricht vorbereiten",note:"Was brauche ich heute?",zirkus:"Morgen sitzt wer vor mir und lernt. Das verdient meine ganze Aufmerksamkeit.",cat:"arbeit",dur:30,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste"}]},
+    {name:"Uni-Aufgabe — ein Schritt",note:"einen Schritt, nicht alles",zirkus:"Ich baue mein Berufsleben um — einen vernünftigen Schritt nach dem anderen.",cat:"lernen",dur:30,links:[{href:"Lernplan.html",label:"Lernplan"}]},
+    {name:"Tee & Pause",note:"wirklich innehalten 🍵",zirkus:"Seneca pausierte auch. Ich bin in guter Gesellschaft.",cat:"seele",dur:10,links:[{href:"tee-des-tages.html",label:"Tee"}]},
+    {name:"Schnell essen & fertig machen",note:"und raus! 🌺",zirkus:"Raus in die Welt. Ich bring meine beste Haltung mit — der Rest liegt nicht bei mir.",cat:"ernährung",dur:15,links:[{href:"Ernaehrung.html",label:"Ernährung"}]},
   ]},
   vormittag:{mood:null,tasks:[]},
   mittag:{mood:'',tasks:[]},
   nachmittag:{mood:'',tasks:[]},
   nachhause:{mood:null,tasks:[
-    {name:"Lotte raus 🌿",note:"sie zuerst — schlendernd, echtes Runterkommen",zirkus:"Mein Übergang. Ich gestalte ihn — mit ihr, im Schlendern.",cat:"tiere",dur:25,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
-    {name:"Yoga Nidra 🧘",note:"20 Min. Tiefenentspannung — direkt nach dem Ankommen",zirkus:"Ich pflege mich wie ein gutes Instrument. Das klingt dann auch besser.",cat:"körper",dur:20,links:[{href:"yoga-nidra.html",label:"App öffnen"}]},
-    {name:"Atemübung 🫁",note:"4 sek ein · 6–8 sek aus · 5 Min. — senkt Blutdruck",zirkus:"Atmen als Kunstform. Ich üb's.",cat:"körper",dur:5,links:[{href:"atemübung.html",label:"App öffnen"}]},
+    {name:"Lotte raus 🌿",note:"sie zuerst — schlendernd, echtes Runterkommen",zirkus:"Lotte schlendern, ich loslassen. Der Übergang gehört zum guten Tag dazu.",cat:"tiere",dur:25,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+    {name:"Yoga Nidra 🧘",note:"20 Min. Tiefenentspannung — direkt nach dem Ankommen",zirkus:"Yoga Nidra: Ich lege mich hin und übe das Loslassen. Ernsthaft.",cat:"körper",dur:20,links:[{href:"yoga-nidra.html",label:"App öffnen"}]},
+    {name:"Atemübung 🫁",note:"4 sek ein · 6–8 sek aus · 5 Min. — senkt Blutdruck",zirkus:"Atmen. Das kann ich immer. Und es wirkt — das ist keine Metapher.",cat:"körper",dur:5,links:[{href:"atemübung.html",label:"App öffnen"}]},
   ]},
   abend:{mood:"Du bist zuhause. Die Natur wartet morgen wieder. 🌸",tasks:[
-    {name:"Katzen füttern",note:"Rudi & Timmy — 18:00 🐱",zirkus:"Ich eröffne den Abend. Mit Katzenfutter. Glamourös.",cat:"tiere",dur:5},
-    {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",zirkus:"Ich arbeite an meiner Skulptur. Die bin ich selbst.",cat:"körper",dur:25,links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
-    {name:"Duschen",note:"nach dem Training 🚿",zirkus:"Frisch für den Rest meines Abends. Den ich selbst entworfen habe.",cat:"pflege",dur:10},
-    {name:"Abendessen",note:"schön kochen, bewusst genießen",zirkus:"Kochen ist Gestaltung. Essen ist Genuss. Beides gehört mir.",cat:"ernährung",dur:45,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
-    {name:"Pflanzen 🌿",note:"gießen, schauen, da sein",zirkus:"Lebendige Kunst. Braucht Wasser. Wie ich.",cat:"zuhause",dur:5,links:[{href:"Pflanzen.html",label:"Pflanzen"}]},
-    {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",zirkus:"Ein schöner Raum ist kein Zufall. Der wird gemacht. Von mir.",cat:"zuhause",dur:20,links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
-    {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",zirkus:"Morgen sitzt wer vor mir und lernt. Das will ich gut gemacht haben.",cat:"arbeit",dur:30,flex:true,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
-    {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",zirkus:"Meine Zukunft baut sich Seite für Seite. Heute eine.",cat:"lernen",dur:30,flex:true,links:[{href:"Lernplan.html",label:"Lernplan"}]},
-    {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",zirkus:"Das hier. Genau das. Das ist der Grund für alles andere.",cat:"seele",dur:45,flex:true},
-    {name:"Freizeit 🌸",note:"was auch immer sich gut anfühlt",zirkus:"Ich wähle, wie ich mich erhole. Das ist auch Kunst.",cat:"seele",dur:30,flex:true},
-    {name:"Lotte — Futter",note:"Abendportion",zirkus:"Ihr Lieblingsmoment des Tages. Von mir inszeniert.",cat:"tiere",dur:5},
-    {name:"Alle Tiere — Medikamente",note:"Lotte + Rudi + Timmy Abendgabe 🐾🐱🐱",zirkus:"Drei Leben, die ich mitgestalte. Jeden Abend aufs Neue.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
-    {name:"Bad Abend",note:"Loslassen, abschließen 🛁",zirkus:"Der letzte schöne Moment, den ich mir heute noch baue.",cat:"pflege",dur:20,links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
-    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium (Glycinat/Malat) 🌿",zirkus:"Ich bereite mein Morgen vor. Schon jetzt. Ziemlich clever.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",zirkus:"Bis in die Fingerspitzen gepflegt. Mein Leben, meine Hände.",cat:"pflege",dur:5},
-    {name:"Lesen",note:"kein Handy — echtes Buch 📖",zirkus:"Ich füttere meine Phantasie. Die braucht das.",cat:"seele",dur:30,flex:true},
-    {name:"Schlafen",note:"früh genug, du weißt warum 🌙",zirkus:"Ich gestalte morgen — indem ich heute gut schlafe. Gute Nacht.",cat:"körper",dur:0},
+    {name:"Katzen füttern",note:"Rudi & Timmy — 18:00 🐱",zirkus:"Abend. Katzen. Futter. Kleine Verlässlichkeit, die das Leben zusammenhält.",cat:"tiere",dur:5},
+    {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",zirkus:"Ich bewege mich — nicht um schön auszusehen, sondern weil ein starker Körper ein freier Körper ist.",cat:"körper",dur:25,links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
+    {name:"Duschen",note:"nach dem Training 🚿",zirkus:"Nach dem Training: Duschen. Das Einfache tun, und gut damit sein.",cat:"pflege",dur:10},
+    {name:"Abendessen",note:"schön kochen, bewusst genießen",zirkus:"Abendessen mit Thomas. Die Stoiker wussten: Gemeinschaft ist kein Luxus — sie ist wesentlich.",cat:"ernährung",dur:45,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"}]},
+    {name:"Pflanzen 🌿",note:"gießen, schauen, da sein",zirkus:"Pflanzen gießen: fünf Minuten Fürsorge für das Lebendige. Schöne Kleinigkeit.",cat:"zuhause",dur:5,links:[{href:"Pflanzen.html",label:"Pflanzen"}]},
+    {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",zirkus:"Haushalt ist keine Strafe — es ist die kleine tägliche Übung im Gestalten.",cat:"zuhause",dur:20,links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
+    {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",zirkus:"Morgen sitzt wer vor mir. Ich bereite mich vor — das ist meine Pflicht und meine Freude.",cat:"arbeit",dur:30,flex:true,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
+    {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",zirkus:"Meine Zukunft baut sich — Seite für Seite, Aufgabe für Aufgabe. Das ist genug.",cat:"lernen",dur:30,flex:true,links:[{href:"Lernplan.html",label:"Lernplan"}]},
+    {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",zirkus:"Kunstzeit. Das hier ist nicht Dekoration — es ist, wofür ich lebe. Ich gebe ihr Raum.",cat:"seele",dur:45,flex:true},
+    {name:"Freizeit 🌸",note:"was auch immer sich gut anfühlt",zirkus:"Freizeit als bewusste Wahl: Ich erhole mich wie eine, die weiß warum.",cat:"seele",dur:30,flex:true},
+    {name:"Lotte — Futter",note:"Abendportion",zirkus:"Lotters Abendportion. Ihr Lieblingsmoment — und meine kleine tägliche Zuverlässigkeit.",cat:"tiere",dur:5},
+    {name:"Alle Tiere — Medikamente",note:"Lotte + Rudi + Timmy Abendgabe 🐾🐱🐱",zirkus:"Drei Tiere, drei Abendgaben. Das ist mein Charakter — täglich, leise, verlässlich.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
+    {name:"Bad Abend",note:"Loslassen, abschließen 🛁",zirkus:"Bad am Abend: ich wasche den Tag ab. Buchstäblich und innerlich.",cat:"pflege",dur:20,links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
+    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium (Glycinat/Malat) 🌿",zirkus:"Ich bereite morgen vor — das ist stoische Klugheit, nicht Fleißigkeit.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",zirkus:"Handcreme, Fußcreme. Kleinste Geste der Selbstachtung. Marc Aurel hätte gelächelt.",cat:"pflege",dur:5},
+    {name:"Lesen",note:"kein Handy — echtes Buch 📖",zirkus:"Ich lese. Seneca hätte das gutgeheißen — und ich auch.",cat:"seele",dur:30,flex:true},
+    {name:"Schlafen",note:"früh genug, du weißt warum 🌙",zirkus:"Der Weise weiß: Morgen kommt. Ich schlafe gut dafür. Gute Nacht.",cat:"körper",dur:0},
   ]}
 };
 
@@ -1072,8 +1326,52 @@ function toggleReflexBlock(){
   badge.textContent=open?'zuklappen ↑':'aufklappen ↓';
 }
 
-var STOIC_MORGEN=['Was ist heute wirklich in meiner Macht?','Welche Haltung möchte ich heute kultivieren?','Was würde eine weise Frau heute als Erstes tun?','Wofür bin ich dankbar — bevor der Tag beginnt?','Was ist das Eine, das heute wirklich zählt?','Was kann ich loslassen, das mir gestern schwer fiel?','Welche meiner Tugenden brauche ich heute am meisten?'];
-var STOIC_ABEND=['Wo habe ich heute meine Werte gelebt?','Was hätte ich besser machen können — ohne mich zu verurteilen?','Welchen Moment des Tages möchte ich bewusst festhalten?','Was hat mir heute Kraft gegeben? Was hat mich geschwächt?','Habe ich heute jemandem Gutes getan — auch kleines?','Was habe ich heute gelernt — über die Welt, über mich?','Was verdient morgen meine Aufmerksamkeit — ruhig und klar?'];
+var STOIC_MORGEN=[
+  // Dichotomie der Kontrolle
+  'Was ist heute wirklich in meiner Macht — und was nicht? Wo will ich meine Energie hinlenken?',
+  'Was könnte mich heute aus der Ruhe bringen? Wie werde ich innerlich darauf reagieren?',
+  'Wenn ich heute nur eine Haltung wählen dürfte: Welche wäre es?',
+  // Tugend & Charakter
+  'Welche meiner Tugenden brauche ich heute am meisten — Weisheit, Gerechtigkeit, Mut oder Besonnenheit?',
+  'Was würde eine weise, ruhige Version von mir heute als Erstes tun?',
+  'Wie kann ich heute jemandem Gutes tun — auch mit einer kleinen Geste?',
+  // Premeditatio malorum (neg. Visualisierung)
+  'Was ist das Schwierigste, das heute passieren könnte? Wie würde ich standhaft damit umgehen?',
+  'Stell dir vor, dieser Tag ist vorbei. Was möchtest du von dir sagen können?',
+  // Dankbarkeit & Präsenz
+  'Wofür bin ich dankbar — bevor der Tag beginnt?',
+  'Was ist das Eine, das heute wirklich zählt?',
+  'Was kann ich loslassen, das mir gestern schwer fiel?',
+  // Marcus Aurelius inspiriert
+  '»Beginne den Morgen damit, dir zu sagen: Ich werde heute mit anspruchsvollen Menschen zu tun haben.« — Wie begegne ich ihnen mit Geduld?',
+  '»Verliere keine Zeit mehr damit, darüber zu diskutieren, wie ein guter Mensch sein soll. Sei einer.« Was tue ich heute konkret?',
+  '»Das Hindernis auf dem Weg ist der Weg.« Was ist mein heutiges Hindernis — und was zeigt es mir?',
+  // Epiktet inspiriert
+  '»Störe dich nicht an dem, was andere tun oder lassen.« Wo neige ich heute dazu, mich zu stören?',
+  'Welche Erwartung an heute darf ich loslassen, damit mehr Freiheit entsteht?'
+];
+var STOIC_ABEND=[
+  // Abendreview (Seneca / Marc Aurel)
+  'Wo habe ich heute meine Werte gelebt — und wo bin ich davon abgewichen?',
+  'Was hätte ich heute besser machen können — sachlich, ohne Selbstverurteilung?',
+  'Welchen Moment des Tages möchte ich bewusst festhalten?',
+  // Energie & Kraft
+  'Was hat mir heute Kraft gegeben? Was hat mich geschwächt?',
+  'War ich heute Herrin meiner Reaktionen — oder haben Umstände mich gesteuert?',
+  // Mitgefühl & Verbindung
+  'Habe ich heute jemandem Gutes getan — auch etwas Kleines?',
+  'Habe ich heute jemanden wirklich wahrgenommen und gehört?',
+  // Lernen
+  'Was habe ich heute über mich gelernt?',
+  'Was verdient morgen meine ruhige, klare Aufmerksamkeit?',
+  // Memento mori / Dankbarkeit
+  'Wenn dies mein letzter Tag gewesen wäre — wäre ich zufrieden mit dem, wie ich ihn gelebt habe?',
+  '»Denk daran, wie oft du meintest, dieser Tag wäre verschwendet — und er war es doch nicht.« Was hat dieser Tag mir gegeben?',
+  // Zirkus-stoisch 🎪
+  'Welche Rolle habe ich heute gespielt — und war sie meine eigene?',
+  'Was hat mich heute überrascht — und wie habe ich darauf reagiert?',
+  'Drei Dinge, die heute gut waren — auch winzige Momente zählen.'
+];
 var stoicMorgenIdx=Math.floor(Math.random()*STOIC_MORGEN.length);
 var stoicAbendIdx=Math.floor(Math.random()*STOIC_ABEND.length);
 function initStoicReflex(){document.getElementById('stoicMorgenQ').textContent=STOIC_MORGEN[stoicMorgenIdx];document.getElementById('stoicAbendQ').textContent=STOIC_ABEND[stoicAbendIdx];}
@@ -1089,16 +1387,53 @@ function renderStoicMorgenEntries(){var entries=loadStoicData('stoic_morgen_v1')
 function renderStoicAbendEntries(){var entries=loadStoicData('stoic_abend_v1');var el=document.getElementById('stoicAbendEntries');if(!entries.length){el.innerHTML='<div style="font-family:Caveat,cursive;color:rgba(26,10,0,.4);">Noch keine Einträge.</div>';return;}el.innerHTML=entries.slice(0,10).map(function(e){return'<div><div class="stoic-entry-date">'+e.date+' · '+e.time+'</div><div class="stoic-entry-q">'+e.q+'</div><div class="stoic-entry-text">'+e.text+'</div></div>';}).join('<hr style="border:none;border-top:1px dashed rgba(26,10,0,.1);margin:.3rem 0;">');}
 initStoicReflex();
 
-var LEITFRAGEN=['🌸 Was hat mich heute bewegt?','🌺 Was war heute schön?','🌿 Was würde ich heute nochmal tun?','🌾 Wofür bin ich heute dankbar?','🐾 Was hat heute gut funktioniert?','🦋 Was hat mich überrascht?','🍃 Was darf ich loslassen?','🌱 Wer war ich heute — wer will ich sein?'];
-var currentLF=Math.floor(Math.random()*LEITFRAGEN.length);
-function initReflex(){document.getElementById('reflexLeitfrage').textContent=LEITFRAGEN[currentLF];}
-function newLeitfrage(){currentLF=(currentLF+1)%LEITFRAGEN.length;document.getElementById('reflexLeitfrage').textContent=LEITFRAGEN[currentLF];}
-function loadReflex(){try{return JSON.parse(localStorage.getItem('reflex_v1')||'[]');}catch(e){return[];}}
-function saveReflexData(d){try{localStorage.setItem('reflex_v1',JSON.stringify(d));}catch(e){}}
-function speichereReflex(){var text=document.getElementById('reflexText').value.trim();if(!text)return;var entries=loadReflex();var now=new Date();entries.unshift({text:text,lf:LEITFRAGEN[currentLF],date:now.getDate()+'.'+(now.getMonth()+1)+'.'+now.getFullYear(),time:String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')});if(entries.length>50)entries=entries.slice(0,50);saveReflexData(entries);document.getElementById('reflexText').value='';var s=document.getElementById('reflexSaved');s.style.display='inline';setTimeout(function(){s.style.display='none';},2000);newLeitfrage();renderReflexEntries();konfetti();}
-function toggleReflexEntries(){var el=document.getElementById('reflexEntries');var btn=document.getElementById('reflexToggle');if(el.style.display==='none'||el.style.display===''){renderReflexEntries();el.style.display='flex';btn.textContent='ausblenden';}else{el.style.display='none';btn.textContent='Einträge';}}
+// ── Stoischer Tagesfokus ─────────────────────────────────────────
+var STOIC_TAGE=[
+  {tag:'Sonntag',thema:'Ruhe & Rückzug',zitat:'»Zieh dich in dich selbst zurück so oft wie möglich.« — Marc Aurel',in:['Innere Stille','Selbstreflexion','Sabbat der Seele'],nicht:['Kontrolle über den freien Tag anderer','Erzwungene Produktivität']},
+  {tag:'Montag',thema:'Anfang & Absicht',zitat:'»Beginne nicht, was du nicht vollenden kannst — aber beginne.« — Seneca',in:['Heutige Planung','Eigene Haltung','Erste Schritte'],nicht:['Das Ergebnis der Woche','Was andere denken','Äußere Umstände']},
+  {tag:'Dienstag',thema:'Ausdauer & Gleichmut',zitat:'»Es ist nicht der Schmerz, der uns schadet, sondern unser Urteil darüber.« — Epiktet',in:['Wie ich auf Hindernisse reagiere','Meine Beharrlichkeit','Meine Haltung'],nicht:['Hindernisse selbst','Reaktionen anderer','Das Tempo der Dinge']},
+  {tag:'Mittwoch',thema:'Tugend in der Mitte der Woche',zitat:'»Wenn du weißt, wie viel bleibt, und wenn du dir sagst: Es reicht — dann ist es genug.« — Seneca',in:['Qualität meiner Handlungen heute','Meine Großzügigkeit','Mein Fokus'],nicht:['Wie weit noch bis Freitag','Was die Woche bringen wird','Anerkennung von außen']},
+  {tag:'Donnerstag',thema:'Dankbarkeit & Genuss',zitat:'»Genieße die Gegenwart, ohne von ihr abzuhängen.« — Marc Aurel',in:['Was heute schön ist','Kleine Freuden','Wofür ich dankbar bin'],nicht:['Was fehlt','Was noch kommt','Was andere genießen']},
+  {tag:'Freitag',thema:'Abschluss & Loslassen',zitat:'»Beeil dich zu leben, und bedenke: Jeder Tag für sich ist ein Leben.« — Seneca',in:['Was ich diese Woche gelernt habe','Was ich abschließen kann','Meine gelebten Werte'],nicht:['Was unfertig bleibt','Das Urteil der Woche anderer','Nächste Woche schon']},
+  {tag:'Samstag',thema:'Freiheit & Selbstgestaltung',zitat:'»Nur wer Zeit hat, hat Leben.« — Seneca',in:['Wie ich diesen Tag gestalte','Meine Kreativität','Erholung als Tugend'],nicht:['Andere Menschen Pläne','Gesellschaftliche Erwartungen','Produktivitätsdruck']}
+];
+
+function initStoicTagesfokus(){
+  var heute=new Date().getDay(); // 0=So
+  var tagesIdx=[0,1,2,3,4,5,6][heute];
+  var t=STOIC_TAGE[tagesIdx];
+  var thEl=document.getElementById('stoicTagesthema');
+  var qEl=document.getElementById('stoicTageszitat');
+  var dEl=document.getElementById('stoicDichotomie');
+  if(!thEl)return;
+  thEl.textContent=t.tag+': '+t.thema;
+  qEl.textContent=t.zitat;
+  var inHtml=t.in.map(function(x){return'<span style="background:rgba(61,90,122,.12);color:var(--navy);border-radius:12px;padding:.15rem .55rem;font-family:Caveat,cursive;font-size:.82rem;">✓ '+x+'</span>';}).join('');
+  var nichtHtml=t.nicht.map(function(x){return'<span style="background:rgba(107,72,107,.1);color:var(--violet);border-radius:12px;padding:.15rem .55rem;font-family:Caveat,cursive;font-size:.82rem;">○ '+x+'</span>';}).join('');
+  dEl.innerHTML='<div style="width:100%;font-family:Raleway,sans-serif;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(30,18,8,.4);margin-bottom:.3rem;">In meiner Macht</div>'+inHtml+'<div style="width:100%;font-family:Raleway,sans-serif;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(30,18,8,.3);margin:.4rem 0 .3rem;">Außerhalb</div>'+nichtHtml;
+}
+
+// ── Memento Mori ──────────────────────────────────────────────────
+var MEMENTO_TEXTE=[
+  'Dieser Tag ist ein Geschenk. Er war nicht sicher.',
+  'Irgendwann wird es einen letzten Morgen geben. Heute nicht.',
+  'Was du heute tust, ist Teil deiner Geschichte.',
+  'Die Zeit läuft — aber du entscheidest, womit.',
+  'Wie viele solche Tage bleiben? Lebe diesen vollständig.',
+  'Alles, was du liebst, ist vergänglich. Liebe es deshalb tiefer.',
+  'Der Tod macht das Leben nicht sinnlos — er macht es kostbar.',
+  'Seneca: »Lebe so, dass der letzte Tag nicht neu und unerwartet kommt.«'
+];
+function initMemento(){
+  var el=document.getElementById('mementoText');
+  if(!el)return;
+  el.textContent=MEMENTO_TEXTE[Math.floor(Math.random()*MEMENTO_TEXTE.length)];
+}
+
+initStoicTagesfokus();
+initMemento();
+
 function renderReflexEntries(){var entries=loadReflex();var el=document.getElementById('reflexEntries');if(!entries.length){el.innerHTML='<div style="font-family:Caveat,cursive;color:rgba(26,10,0,.4);">Noch keine Einträge.</div>';return;}el.innerHTML=entries.slice(0,10).map(function(e){return'<div><div class="reflex-entry-date">'+e.date+' · '+e.time+'</div><div class="reflex-entry-lf">'+e.lf+'</div><div class="reflex-entry-text">'+e.text+'</div></div>';}).join('<hr style="border:none;border-top:1px dashed rgba(26,10,0,.1);margin:.3rem 0;">');}
-initReflex();
 
 function speichereNotiz(){var text=document.getElementById('notizText').value;try{localStorage.setItem('notizen_v1',text);}catch(e){}document.getElementById('notizClear').style.display=text?'inline':'none';}
 function loescheNotiz(){if(!confirm('Notizen löschen?'))return;document.getElementById('notizText').value='';try{localStorage.removeItem('notizen_v1');}catch(e){}document.getElementById('notizClear').style.display='none';}
