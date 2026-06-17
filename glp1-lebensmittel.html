@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLP-1 Lebensmittel</title>
+<style>
+  body {
+    font-family: 'Georgia', serif;
+    background: #fdf6ee;
+    color: #3a2a1a;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+  h1 {
+    font-size: 1.4rem;
+    color: #8b1a1a;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #7a6a5a;
+    margin-bottom: 24px;
+  }
+  .section {
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8b1a1a;
+    border-bottom: 1px solid #d4a96a55;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+  }
+  label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.15s;
+  }
+  label:hover { background: #f0e8d8; }
+  label.checked { color: #a09080; text-decoration: line-through; }
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #8b1a1a;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .reset-btn {
+    display: block;
+    margin: 28px auto 0;
+    padding: 8px 22px;
+    background: transparent;
+    border: 1.5px solid #8b1a1a;
+    color: #8b1a1a;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: Georgia, serif;
+  }
+  .reset-btn:hover { background: #8b1a1a; color: #fdf6ee; }
+</style>
+</head>
+<body>
+
+<h1>🌿 GLP-1 Lebensmittel</h1>
+<p class="subtitle">Natürliche Sättigungsunterstützung – abhaken, was du heute hattest</p>
+
+<div class="section">
+  <div class="section-title">Ballaststoffe</div>
+  <label><input type="checkbox"> Haferflocken</label>
+  <label><input type="checkbox"> Gerste</label>
+  <label><input type="checkbox"> Linsen</label>
+  <label><input type="checkbox"> Kichererbsen</label>
+  <label><input type="checkbox"> Vollkornbrot / Vollkornprodukte</label>
+  <label><input type="checkbox"> Flohsamen</label>
+  <label><input type="checkbox"> Beeren (Himbeeren, Erdbeeren …)</label>
+  <label><input type="checkbox"> Äpfel (Pektin)</label>
+  <label><input type="checkbox"> Zitrusfrüchte (Pektin)</label>
+</div>
+
+<div class="section">
+  <div class="section-title">Protein</div>
+  <label><input type="checkbox"> Eier</label>
+  <label><input type="checkbox"> Magerquark</label>
+  <label><input type="checkbox"> Tofu</label>
+  <label><input type="checkbox"> Tempeh</label>
+</div>
+
+<div class="section">
+  <div class="section-title">Gesunde Fette</div>
+  <label><input type="checkbox"> Olivenöl</label>
+  <label><input type="checkbox"> Walnüsse</label>
+  <label><input type="checkbox"> Mandeln</label>
+</div>
+
+<div class="section">
+  <div class="section-title">Präbiotische & bittere Pflanzen</div>
+  <label><input type="checkbox"> Chicorée</label>
+  <label><input type="checkbox"> Rucola</label>
+  <label><input type="checkbox"> Artischocken</label>
+  <label><input type="checkbox"> Zwiebeln (Inulin)</label>
+  <label><input type="checkbox"> Knoblauch (Inulin)</label>
+</div>
+
+<div class="section">
+  <div class="section-title">Fermentiertes (Darmflora)</div>
+  <label><input type="checkbox"> Naturjoghurt</label>
+  <label><input type="checkbox"> Kefir</label>
+  <label><input type="checkbox"> Sauerkraut</label>
+  <label><input type="checkbox"> Kimchi</label>
+  <label><input type="checkbox"> Kombucha</label>
+</div>
+
+<div class="section">
+  <div class="section-title">Gewürze & Extras</div>
+  <label><input type="checkbox"> Zimt</label>
+  <label><input type="checkbox"> Kurkuma / Curcumin</label>
+  <label><input type="checkbox"> Ingwer</label>
+</div>
+
+<div class="section">
+  <div class="section-title">Lebensstil</div>
+  <label><input type="checkbox"> Spaziergang nach dem Essen 🐾</label>
+  <label><input type="checkbox"> Intervallfasten (16:8 o.ä.)</label>
+  <label><input type="checkbox"> Stark Verarbeitetes & Zucker gemieden</label>
+</div>
+
+<button class="reset-btn" onclick="resetAll()">↺ Alles zurücksetzen</button>
+
+<script>
+  // Restore checkboxes from localStorage
+  document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+    cb.checked = localStorage.getItem('glp1_' + i) === '1';
+    if (cb.checked) cb.closest('label').classList.add('checked');
+    cb.addEventListener('change', () => {
+      localStorage.setItem('glp1_' + i, cb.checked ? '1' : '0');
+      cb.closest('label').classList.toggle('checked', cb.checked);
+    });
+  });
+
+  function resetAll() {
+    document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+      cb.checked = false;
+      localStorage.removeItem('glp1_' + i);
+      cb.closest('label').classList.remove('checked');
+    });
+  }
+</script>
+</body>
+</html>
