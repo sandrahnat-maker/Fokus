@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandras Ausmist-Liste</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf6ee;
+    --bordeaux: #8b1a1a;
+    --bordeaux-light: #b8294a;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a0;
+    --ink: #2a1a0e;
+    --muted: #7a6050;
+    --stripe-a: #f5ede0;
+    --stripe-b: #fdf6ee;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Raleway', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* WIMPELKETTE */
+  .banner {
+    background: var(--bordeaux);
+    padding: 0.5rem 0 0.3rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .pennants {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 1rem;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+  .pennant {
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 22px solid var(--gold);
+    margin: 0 2px;
+    flex-shrink: 0;
+  }
+  .pennant:nth-child(2n) { border-top-color: var(--cream); }
+  .pennant:nth-child(3n) { border-top-color: var(--bordeaux-light); }
+  .pennant:nth-child(4n) { border-top-color: var(--gold-light); }
+
+  header {
+    background: var(--bordeaux);
+    padding: 1.5rem 1rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -18px; left: 0; right: 0;
+    height: 36px;
+    background: var(--bordeaux);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 50% 100%, 0 0);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    color: var(--cream);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+  .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: 1rem;
+    margin-top: 0.3rem;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    max-width: 720px;
+    margin: 3rem auto 0;
+    padding: 0 1rem;
+  }
+  .progress-bar-bg {
+    background: var(--gold-light);
+    border-radius: 999px;
+    height: 10px;
+    overflow: hidden;
+    border: 1px solid var(--gold);
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--bordeaux-light), var(--bordeaux));
+    border-radius: 999px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+  }
+  .progress-label strong { color: var(--bordeaux); }
+
+  /* CONTROLS */
+  .controls {
+    max-width: 720px;
+    margin: 1.2rem auto 0;
+    padding: 0 1rem;
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-btn {
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    color: var(--ink);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--bordeaux);
+    border-color: var(--bordeaux);
+    color: var(--cream);
+  }
+  .reset-btn {
+    margin-left: auto;
+    background: transparent;
+    border: 1.5px solid var(--bordeaux-light);
+    color: var(--bordeaux-light);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .reset-btn:hover { background: var(--bordeaux-light); color: var(--cream); }
+
+  /* MAIN */
+  main {
+    max-width: 720px;
+    margin: 1.5rem auto 4rem;
+    padding: 0 1rem;
+  }
+
+  /* CATEGORY */
+  .category {
+    margin-bottom: 1.5rem;
+    border: 1.5px solid var(--gold-light);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .category-header {
+    background: linear-gradient(135deg, var(--bordeaux) 0%, #6b1414 100%);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .category-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--cream);
+    flex: 1;
+    letter-spacing: 0.02em;
+  }
+  .category-count {
+    font-size: 0.78rem;
+    color: var(--gold-light);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .category-toggle {
+    color: var(--gold);
+    font-size: 1rem;
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .category.collapsed .category-toggle { transform: rotate(-90deg); }
+  .category.collapsed .item-list { display: none; }
+
+  /* ITEMS */
+  .item-list { list-style: none; }
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--stripe-a);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .item:nth-child(even) { background: var(--stripe-a); }
+  .item:nth-child(odd) { background: var(--stripe-b); }
+  .item:hover { background: var(--gold-light); }
+  .item:last-child { border-bottom: none; }
+
+  .item.done { opacity: 0.45; }
+  .item.done .item-text { text-decoration: line-through; color: var(--muted); }
+
+  .checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--gold);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: white;
+  }
+  .item.done .checkbox {
+    background: var(--bordeaux);
+    border-color: var(--bordeaux);
+  }
+  .item.done .checkbox::after {
+    content: '✓';
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  .item-text {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .item-hint {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 0.15rem;
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  /* FOOTER */
+  .bottom-banner {
+    background: var(--bordeaux);
+    padding: 0.5rem 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="pennants" id="pennants"></div>
+</div>
+
+<header>
+  <h1>✦ Sandras Ausmist-Liste ✦</h1>
+  <div class="subtitle">Kategorie für Kategorie — leichter werden</div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="progressFill"></div>
+  </div>
+  <div class="progress-label">
+    <span><strong id="doneCount">0</strong> erledigt</span>
+    <span id="totalCount">0</span> Dinge gesamt
+  </div>
+</div>
+
+<div class="controls">
+  <button class="filter-btn active" data-filter="all">Alle</button>
+  <button class="filter-btn" data-filter="open">Offen</button>
+  <button class="filter-btn" data-filter="done">Erledigt</button>
+  <button class="reset-btn" id="resetBtn">Alles zurücksetzen</button>
+</div>
+
+<main id="main"></main>
+
+<div class="bottom-banner">
+  <div class="pennants" id="pennants2"></div>
+</div>
+
+<script>
+const DATA = [
+  {
+    id: 'kleidung',
+    icon: '👗',
+    title: 'Kleidung & Accessoires',
+    items: [
+      { id: 'k1', text: 'Oberteile & Shirts', hint: 'Was hast du in den letzten 90 Tagen nicht getragen?' },
+      { id: 'k2', text: 'Hosen, Röcke, Kleider' },
+      { id: 'k3', text: 'Pullover & Strickjacken' },
+      { id: 'k4', text: 'Jacken & Mäntel' },
+      { id: 'k5', text: 'Sportkleidung & Yogasachen' },
+      { id: 'k6', text: 'Unterwäsche & Socken', hint: 'Löchrig, grau, verformt → weg!' },
+      { id: 'k7', text: 'Nachtwäsche & Hausjacken' },
+      { id: 'k8', text: 'Schuhe & Stiefel', hint: 'Auch Schuhe, die drücken oder nie passen wollten' },
+      { id: 'k9', text: 'Handtaschen & Rucksäcke' },
+      { id: 'k10', text: 'Schals, Mützen, Handschuhe' },
+      { id: 'k11', text: 'Schmuck & Accessoires', hint: 'Versilberter Modeschmuck, den du nie trägst' },
+      { id: 'k12', text: 'Gürtel & Hosenträger' },
+      { id: 'k13', text: 'Sonnenbrillen' },
+      { id: 'k14', text: 'Bademode & Strandkleidung' },
+    ]
+  },
+  {
+    id: 'kueche',
+    icon: '🍳',
+    title: 'Küche & Lebensmittel',
+    items: [
+      { id: 'ku1', text: 'Abgelaufene Lebensmittel (Kühlschrank)', hint: 'Regelmäßig prüfen!' },
+      { id: 'ku2', text: 'Abgelaufene Lebensmittel (Vorrat & Tiefkühler)' },
+      { id: 'ku3', text: 'Steinhart gewordene Gewürze', hint: 'Wenn sie nicht mehr riechen, helfen sie auch nicht mehr' },
+      { id: 'ku4', text: 'Tupperdosen ohne passenden Deckel' },
+      { id: 'ku5', text: 'Leere Gläser & Flaschen (aufgehoben "für später")' },
+      { id: 'ku6', text: 'Doppelt vorhandenes Kochgeschirr & Töpfe' },
+      { id: 'ku7', text: 'Küchenwerkzeuge, die nie benutzt werden', hint: 'Eierteiler, Ananas-Schneider, Avocadoschneider…' },
+      { id: 'ku8', text: 'Kochbücher, aus denen nie gekocht wurde' },
+      { id: 'ku9', text: 'Plastiktragetaschen & Tüten' },
+      { id: 'ku10', text: 'Kaputtes Geschirr & angesprungene Tassen' },
+      { id: 'ku11', text: 'Überschüssige Vorratsdosen & Behälter' },
+      { id: 'ku12', text: 'Schubladen-Chaos: Gummis, Korken, Stifte ohne Funktion' },
+      { id: 'ku13', text: 'Besteck überschuss (zu viele Teelöffel, kaputte Stücke)' },
+      { id: 'ku14', text: 'Küchengeräte mit Defekt oder ohne Nutzung', hint: 'Fondueset, Waffeleisen, Eismaschine…' },
+    ]
+  },
+  {
+    id: 'bad',
+    icon: '🧴',
+    title: 'Bad & Kosmetik & Pflege',
+    items: [
+      { id: 'b1', text: 'Abgelaufene Medikamente', hint: 'Zum Recyclinghof, nicht in den Müll' },
+      { id: 'b2', text: 'Abgelaufene Kosmetik & Cremes' },
+      { id: 'b3', text: 'Halbvolle Produkte, die du nicht magst', hint: 'Auch teures Parfüm, das nie benutzt wird' },
+      { id: 'b4', text: 'Doppelt vorhandene Pflegeprodukte' },
+      { id: 'b5', text: 'Alte Zahnbürsten, Rasierer, Pinsel' },
+      { id: 'b6', text: 'Pflegemuster & Proben (alt oder unpassend)' },
+      { id: 'b7', text: 'Haarstyling-Produkte die nicht funktionieren' },
+      { id: 'b8', text: 'Nagellacke, die eingedickt sind' },
+      { id: 'b9', text: 'Abgelaufenes Make-up & Mascara' },
+      { id: 'b10', text: 'Defekte Haarbürsten, Kämme, Haarspangen' },
+      { id: 'b11', text: 'Handtücher & Waschlappen mit Verfärbungen/Löchern' },
+      { id: 'b12', text: 'Alte Rezepte & Beipackzettel (anhäufen sich)' },
+    ]
+  },
+  {
+    id: 'papiere',
+    icon: '📄',
+    title: 'Bücher & Papiere & Dokumente',
+    items: [
+      { id: 'p1', text: 'Alte Zeitschriften & Kataloge' },
+      { id: 'p2', text: 'Bücher, die du nie lesen wirst', hint: 'KonMari: Welche machen dich wirklich froh?' },
+      { id: 'p3', text: 'Bücher, die du schon gelesen hast & nicht nochmal liest' },
+      { id: 'p4', text: 'Alte Schulunterlagen & Uniunterlagen (> 5 Jahre)' },
+      { id: 'p5', text: 'Veraltete Reiseführer & Stadtpläne' },
+      { id: 'p6', text: 'Abgelaufene Garantieunterlagen' },
+      { id: 'p7', text: 'Quittungen & Kassenzettel (> 2 Jahre)' },
+      { id: 'p8', text: 'Alte Kalender & Notizbücher (veraltete Inhalte)' },
+      { id: 'p9', text: 'Bedienungsanleitungen für nicht mehr vorhandene Geräte' },
+      { id: 'p10', text: 'Flyer, Broschüren, Visitenkarten' },
+      { id: 'p11', text: 'Kopien von Dokumenten, die du digital gesichert hast' },
+      { id: 'p12', text: 'Übervolle Lehrmaterialien (DaZ/Lernhilfe): aussortieren, was nicht mehr passt', hint: 'Behalten: was regelmäßig im Unterricht funktioniert' },
+    ]
+  },
+  {
+    id: 'elektronik',
+    icon: '🔌',
+    title: 'Elektronik & Kabel & Technik',
+    items: [
+      { id: 'e1', text: 'Kabel ohne bekanntes Gerät', hint: 'Falls du nach 3 Monaten nicht weißt wozu → weg' },
+      { id: 'e2', text: 'Defekte oder veraltete Ladekabel' },
+      { id: 'e3', text: 'Alte Handys & Tablets' },
+      { id: 'e4', text: 'Leere/alte Batterien & Akkus' },
+      { id: 'e5', text: 'CDs, DVDs, USB-Sticks mit obsoletem Inhalt' },
+      { id: 'e6', text: 'Nicht mehr genutzte Kopfhörer & Headsets' },
+      { id: 'e7', text: 'Altes Zubehör (Hüllen für alte Geräte, Adapter)' },
+      { id: 'e8', text: 'Defekte Elektrogeräte (zum Recyclinghof)' },
+      { id: 'e9', text: 'Mehrfachstecker/Verlängerungskabel im Überfluss' },
+    ]
+  },
+  {
+    id: 'deko',
+    icon: '🪴',
+    title: 'Deko, Haushalt & Wohnen',
+    items: [
+      { id: 'd1', text: 'Dekoartikel, die nicht zur gewünschten Atmosphäre passen', hint: 'Passt es zum Zirkus-Flair?' },
+      { id: 'd2', text: 'Vasen & Schalen im Überfluss' },
+      { id: 'd3', text: 'Kerzen & Kerzenhalter (zu viele)' },
+      { id: 'd4', text: 'Bilderrahmen ohne Foto oder Verwendung' },
+      { id: 'd5', text: 'Überschüssiges Bettzeug & Kissen', hint: 'Für Wärmendes: behalten was wirklich genutzt wird' },
+      { id: 'd6', text: 'Defekte oder nicht genutzte Teppiche' },
+      { id: 'd7', text: 'Werkzeug ohne Nutzung oder doppelt vorhanden' },
+      { id: 'd8', text: 'Kerzen-/Duft-/Badprodukte als Geschenk erhalten & ungenutzt' },
+      { id: 'd9', text: 'Einkaufstaschen im Überfluss' },
+      { id: 'd10', text: 'Veraltete Kalender an der Wand' },
+      { id: 'd11', text: 'Briefpapier, Geschenkbänder, Verpackungsmaterial (überschuss)' },
+      { id: 'd12', text: 'Spielzeug & Bastelzeug das nie genutzt wird' },
+      { id: 'd13', text: 'Blumentöpfe & Übertöpfe ohne Pflanze' },
+      { id: 'd14', text: 'Tote oder nicht mehr heilbare Pflanzen' },
+    ]
+  },
+  {
+    id: 'sentimentales',
+    icon: '🎭',
+    title: 'Erinnerungsstücke & Sentimentales',
+    items: [
+      { id: 's1', text: 'Geschenke, die du nicht magst, aber aufhebst aus Pflicht', hint: 'Schuldgefühle sind kein guter Grund zum Behalten' },
+      { id: 's2', text: 'Fotos: doppelt, unscharf, bedeutungslos', hint: 'Schöne Erinnerungen fotografieren und Originale loslassen' },
+      { id: 's3', text: 'Souvenirs ohne echte Erinnerung', hint: 'Was war das nochmal?' },
+      { id: 's4', text: 'Basteleien & Kunstwerke aus der Vergangenheit', hint: 'Was davon zeigt wirklich, wer du bist?' },
+      { id: 's5', text: 'Alte Grußkarten & Briefe (nicht bedeutsame)' },
+      { id: 's6', text: 'Trophäen, Urkunden & Auszeichnungen prüfen' },
+      { id: 's7', text: 'Dinge, die "eines Tages" genutzt werden sollen', hint: 'Wenn "eines Tages" nie kommt: jetzt entscheiden' },
+      { id: 's8', text: 'Kleidung von geliebten Menschen die gestorben sind', hint: 'Ein Stück behalten, Foto machen — den Rest loslassen' },
+      { id: 's9', text: 'Dinge aus früheren Lebensphasen, die nicht mehr zu dir passen' },
+    ]
+  },
+  {
+    id: 'tiere',
+    icon: '🐾',
+    title: 'Tierbedarf (Lotte, Rudi & Timmy)',
+    items: [
+      { id: 't1', text: 'Abgelaufenes Tierfutter & Leckerlies' },
+      { id: 't2', text: 'Nicht verwendete Medikamente & Präparate', hint: 'Ablaufdatum prüfen!' },
+      { id: 't3', text: 'Spielzeug, das niemand mehr mag (zerstört oder ignoriert)' },
+      { id: 't4', text: 'Alte Halsbänder, Leinen, Geschirre (passen nicht mehr / defekt)' },
+      { id: 't5', text: 'Überschüssige Näpfe & Futterbehälter' },
+      { id: 't6', text: 'Katzenstreu-Behälter im Überfluss' },
+      { id: 't7', text: 'Alte Körbchen, Decken, Schlafplätze (unhygienisch oder ungenutzt)' },
+      { id: 't8', text: 'Transportboxen, die nicht mehr genutzt werden' },
+    ]
+  },
+  {
+    id: 'kreativ',
+    icon: '🎨',
+    title: 'Kreativ- & Kunstmaterialien',
+    items: [
+      { id: 'kr1', text: 'Eingetrocknete Acryl-, Gouache- oder Ölfarben', hint: 'Deckel auf — riecht oder klebt? Weg damit.' },
+      { id: 'kr2', text: 'Pinsel mit gespreizten oder verklebten Borsten' },
+      { id: 'kr3', text: 'Farben & Medien doppelt vorhanden (zu viel vom Gleichen)' },
+      { id: 'kr4', text: 'Papier & Karton: angegilbt, gewellt, falsche Formate', hint: 'Was du nie verwenden wirst, blockiert den Blick aufs Gute' },
+      { id: 'kr5', text: 'Skizzenbücher & Blöcke zur Hälfte leer & nie mehr geöffnet' },
+      { id: 'kr6', text: 'Stifte, Marker, Liner: trocken oder ausgelaufen testen' },
+      { id: 'kr7', text: 'Buntstifte & Pastellkreiden: Fragmente, die zu kurz zum Halten sind' },
+      { id: 'kr8', text: 'Stoffe & Textilreste ohne konkreten Plan' },
+      { id: 'kr9', text: 'Wolle & Garne (Mengen, Farben, Qualitäten die nicht mehr passen)' },
+      { id: 'kr10', text: 'Bastelmaterialien: Kleber, Klebeband, Washi-Tapes eingetrocknet' },
+      { id: 'kr11', text: 'Scheren, Cutter, Skalpelle: stumpf oder rostfleckig' },
+      { id: 'kr12', text: 'Materialien für Techniken, die du nicht mehr machst', hint: 'Sei ehrlich: kommt Macramé/Ton/Linoldruck zurück?' },
+      { id: 'kr13', text: 'Halbfertige Projekte: beenden oder bewusst loslassen', hint: 'Ein halbfertiges Projekt das Schuldgefühle macht, ist kein Kunstwerk mehr' },
+      { id: 'kr14', text: 'Gesammelte "Inspirationsmaterialien": Zeitschriften, Ausdrucke, Collagen-Schnipsel', hint: 'Was wirklich zündet, digitalisieren — den Rest gehen lassen' },
+      { id: 'kr15', text: 'Alte Leinwände & Malunterlagen, die nichts mehr werden' },
+      { id: 'kr16', text: 'Aufbewahrungsboxen & Behälter für Kreativkram (zu viele leere)' },
+    ]
+  },
+  {
+    id: 'digital',
+    icon: '💻',
+    title: 'Digital Decluttering',
+    items: [
+      { id: 'dig1', text: 'E-Mail-Postfach: alte Newsletter abbestellen' },
+      { id: 'dig2', text: 'Apps auf Handy & Tablet löschen (nie geöffnet)' },
+      { id: 'dig3', text: 'Fotos: doppelte, unscharfe, bedeutungslose löschen' },
+      { id: 'dig4', text: 'Downloads-Ordner aufräumen' },
+      { id: 'dig5', text: 'Alte Dokumente & PDFs sortieren/löschen' },
+      { id: 'dig6', text: 'Browser-Lesezeichen entrümpeln' },
+      { id: 'dig7', text: 'Nicht genutzte Accounts & Abos kündigen' },
+      { id: 'dig8', text: 'Passwörter-Liste aktualisieren (alte Accounts löschen)' },
+      { id: 'dig9', text: 'Desktop & Schreibtisch am Bildschirm aufräumen' },
+    ]
+  },
+];
+
+// State
+let state = {};
+let filter = 'all';
+
+function loadState() {
+  try {
+    const s = localStorage.getItem('ausmisten_state');
+    if (s) state = JSON.parse(s);
+  } catch(e) {}
+}
+
+function saveState() {
+  localStorage.setItem('ausmisten_state', JSON.stringify(state));
+}
+
+function isItemDone(id) { return !!state[id]; }
+
+function toggleItem(id) {
+  state[id] = !state[id];
+  saveState();
+  render();
+}
+
+function getTotals() {
+  let total = 0, done = 0;
+  DATA.forEach(cat => cat.items.forEach(item => {
+    total++;
+    if (isItemDone(item.id)) done++;
+  }));
+  return { total, done };
+}
+
+function render() {
+  const main = document.getElementById('main');
+  const { total, done } = getTotals();
+
+  // Progress
+  document.getElementById('progressFill').style.width = total ? (done/total*100)+'%' : '0%';
+  document.getElementById('doneCount').textContent = done;
+  document.getElementById('totalCount').textContent = total;
+
+  // Categories
+  let html = '';
+  DATA.forEach(cat => {
+    const catDone = cat.items.filter(i => isItemDone(i.id)).length;
+    let visibleItems = cat.items;
+    if (filter === 'done') visibleItems = cat.items.filter(i => isItemDone(i.id));
+    if (filter === 'open') visibleItems = cat.items.filter(i => !isItemDone(i.id));
+    if (visibleItems.length === 0) return;
+
+    const collapsed = state['__collapsed_'+cat.id] ? 'collapsed' : '';
+    html += `<div class="category ${collapsed}" data-cat="${cat.id}">
+      <div class="category-header" onclick="toggleCollapse('${cat.id}')">
+        <span class="category-icon">${cat.icon}</span>
+        <span class="category-title">${cat.title}</span>
+        <span class="category-count">${catDone}/${cat.items.length}</span>
+        <span class="category-toggle">▾</span>
+      </div>
+      <ul class="item-list">`;
+
+    visibleItems.forEach(item => {
+      const done = isItemDone(item.id);
+      html += `<li class="item${done?' done':''}" onclick="toggleItem('${item.id}')">
+        <div class="checkbox"></div>
+        <div class="item-text">${item.text}${item.hint ? `<span class="item-hint">${item.hint}</span>` : ''}</div>
+      </li>`;
+    });
+
+    html += `</ul></div>`;
+  });
+
+  if (!html) html = `<div class="empty-state">Alle Aufgaben in dieser Ansicht erledigt ✦</div>`;
+  main.innerHTML = html;
+}
+
+function toggleCollapse(catId) {
+  state['__collapsed_'+catId] = !state['__collapsed_'+catId];
+  saveState();
+  render();
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    filter = this.dataset.filter;
+    render();
+  });
+});
+
+// Reset
+document.getElementById('resetBtn').addEventListener('click', function() {
+  if (confirm('Wirklich alles zurücksetzen? Alle Häkchen gehen verloren.')) {
+    state = {};
+    saveState();
+    render();
+  }
+});
+
+// Pennants
+function makePennants(id) {
+  const el = document.getElementById(id);
+  let html = '';
+  for (let i = 0; i < 40; i++) html += '<div class="pennant"></div>';
+  el.innerHTML = html;
+}
+makePennants('pennants');
+makePennants('pennants2');
+
+loadState();
+render();
+</script>
+</body>
+</html>

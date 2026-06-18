@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grundreinigung — Sandras Welt</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf6ee;
+    --bordeaux: #8b1a1a;
+    --bordeaux-light: #b8294a;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a0;
+    --ink: #2a1a0e;
+    --muted: #7a6050;
+    --stripe-a: #f5ede0;
+    --stripe-b: #fdf6ee;
+    --sage: #6b7c5a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    font-family: 'Raleway', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* BANNER */
+  .banner { background: var(--bordeaux); padding: 0.5rem 0 0.3rem; overflow: hidden; }
+  .pennants { display: flex; justify-content: center; gap: 0; padding: 0 1rem; flex-wrap: nowrap; overflow: hidden; }
+  .pennant { width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 22px solid var(--gold); margin: 0 2px; flex-shrink: 0; }
+  .pennant:nth-child(2n) { border-top-color: var(--cream); }
+  .pennant:nth-child(3n) { border-top-color: var(--bordeaux-light); }
+  .pennant:nth-child(4n) { border-top-color: var(--gold-light); }
+
+  header {
+    background: var(--bordeaux);
+    padding: 1.5rem 1rem 2.2rem;
+    text-align: center;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -18px; left: 0; right: 0;
+    height: 36px;
+    background: var(--bordeaux);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 50% 100%, 0 0);
+  }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 5vw, 2.2rem); color: var(--cream); letter-spacing: 0.02em; }
+  .subtitle { font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold-light); font-size: 0.95rem; margin-top: 0.3rem; }
+
+  /* OVERALL PROGRESS */
+  .progress-wrap { max-width: 760px; margin: 3rem auto 0; padding: 0 1rem; }
+  .progress-bar-bg { background: var(--gold-light); border-radius: 999px; height: 10px; overflow: hidden; border: 1px solid var(--gold); }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--bordeaux-light), var(--bordeaux)); border-radius: 999px; transition: width 0.4s ease; width: 0%; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; }
+  .progress-label strong { color: var(--bordeaux); }
+
+  /* ROOM NAV */
+  .room-nav {
+    max-width: 760px;
+    margin: 1.5rem auto 0;
+    padding: 0 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .room-nav-btn {
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    color: var(--ink);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .room-nav-btn:hover { background: var(--gold-light); }
+  .room-nav-btn.active { background: var(--bordeaux); border-color: var(--bordeaux); color: var(--cream); }
+  .room-nav-btn.complete { border-color: var(--sage); color: var(--sage); }
+  .room-nav-btn.complete.active { background: var(--sage); border-color: var(--sage); color: var(--cream); }
+
+  /* MAIN */
+  main { max-width: 760px; margin: 1.5rem auto 4rem; padding: 0 1rem; }
+
+  /* ROOM PANEL */
+  .room-panel { display: none; }
+  .room-panel.visible { display: block; }
+
+  .room-header {
+    background: linear-gradient(135deg, var(--bordeaux) 0%, #6b1414 100%);
+    border-radius: 4px 4px 0 0;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .room-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .room-title-wrap { flex: 1; }
+  .room-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--cream); }
+  .room-subtitle { font-size: 0.78rem; color: var(--gold-light); font-style: italic; margin-top: 0.15rem; }
+  .room-progress-mini {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    white-space: nowrap;
+  }
+
+  /* ROOM PROGRESS BAR */
+  .room-bar-bg { background: rgba(255,255,255,0.15); height: 4px; border-radius: 999px; margin-top: 0.6rem; }
+  .room-bar-fill { height: 100%; background: var(--gold); border-radius: 999px; transition: width 0.3s; }
+
+  /* SECTIONS */
+  .section-label {
+    background: var(--gold-light);
+    border-left: 3px solid var(--gold);
+    padding: 0.4rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ITEMS */
+  .item-list { list-style: none; border: 1.5px solid var(--gold-light); border-top: none; border-radius: 0 0 4px 4px; overflow: hidden; }
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--stripe-a);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .item:nth-child(even) { background: var(--stripe-a); }
+  .item:nth-child(odd) { background: var(--stripe-b); }
+  .item:hover { background: var(--gold-light); }
+  .item:last-child { border-bottom: none; }
+  .item.done { opacity: 0.45; }
+  .item.done .item-text { text-decoration: line-through; color: var(--muted); }
+
+  .checkbox { width: 18px; height: 18px; border: 2px solid var(--gold); border-radius: 3px; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; background: white; }
+  .item.done .checkbox { background: var(--bordeaux); border-color: var(--bordeaux); }
+  .item.done .checkbox::after { content: '✓'; color: white; font-size: 11px; font-weight: bold; }
+
+  .item-text { font-size: 0.87rem; line-height: 1.45; color: var(--ink); }
+  .item-hint { display: block; font-size: 0.74rem; color: var(--muted); font-style: italic; margin-top: 0.15rem; }
+
+  /* NAV BUTTONS */
+  .room-nav-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.2rem;
+    gap: 0.5rem;
+  }
+  .nav-btn {
+    background: var(--bordeaux);
+    color: var(--cream);
+    border: none;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.55rem 1.2rem;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.2s;
+  }
+  .nav-btn:hover { background: var(--bordeaux-light); }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-btn.ghost { background: transparent; border: 1.5px solid var(--bordeaux-light); color: var(--bordeaux-light); }
+  .nav-btn.ghost:hover { background: var(--bordeaux-light); color: var(--cream); }
+
+  /* DONE BADGE */
+  .room-done-badge {
+    display: none;
+    background: var(--sage);
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+  .room-done-badge.visible { display: inline-block; }
+
+  /* RESET */
+  .bottom-controls { max-width: 760px; margin: -1rem auto 0; padding: 0 1rem; text-align: right; }
+  .reset-btn { background: transparent; border: 1.5px solid var(--bordeaux-light); color: var(--bordeaux-light); font-family: 'Raleway', sans-serif; font-size: 0.75rem; font-weight: 600; padding: 0.3rem 0.8rem; border-radius: 999px; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; }
+  .reset-btn:hover { background: var(--bordeaux-light); color: var(--cream); }
+
+  .bottom-banner { background: var(--bordeaux); padding: 0.5rem 0; margin-top: 3rem; }
+
+  /* PHASE BANNER */
+  .phase-banner {
+    display: flex;
+    gap: 0;
+    border: 1.5px solid var(--gold-light);
+    border-top: none;
+    overflow: hidden;
+  }
+  .phase-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.55rem 0.3rem 0.5rem;
+    background: var(--stripe-b);
+    border-right: 1px solid var(--gold-light);
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .phase-step:last-child { border-right: none; }
+  .phase-step:hover { background: var(--gold-light); }
+  .phase-step.active {
+    background: var(--cream);
+    box-shadow: inset 0 -3px 0 var(--bordeaux);
+  }
+  .phase-step.phase-done { background: #f0f5ee; }
+  .phase-step.phase-done .phase-label { color: var(--sage); }
+  .phase-icon { font-size: 1.1rem; line-height: 1; }
+  .phase-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.2rem;
+    text-align: center;
+  }
+  .phase-check { position: absolute; top: 4px; right: 6px; font-size: 0.65rem; color: var(--sage); font-weight: 700; }
+
+  /* PHASE SECTION LABELS */
+  .section-label.phase-1 { border-left-color: #7a6050; background: #f5ede0; }
+  .section-label.phase-2 { border-left-color: #4a7c8a; background: #e8f3f5; }
+  .section-label.phase-3 { border-left-color: var(--sage); background: #edf2ea; }
+  .phase-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 0.05rem 0.4rem;
+    border-radius: 999px;
+    margin-left: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    vertical-align: middle;
+  }
+  .phase-tag-1 { background: #c9a84c22; color: #7a6050; }
+  .phase-tag-2 { background: #4a7c8a22; color: #4a7c8a; }
+  .phase-tag-3 { background: #6b7c5a22; color: #4a5e3a; }
+
+  /* PHASE 0 — VORBEREITUNG */
+  .section-label.phase-0 { border-left-color: var(--bordeaux); background: #f9ece8; }
+  .phase-tag-0 { background: #8b1a1a18; color: var(--bordeaux); }
+  .prep-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.65rem 1rem;
+    background: #fdf0ec;
+    border-bottom: 1px solid #f0d8d0;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .prep-item:hover { background: #f7ddd5; }
+  .prep-item.done { opacity: 0.45; }
+  .prep-item.done .item-text { text-decoration: line-through; color: var(--muted); }
+  .prep-item.done .checkbox { background: var(--bordeaux); border-color: var(--bordeaux); }
+  .prep-item.done .checkbox::after { content: '✓'; color: white; font-size: 11px; font-weight: bold; }
+
+  /* INTRO BOX */
+  .intro-box {
+    max-width: 760px;
+    margin: 1.5rem auto 0;
+    padding: 0 1rem;
+  }
+  .intro-inner {
+    border: 1.5px solid var(--gold-light);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .intro-header {
+    background: linear-gradient(135deg, var(--bordeaux) 0%, #6b1414 100%);
+    padding: 0.65rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+  .intro-header-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--cream);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+  .intro-toggle { color: var(--gold-light); font-size: 0.9rem; transition: transform 0.25s; }
+  .intro-box.collapsed .intro-toggle { transform: rotate(-90deg); }
+  .intro-box.collapsed .intro-body { display: none; }
+  .intro-body {
+    background: var(--stripe-b);
+    padding: 1rem 1rem 0.8rem;
+  }
+  .intro-steps {
+    display: flex;
+    gap: 0;
+    margin-bottom: 0.8rem;
+  }
+  .intro-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.7rem 0.4rem;
+    border-right: 1px solid var(--gold-light);
+    text-align: center;
+  }
+  .intro-step:last-child { border-right: none; }
+  .intro-step-icon { font-size: 1.4rem; }
+  .intro-step-num {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bordeaux);
+    margin-top: 0.3rem;
+  }
+  .intro-step-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    color: var(--ink);
+    margin-top: 0.1rem;
+    line-height: 1.2;
+  }
+  .intro-step-sub {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 0.2rem;
+    line-height: 1.3;
+  }
+  .intro-arrow {
+    display: flex;
+    align-items: center;
+    color: var(--gold);
+    font-size: 1rem;
+    padding: 0 0.1rem;
+    flex-shrink: 0;
+  }
+  .intro-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-style: italic;
+    border-top: 1px solid var(--gold-light);
+    padding-top: 0.65rem;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<div class="banner"><div class="pennants" id="pennants"></div></div>
+
+<header>
+  <h1>✦ Grundreinigung ✦</h1>
+  <div class="subtitle">Von der Eingangstür bis ins Atelier — Raum für Raum</div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="totalFill"></div></div>
+  <div class="progress-label">
+    <span><strong id="totalDone">0</strong> Aufgaben erledigt</span>
+    <span id="totalAll">0</span> gesamt
+  </div>
+</div>
+
+<div class="intro-box" id="introBox">
+  <div class="intro-inner">
+    <div class="intro-header" onclick="toggleIntro()">
+      <span class="intro-header-title">✦ Bevor du anfängst</span>
+      <span class="intro-toggle">▾</span>
+    </div>
+    <div class="intro-body">
+      <div class="intro-steps">
+        <div class="intro-step">
+          <span class="intro-step-icon">🗂️</span>
+          <span class="intro-step-num">Schritt 1</span>
+          <span class="intro-step-label">Ausmisten</span>
+          <span class="intro-step-sub">Was weg ist, muss nicht weggeräumt & nicht geputzt werden</span>
+        </div>
+        <div class="intro-arrow">→</div>
+        <div class="intro-step">
+          <span class="intro-step-icon">📦</span>
+          <span class="intro-step-num">Schritt 2</span>
+          <span class="intro-step-label">Wegräumen</span>
+          <span class="intro-step-sub">Boden zuerst — von unten nach oben, alles bekommt einen Platz</span>
+        </div>
+        <div class="intro-arrow">→</div>
+        <div class="intro-step">
+          <span class="intro-step-icon">🧹</span>
+          <span class="intro-step-num">Schritt 3</span>
+          <span class="intro-step-label">Putzen</span>
+          <span class="intro-step-sub">Von oben nach unten: Abstauben → Dampf → Nachwischen</span>
+        </div>
+      </div>
+      <div class="intro-note">
+        Jede Stufe macht die nächste leichter. Erst ausmisten, dann sind weniger Dinge wegzuräumen. Erst wegräumen, dann kann man wirklich putzen. ✦
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="room-nav" id="roomNav"></div>
+
+<div class="bottom-controls">
+  <button class="reset-btn" id="resetBtn">Alles zurücksetzen</button>
+</div>
+
+<main id="main"></main>
+
+<div class="bottom-banner"><div class="pennants" id="pennants2"></div></div>
+
+<script>
+const ROOMS = [
+  {
+    id: 'eingang_aussen',
+    icon: '🚪',
+    title: 'Wohnungstür von außen',
+    subtitle: 'Der erste Eindruck — auch für dich selbst',
+    sections: [
+      { label: 'Türblatt & Rahmen', items: [
+        { id: 'ea1', text: 'Türblatt außen abwischen (Fettfinger, Flecken)', hint: '🌊 Dampfreiniger ideal — löst Griffspuren & Schmutz in Profilierungen. Nur bei lackierten Türen, nicht bei Echtholz/Furnier.' },
+        { id: 'ea2', text: 'Türrahmen & Zarge abstauben und abwischen' },
+        { id: 'ea3', text: 'Türgriff & Schloss reinigen', hint: 'Türgriffe sind Keimherde — gründlich! 🌊 Dampfreiniger geht hier sehr gut.' },
+        { id: 'ea4', text: 'Türspion innen & außen reinigen' },
+        { id: 'ea5', text: 'Türklingel & Briefkasten abwischen' },
+      ]},
+      { label: 'Boden & Umgebung', items: [
+        { id: 'ea6', text: 'Fußmatte klopfen oder waschen' },
+        { id: 'ea7', text: 'Bereich vor der Tür kehren & wischen' },
+        { id: 'ea8', text: 'Schuhabstreifer reinigen' },
+      ]}
+    ]
+  },
+  {
+    id: 'vorzimmer1',
+    icon: '🏠',
+    title: 'Vorzimmer Teil 1',
+    subtitle: 'Decke bis Möbel — oben anfangen',
+    sections: [
+      { label: 'Von oben', items: [
+        { id: 'v1a', text: 'Decke: Spinnweben entfernen' },
+        { id: 'v1b', text: 'Lampe & Lampenschirm abstauben', hint: 'Oft jahrelang vergessen!' },
+        { id: 'v1c', text: 'Wände: Flecken, Spinnennetze in Ecken' },
+        { id: 'v1d', text: 'Lichtschalter & Steckdosen abwischen' },
+      ]},
+      { label: 'Möbel & Flächen', items: [
+        { id: 'v1e', text: 'Garderobe/Haken: abstauben, Jacken abnehmen' },
+        { id: 'v1f', text: 'Spiegel reinigen' },
+        { id: 'v1g', text: 'Schuhregal leeren, wischen, neu einräumen' },
+        { id: 'v1h', text: 'Ablage/Kommode: ausräumen, abwischen, einräumen' },
+        { id: 'v1i', text: 'Türen innen: Türblatt, Rahmen & Griff reinigen', hint: '🌊 Dampfreiniger ideal für lackierte Innentüren — Griffspuren & Schmutz in Rillen lösen sich leicht. Nicht bei Echtholz/Furnier.' },
+        { id: 'v1j', text: 'Heizung/Heizkörper abstauben (Lamellen!)', hint: '🌊 Dampfreiniger mit schmaler Düse kommt gut zwischen die Lamellen.' },
+      ]},
+      { label: 'Unten', items: [
+        { id: 'v1k', text: 'Sockelleisten abwischen' },
+        { id: 'v1l', text: 'Boden kehren & wischen' },
+        { id: 'v1m', text: 'Teppich/Läufer absaugen oder waschen' },
+      ]}
+    ]
+  },
+  {
+    id: 'klo',
+    icon: '🚽',
+    title: 'Klo / WC',
+    subtitle: 'Klein aber gründlich',
+    sections: [
+      { label: 'Oben', items: [
+        { id: 'kl1', text: 'Decke & Ecken: Spinnweben, Schimmelspuren?' },
+        { id: 'kl2', text: 'Lampe reinigen' },
+        { id: 'kl3', text: 'Lüftungsgitter abstauben (oft vergessen)' },
+      ]},
+      { label: 'Wände & Flächen', items: [
+        { id: 'kl4', text: 'Wände abwischen (Spritzer!)', hint: 'Besonders hinter und neben der Toilette' },
+        { id: 'kl5', text: 'Lichtschalter abwischen' },
+        { id: 'kl6', text: 'Spiegel (falls vorhanden) reinigen' },
+        { id: 'kl7', text: 'Regal/Ablage ausräumen & wischen' },
+        { id: 'kl8', text: 'Türblatt & Türgriff beidseitig reinigen', hint: '🌊 Dampfreiniger gut geeignet für lackierte Türen.' },
+      ]},
+      { label: 'Toilette', items: [
+        { id: 'kl9', text: 'WC-Sitz innen & außen reinigen', hint: '🌊 Dampfreiniger desinfiziert hier ohne Chemie.' },
+        { id: 'kl10', text: 'WC-Schüssel: mit Reiniger einwirken lassen, dann bürsten' },
+        { id: 'kl11', text: 'Spülkasten außen abwischen' },
+        { id: 'kl12', text: 'Bereich hinter & unter der Toilette wischen', hint: 'Oft das Schmutzigste im ganzen Klo — 🌊 Dampfreiniger ideal.' },
+        { id: 'kl13', text: 'WC-Bürste & Halter reinigen oder ersetzen' },
+      ]},
+      { label: 'Unten', items: [
+        { id: 'kl14', text: 'Sockelleisten abwischen', hint: '🌊 Dampfreiniger löst hartnäckigen Schmutz an Sockelleisten gut.' },
+        { id: 'kl15', text: 'Boden wischen (auch unter dem WC-Sockel)', hint: '🌊 Dampfreiniger für Fliesenfugen am Boden ideal.' },
+        { id: 'kl16', text: 'WC-Vorleger waschen' },
+      ]}
+    ]
+  },
+  {
+    id: 'vorzimmer2',
+    icon: '🪟',
+    title: 'Vorzimmer Teil 2',
+    subtitle: 'Fenster, Stauraum, Restzonen',
+    sections: [
+      { label: 'Fenster & Licht', items: [
+        { id: 'v2a', text: 'Fenster putzen (innen & außen wenn möglich)' },
+        { id: 'v2b', text: 'Fensterrahmen & Fensterbank abwischen' },
+        { id: 'v2c', text: 'Fenstergriff reinigen' },
+        { id: 'v2d', text: 'Vorhänge/Rollo abstauben oder waschen' },
+      ]},
+      { label: 'Restliche Flächen', items: [
+        { id: 'v2e', text: 'Abstellbereiche & Ecken leeren & wischen' },
+        { id: 'v2f', text: 'Kabel & Kabelkanäle abstauben' },
+        { id: 'v2g', text: 'Bilder & Wanddeko abstauben' },
+        { id: 'v2h2', text: 'Türen innen: Türblatt, Rahmen & Griff reinigen', hint: '🌊 Dampfreiniger für lackierte Türen.' },
+        { id: 'v2h', text: 'Abschlussboden wischen' },
+      ]}
+    ]
+  },
+  {
+    id: 'kueche',
+    icon: '🍳',
+    title: 'Küche',
+    subtitle: 'Der größte Aufwand — dafür extra Zeit einplanen',
+    sections: [
+      { label: 'Oben & Wände', items: [
+        { id: 'ku1', text: 'Decke: Spinnweben, Fettfilm?' },
+        { id: 'ku2', text: 'Oberschränke oben: Fettschicht entfernen', hint: 'Spülmittel + heißes Wasser, einwirken lassen' },
+        { id: 'ku3', text: 'Fliesenspiegel & Wände hinter dem Herd entfetten', hint: '🌊 Dampfreiniger verflüssigt Fett — dann einfach abwischen.' },
+        { id: 'ku4', text: 'Lichtschalter & Steckdosen abwischen' },
+        { id: 'ku5', text: 'Lampe/Deckenleuchte reinigen' },
+      ]},
+      { label: 'Dunstabzug & Herd', items: [
+        { id: 'ku6', text: 'Dunstabzug: Filter ausbauen & entfetten', hint: 'Filter in kochendem Wasser mit Backpulver einweichen' },
+        { id: 'ku7', text: 'Dunstabzug außen abwischen' },
+        { id: 'ku8', text: 'Herdplatten/Ceranfeld reinigen', hint: '🌊 Dampfreiniger löst eingebrannte Reste auf dem Ceranfeld.' },
+        { id: 'ku9', text: 'Herd seitlich & hinten entfetten', hint: '🌊 Dampfreiniger hier sehr wirksam.' },
+        { id: 'ku10', text: 'Backofen innen reinigen', hint: 'Backofenspray einwirken lassen, dann ausschaben — 🌊 danach mit Dampf nachbehandeln für Rest-Schmutz.' },
+        { id: 'ku11', text: 'Backofentür innen & außen' },
+      ]},
+      { label: 'Schränke & Geräte', items: [
+        { id: 'ku12', text: 'Oberschränke innen: ausräumen, wischen, einräumen' },
+        { id: 'ku13', text: 'Unterschränke innen: ausräumen, wischen, einräumen' },
+        { id: 'ku14', text: 'Kühlschrank ausräumen, abtauen & innen wischen' },
+        { id: 'ku15', text: 'Kühlschrank außen & Dichtungsgummi reinigen' },
+        { id: 'ku16', text: 'Hinter dem Kühlschrank: Staub & Fusseln entfernen', hint: 'Staubige Rückseite kostet Strom!' },
+        { id: 'ku17', text: 'Geschirrspüler: Filter reinigen, Innenraum' },
+        { id: 'ku18', text: 'Mikrowelle innen & außen' },
+        { id: 'ku19', text: 'Wasserkocher & Kaffeemaschine entkalken' },
+        { id: 'ku20', text: 'Andere Küchengeräte außen abwischen' },
+      ]},
+      { label: 'Spüle & Arbeitsflächen', items: [
+        { id: 'ku21', text: 'Arbeitsflächen gründlich reinigen & desinfizieren' },
+        { id: 'ku22', text: 'Spüle reinigen, Abfluss reinigen' },
+        { id: 'ku23', text: 'Armatur entkalken' },
+        { id: 'ku24', text: 'Fugen in Fliesen & Arbeitsfläche reinigen', hint: '🌊 Dampfreiniger — absolute Paradedisziplin! Fugen werden wie neu.' },
+      ]},
+      { label: 'Türen', items: [
+        { id: 'ku28b', text: 'Küchentür & Rahmen reinigen', hint: '🌊 Dampfreiniger für Fettfilm auf lackierten Türen.' },
+        { id: 'ku28c', text: 'Schranktüren außen: Fettfilm & Griffspuren entfernen', hint: '🌊 Dampfreiniger ideal — besonders bei Hochglanzfronten vorsichtig, zuerst testen.' },
+      ]},
+      { label: 'Unten', items: [
+        { id: 'ku25', text: 'Sockelleisten abwischen' },
+        { id: 'ku26', text: 'Unter den Unterschränken kehren & wischen' },
+        { id: 'ku27', text: 'Gesamten Boden wischen' },
+        { id: 'ku28', text: 'Mülleimer & Mülleimer-Bereich reinigen' },
+      ]}
+    ]
+  },
+  {
+    id: 'schlafzimmer',
+    icon: '🛏️',
+    title: 'Schlafzimmer',
+    subtitle: 'Erholungsraum — verdient besondere Sorgfalt',
+    sections: [
+      { label: 'Oben', items: [
+        { id: 'sz1', text: 'Decke: Spinnweben' },
+        { id: 'sz2', text: 'Lampe/Deckenleuchte abstauben' },
+        { id: 'sz3', text: 'Lichtschalter abwischen' },
+      ]},
+      { label: 'Bett & Textilien', items: [
+        { id: 'sz4', text: 'Bettwäsche waschen' },
+        { id: 'sz5', text: 'Matratze absaugen & lüften', hint: 'Wenn möglich: Matratze 2–3 Stunden im Freien lüften' },
+        { id: 'sz6', text: 'Polster & Decken auslüften oder waschen' },
+        { id: 'sz7', text: 'Bettgestell abstauben & wischen' },
+        { id: 'sz8', text: 'Unter dem Bett: leeren, kehren, wischen', hint: 'Oft eine wahre Fundgrube…' },
+      ]},
+      { label: 'Möbel', items: [
+        { id: 'sz9', text: 'Kleiderschrank außen abstauben' },
+        { id: 'sz10', text: 'Kleiderschrank innen: ausräumen, wischen (wenn Grundreinigung)' },
+        { id: 'sz11', text: 'Nachtkästchen: ausräumen, abwischen' },
+        { id: 'sz12', text: 'Alle Ablageflächen abstauben' },
+        { id: 'sz13', text: 'Spiegel reinigen' },
+        { id: 'sz14', text: 'Bilder & Deko abstauben' },
+        { id: 'sz15', text: 'Heizkörper abstauben', hint: '🌊 Dampfreiniger mit schmaler Düse für die Lamellen.' },
+      ]},
+      { label: 'Fenster & Unten', items: [
+        { id: 'sz16', text: 'Fenster putzen, Fensterbank wischen' },
+        { id: 'sz16b', text: 'Schlafzimmertür: Türblatt, Rahmen & Griff reinigen', hint: '🌊 Dampfreiniger für lackierte Türen.' },
+        { id: 'sz17', text: 'Vorhänge/Rollos abstauben oder waschen' },
+        { id: 'sz18', text: 'Sockelleisten abwischen', hint: '🌊 Dampfreiniger löst hartnäckigen Schmutz.' },
+        { id: 'sz19', text: 'Boden kehren & wischen' },
+        { id: 'sz20', text: 'Teppich absaugen (tief)' },
+      ]}
+    ]
+  },
+  {
+    id: 'wohnzimmer',
+    icon: '🖥️',
+    title: 'Wohnzimmer / Arbeitsraum Thomas',
+    subtitle: 'Viele Oberflächen, viel Staub',
+    sections: [
+      { label: 'Oben', items: [
+        { id: 'wz1', text: 'Decke: Spinnweben' },
+        { id: 'wz2', text: 'Lampen & Leuchten abstauben' },
+        { id: 'wz3', text: 'Lichtschalter & Steckdosen abwischen' },
+        { id: 'wz4', text: 'Bilder, Regale oben abstauben' },
+      ]},
+      { label: 'Elektronik & Schreibtisch', items: [
+        { id: 'wz5', text: 'Bildschirm(e) mit geeignetem Tuch reinigen' },
+        { id: 'wz6', text: 'Tastatur & Maus reinigen', hint: 'Tastatur umdrehen & ausklopfen, dann abwischen' },
+        { id: 'wz7', text: 'Computer / Tower abstauben (Lüftungsschlitze!)' },
+        { id: 'wz8', text: 'Kabel am Schreibtisch sortieren & abstauben' },
+        { id: 'wz9', text: 'Schreibtisch ausräumen, abwischen, neu einräumen' },
+        { id: 'wz10', text: 'TV-Gerät & Fernbedienungen abwischen' },
+        { id: 'wz11', text: 'Lautsprecher abstauben' },
+      ]},
+      { label: 'Möbel & Regale', items: [
+        { id: 'wz12', text: 'Bücherregale Regal für Regal: Bücher herausnehmen, wischen, zurück' },
+        { id: 'wz13', text: 'Sofakissen: ausschütteln, Bezüge waschen' },
+        { id: 'wz14', text: 'Sofa/Sessel absaugen (auch unten & dahinter)' },
+        { id: 'wz15', text: 'Couchtisch: abräumen, abwischen' },
+        { id: 'wz16', text: 'Alle Ablageflächen abstauben' },
+        { id: 'wz17', text: 'Heizkörper abstauben', hint: '🌊 Dampfreiniger für Lamellen.' },
+      ]},
+      { label: 'Fenster & Unten', items: [
+        { id: 'wz18', text: 'Fenster putzen, Fensterbank wischen' },
+        { id: 'wz18b', text: 'Zimmertür: Türblatt, Rahmen & Griff reinigen', hint: '🌊 Dampfreiniger für lackierte Türen.' },
+        { id: 'wz19', text: 'Vorhänge abstauben oder waschen' },
+        { id: 'wz20', text: 'Sockelleisten abwischen', hint: '🌊 Dampfreiniger löst hartnäckigen Schmutz an Sockelleisten.' },
+        { id: 'wz21', text: 'Boden unter Möbeln kehren/saugen' },
+        { id: 'wz22', text: 'Teppich tief absaugen oder rausbringen & klopfen' },
+        { id: 'wz23', text: 'Gesamten Boden wischen' },
+      ]}
+    ]
+  },
+  {
+    id: 'badezimmer',
+    icon: '🛁',
+    title: 'Badezimmer',
+    subtitle: 'Kalk, Schimmel, Haare — das große Reinemachen',
+    sections: [
+      { label: 'Oben', items: [
+        { id: 'ba1', text: 'Decke: Schimmelspuren? Ecken prüfen', hint: 'Bei Schimmel: mit Schimmelentferner behandeln, gut lüften' },
+        { id: 'ba2', text: 'Lüftungsgitter abstauben & reinigen' },
+        { id: 'ba3', text: 'Lampe reinigen' },
+        { id: 'ba4', text: 'Lichtschalter abwischen' },
+      ]},
+      { label: 'Dusche / Wanne', items: [
+        { id: 'ba5', text: 'Duschkabine / Badewanne: Kalkflecken entfernen', hint: 'Essigwasser oder Kalkentferner einwirken lassen — 🌊 danach Dampfreiniger für Rest-Kalk & Ecken.' },
+        { id: 'ba6', text: 'Silikon-Fugen prüfen: Schimmel? Ggf. erneuern', hint: '🌊 Dampfreiniger lockert Schmutz in Silikonfugen — aber Schimmel danach mit Schimmelentferner nachbehandeln.' },
+        { id: 'ba7', text: 'Duscharmatur & Brausekopf entkalken' },
+        { id: 'ba8', text: 'Duschvorhang waschen oder ersetzen' },
+        { id: 'ba9', text: 'Abfluss reinigen (Haare, Seifenreste)' },
+      ]},
+      { label: 'Waschbecken & Spiegel', items: [
+        { id: 'ba10', text: 'Spiegel streifenfrei reinigen' },
+        { id: 'ba11', text: 'Waschtisch/Waschbecken: Kalk & Seifenreste entfernen' },
+        { id: 'ba12', text: 'Armatur entkalken' },
+        { id: 'ba13', text: 'Unter dem Waschbecken: Schrank ausräumen & wischen' },
+        { id: 'ba14', text: 'Spiegelschrank / Badschrank: ausräumen, wischen' },
+      ]},
+      { label: 'Kacheln & Möbel', items: [
+        { id: 'ba15', text: 'Fliesen/Kacheln: Kalkschleier entfernen' },
+        { id: 'ba16', text: 'Fliesenfugen reinigen', hint: '🌊 Dampfreiniger — absolute Stärke! Zahnbürste + Backpulver-Paste danach für hartnäckige Reste.' },
+        { id: 'ba17', text: 'Heizkörper/Handtuchhalter abstauben' },
+        { id: 'ba18', text: 'Handtücher waschen' },
+        { id: 'ba19', text: 'Alle Ablageflächen wischen' },
+      ]},
+      { label: 'Türen & Unten', items: [
+        { id: 'ba19b', text: 'Badezimmertür: Türblatt, Rahmen & Griff reinigen', hint: '🌊 Dampfreiniger für lackierte Türen. Bei Feuchtigkeit im Bad besonders wichtig.' },
+        { id: 'ba20', text: 'Sockelleisten abwischen', hint: '🌊 Dampfreiniger für Schmutz an Sockelleisten-Fugen.' },
+        { id: 'ba21', text: 'Boden wischen (auch hinter & unter Möbeln)', hint: '🌊 Dampfreiniger für Fliesenboden & Fugen.' },
+        { id: 'ba22', text: 'Badematte waschen' },
+      ]}
+    ]
+  },
+  {
+    id: 'vorraum_atelier',
+    icon: '🎪',
+    title: 'Vorraum zum Atelier',
+    subtitle: 'Übergangszone — oft unterschätzt',
+    sections: [
+      { label: 'Oben & Wände', items: [
+        { id: 'va1', text: 'Decke: Spinnweben' },
+        { id: 'va2', text: 'Lampe abstauben' },
+        { id: 'va3', text: 'Lichtschalter abwischen' },
+        { id: 'va4', text: 'Wände: Flecken, Abdrücke' },
+      ]},
+      { label: 'Flächen & Stauraum', items: [
+        { id: 'va5', text: 'Regale / Abstellflächen: ausräumen, wischen, einräumen' },
+        { id: 'va6', text: 'Türen: Türblatt, Rahmen & Griff reinigen', hint: '🌊 Dampfreiniger für lackierte Türen.' },
+        { id: 'va7', text: 'Heizkörper abstauben', hint: '🌊 Dampfreiniger für Lamellen.' },
+      ]},
+      { label: 'Unten', items: [
+        { id: 'va8', text: 'Sockelleisten abwischen' },
+        { id: 'va9', text: 'Boden kehren & wischen' },
+      ]}
+    ]
+  },
+  {
+    id: 'atelier',
+    icon: '🎨',
+    title: 'Atelier / Arbeitszimmer',
+    subtitle: 'Dein kreativer Raum — erst ausmisten, dann reinigen',
+    sections: [
+      { label: 'Oben', items: [
+        { id: 'at1', text: 'Decke: Spinnweben, Farbspritzer?' },
+        { id: 'at2', text: 'Lampen & Arbeitsleuchten abstauben' },
+        { id: 'at3', text: 'Lichtschalter abwischen' },
+      ]},
+      { label: 'Arbeitsflächen', items: [
+        { id: 'at4', text: 'Arbeitstisch komplett freiräumen & abwischen', hint: 'Getrocknete Farbe mit Spachtel oder Aceton ablösen' },
+        { id: 'at5', text: 'Pinsel & Werkzeug-Ablagen reinigen' },
+        { id: 'at6', text: 'Paletten & Malutensilien säubern' },
+        { id: 'at7', text: 'Farbflecken auf Ablageflächen behandeln' },
+      ]},
+      { label: 'Regale & Stauraum', items: [
+        { id: 'at8', text: 'Materialregale abstauben: Regal für Regal' },
+        { id: 'at9', text: 'Materialboxen & Behälter abwischen' },
+        { id: 'at10', text: 'Bücherregal / Mappenstauraum abstauben' },
+        { id: 'at11', text: 'Schubladen ausräumen, wischen, einräumen' },
+      ]},
+      { label: 'Wände & Fenster', items: [
+        { id: 'at12', text: 'Bilder & aufgehängte Arbeiten abstauben' },
+        { id: 'at13', text: 'Wände: Farbspritzer, Flecken behandeln' },
+        { id: 'at14', text: 'Fenster putzen (Licht ist alles im Atelier!)' },
+        { id: 'at15', text: 'Fensterbank: oft Pinsel-Ablage — gründlich reinigen' },
+        { id: 'at16', text: 'Heizkörper abstauben', hint: '🌊 Dampfreiniger für Lamellen.' },
+      ]},
+      { label: 'Türen & Unten', items: [
+        { id: 'at16b', text: 'Ateliertür: Türblatt, Rahmen & Griff reinigen', hint: '🌊 Dampfreiniger für lackierte Türen.' },
+        { id: 'at17', text: 'Sockelleisten abwischen' },
+        { id: 'at18', text: 'Farbflecken am Boden behandeln' },
+        { id: 'at19', text: 'Unter Arbeitstisch & Regalen kehren & wischen' },
+        { id: 'at20', text: 'Gesamten Boden wischen' },
+      ]}
+    ]
+  },
+  {
+    id: 'flo',
+    icon: '🌸',
+    title: 'Flos Zimmer',
+    subtitle: 'Wenn sie mitmacht ✦',
+    sections: [
+      { label: 'Oben', items: [
+        { id: 'fl1', text: 'Decke: Spinnweben' },
+        { id: 'fl2', text: 'Lampe abstauben' },
+        { id: 'fl3', text: 'Lichtschalter abwischen' },
+      ]},
+      { label: 'Möbel & Flächen', items: [
+        { id: 'fl4', text: 'Schreibtisch: ausräumen, abwischen' },
+        { id: 'fl5', text: 'Regal: Regal für Regal abstauben' },
+        { id: 'fl6', text: 'Kleiderschrank außen abstauben' },
+        { id: 'fl7', text: 'Bett: Bettwäsche waschen, Matratze absaugen' },
+        { id: 'fl8', text: 'Unter dem Bett leeren & wischen' },
+        { id: 'fl9', text: 'Heizkörper abstauben', hint: '🌊 Dampfreiniger für Lamellen.' },
+        { id: 'fl9b', text: 'Zimmertür: Türblatt, Rahmen & Griff reinigen', hint: '🌊 Dampfreiniger für lackierte Türen.' },
+        { id: 'fl10', text: 'Bilder & Deko abstauben' },
+      ]},
+      { label: 'Fenster & Unten', items: [
+        { id: 'fl11', text: 'Fenster putzen, Fensterbank wischen' },
+        { id: 'fl12', text: 'Sockelleisten abwischen' },
+        { id: 'fl13', text: 'Boden kehren & wischen / Teppich absaugen' },
+      ]}
+    ]
+  },
+];
+
+// Phase classification: assign phase to each section by label keywords
+const PHASE_MAP = {
+  1: ['oben', 'decke', 'wände', 'staub', 'möbel', 'flächen', 'bett', 'textil', 'regale', 'stauraum', 'elektronik', 'schreibtisch', 'arbeitsflächen', 'oben & wände'],
+  2: ['dampf', 'herd', 'dunstabzug', 'toilette', 'dusche', 'wanne', 'kacheln', 'fugen', 'spüle', 'waschbecken', 'türblatt', 'türen', 'türrahmen'],
+  3: ['unten', 'boden', 'fenster', 'vorhang', 'abschluss', 'türen & unten', 'fenster & unten'],
+};
+
+const PHASES = [
+  { n: 0, icon: '📦', label: 'Vorbereitung', color: 'phase-0', tag: 'phase-tag-0' },
+  { n: 1, icon: '🧹', label: 'Abstauben', color: 'phase-1', tag: 'phase-tag-1' },
+  { n: 2, icon: '🌊', label: 'Dampf', color: 'phase-2', tag: 'phase-tag-2' },
+  { n: 3, icon: '💧', label: 'Wischen', color: 'phase-3', tag: 'phase-tag-3' },
+];
+
+function getPhase(sectionLabel) {
+  const l = sectionLabel.toLowerCase();
+  for (const [phase, keywords] of Object.entries(PHASE_MAP)) {
+    if (keywords.some(k => l.includes(k))) return parseInt(phase);
+  }
+  return 1; // default to phase 1
+}
+
+let state = {};
+let currentRoom = 0;
+let activePhase = -1; // -1 = all phases visible
+
+function loadState() {
+  try { const s = localStorage.getItem('grundreinigung_state'); if (s) state = JSON.parse(s); } catch(e) {}
+}
+function saveState() { localStorage.setItem('grundreinigung_state', JSON.stringify(state)); }
+function isDone(id) { return !!state[id]; }
+function toggleItem(id) { state[id] = !state[id]; saveState(); render(); }
+
+function getRoomProgress(room) {
+  let total = 0, done = 0;
+  room.sections.forEach(s => s.items.forEach(i => { total++; if (isDone(i.id)) done++; }));
+  return { total, done };
+}
+
+function getPhaseProgress(room, phaseN) {
+  let total = 0, done = 0;
+  room.sections.forEach(s => {
+    if (getPhase(s.label) === phaseN) {
+      s.items.forEach(i => { total++; if (isDone(i.id)) done++; });
+    }
+  });
+  return { total, done };
+}
+
+function getTotals() {
+  let total = 0, done = 0;
+  ROOMS.forEach(r => { const p = getRoomProgress(r); total += p.total; done += p.done; });
+  return { total, done };
+}
+
+function setPhase(n) {
+  activePhase = activePhase === n ? 0 : n;
+  render();
+}
+
+function render() {
+  const { total, done } = getTotals();
+  document.getElementById('totalFill').style.width = total ? (done/total*100)+'%' : '0%';
+  document.getElementById('totalDone').textContent = done;
+  document.getElementById('totalAll').textContent = total;
+
+  const nav = document.getElementById('roomNav');
+  nav.innerHTML = ROOMS.map((r, i) => {
+    const p = getRoomProgress(r);
+    const complete = p.done === p.total;
+    const active = i === currentRoom;
+    return `<button class="room-nav-btn${active?' active':''}${complete?' complete':''}" onclick="switchRoom(${i})">${r.icon} ${r.title}</button>`;
+  }).join('');
+
+  const main = document.getElementById('main');
+  main.innerHTML = ROOMS.map((room, ri) => {
+    const p = getRoomProgress(room);
+    const pct = p.total ? Math.round(p.done/p.total*100) : 0;
+    const visible = ri === currentRoom ? 'visible' : '';
+
+    // Phase banner
+    const phaseBannerHtml = `<div class="phase-banner">
+      ${PHASES.map(ph => {
+        let phaseDone = false;
+        if (ph.n === 0) {
+          phaseDone = isDone('prep_' + room.id);
+        } else {
+          const pp = getPhaseProgress(room, ph.n);
+          phaseDone = pp.total > 0 && pp.done === pp.total;
+        }
+        const isActive = activePhase === ph.n;
+        return `<div class="phase-step${isActive?' active':''}${phaseDone?' phase-done':''}" onclick="setPhase(${ph.n})">
+          ${phaseDone ? '<span class="phase-check">✓</span>' : ''}
+          <span class="phase-icon">${ph.icon}</span>
+          <span class="phase-label">${ph.label}</span>
+        </div>`;
+      }).join('')}
+      <div class="phase-step${activePhase===-1?' active':''}" onclick="setPhase(-1)">
+        <span class="phase-icon">📋</span>
+        <span class="phase-label">Alle</span>
+      </div>
+    </div>`;
+
+    // Prep step (phase 0)
+    const prepId = 'prep_' + room.id;
+    const prepDone = isDone(prepId);
+    const showPrep = activePhase === -1 || activePhase === 0;
+    const prepHtml = showPrep ? `
+      <div class="section-label phase-0">Vorbereitung<span class="phase-tag phase-tag-0">📦 Vor dem Putzen</span></div>
+      <ul class="item-list" style="border-radius:0;border-top:none;">
+        <li class="prep-item${prepDone?' done':''}" onclick="toggleItem('${prepId}')">
+          <div class="checkbox"></div>
+          <div class="item-text">Boden freiräumen — alles vom Boden aufheben & wegräumen<span class="item-hint">Von unten nach oben aufräumen: Boden zuerst, damit der Raum sofort leichter wirkt. Erst dann mit dem Putzen von oben beginnen.</span></div>
+        </li>
+      </ul>` : '';
+
+    let sectionsHtml = '';
+    room.sections.forEach(sec => {
+      const secPhase = getPhase(sec.label);
+      if (activePhase !== -1 && activePhase !== 0 && secPhase !== activePhase) return;
+      if (activePhase === 0) return; // phase 0 = only prep step
+      const ph = PHASES.find(p => p.n === secPhase);
+      const phTag = ph ? `<span class="phase-tag ${ph.tag}">${ph.icon} ${ph.label}</span>` : '';
+      sectionsHtml += `<div class="section-label ${ph ? ph.color : ''}">${sec.label}${phTag}</div>`;
+      sectionsHtml += `<ul class="item-list" style="border-radius:0;border-top:none;">`;
+      sec.items.forEach(item => {
+        const d = isDone(item.id);
+        sectionsHtml += `<li class="item${d?' done':''}" onclick="toggleItem('${item.id}')">
+          <div class="checkbox"></div>
+          <div class="item-text">${item.text}${item.hint ? `<span class="item-hint">${item.hint}</span>` : ''}</div>
+        </li>`;
+      });
+      sectionsHtml += `</ul>`;
+    });
+
+    if (!prepHtml && !sectionsHtml) sectionsHtml = `<div style="padding:1.5rem 1rem;text-align:center;font-style:italic;color:var(--muted);font-size:0.85rem;">Alle Aufgaben dieser Phase erledigt ✦</div>`;
+
+    return `<div class="room-panel ${visible}" id="room_${ri}">
+      <div class="room-header">
+        <span class="room-icon">${room.icon}</span>
+        <div class="room-title-wrap">
+          <div class="room-title">${room.title}</div>
+          <div class="room-subtitle">${room.subtitle}</div>
+          <div class="room-bar-bg"><div class="room-bar-fill" style="width:${pct}%"></div></div>
+        </div>
+        <div class="room-progress-mini">${p.done}/${p.total}</div>
+      </div>
+      ${phaseBannerHtml}
+      ${prepHtml}
+      ${sectionsHtml}
+      <div class="room-nav-actions">
+        <button class="nav-btn ghost" onclick="switchRoom(${ri-1})" ${ri===0?'disabled':''}>← Zurück</button>
+        <span class="room-done-badge${p.done===p.total?' visible':''}">✓ Fertig!</span>
+        <button class="nav-btn" onclick="switchRoom(${ri+1})" ${ri===ROOMS.length-1?'disabled':''}>Weiter →</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function switchRoom(i) {
+  if (i < 0 || i >= ROOMS.length) return;
+  currentRoom = i;
+  render();
+  document.getElementById('roomNav').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function toggleIntro() {
+  const box = document.getElementById('introBox');
+  box.classList.toggle('collapsed');
+}
+
+document.getElementById('resetBtn').addEventListener('click', function() {
+  if (confirm('Wirklich alles zurücksetzen? Alle Häkchen gehen verloren.')) {
+    state = {}; saveState(); render();
+  }
+});
+
+function makePennants(id) {
+  const el = document.getElementById(id);
+  let html = '';
+  for (let i = 0; i < 40; i++) html += '<div class="pennant"></div>';
+  el.innerHTML = html;
+}
+makePennants('pennants');
+makePennants('pennants2');
+
+loadState();
+render();
+</script>
+</body>
+</html>
