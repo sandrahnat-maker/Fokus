@@ -480,7 +480,6 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
   <div class="innehalten-inhalt" style="padding:3rem 2rem 220px;">
     <div style="font-size:3rem;margin-bottom:.8rem;animation:schaukeln 2.5s ease-in-out infinite;">🎪</div>
     <div class="innehalten-frage" style="font-size:2rem;color:var(--bordeaux);margin-bottom:.6rem;text-align:center;">Mach doch<br>was du willst!</div>
-    <div style="font-family:'IM Fell English',serif;font-size:1rem;font-style:italic;color:rgba(42,21,5,.45);margin-bottom:1.4rem;text-align:center;letter-spacing:.01em;text-align:center;">Handle ich gerade aus Freiheit — oder aus Angst?</div>
     <input class="vk-overlay-input" style="text-align:center;" id="innehaltенAntwort" type="text" placeholder="…" autocomplete="off" style="margin-bottom:1.2rem;font-size:1.1rem;">
     <button class="los-btn" onclick="schliesseInnehalten()" style="font-size:1.2rem;padding:.9rem 2rem;">Mach ich eh! ✦</button>
     <button class="weiter-btn" onclick="schliesseInnehalten()">oder auch nicht</button>
@@ -534,8 +533,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
   <div style="width:100%;display:flex;flex-direction:column;gap:.7rem;max-width:420px;">
 
     <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--crimson);border-radius:4px;padding:.9rem 1rem;">
-      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🎭 Handle ich aus Freiheit?</div>
-      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:var(--text);line-height:1.55;font-style:italic;">Nicht aus Angst, sondern weil ich es wähle — das ist der Unterschied.</div>
+      
     </div>
 
     <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--gold);border-radius:4px;padding:.9rem 1rem;">
@@ -620,6 +618,31 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
   <button onclick="document.getElementById('zirkusprinzessinOverlay').style.display='flex'" style="background:none;border:1px solid rgba(200,153,58,.35);border-radius:4px;padding:.2rem .65rem;font-size:.75rem;color:var(--gold);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🎨 Ich</button>
   <button onclick="document.getElementById('guterTagOverlay').style.display='flex'" style="background:none;border:1px solid rgba(90,138,90,.4);border-radius:4px;padding:.2rem .65rem;font-size:.75rem;color:var(--sage);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🌟 Guter Tag</button>
 </div>
+
+<!-- FÜR MICH KARTE -->
+<div id="fuerMichKarte" style="margin:.6rem 1rem 0;background:var(--card);border:1px solid rgba(139,26,26,.12);border-left:3px solid var(--bordeaux);border-radius:6px;padding:.65rem 1rem .6rem;display:flex;align-items:flex-start;gap:.7rem;cursor:pointer;" onclick="toggleFuerMich()">
+  <div style="font-size:1.3rem;flex-shrink:0;line-height:1.3;">🪞</div>
+  <div style="flex:1;min-width:0;">
+    <div style="font-family:'Raleway',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bordeaux);font-weight:700;opacity:.8;margin-bottom:.25rem;">Alles, was ich tue —</div>
+    <div id="fuerMichSatz" style="font-family:'IM Fell English',serif;font-size:.97rem;color:var(--text);line-height:1.55;font-style:italic;">tue ich für mich. Damit es den Tieren gut geht, den Pflanzen. Damit ich mich gepflegt und lebendig fühle. Damit meine Wohnung ein Ort ist, der mir gefällt.</div>
+  </div>
+</div>
+<script>
+var fuerMichExpanded = false;
+var fuerMichKurz = 'tue ich für mich. Damit es den Tieren gut geht, den Pflanzen. Damit ich mich gepflegt und lebendig fühle. Damit meine Wohnung ein Ort ist, der mir gefällt.';
+var fuerMichLang = 'tue ich für mich.\n\n🐾 Damit Rudi, Timmy und Lotte versorgt und geliebt sind.\n🌿 Damit meine Pflanzen gedeihen.\n✨ Damit ich gepflegt, dynamisch und lebendig wirke.\n🏠 Damit meine Wohnung ein Ort ist, der mir wirklich gefällt.\n\nNicht aus Pflicht. Weil ich es will.';
+function toggleFuerMich(){
+  fuerMichExpanded = !fuerMichExpanded;
+  var el = document.getElementById('fuerMichSatz');
+  if(fuerMichExpanded){
+    el.style.whiteSpace = 'pre-line';
+    el.textContent = fuerMichLang;
+  } else {
+    el.style.whiteSpace = '';
+    el.textContent = fuerMichKurz;
+  }
+}
+</script>
 
 <!-- MEINE AUFGABEN -->
 <div class="maufg-wrap">
@@ -797,8 +820,7 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
   <div style="width:100%;display:flex;flex-direction:column;gap:.7rem;max-width:420px;">
 
     <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--crimson);border-radius:4px;padding:.9rem 1rem;">
-      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🎭 Handle ich aus Freiheit?</div>
-      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:var(--text);line-height:1.55;font-style:italic;">Nicht aus Angst, sondern weil ich es wähle — das ist der Unterschied.</div>
+      
     </div>
 
     <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--gold);border-radius:4px;padding:.9rem 1rem;">
@@ -994,53 +1016,53 @@ function getUnterwegsZeit(){return UNTERWEGS_ZEITEN[today.getDay()]||null;}
 
 var PHASES={
   morgen:{mood:null,tasks:[
-    {name:"Euthyrox",note:"noch im Bett",zirkus:"Mein erster Akt des Tages. Nicht glamourös — aber weise.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Rückenübungen",note:"noch im Bett",zirkus:"Noch im Bett und schon tugendhaft. Epiktet wäre stolz.",cat:"körper",dur:10,links:[{href:"Ruecken.html",label:"Rücken"}]},
-    {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",zirkus:"Rudi. Mein erster kleiner Akt der Fürsorge — bevor ich auch nur aufgestanden bin.",cat:"tiere",dur:3,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Blutdruck messen",note:"nüchtern, ruhig · Werte notieren 📋",zirkus:"Daten sammeln, nicht urteilen. Das ist stoisch — und ziemlich vernünftig.",cat:"körper",dur:5,links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
-    {name:"Gewicht messen",note:"nüchtern",zirkus:"Zahlen sind Zahlen. Ich schaue hin. Das ist schon die halbe Übung.",cat:"körper",dur:2,links:[{href:"Wiegen.html",label:"Gewicht"}]},
-    {name:"Knirscherschiene raus",note:"Kiefer entspannen",zirkus:"Vorhang auf. Dieser Tag war nicht garantiert — ich nehme ihn.",cat:"körper",dur:2,links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
-    {name:"Wasser trinken",note:"ein großes Glas",zirkus:"Wasser. Das Einfachste. Manchmal ist das Einfachste das Klügste.",cat:"ernährung",dur:2},
-    {name:"Tee zubereiten",note:"Tee des Tages 🍵",zirkus:"Ich wähle meinen Tee mit Bedacht. Kleine Entscheidungen formen den Charakter.",cat:"ernährung",dur:5,links:[{href:"tee-des-tages.html",label:"Tee"}]},
-    {name:"Frühstück",note:"bewusst & ohne Zwang",zirkus:"Frühstück als stille Übung: genießen, ohne davon abzuhängen.",cat:"ernährung",dur:20,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"glp1-lebensmittel.html",label:"GLP-1 🌿"}]},
-    {name:"Rosenwurz",note:"zum Frühstück — Adaptogen & Stressschutz 🌿",zirkus:"Kleines Pflänzchen, große Wirkung. Ich vertraue der Vernunft — auch in Grün.",cat:"körper",dur:1,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Rudi & Timmy füttern",note:"Futter & Schmusezeit 🐱🐱",zirkus:"Rudi & Timmy. Ob sie's verdienen, ist nicht die Frage. Ich füttere, weil Fürsorge gut ist.",cat:"tiere",dur:10,links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
-    {name:"Bad Früh",note:"FM4 oder Podcast 🎵",zirkus:"Morgenroutine als kleines Ritual. Ordnung außen, Ruhe innen.",cat:"pflege",dur:15,links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
-    {name:"Duschen",note:"warm & frisch in den Tag 🚿",zirkus:"Frisch in den Tag — nicht um aufzufallen, sondern weil ich mich selbst achte.",cat:"pflege",dur:15},
-    {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch 🐾",zirkus:"Lotte wedelt. Die Stadt lebt. Ich bin ein Teil davon — das genügt vollständig.",cat:"tiere",dur:30,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
-    {name:"Tiere — Medikamente geben",note:"Lotte + Rudi prüfen & geben",zirkus:"Kleine Pflicht, große Haltung. Ich tue es täglich — und das formt mich.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-App"},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
-    {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",zirkus:"Er hasst es. Ich mach's trotzdem. So sieht Liebe manchmal aus — leicht schrullig, aber konsequent.",cat:"tiere",dur:2,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
-    {name:"Unterricht vorbereiten",note:"Was brauche ich heute?",zirkus:"Morgen sitzt wer vor mir und lernt. Das verdient meine ganze Aufmerksamkeit.",cat:"arbeit",dur:30,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste"}]},
-    {name:"Uni-Aufgabe — ein Schritt",note:"einen Schritt, nicht alles",zirkus:"Ich baue mein Berufsleben um — einen vernünftigen Schritt nach dem anderen.",cat:"lernen",dur:30,links:[{href:"Lernplan.html",label:"Lernplan"}]},
-    {name:"Tee & Pause",note:"wirklich innehalten 🍵",zirkus:"Seneca pausierte auch. Ich bin in guter Gesellschaft.",cat:"seele",dur:10,links:[{href:"tee-des-tages.html",label:"Tee"}]},
-    {name:"Schnell essen & fertig machen",note:"und raus! 🌺",zirkus:"Raus in die Welt. Ich bring meine beste Haltung mit — der Rest liegt nicht bei mir.",cat:"ernährung",dur:15,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"glp1-lebensmittel.html",label:"GLP-1 🌿"}]},
+    {name:"Euthyrox",note:"noch im Bett",zirkus:"Ich nehme Euthyrox, weil ICH will, dass mein Körper funktioniert.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Rückenübungen",note:"noch im Bett",zirkus:"Ich mache Rückenübungen, weil ICH einen starken Körper haben will.",cat:"körper",dur:10,links:[{href:"Ruecken.html",label:"Rücken"}]},
+    {name:"Rudi — Magenschutz",note:"erstes nach dem Aufstehen",zirkus:"Ich gebe Rudi seinen Magenschutz, weil ICH will, dass es ihm gut geht.",cat:"tiere",dur:3,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
+    {name:"Blutdruck messen",note:"nüchtern, ruhig · Werte notieren 📋",zirkus:"Ich messe meinen Blutdruck, weil ICH stolz auf mich sein will.",cat:"körper",dur:5,links:[{href:"Blutdruck.html",label:"Blutdruck"}]},
+    {name:"Gewicht messen",note:"nüchtern",zirkus:"Ich wiege mich, weil ICH die Kontrolle haben will.",cat:"körper",dur:2,links:[{href:"Wiegen.html",label:"Gewicht"}]},
+    {name:"Knirscherschiene raus",note:"Kiefer entspannen",zirkus:"Ich nehme die Schiene raus, weil ICH will, dass mein Kiefer sich erholt.",cat:"körper",dur:2,links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
+    {name:"Wasser trinken",note:"ein großes Glas",zirkus:"Ich trinke Wasser, weil ICH einen schönen Körper haben will.",cat:"ernährung",dur:2},
+    {name:"Tee zubereiten",note:"Tee des Tages 🍵",zirkus:"Ich bereite meinen Tee zu, weil ICH abnehmen will.",cat:"ernährung",dur:5,links:[{href:"tee-des-tages.html",label:"Tee"}]},
+    {name:"Frühstück",note:"bewusst & ohne Zwang",zirkus:"Ich frühstücke, weil ICH gesund sein will.",cat:"ernährung",dur:20,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"glp1-lebensmittel.html",label:"GLP-1 🌿"}]},
+    {name:"Rosenwurz",note:"zum Frühstück — Adaptogen & Stressschutz 🌿",zirkus:"Ich nehme Rosenwurz, weil ICH meinem Körper etwas Gutes tun will.",cat:"körper",dur:1,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Rudi & Timmy füttern",note:"Futter & Schmusezeit 🐱🐱",zirkus:"Ich füttere Rudi & Timmy, weil ICH will, dass es ihnen gut geht.",cat:"tiere",dur:10,links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
+    {name:"Bad Früh",note:"FM4 oder Podcast 🎵",zirkus:"Ich mache mein Bad-Ritual, weil ICH gepflegt in den Tag gehen will.",cat:"pflege",dur:15,links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
+    {name:"Duschen",note:"warm & frisch in den Tag 🚿",zirkus:"Ich dusche, weil ICH mich frisch und lebendig fühlen will.",cat:"pflege",dur:15},
+    {name:"Lotte raus",note:"Lotte strahlt — und die Stadt auch 🐾",zirkus:"Ich gehe mit Lotte, weil ICH eine gute Hunde-Mama sein will.",cat:"tiere",dur:30,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+    {name:"Tiere — Medikamente geben",note:"Lotte + Rudi prüfen & geben",zirkus:"Ich gebe den Tieren ihre Medikamente, weil ICH will, dass sie gesund bleiben.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-App"},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
+    {name:"Rudi — Gabapentin",note:"vor dem Rausgehen",zirkus:"Ich gebe Rudi sein Gabapentin, weil ICH nicht will, dass er Schmerzen hat.",cat:"tiere",dur:2,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
+    {name:"Unterricht vorbereiten",note:"Was brauche ich heute?",zirkus:"Ich bereite vor, weil ICH will, dass mein Unterricht gut wird.",cat:"arbeit",dur:30,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"},{href:"VHS_Kurs_Checkliste.html",label:"Packliste"}]},
+    {name:"Uni-Aufgabe — ein Schritt",note:"einen Schritt, nicht alles",zirkus:"Ich arbeite an der Uni-Aufgabe, weil ICH gut sein will.",cat:"lernen",dur:30,links:[{href:"Lernplan.html",label:"Lernplan"}]},
+    {name:"Tee & Pause",note:"wirklich innehalten 🍵",zirkus:"Ich mache Pause, weil ICH danach wieder leistungsfähig bin.",cat:"seele",dur:10,links:[{href:"tee-des-tages.html",label:"Tee"}]},
+    {name:"Schnell essen & fertig machen",note:"und raus! 🌺",zirkus:"Ich mache mich fertig, weil ICH gut und pünktlich ankommen will.",cat:"ernährung",dur:15,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"glp1-lebensmittel.html",label:"GLP-1 🌿"}]},
   ]},
   vormittag:{mood:null,tasks:[]},
   mittag:{mood:'',tasks:[]},
   nachmittag:{mood:'',tasks:[]},
   nachhause:{mood:null,tasks:[
-    {name:"Lotte raus 🌿",note:"sie zuerst — schlendernd, echtes Runterkommen",zirkus:"Lotte schlendern, ich loslassen. Der Übergang gehört zum guten Tag dazu.",cat:"tiere",dur:25,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
-    {name:"Yoga Nidra 🧘",note:"20 Min. Tiefenentspannung — direkt nach dem Ankommen",zirkus:"Yoga Nidra: Ich lege mich hin und übe das Loslassen. Ernsthaft.",cat:"körper",dur:20,links:[{href:"yoga-nidra.html",label:"App öffnen"}]},
-    {name:"Atemübung 🫁",note:"4 sek ein · 6–8 sek aus · 5 Min. — senkt Blutdruck",zirkus:"Atmen. Das kann ich immer. Und es wirkt — das ist keine Metapher.",cat:"körper",dur:5,links:[{href:"atemübung.html",label:"App öffnen"}]},
+    {name:"Lotte raus 🌿",note:"sie zuerst — schlendernd, echtes Runterkommen",zirkus:"Ich gehe mit Lotte, weil ICH eine gute Hunde-Mama sein will.",cat:"tiere",dur:25,links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+    {name:"Yoga Nidra 🧘",note:"20 Min. Tiefenentspannung — direkt nach dem Ankommen",zirkus:"Ich mache Yoga Nidra, weil ICH will, dass mein Nervensystem zur Ruhe kommt.",cat:"körper",dur:20,links:[{href:"yoga-nidra.html",label:"App öffnen"}]},
+    {name:"Atemübung 🫁",note:"4 sek ein · 6–8 sek aus · 5 Min. — senkt Blutdruck",zirkus:"Ich atme bewusst, weil ICH will, dass mein Körper zur Ruhe kommt.",cat:"körper",dur:5,links:[{href:"atemübung.html",label:"App öffnen"}]},
   ]},
   abend:{mood:"Du bist zuhause. Die Natur wartet morgen wieder. 🌸",tasks:[
-    {name:"Katzen füttern",note:"Rudi & Timmy — 18:00 🐱",zirkus:"Abend. Katzen. Futter. Kleine Verlässlichkeit, die das Leben zusammenhält.",cat:"tiere",dur:5},
-    {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",zirkus:"Ich bewege mich — nicht um schön auszusehen, sondern weil ein starker Körper ein freier Körper ist.",cat:"körper",dur:25,links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
-    {name:"Duschen",note:"nach dem Training 🚿",zirkus:"Nach dem Training: Duschen. Das Einfache tun, und gut damit sein.",cat:"pflege",dur:10},
-    {name:"Abendessen",note:"schön kochen, bewusst genießen",zirkus:"Abendessen mit Thomas. Die Stoiker wussten: Gemeinschaft ist kein Luxus — sie ist wesentlich.",cat:"ernährung",dur:45,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"},{href:"glp1-lebensmittel.html",label:"GLP-1 🌿"}]},
-    {name:"Pflanzen 🌿",note:"gießen, schauen, da sein",zirkus:"Pflanzen gießen: fünf Minuten Fürsorge für das Lebendige. Schöne Kleinigkeit.",cat:"zuhause",dur:5,links:[{href:"Pflanzen.html",label:"Pflanzen"}]},
-    {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",zirkus:"Haushalt ist keine Strafe — es ist die kleine tägliche Übung im Gestalten.",cat:"zuhause",dur:20,links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
-    {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",zirkus:"Morgen sitzt wer vor mir. Ich bereite mich vor — das ist meine Pflicht und meine Freude.",cat:"arbeit",dur:30,flex:true,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
-    {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",zirkus:"Meine Zukunft baut sich — Seite für Seite, Aufgabe für Aufgabe. Das ist genug.",cat:"lernen",dur:30,flex:true,links:[{href:"Lernplan.html",label:"Lernplan"}]},
-    {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",zirkus:"Kunstzeit. Das hier ist nicht Dekoration — es ist, wofür ich lebe. Ich gebe ihr Raum.",cat:"seele",dur:45,flex:true},
-    {name:"Freizeit 🌸",note:"was auch immer sich gut anfühlt",zirkus:"Freizeit als bewusste Wahl: Ich erhole mich wie eine, die weiß warum.",cat:"seele",dur:30,flex:true},
-    {name:"Lotte — Futter",note:"Abendportion",zirkus:"Lotters Abendportion. Ihr Lieblingsmoment — und meine kleine tägliche Zuverlässigkeit.",cat:"tiere",dur:5},
-    {name:"Alle Tiere — Medikamente",note:"Lotte + Rudi + Timmy Abendgabe 🐾🐱🐱",zirkus:"Drei Tiere, drei Abendgaben. Das ist mein Charakter — täglich, leise, verlässlich.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
-    {name:"Bad Abend",note:"Loslassen, abschließen 🛁",zirkus:"Bad am Abend: ich wasche den Tag ab. Buchstäblich und innerlich.",cat:"pflege",dur:20,links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
-    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium (Glycinat/Malat) 🌿",zirkus:"Ich bereite morgen vor — das ist stoische Klugheit, nicht Fleißigkeit.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
-    {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",zirkus:"Handcreme, Fußcreme. Kleinste Geste der Selbstachtung. Marc Aurel hätte gelächelt.",cat:"pflege",dur:5},
-    {name:"Lesen",note:"kein Handy — echtes Buch 📖",zirkus:"Ich lese. Seneca hätte das gutgeheißen — und ich auch.",cat:"seele",dur:30,flex:true},
-    {name:"Schlafen",note:"früh genug, du weißt warum 🌙",zirkus:"Der Weise weiß: Morgen kommt. Ich schlafe gut dafür. Gute Nacht.",cat:"körper",dur:0},
+    {name:"Katzen füttern",note:"Rudi & Timmy — 18:00 🐱",zirkus:"Ich füttere die Katzen, weil ICH will, dass es ihnen gut geht.",cat:"tiere",dur:5},
+    {name:"Taillen-Training 💪",note:"täglich · Core, Rotation, Rücken",zirkus:"Ich trainiere, weil ICH mich kräftig und dynamisch fühlen will.",cat:"körper",dur:25,links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
+    {name:"Duschen",note:"nach dem Training 🚿",zirkus:"Ich dusche, weil ICH mich danach frisch und gepflegt fühlen will.",cat:"pflege",dur:10},
+    {name:"Abendessen",note:"schön kochen, bewusst genießen",zirkus:"Ich koche und esse, was ich will, weil ICH gesund und schlank sein will.",cat:"ernährung",dur:45,links:[{href:"Ernaehrung.html",label:"Ernährung"},{href:"Einkaufsliste.html",label:"Einkauf"},{href:"Wochenplan.html",label:"Wochenplan"},{href:"glp1-lebensmittel.html",label:"GLP-1 🌿"}]},
+    {name:"Pflanzen 🌿",note:"gießen, schauen, da sein",zirkus:"Ich gieße meine Pflanzen, weil ICH will, dass sie toll aussehen und mir Freude machen.",cat:"zuhause",dur:5,links:[{href:"Pflanzen.html",label:"Pflanzen"}]},
+    {name:"Haushalt — täglich",note:"Küche, aufräumen, das Nötigste",zirkus:"Ich räume auf, weil ICH in einer Wohnung leben will, die mir gefällt.",cat:"zuhause",dur:20,links:[{href:"Haushaltsplan.html",label:"Haushalt"}]},
+    {name:"Unterricht vorbereiten",note:"nur So / Di / Mi",zirkus:"Ich bereite vor, weil ICH will, dass mein Unterricht morgen gut wird.",cat:"arbeit",dur:30,flex:true,links:[{href:"VHS_Kursvorbereitung.html",label:"VHS"},{href:"Lernplan.html",label:"Uni"}]},
+    {name:"Uni-Aufgabe",note:"nur wenn Deadline naht",zirkus:"Ich arbeite an der Uni, weil ICH eine richtig gute DaZ-Lehrerin sein will.",cat:"lernen",dur:30,flex:true,links:[{href:"Lernplan.html",label:"Lernplan"}]},
+    {name:"Kreativzeit 🎨",note:"Fr / Sa / So — gehört dir",zirkus:"Ich nehme mir Kreativzeit, weil ICH weiß, dass ich ganz darin aufgehen kann.",cat:"seele",dur:45,flex:true},
+    {name:"Freizeit 🌸",note:"was auch immer sich gut anfühlt",zirkus:"Ich ruhe mich aus, weil ICH mein Gehirn zur Ruhe kommen lassen will.",cat:"seele",dur:30,flex:true},
+    {name:"Lotte — Futter",note:"Abendportion",zirkus:"Ich füttere Lotte, weil ICH will, dass es ihr gut geht.",cat:"tiere",dur:5},
+    {name:"Alle Tiere — Medikamente",note:"Lotte + Rudi + Timmy Abendgabe 🐾🐱🐱",zirkus:"Ich gebe allen Tieren ihre Abendmedikamente, weil ICH will, dass ich alles für ihr Wohlbefinden getan habe.",cat:"tiere",dur:5,links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
+    {name:"Bad Abend",note:"Loslassen, abschließen 🛁",zirkus:"Ich mache mein Abendbad, weil ICH damit etwas für mein Aussehen für morgen mache.",cat:"pflege",dur:20,links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
+    {name:"Bett vorbereiten",note:"Atorvastatin, Melatonin, Magnesium (Glycinat/Malat) 🌿",zirkus:"Ich bereite alles vor, weil ICH will, dass ich mich maximal erhole.",cat:"körper",dur:5,links:[{href:"Medikamente.html",label:"Medikamente"}]},
+    {name:"Handcreme & Fußcreme",note:"kleine Abendpflege",zirkus:"Ich pflege Hände und Füße, weil ICH schön sein will.",cat:"pflege",dur:5},
+    {name:"Lesen",note:"kein Handy — echtes Buch 📖",zirkus:"Ich lese, weil es mich intelligenter macht.",cat:"seele",dur:30,flex:true},
+    {name:"Schlafen",note:"früh genug, du weißt warum 🌙",zirkus:"Ich schlafe, weil ICH am nächsten Tag gut aussehe und leistungsfähig bin.",cat:"körper",dur:0},
   ]}
 };
 
