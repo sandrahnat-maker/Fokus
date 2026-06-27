@@ -126,48 +126,58 @@ const MEALS = [
 ];
 
 const ITEMS = [
-  { id:'kreuz',  name:'Kreuzblütler ✊',           note:'Brokkoli, Blumenkohl, Kohl, Rucola…',              emoji:'🥦', glp:false },
-  { id:'blatt1', name:'Blattgemüse ✊ 1',           note:'Spinat, Mangold, Salat, Grünkohl – roh gehäuft',   emoji:'🥬', glp:false },
-  { id:'blatt2', name:'Blattgemüse ✊ 2',           note:'Spinat, Mangold, Salat, Grünkohl – roh gehäuft',   emoji:'🥬', glp:false },
-  { id:'gem1',   name:'Anderes Gemüse ✊ 1',        note:'Paprika, Karotten, Zucchini, Tomaten…',            emoji:'🫑', glp:false },
-  { id:'gem2',   name:'Anderes Gemüse ✊ 2',        note:'Paprika, Karotten, Zucchini, Tomaten…',            emoji:'🫑', glp:false },
-  { id:'beer',   name:'Beeren ✊',                  note:'Heidelbeeren, Erdbeeren, Himbeeren – Polyphenole!', emoji:'🫐', glp:false },
-  { id:'obst1',  name:'Anderes Obst ✊ 1',          note:'1 Stück oder 1 Faust – Apfel, Birne, Zitrus…',    emoji:'🍎', glp:false },
-  { id:'obst2',  name:'Anderes Obst ✊ 2',          note:'1 Stück oder 1 Faust – Apfel, Birne, Zitrus…',    emoji:'🍎', glp:false },
-  { id:'obst3',  name:'Anderes Obst ✊ 3',          note:'1 Stück oder 1 Faust – Apfel, Birne, Zitrus…',    emoji:'🍎', glp:false },
-  { id:'vk1',    name:'Vollkorn ✊ 1',              note:'Haferflocken, Vollkornbrot, Quinoa, brauner Reis', emoji:'🌾', glp:false },
-  { id:'vk2',    name:'Vollkorn ✊ 2',              note:'Haferflocken, Vollkornbrot, Quinoa, brauner Reis', emoji:'🌾', glp:false },
-  { id:'vk3',    name:'Vollkorn ✊ 3',              note:'Haferflocken, Vollkornbrot, Quinoa, brauner Reis', emoji:'🌾', glp:false },
-  { id:'huel1',  name:'Hülsenfrüchte ✊ 1',        note:'Linsen, Bohnen, Kichererbsen – gekocht',           emoji:'🫘', glp:false },
-  { id:'huel2',  name:'Hülsenfrüchte ✊ 2',        note:'Linsen, Bohnen, Kichererbsen – gekocht',           emoji:'🫘', glp:false },
-  { id:'huel3',  name:'Hülsenfrüchte ✊ 3',        note:'Linsen, Bohnen, Kichererbsen – gekocht',           emoji:'🫘', glp:false },
-  { id:'nuesse', name:'Nüsse ✊ ½',                note:'Walnüsse, Mandeln, Cashews – ½ Faust',             emoji:'🌰', glp:false },
-  { id:'lein',   name:'Leinsamen',                 note:'1 EL gemahlen – Omega-3 & Ballaststoffe',          emoji:'🌱', glp:false },
-  { id:'oel',    name:'Olivenöl',                  note:'1 EL – extra vergine',                             emoji:'🫒', glp:false },
-  { id:'kurk0',  name:'Kurkuma – Frühstück',       note:'¼ TL – mit Pfeffer für bessere Aufnahme',          emoji:'🟡', glp:false },
-  { id:'kurk1',  name:'Kurkuma – Mittag',          note:'¼ TL – mit Pfeffer für bessere Aufnahme',          emoji:'🟡', glp:false },
-  { id:'kurk2',  name:'Kurkuma – Abend',           note:'¼ TL – mit Pfeffer für bessere Aufnahme',          emoji:'🟡', glp:false },
-  { id:'gew0',   name:'Gewürze – Frühstück',       note:'¼ TL Zimt, Ingwer oder Knoblauch',                emoji:'🌶️', glp:false },
-  { id:'gew1',   name:'Gewürze – Mittag',          note:'¼ TL Zimt, Ingwer oder Knoblauch',                emoji:'🌶️', glp:false },
-  { id:'gew2',   name:'Gewürze – Abend',           note:'¼ TL Zimt, Ingwer oder Knoblauch',                emoji:'🌶️', glp:false },
-  { id:'ei1',    name:'Ei 1',                      note:'Reich an Protein → starke Sättigungswirkung',      emoji:'🥚', glp:true  },
-  { id:'ei2',    name:'Ei 2',                      note:'Reich an Protein → starke Sättigungswirkung',      emoji:'🥚', glp:true  },
-  { id:'topf',   name:'Topfen ✊',                 note:'Magertopfen – sehr proteinreich, leicht fermentiert', emoji:'🫙', glp:true },
-  { id:'ferm',   name:'Fermentiertes o. Joghurt/Kefir', note:'Joghurt, Kefir, Sauerkraut, Kimchi oder Miso', emoji:'🥛', glp:true },
-  { id:'bew',    name:'Bewegung',                  note:'Mind. 20 Min. – steigert GLP-1-Sensitivität',      emoji:'🚶', glp:false },
-  { id:'was1',   name:'Wasser 1. Glas',            note:'1 Glas Wasser',                                    emoji:'💧', glp:false },
-  { id:'was2',   name:'Wasser 2. Glas',            note:'1 Glas Wasser',                                    emoji:'💧', glp:false },
-  { id:'was3',   name:'Wasser 3. Glas',            note:'1 Glas Wasser',                                    emoji:'💧', glp:false },
-  { id:'was4',   name:'Wasser 4. Glas',            note:'1 Glas Wasser',                                    emoji:'💧', glp:false },
-  { id:'was5',   name:'Wasser 5. Glas',            note:'1 Glas Wasser',                                    emoji:'💧', glp:false },
-  { id:'was6',   name:'Wasser 6. Glas',            note:'1 Glas Wasser',                                    emoji:'💧', glp:false },
+  // 🥚 PROTEIN ZUERST – Sättigung von Anfang an
+  { id:'ei1',    name:'Ei 1',                      note:'Frühstück – Protein sättigt lang',                 emoji:'🥚', glp:true  },
+  { id:'ei2',    name:'Ei 2',                      note:'Frühstück – Protein sättigt lang',                 emoji:'🥚', glp:true  },
+  { id:'topf',   name:'Topfen ✊',                 note:'Frühstück – proteinreich, wenig Kalorien',         emoji:'🫙', glp:true  },
+  { id:'ferm',   name:'Fermentiertes o. Joghurt/Kefir', note:'Frühstück – Mikrobiom & GLP-1',             emoji:'🥛', glp:true  },
+  // 🥦 GEMÜSE – viel Volumen, wenig Kalorien
+  { id:'blatt1', name:'Blattgemüse ✊ 1',           note:'Spinat, Mangold, Salat, Grünkohl – roh gehäuft',  emoji:'🥬', glp:false },
+  { id:'blatt2', name:'Blattgemüse ✊ 2',           note:'Spinat, Mangold, Salat, Grünkohl – roh gehäuft',  emoji:'🥬', glp:false },
+  { id:'kreuz',  name:'Kreuzblütler ✊',            note:'Brokkoli, Blumenkohl, Kohl, Rucola…',             emoji:'🥦', glp:false },
+  { id:'gem1',   name:'Anderes Gemüse ✊ 1',        note:'Paprika, Karotten, Zucchini, Tomaten…',           emoji:'🫑', glp:false },
+  { id:'gem2',   name:'Anderes Gemüse ✊ 2',        note:'Paprika, Karotten, Zucchini, Tomaten…',           emoji:'🫑', glp:false },
+  // 🫘 HÜLSENFRÜCHTE – erhöht auf 4× für mehr Sättigung
+  { id:'huel1',  name:'Hülsenfrüchte ✊ 1',        note:'Mittag – Linsen, Bohnen, Kichererbsen',           emoji:'🫘', glp:false },
+  { id:'huel2',  name:'Hülsenfrüchte ✊ 2',        note:'Mittag – Linsen, Bohnen, Kichererbsen',           emoji:'🫘', glp:false },
+  { id:'huel3',  name:'Hülsenfrüchte ✊ 3',        note:'Abend – Linsen, Bohnen, Kichererbsen',            emoji:'🫘', glp:false },
+  { id:'huel4',  name:'Hülsenfrüchte ✊ 4',        note:'Abend – Linsen, Bohnen, Kichererbsen',            emoji:'🫘', glp:false },
+  // 🫐 OBST – reduziert auf 2× (weniger Fruchtzucker)
+  { id:'beer',   name:'Beeren ✊',                  note:'Frühstück – wenig Zucker, viele Polyphenole',      emoji:'🫐', glp:false },
+  { id:'obst1',  name:'Anderes Obst ✊',            note:'Mittag – 1 Stück, lieber Apfel oder Birne',       emoji:'🍎', glp:false },
+  // 🌾 VOLLKORN – reduziert auf 2× (mittags, nicht abends)
+  { id:'vk1',    name:'Vollkorn ✊ 1',              note:'Frühstück – Haferflocken oder Vollkornbrot',       emoji:'🌾', glp:false },
+  { id:'vk2',    name:'Vollkorn ✊ 2',              note:'Mittag – Quinoa oder brauner Reis',                emoji:'🌾', glp:false },
+  // 🌰 NÜSSE & SAMEN
+  { id:'nuesse', name:'Nüsse ✊ ½',                note:'1× täglich – nicht als Snack zwischendurch',       emoji:'🌰', glp:false },
+  { id:'lein',   name:'Leinsamen',                 note:'1 EL gemahlen – ins Frühstück mischen',            emoji:'🌱', glp:false },
+  // 🫚 FETTE & WÜRZE
+  { id:'oel',    name:'Olivenöl',                  note:'1 TL statt 1 EL – bewusst einsetzen',              emoji:'🫒', glp:false },
+  { id:'kurk0',  name:'Kurkuma – Frühstück',       note:'¼ TL – mit Pfeffer für bessere Aufnahme',         emoji:'🟡', glp:false },
+  { id:'kurk1',  name:'Kurkuma – Mittag',          note:'¼ TL – mit Pfeffer für bessere Aufnahme',         emoji:'🟡', glp:false },
+  { id:'kurk2',  name:'Kurkuma – Abend',           note:'¼ TL – mit Pfeffer für bessere Aufnahme',         emoji:'🟡', glp:false },
+  { id:'gew0',   name:'Gewürze – Frühstück',       note:'Zimt senkt Blutzucker – ideal morgens',           emoji:'🌶️', glp:false },
+  { id:'gew1',   name:'Gewürze – Mittag',          note:'¼ TL Ingwer oder Knoblauch',                      emoji:'🌶️', glp:false },
+  { id:'gew2',   name:'Gewürze – Abend',           note:'¼ TL Ingwer oder Knoblauch',                      emoji:'🌶️', glp:false },
+  // 💧 BASIS
+  { id:'bew',    name:'Bewegung',                  note:'Mind. 20 Min. – steigert GLP-1-Sensitivität',     emoji:'🚶', glp:false },
+  { id:'was1',   name:'Wasser 1. Glas',            note:'Frühstück – vor dem Essen trinken',               emoji:'💧', glp:false },
+  { id:'was2',   name:'Wasser 2. Glas',            note:'Frühstück',                                       emoji:'💧', glp:false },
+  { id:'was3',   name:'Wasser 3. Glas',            note:'Mittag – vor dem Essen trinken',                  emoji:'💧', glp:false },
+  { id:'was4',   name:'Wasser 4. Glas',            note:'Mittag',                                          emoji:'💧', glp:false },
+  { id:'was5',   name:'Wasser 5. Glas',            note:'Abend – vor dem Essen trinken',                   emoji:'💧', glp:false },
+  { id:'was6',   name:'Wasser 6. Glas',            note:'Abend',                                           emoji:'💧', glp:false },
 ];
 
 const TOTAL = ITEMS.length;
 const SK_M = 'ddglp3_meals', SK_C = 'ddglp3_checked';
 
 function buildDefault() {
-  return { 0: ITEMS.map(x => x.id), 1: [], 2: [] };
+  return {
+    0: ['ei1','ei2','topf','ferm','beer','vk1','lein','kurk0','gew0','was1','was2'],
+    1: ['blatt1','kreuz','gem1','huel1','huel2','obst1','vk2','oel','kurk1','gew1','was3','was4'],
+    2: ['blatt2','gem2','huel3','huel4','nuesse','kurk2','gew2','was5','was6','bew'],
+  };
 }
 
 let meals, checked;
