@@ -252,6 +252,49 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
 /* TOAST */
 .vk-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--bordeaux);color:var(--cream);font-family:'IM Fell English',serif;font-style:italic;font-size:1rem;padding:.5rem 1.4rem;border-radius:4px;box-shadow:0 2px 12px rgba(42,26,10,.2);opacity:0;transition:opacity .3s;z-index:9999;pointer-events:none;}
 .vk-toast.sichtbar{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── SEKT-KARTEN (neue vertikale Struktur) ── */
+.sekt-karte{margin:0 1rem;margin-top:.65rem;background:var(--card);border:1px solid var(--border-col);border-radius:7px;overflow:hidden;}
+.sekt-head{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem .65rem;cursor:pointer;user-select:none;}
+.sekt-head:active{background:var(--crimson-l);}
+.sekt-title{font-family:'Raleway',sans-serif;font-weight:700;font-size:.95rem;color:var(--text);}
+.sekt-badge{font-family:'Caveat',cursive;font-size:.78rem;color:var(--sage);margin-left:.3rem;}
+.sekt-toggle{font-family:'Caveat',cursive;font-size:.82rem;color:var(--muted);background:none;border:none;cursor:pointer;flex-shrink:0;}
+.sekt-body{border-top:1px solid var(--border-dim);}
+.sekt-progress-wrap{height:2px;background:rgba(42,26,10,.07);}
+.sekt-progress-bar{height:2px;background:linear-gradient(90deg,var(--bordeaux),var(--gold));transition:width .4s ease;}
+.mr-item{display:flex;align-items:flex-start;gap:.55rem;padding:.55rem 1rem;border-bottom:1px solid rgba(200,153,58,.05);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .12s;}
+.mr-item:last-child{border-bottom:none;}
+.mr-item:active{background:rgba(192,57,43,.07);}
+.mr-item.done{opacity:.28;}
+.mr-item.done .mr-name{text-decoration:line-through;}
+.mr-check{width:22px;height:22px;border:1.5px solid rgba(139,26,26,.25);border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:.75rem;background:var(--card);transition:all .2s;}
+.mr-item.done .mr-check{background:var(--bordeaux);border-color:var(--bordeaux);color:var(--cream);}
+.mr-item.done .mr-check::after{content:'✓';}
+.mr-name{font-size:.92rem;font-weight:700;font-family:'Raleway',sans-serif;color:var(--text);line-height:1.3;}
+.mr-note{font-family:'IM Fell English',serif;font-size:.82rem;color:var(--muted);font-style:italic;margin-top:.05rem;}
+.mr-zirkus{font-family:'IM Fell English',serif;font-size:.78rem;color:var(--bordeaux);font-style:italic;margin-top:.1rem;opacity:.8;line-height:1.3;}
+.mr-links{display:flex;flex-wrap:wrap;gap:.2rem;margin-top:.2rem;}
+.mr-link{font-size:.72rem;color:var(--gold);background:rgba(200,153,58,.1);border:1px solid rgba(200,153,58,.22);border-radius:3px;padding:.03rem .35rem;text-decoration:none;}
+
+/* ── Verschiebe-Controls ── */
+.mr-move-col{display:flex;flex-direction:column;align-items:center;gap:.15rem;flex-shrink:0;padding-left:.4rem;}
+.mr-arrow{background:none;border:1px solid rgba(42,26,10,.1);border-radius:3px;font-size:.65rem;color:var(--muted);cursor:pointer;padding:.1rem .3rem;line-height:1;transition:background .12s;}
+.mr-arrow:active{background:var(--crimson-l);}
+.mr-sekt-btn{background:none;border:1px solid rgba(184,136,42,.25);border-radius:3px;font-size:.7rem;color:var(--gold);cursor:pointer;padding:.1rem .3rem;line-height:1;margin-top:.1rem;}
+.mr-sekt-btn:active{background:var(--gold-l);}
+/* MoveTo Buttons */
+.moveto-btn{width:100%;padding:.65rem 1rem;background:var(--card);border:1px solid var(--border-col);border-radius:5px;font-family:'Raleway',sans-serif;font-weight:600;font-size:.92rem;color:var(--text);cursor:pointer;text-align:left;transition:background .12s;}
+.moveto-btn:active{background:var(--crimson-l);}
+.moveto-btn.aktiv{border-color:var(--bordeaux);background:rgba(139,26,26,.06);color:var(--bordeaux);}
+
+/* ── Sektions-Eingabefeld ── */
+.sekt-input-row{display:flex;gap:.4rem;padding:.55rem 1rem .6rem;border-top:1px solid var(--border-dim);}
+.sekt-inp{flex:1;border:1px solid var(--border-col);border-radius:4px;padding:.42rem .7rem;font-family:'IM Fell English',serif;font-style:italic;font-size:.95rem;background:var(--card2);outline:none;color:var(--text);}
+.sekt-inp:focus{border-color:var(--gold);}
+.sekt-inp::placeholder{color:var(--muted);}
+.sekt-add-btn{background:var(--bordeaux);color:var(--cream);border:none;border-radius:4px;padding:.42rem .85rem;font-size:1.1rem;font-weight:700;cursor:pointer;flex-shrink:0;}
+.sekt-add-btn:active{transform:translate(1px,1px);}
 /* KONFETTI */
 .konfetti-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;display:none;}
 .kdot{position:absolute;animation:fallen 1.5s ease-in forwards;}
@@ -498,251 +541,191 @@ body::after{content:'';position:fixed;bottom:0;left:0;right:0;height:4px;backgro
   <button class="mindest-ov-skip" onclick="schliesseMindestOv()">lieber später</button>
 </div>
 
-<!-- TOAST & KONFETTI -->
-<div class="vk-toast" id="vkToast"></div>
-<div class="konfetti-wrap" id="konfettiWrap"></div>
-
-<!-- GUTER TAG OVERLAY -->
-<div class="gutertag-overlay" id="guterTagOverlay" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(247,243,238,.98);flex-direction:column;align-items:center;justify-content:center;padding:2rem;">
-  <div class="vk-overlay-stripe" style="width:100%;margin-bottom:1.5rem;"></div>
-  <div style="font-size:2.5rem;margin-bottom:1rem;">🎪</div>
-  <div class="gutертag-liste" style="font-family:'Caveat',cursive;font-size:1.2rem;line-height:2.1;text-align:center;">
-    Ich bin die fröhliche, schrullige Lehrerin.<br>
-    Das ist kein Fehler.<br>
-    <br>
-    Lotte, Rudi, Timmy —<br>
-    die drei haben mich im Griff.<br>
-    <br>
-    Meinen Schülerinnen begegne ich<br>
-    mit echtem Interesse.<br>
-    Nicht weil ich muss.<br>
-    <br>
-    Irgendwas heute wird unerwartet schön sein.<br>
-    Ich werde es sehen — wenn ich hinschaue.
-  </div>
-  <button class="vk-overlay-btn" style="margin-top:1.5rem;background:var(--bordeaux);color:var(--cream);border:none;" onclick="document.getElementById('guterTagOverlay').style.display='none'">schließen</button>
-</div>
-
-<!-- ZIRKUSPRINZESSIN OVERLAY -->
-<div id="zirkusprinzessinOverlay" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(247,243,238,.98);flex-direction:column;align-items:center;justify-content:center;padding:2rem;box-sizing:border-box;overflow-y:auto;">
-  <div style="width:100%;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--crimson),var(--gold),var(--violet),var(--sage));margin-bottom:1.5rem;flex-shrink:0;"></div>
-  <div style="font-size:2rem;margin-bottom:.4rem;animation:schaukeln 3s ease-in-out infinite;">🎪</div>
-  <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);text-align:center;margin-bottom:.2rem;">🎪 Sandra — fröhlich & schrullig</div>
-  <div style="font-family:'IM Fell English',serif;font-style:italic;color:rgba(232,213,163,.7);font-size:.9rem;margin-bottom:1.4rem;">fröhlich · schrullig · lebendig · echt</div>
-
-  <div style="width:100%;display:flex;flex-direction:column;gap:.7rem;max-width:420px;">
-
-    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--crimson);border-radius:4px;padding:.9rem 1rem;">
-      
-    </div>
-
-    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--gold);border-radius:4px;padding:.9rem 1rem;">
-      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">📚 Ich bin die fröhliche Lehrerin</div>
-      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:var(--text);line-height:1.55;font-style:italic;">Neugierig, warm, ein bisschen schrullig — das ist keine Schwäche, das bin ich.</div>
-    </div>
-
-    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--violet);border-radius:4px;padding:.9rem 1rem;">
-      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🎨 Ich bin die Künstlerin</div>
-      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:var(--text);line-height:1.55;font-style:italic;">Das Schöne sehen, das Kleine bewundern — das ist meine Art, in der Welt zu sein.</div>
-    </div>
-
-    <div style="background:rgba(255,255,255,.05);border-left:3px solid var(--sage);border-radius:4px;padding:.9rem 1rem;">
-      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">🐾 Ich liebe meine Tiere</div>
-      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:var(--text);line-height:1.55;font-style:italic;">Rudi, Timmy, Lotte — sie erinnern mich jeden Tag daran, was zählt.</div>
-    </div>
-
-    <div style="background:rgba(255,255,255,.05);border-left:3px solid #5B8DB8;border-radius:4px;padding:.9rem 1rem;">
-      <div style="font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);margin-bottom:.3rem;">✨ Ich fließe, wenn ich wähle</div>
-      <div style="font-family:'IM Fell English',serif;font-size:.85rem;color:var(--text);line-height:1.55;font-style:italic;">Wenn ich aus Freude arbeite, nicht aus Angst — dann fließe ich. Das ist mein Kompass.</div>
-    </div>
-
-  </div>
-
-  <button class="vk-overlay-btn" style="margin-top:1.5rem;background:var(--bordeaux);color:var(--cream);border:none;" onclick="document.getElementById('zirkusprinzessinOverlay').style.display='none'">✦ in den Tag ›</button>
-</div>
 <!-- HEADER -->
 <div class="vk-header">
-  <!-- Wimpelkette -->
   <div style="width:100%;overflow:hidden;margin:0 -1.4rem .9rem;width:calc(100% + 2.8rem);">
     <svg viewBox="0 0 400 32" style="display:block;width:100%;height:32px;" xmlns="http://www.w3.org/2000/svg">
-      <!-- cord -->
       <path d="M0,4 Q28,9 56,4 Q84,1 112,5 Q140,9 168,4 Q196,1 224,5 Q252,9 280,4 Q308,1 336,5 Q364,9 392,4 L400,4" fill="none" stroke="#b8882a" stroke-width="1.4" opacity=".75"/>
-      <!-- Wimpel: base at top (y=1..6), apex points DOWN (y=30) -->
-      <polygon points="4,4 18,4 11,30" fill="#8b1a1a"/>
-      <polygon points="32,3 46,3 39,30" fill="#b8882a"/>
-      <polygon points="60,5 74,5 67,30" fill="#f2ead8" stroke="#b8882a" stroke-width=".8"/>
-      <polygon points="88,4 102,4 95,30" fill="#5c3060"/>
-      <polygon points="116,3 130,3 123,30" fill="#4a6741"/>
-      <polygon points="144,5 158,5 151,30" fill="#8b1a1a"/>
-      <polygon points="172,4 186,4 179,30" fill="#b8882a"/>
-      <polygon points="200,3 214,3 207,30" fill="#f2ead8" stroke="#b8882a" stroke-width=".8"/>
-      <polygon points="228,5 242,5 235,30" fill="#5c3060"/>
-      <polygon points="256,4 270,4 263,30" fill="#8b1a1a"/>
-      <polygon points="284,3 298,3 291,30" fill="#b8882a"/>
-      <polygon points="312,5 326,5 319,30" fill="#4a6741"/>
-      <polygon points="340,4 354,4 347,30" fill="#f2ead8" stroke="#b8882a" stroke-width=".8"/>
-      <polygon points="368,3 382,3 375,30" fill="#5c3060"/>
-      <!-- knots on cord -->
-      <circle cx="11" cy="4" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="39" cy="3" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="67" cy="5" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="95" cy="4" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="123" cy="3" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="151" cy="5" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="179" cy="4" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="207" cy="3" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="235" cy="5" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="263" cy="4" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="291" cy="3" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="319" cy="5" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="347" cy="4" r="2" fill="#b8882a" opacity=".9"/>
-      <circle cx="375" cy="3" r="2" fill="#b8882a" opacity=".9"/>
+      <polygon points="4,4 18,4 11,30" fill="#8b1a1a"/><polygon points="32,3 46,3 39,30" fill="#b8882a"/><polygon points="60,5 74,5 67,30" fill="#f2ead8" stroke="#b8882a" stroke-width=".8"/><polygon points="88,4 102,4 95,30" fill="#5c3060"/><polygon points="116,3 130,3 123,30" fill="#4a6741"/><polygon points="144,5 158,5 151,30" fill="#8b1a1a"/><polygon points="172,4 186,4 179,30" fill="#b8882a"/><polygon points="200,3 214,3 207,30" fill="#f2ead8" stroke="#b8882a" stroke-width=".8"/><polygon points="228,5 242,5 235,30" fill="#5c3060"/><polygon points="256,4 270,4 263,30" fill="#8b1a1a"/><polygon points="284,3 298,3 291,30" fill="#b8882a"/><polygon points="312,5 326,5 319,30" fill="#4a6741"/><polygon points="340,4 354,4 347,30" fill="#f2ead8" stroke="#b8882a" stroke-width=".8"/><polygon points="368,3 382,3 375,30" fill="#5c3060"/>
+      <circle cx="11" cy="4" r="2" fill="#b8882a" opacity=".9"/><circle cx="39" cy="3" r="2" fill="#b8882a" opacity=".9"/><circle cx="67" cy="5" r="2" fill="#b8882a" opacity=".9"/><circle cx="95" cy="4" r="2" fill="#b8882a" opacity=".9"/><circle cx="123" cy="3" r="2" fill="#b8882a" opacity=".9"/><circle cx="151" cy="5" r="2" fill="#b8882a" opacity=".9"/><circle cx="179" cy="4" r="2" fill="#b8882a" opacity=".9"/><circle cx="207" cy="3" r="2" fill="#b8882a" opacity=".9"/><circle cx="235" cy="5" r="2" fill="#b8882a" opacity=".9"/><circle cx="263" cy="4" r="2" fill="#b8882a" opacity=".9"/><circle cx="291" cy="3" r="2" fill="#b8882a" opacity=".9"/><circle cx="319" cy="5" r="2" fill="#b8882a" opacity=".9"/><circle cx="347" cy="4" r="2" fill="#b8882a" opacity=".9"/><circle cx="375" cy="3" r="2" fill="#b8882a" opacity=".9"/>
     </svg>
   </div>
   <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;">
     <div class="vk-date" id="datumZeile"></div>
     <div style="display:flex;gap:.4rem;flex-shrink:0;">
-      <button id="btnVortag" onclick="switchDay(-1)" style="font-size:.75rem;font-family:'Fredoka One',cursive;color:rgba(200,153,58,.55);background:none;border:1px solid rgba(200,153,58,.2);border-radius:4px;padding:.1rem .5rem;cursor:pointer;">← Vortag</button>
-      <button id="btnHeute" onclick="switchDay(0)" style="display:none;font-size:.75rem;font-family:'Fredoka One',cursive;color:var(--crimson);background:none;border:1px solid rgba(192,57,43,.4);border-radius:4px;filter:brightness(1.3);padding:.1rem .5rem;cursor:pointer;">Heute ✓</button>
+      <button id="btnVortag" onclick="switchDay(-1)" style="font-size:.75rem;color:rgba(200,153,58,.55);background:none;border:1px solid rgba(200,153,58,.2);border-radius:4px;padding:.1rem .5rem;cursor:pointer;">← Vortag</button>
+      <button id="btnHeute" onclick="switchDay(0)" style="display:none;font-size:.75rem;color:var(--crimson);background:none;border:1px solid rgba(192,57,43,.4);border-radius:4px;filter:brightness(1.3);padding:.1rem .5rem;cursor:pointer;">Heute ✓</button>
     </div>
   </div>
   <div class="vk-title">🎪 Sandras Welt</div>
   <div class="vk-motto">fröhlich · schrullig · lebendig</div>
 </div>
 
-
-
-
-<!-- BUTTONS: ZIRKUSPRINZESSIN + GUTER TAG -->
-<div style="display:flex;gap:.4rem;margin:.6rem 1rem 0;">
-  <button onclick="document.getElementById('zirkusprinzessinOverlay').style.display='flex'" style="background:none;border:1px solid rgba(200,153,58,.35);border-radius:4px;padding:.2rem .65rem;font-size:.75rem;color:var(--gold);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🎨 Ich</button>
-  <button onclick="document.getElementById('guterTagOverlay').style.display='flex'" style="background:none;border:1px solid rgba(90,138,90,.4);border-radius:4px;padding:.2rem .65rem;font-size:.75rem;color:var(--sage);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🌟 Guter Tag</button>
-</div>
-
-<!-- FÜR MICH KARTE -->
-<div id="fuerMichKarte" style="margin:.6rem 1rem 0;background:var(--card);border:1px solid rgba(139,26,26,.12);border-left:3px solid var(--bordeaux);border-radius:6px;padding:.65rem 1rem .6rem;display:flex;align-items:flex-start;gap:.7rem;cursor:pointer;" onclick="toggleFuerMich()">
-  <div style="font-size:1.3rem;flex-shrink:0;line-height:1.3;">🪞</div>
-  <div style="flex:1;min-width:0;">
-    <div style="font-family:'Raleway',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bordeaux);font-weight:700;opacity:.8;margin-bottom:.25rem;">Alles, was ich tue —</div>
-    <div id="fuerMichSatz" style="font-family:'IM Fell English',serif;font-size:.97rem;color:var(--text);line-height:1.55;font-style:italic;">tue ich für mich. Damit es den Tieren gut geht, den Pflanzen. Damit ich mich gepflegt und lebendig fühle. Damit meine Wohnung ein Ort ist, der mir gefällt.</div>
-  </div>
-</div>
-<script>
-var fuerMichExpanded = false;
-var fuerMichKurz = 'tue ich für mich. Damit es den Tieren gut geht, den Pflanzen. Damit ich mich gepflegt und lebendig fühle. Damit meine Wohnung ein Ort ist, der mir gefällt.';
-var fuerMichLang = 'tue ich für mich.\n\n🐾 Damit Rudi, Timmy und Lotte versorgt und geliebt sind.\n🌿 Damit meine Pflanzen gedeihen.\n✨ Damit ich gepflegt, dynamisch und lebendig wirke.\n🏠 Damit meine Wohnung ein Ort ist, der mir wirklich gefällt.\n\nNicht aus Pflicht. Weil ich es will.';
-function toggleFuerMich(){
-  fuerMichExpanded = !fuerMichExpanded;
-  var el = document.getElementById('fuerMichSatz');
-  if(fuerMichExpanded){
-    el.style.whiteSpace = 'pre-line';
-    el.textContent = fuerMichLang;
-  } else {
-    el.style.whiteSpace = '';
-    el.textContent = fuerMichKurz;
-  }
-}
-</script>
-
-<!-- MEINE AUFGABEN -->
-<div class="maufg-wrap">
-  <div class="maufg-head" onclick="toggleMaufg()">
-    <span class="maufg-head-label">✦ Meine heutigen Aufgaben</span>
-    <span class="maufg-toggle" id="maufgToggleBtn">aufklappen ↓</span>
-  </div>
-  <div class="maufg-body" id="maufgBody" style="display:none;">
-    <div class="maufg-input-row">
-      <input class="maufg-inp" type="text" id="maufgInp" placeholder="Neue Aufgabe …" onkeydown="if(event.key==='Enter')maufgAdd()">
-      <select class="maufg-phase-sel" id="maufgPhase">
-        <option value="morgen">🌅 Morgen</option>
-        <option value="vormittag">🌾 Unterwegs</option>
-        <option value="nachhause">🏡 Nach Hause</option>
-        <option value="abend">🌙 Abend</option>
-        <option value="alle">✦ Alle</option>
-      </select>
-      <button class="maufg-add-btn" onclick="maufgAdd()">+ hinzu</button>
-    </div>
-    <div class="maufg-list" id="maufgList"></div>
-  </div>
-</div>
-
-<!-- MINDESTLINIE -->
-<div class="mindest-wrap" id="mindestWrap">
-  <div class="mindest-title">✦ Mein Fundament heute</div>
-  <div class="mindest-grid" id="mindestGrid">
-    <div class="mindest-item" id="md0" onclick="toggleMindest(0)">
-      <span class="mindest-icon">🌿</span>
-      <span class="mindest-label">Bewegung</span>
-      <span class="mindest-sub">+ Pflege</span>
-    </div>
-    <div class="mindest-item" id="md1" onclick="toggleMindest(1)">
-      <span class="mindest-icon">🏠</span>
-      <span class="mindest-label">Wohnung</span>
-      <span class="mindest-sub">10 Min</span>
-    </div>
-    <div class="mindest-item" id="md2" onclick="toggleMindest(2)">
-      <span class="mindest-icon">🐾</span>
-      <span class="mindest-label">Tiere</span>
-      <span class="mindest-sub">Futter + Lotte</span>
-    </div>
-    <div class="mindest-item" id="md3" onclick="toggleMindest(3)">
-      <span class="mindest-icon">🎭</span>
-      <span class="mindest-label">Innehalten</span>
-      <span class="mindest-sub">1 Moment</span>
-    </div>
-    <div class="mindest-item" id="md4" onclick="toggleMindest(4)">
-      <span class="mindest-icon">🍽️</span>
-      <span class="mindest-label">Thomas</span>
-      <span class="mindest-sub">Abendessen</span>
-    </div>
-    <div class="mindest-item" id="md5" onclick="toggleMindest(5)">
-      <span class="mindest-icon">📚</span>
-      <span class="mindest-label">Überblick</span>
-      <span class="mindest-sub">+ 1 Ding</span>
-    </div>
-  </div>
-  <div class="mindest-bar-wrap"><div class="mindest-bar" id="mindestBar" style="width:0%"></div></div>
-  <div class="mindest-status" id="mindestStatus">Wie geht es heute los?</div>
-</div>
-
-<!-- NÄCHSTE AUFGABE -->
-<div class="naechste-wrap">
-  <div class="naechste-karte" id="naechsteKarte"></div>
-</div>
-
-
 <!-- IMPULS -->
-<div class="impuls-karte">
+<div class="impuls-karte" style="margin-top:.8rem;">
   <div class="impuls-label">✦ Mein heutiger Impuls</div>
   <div class="impuls-text laden" id="impulsText">Einen Moment …</div>
   <div class="impuls-refresh"><button class="impuls-refresh-btn" onclick="ladeImpuls(true)">↺ neuer Impuls</button></div>
 </div>
 
-<!-- FOKUS KATEGORIEN -->
-<div class="fokus-karte">
-  <div class="fokus-head" onclick="toggleFokusBlock()">
-    <span class="fokus-head-label">✦ Mein heutiger Fokus</span>
-    <span class="fokus-toggle-btn" id="fokusBtnLabel">aufklappen ↓</span>
-  </div>
-  <div class="fokus-body" id="fokusBody">
-    <div class="fokus-bühne-label">Welcher Bereich bekommt heute die Hauptbühne?</div>
-    <div class="fokus-chips">
-      <button class="fokus-chip" onclick="waehleFokus(this,'Tiere')">🐾 Tiere</button>
-      <button class="fokus-chip" onclick="waehleFokus(this,'Unterrichten')">📚 Unterrichten</button>
-      <button class="fokus-chip" onclick="waehleFokus(this,'Uni')">🎓 Uni</button>
-      <button class="fokus-chip" onclick="waehleFokus(this,'Zuhause')">🏡 Zuhause</button>
-      <button class="fokus-chip" onclick="waehleFokus(this,'Ich')">🎨 Ich</button>
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MORGENROUTINE — aufklappbar mit Abhak-Funktion        -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sekt-karte" id="morgenSekt">
+  <div class="sekt-head" onclick="toggleSekt('morgen')">
+    <div style="display:flex;align-items:center;gap:.6rem;">
+      <span style="font-size:1.1rem;">🌅</span>
+      <span class="sekt-title">Morgenroutine</span>
+      <span class="sekt-badge" id="morgenBadge"></span>
     </div>
-    <div class="fokus-kat-liste" id="fokusKatListe"></div>
-    <div class="fokus-save-row">
-      <button class="fokus-save-btn" onclick="speichereFokus()">✦ festhalten</button>
-      <span class="fokus-gespeichert" id="fokusGespeichert">gespeichert ✦</span>
+    <span class="sekt-toggle" id="morgenToggle">aufklappen ↓</span>
+  </div>
+  <div class="sekt-body" id="morgenBody" style="display:none;">
+    <div class="sekt-progress-wrap"><div class="sekt-progress-bar" id="morgenBar" style="width:0%"></div></div>
+    <div id="morgenListe"></div>
+    <div class="sekt-input-row">
+      <input class="sekt-inp" id="morgenInp" type="text" placeholder="Aufgabe hinzufügen …" onkeydown="if(event.key==='Enter')addCustomTask('morgen')">
+      <button class="sekt-add-btn" onclick="addCustomTask('morgen')">+</button>
+    </div>
+  </div>
+</div>
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sekt-karte" id="ichSekt">
+  <div class="sekt-head" onclick="toggleSekt('ich')">
+    <div style="display:flex;align-items:center;gap:.6rem;">
+      <span style="font-size:1.1rem;">🌺</span>
+      <span class="sekt-title">Ich</span>
+      <span class="sekt-badge" id="ichBadge"></span>
+    </div>
+    <span class="sekt-toggle" id="ichToggle">aufklappen ↓</span>
+  </div>
+  <div class="sekt-body" id="ichBody" style="display:none;">
+    <!-- Selbst-Anker -->
+    <div style="padding:.55rem 1rem .45rem;border-bottom:1px solid var(--border-dim);cursor:pointer;" onclick="document.getElementById('zirkusprinzessinOverlay').style.display='flex'">
+      <div style="font-family:'IM Fell English',serif;font-style:italic;font-size:.92rem;color:var(--text);line-height:1.5;">🪞 Alles, was ich tue — tue ich für mich.</div>
+      <div style="font-size:.72rem;color:var(--gold);font-family:'Raleway',sans-serif;margin-top:.2rem;">🎨 Wer ich bin ›</div>
+    </div>
+    <!-- Mein Fokus heute -->
+    <div style="padding:.55rem 1rem .45rem;border-bottom:1px solid var(--border-dim);">
+      <div style="font-family:'Raleway',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.4rem;">✦ Mein heutiger Fokus</div>
+      <div style="font-family:'IM Fell English',serif;font-size:.82rem;color:var(--muted);font-style:italic;margin-bottom:.45rem;">Welcher Bereich bekommt heute die Hauptbühne?</div>
+      <div class="fokus-chips" style="margin-bottom:.5rem;">
+        <button class="fokus-chip" onclick="waehleFokus(this,'Tiere')">🐾 Tiere</button>
+        <button class="fokus-chip" onclick="waehleFokus(this,'Unterrichten')">📚 Unterrichten</button>
+        <button class="fokus-chip" onclick="waehleFokus(this,'Uni')">🎓 Uni</button>
+        <button class="fokus-chip" onclick="waehleFokus(this,'Zuhause')">🏡 Zuhause</button>
+        <button class="fokus-chip" onclick="waehleFokus(this,'Ich')">🌺 Ich</button>
+      </div>
+      <div class="fokus-kat-liste" id="fokusKatListe"></div>
+      <div class="fokus-save-row" style="margin-top:.5rem;">
+        <button class="fokus-save-btn" onclick="speichereFokus()">✦ festhalten</button>
+        <span class="fokus-gespeichert" id="fokusGespeichert">gespeichert ✦</span>
+      </div>
+    </div>
+    <!-- Körper & Pflege (Abend-Routine) -->
+    <div style="padding:.55rem 1rem .45rem;">
+      <div style="font-family:'Raleway',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--violet);font-weight:700;margin-bottom:.4rem;">✦ Körper & Pflege heute</div>
+      <div id="ichPflegeListe"></div>
+      <div style="margin-top:.45rem;display:flex;flex-direction:column;gap:.25rem;" id="ichAppLinks">
+        <a class="app-link" href="Taillen_Training.html" style="padding:.35rem 0;border-bottom:none;"><span class="app-icon">💪</span><div><div class="app-text">Taillen-Training</div></div><span class="app-arr">›</span></a>
+        <a class="app-link" href="yoga-nidra.html" style="padding:.35rem 0;border-bottom:none;"><span class="app-icon">🧘</span><div><div class="app-text">Yoga Nidra</div></div><span class="app-arr">›</span></a>
+        <a class="app-link" href="atemübung.html" style="padding:.35rem 0;border-bottom:none;"><span class="app-icon">🫁</span><div><div class="app-text">Atemübung</div></div><span class="app-arr">›</span></a>
+        <a class="app-link" href="daily-dozen-glp1.html" style="padding:.35rem 0;border-bottom:none;"><span class="app-icon">🌿</span><div><div class="app-text">Daily Dozen</div></div><span class="app-arr">›</span></a>
+        <a class="app-link" href="Blutdruck.html" style="padding:.35rem 0;border-bottom:none;"><span class="app-icon">❤️</span><div><div class="app-text">Blutdruck</div></div><span class="app-arr">›</span></a>
+        <a class="app-link" href="Wiegen.html" style="padding:.35rem 0;border-bottom:none;"><span class="app-icon">⚖️</span><div><div class="app-text">Gewicht</div></div><span class="app-arr">›</span></a>
+      </div>
+      <div class="sekt-input-row" style="margin-top:.5rem;">
+        <input class="sekt-inp" id="ichInp" type="text" placeholder="Aufgabe hinzufügen …" onkeydown="if(event.key==='Enter')addCustomTask('ich')">
+        <button class="sekt-add-btn" onclick="addCustomTask('ich')">+</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- PHASEN TABS -->
-<div class="phasen-tabs">
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TIERE & HAUSHALT                                      -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sekt-karte" id="tiereSekt">
+  <div class="sekt-head" onclick="toggleSekt('tiere')">
+    <div style="display:flex;align-items:center;gap:.6rem;">
+      <span style="font-size:1.1rem;">🐾</span>
+      <span class="sekt-title">Tiere & Haushalt</span>
+      <span class="sekt-badge" id="tiereBadge"></span>
+    </div>
+    <span class="sekt-toggle" id="tiereToggle">aufklappen ↓</span>
+  </div>
+  <div class="sekt-body" id="tiereBody" style="display:none;">
+    <!-- Tiere Checkliste -->
+    <div style="padding:.5rem 1rem .3rem;">
+      <div style="font-family:'Raleway',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-bottom:.35rem;">✦ Tiere heute</div>
+    </div>
+    <div id="tiereListe"></div>
+    <div class="sekt-input-row">
+      <input class="sekt-inp" id="tiereInp" type="text" placeholder="Aufgabe hinzufügen …" onkeydown="if(event.key==='Enter')addCustomTask('tiere')">
+      <button class="sekt-add-btn" onclick="addCustomTask('tiere')">+</button>
+    </div>
+    <!-- Haushalt Apps -->
+    <div style="padding:.5rem 1rem .3rem;margin-top:.2rem;border-top:1px solid var(--border-dim);">
+      <div style="font-family:'Raleway',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-bottom:.35rem;">✦ Haushalt</div>
+    </div>
+    <a class="app-link" href="Haushaltsplan.html"><span class="app-icon">🏠</span><div><div class="app-text">Haushaltsplan</div><div class="app-sub">Schritt für Schritt</div></div><span class="app-arr">›</span></a>
+    <a class="app-link" href="Einkaufsliste.html"><span class="app-icon">🛒</span><div><div class="app-text">Einkaufsliste</div><div class="app-sub">LP(a)-freundlich</div></div><span class="app-arr">›</span></a>
+    <a class="app-link" href="ausmisten.html"><span class="app-icon">🗂️</span><div><div class="app-text">Ausmist-Liste</div><div class="app-sub">131 Dinge</div></div><span class="app-arr">›</span></a>
+    <a class="app-link" href="Pflanzen_Galerie.html"><span class="app-icon">🌿</span><div><div class="app-text">Meine Pflanzen</div><div class="app-sub">Galerie & Pflege</div></div><span class="app-arr">›</span></a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- ARBEIT & WEITERBILDUNG                                -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sekt-karte" id="arbeitSekt">
+  <div class="sekt-head" onclick="toggleSekt('arbeit')">
+    <div style="display:flex;align-items:center;gap:.6rem;">
+      <span style="font-size:1.1rem;">📚</span>
+      <span class="sekt-title">Arbeit & Weiterbildung</span>
+    </div>
+    <span class="sekt-toggle" id="arbeitToggle">aufklappen ↓</span>
+  </div>
+  <div class="sekt-body" id="arbeitBody" style="display:none;">
+    <!-- Unterwegs-Info -->
+    <div id="unterwegsInfo" style="padding:.6rem 1rem;background:rgba(44,62,80,.04);border-bottom:1px solid var(--border-dim);font-family:'Caveat',cursive;font-size:.95rem;color:var(--navy);"></div>
+    <!-- Apps -->
+    <a class="app-link" href="VHS_Kursvorbereitung.html"><span class="app-icon">📋</span><div><div class="app-text">VHS Kursvorbereitung</div><div class="app-sub">Checklisten & Materialien</div></div><span class="app-arr">›</span></a>
+    <a class="app-link" href="Lernplan.html"><span class="app-icon">📚</span><div><div class="app-text">Lernplan DaZF</div><div class="app-sub">Sandra Hnat-Gerersdorfer</div></div><span class="app-arr">›</span></a>
+    <a class="app-link" href="https://sandrahnat-maker.github.io/Kalender_2203/"><span class="app-icon">📅</span><div><div class="app-text">Kalender</div><div class="app-sub">Mein Tageskalender</div></div><span class="app-arr">›</span></a>
+    <a class="app-link" href="hausverkauf-guide.html"><span class="app-icon">📋</span><div><div class="app-text">Hausverkauf Guide</div><div class="app-sub">Weidlingbach</div></div><span class="app-arr">›</span></a>
+    <div id="arbeitListe"></div>
+    <div class="sekt-input-row">
+      <input class="sekt-inp" id="arbeitInp" type="text" placeholder="Aufgabe hinzufügen …" onkeydown="if(event.key==='Enter')addCustomTask('arbeit')">
+      <button class="sekt-add-btn" onclick="addCustomTask('arbeit')">+</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- ABENDROUTINE                                          -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="sekt-karte" id="abendSekt">
+  <div class="sekt-head" onclick="toggleSekt('abend')">
+    <div style="display:flex;align-items:center;gap:.6rem;">
+      <span style="font-size:1.1rem;">🌙</span>
+      <span class="sekt-title">Abendroutine</span>
+      <span class="sekt-badge" id="abendBadge"></span>
+    </div>
+    <span class="sekt-toggle" id="abendToggle">aufklappen ↓</span>
+  </div>
+  <div class="sekt-body" id="abendBody" style="display:none;">
+    <div class="sekt-progress-wrap"><div class="sekt-progress-bar" id="abendBar" style="width:0%"></div></div>
+    <div id="abendListe"></div>
+    <div class="sekt-input-row">
+      <input class="sekt-inp" id="abendInp" type="text" placeholder="Aufgabe hinzufügen …" onkeydown="if(event.key==='Enter')addCustomTask('abend')">
+      <button class="sekt-add-btn" onclick="addCustomTask('abend')">+</button>
+    </div>
+  </div>
+</div>
+
+<!-- PHASEN TABS (versteckt) -->
+<div class="phasen-tabs" style="display:none;" id="phasenTabsWrap">
   <div class="phase-tab aktiv aktiv-morgen" id="tab-morgen" onclick="zeigePhase('morgen')">
     <span class="tab-icon">🌅</span>
     <span class="tab-name" style="font-size:.62rem;">Bevor ich</span>
@@ -849,113 +832,17 @@ function toggleFuerMich(){
 </div>
 
 
-<!-- BUTTONS: ZIRKUSPRINZESSIN + GUTER TAG -->
-<div style="display:flex;gap:.4rem;margin:.6rem 1rem 0;">
-  <button onclick="document.getElementById('zirkusprinzessinOverlay').style.display='flex'" style="background:none;border:1px solid rgba(200,153,58,.35);border-radius:4px;padding:.2rem .65rem;font-size:.75rem;color:var(--gold);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🎨 Ich</button>
-  <button onclick="document.getElementById('guterTagOverlay').style.display='flex'" style="background:none;border:1px solid rgba(90,138,90,.4);border-radius:4px;padding:.2rem .65rem;font-size:.75rem;color:var(--sage);cursor:pointer;font-family:'Raleway',sans-serif;font-weight:600;">🌟 Guter Tag</button>
-</div>
-
-<!-- MEINE AUFGABEN -->
-<div class="maufg-wrap">
-  <div class="maufg-head" onclick="toggleMaufg()">
-    <span class="maufg-head-label">✦ Meine heutigen Aufgaben</span>
-    <span class="maufg-toggle" id="maufgToggleBtn">aufklappen ↓</span>
-  </div>
-  <div class="maufg-body" id="maufgBody" style="display:none;">
-    <div class="maufg-input-row">
-      <input class="maufg-inp" type="text" id="maufgInp" placeholder="Neue Aufgabe …" onkeydown="if(event.key==='Enter')maufgAdd()">
-      <select class="maufg-phase-sel" id="maufgPhase">
-        <option value="morgen">🌅 Morgen</option>
-        <option value="vormittag">🌾 Unterwegs</option>
-        <option value="nachhause">🏡 Nach Hause</option>
-        <option value="abend">🌙 Abend</option>
-        <option value="alle">✦ Alle</option>
-      </select>
-      <button class="maufg-add-btn" onclick="maufgAdd()">+ hinzu</button>
-    </div>
-    <div class="maufg-list" id="maufgList"></div>
-  </div>
-</div>
-
-<!-- NÄCHSTE AUFGABE -->
-<div class="naechste-wrap">
-  <div class="naechste-karte" id="naechsteKarte"></div>
-</div>
-
-<!-- IMPULS -->
-<div class="impuls-karte">
-  <div class="impuls-label">✦ Mein heutiger Impuls</div>
-  <div class="impuls-text laden" id="impulsText">Einen Moment …</div>
-  <div class="impuls-refresh"><button class="impuls-refresh-btn" onclick="ladeImpuls(true)">↺ neuer Impuls</button></div>
-</div>
-
-<!-- FOKUS KATEGORIEN -->
-<div class="fokus-karte">
-  <div class="fokus-head" onclick="toggleFokusBlock()">
-    <span class="fokus-head-label">✦ Mein heutiger Fokus</span>
-    <span class="fokus-toggle-btn" id="fokusBtnLabel">aufklappen ↓</span>
-  </div>
-  <div class="fokus-body" id="fokusBody">
-    <div class="fokus-bühne-label">Welcher Bereich bekommt heute die Hauptbühne?</div>
-    <div class="fokus-chips">
-      <button class="fokus-chip" onclick="waehleFokus(this,'Tiere')">🐾 Tiere</button>
-      <button class="fokus-chip" onclick="waehleFokus(this,'Unterrichten')">📚 Unterrichten</button>
-      <button class="fokus-chip" onclick="waehleFokus(this,'Uni')">🎓 Uni</button>
-      <button class="fokus-chip" onclick="waehleFokus(this,'Zuhause')">🏡 Zuhause</button>
-      <button class="fokus-chip" onclick="waehleFokus(this,'Ich')">🎨 Ich</button>
-    </div>
-    <div class="fokus-kat-liste" id="fokusKatListe"></div>
-    <div class="fokus-save-row">
-      <button class="fokus-save-btn" onclick="speichereFokus()">✦ festhalten</button>
-      <span class="fokus-gespeichert" id="fokusGespeichert">gespeichert ✦</span>
-    </div>
-  </div>
-</div>
-
-<!-- PHASEN TABS -->
-<div class="phasen-tabs">
-  <div class="phase-tab aktiv aktiv-morgen" id="tab-morgen" onclick="zeigePhase('morgen')">
-    <span class="tab-icon">🌅</span>
-    <span class="tab-name" style="font-size:.62rem;">Bevor ich</span>
-    <span class="tab-zeit" id="tab-zeit-morgen">7:30–?</span>
-    <span class="tab-tee" id="tab-tee-morgen"></span>
-    <span class="tab-done">✓ fertig</span>
-  </div>
-  <div class="phase-tab" id="tab-vormittag" onclick="zeigePhase('vormittag')">
-    <span class="tab-icon">🎒</span>
-    <span class="tab-name">Unterwegs</span>
-    <span class="tab-zeit" id="tab-zeit-vormittag">–</span>
-    <span class="tab-tee" id="tab-tee-vormittag"></span>
-    <span class="tab-done">✓ fertig</span>
-  </div>
-  <div class="phase-tab" id="tab-nachhause" onclick="zeigePhase('nachhause')">
-    <span class="tab-icon">🐾</span>
-    <span class="tab-name">Ankommen</span>
-    <span class="tab-zeit" id="tab-zeit-nachhause">–</span>
-    <span class="tab-done">✓ fertig</span>
-  </div>
-  <div class="phase-tab" id="tab-abend" onclick="zeigePhase('abend')">
-    <span class="tab-icon">🌙</span>
-    <span class="tab-name">Abend</span>
-    <span class="tab-zeit" id="tab-zeit-abend">ab 19:00</span>
-    <span class="tab-tee" id="tab-tee-abend"></span>
-    <span class="tab-done">✓ fertig</span>
-  </div>
-</div>
-
-<div id="phaseInhalt"></div>
-
-<!-- APPS -->
-<div class="vk-sep">✦ · ◆ · ✦</div>
-<div class="apps-wrap">
-  <div class="apps-label" id="appsLabel">Jetzt passend</div>
-  <div id="appsList"></div>
-  <button class="alle-apps-btn" id="alleAppsBtn" onclick="toggleAlleApps()">alle Apps anzeigen ↓</button>
-</div>
-
-<!-- REFLEXION & NOTIZEN — zusammengefasst, aufklappbar -->
-<div class="vk-sep">✦ · ◆ · ✦</div>
+<!-- SEPARATOR & ABSTAND -->
 <div style="height:2rem;"></div>
+
+<!-- MOVETO OVERLAY -->
+<div id="moveToOv" style="display:none;position:fixed;inset:0;z-index:998;background:rgba(247,243,238,.97);flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;box-sizing:border-box;">
+  <div style="width:100%;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--bordeaux),var(--gold));margin-bottom:1.4rem;"></div>
+  <div style="font-family:'Raleway',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">verschieben nach</div>
+  <div id="moveToName" style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--text);text-align:center;margin-bottom:1.2rem;line-height:1.3;"></div>
+  <div id="moveTobtns" style="display:flex;flex-direction:column;gap:.5rem;width:100%;max-width:320px;"></div>
+  <button onclick="document.getElementById('moveToOv').style.display='none'" style="margin-top:1.2rem;background:none;border:1px dashed rgba(42,26,10,.2);border-radius:4px;padding:.4rem 1.4rem;font-family:'IM Fell English',serif;font-style:italic;font-size:.95rem;color:var(--muted);cursor:pointer;">abbrechen</button>
+</div>
 
 <script>
 var realToday=new Date();
@@ -979,10 +866,11 @@ function switchDay(offset){
   try{taskState=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch(e){taskState={};}
   updateDateDisplay();
   updateWaveTea();
-  var phase=getPhaseByTime();
-  renderApps(phase);
-  renderPhase(phase);
-  renderNaechste();
+  // Offene Sektionen neu rendern
+  if(sektOffen['morgen']) renderMorgenRoutine();
+  if(sektOffen['ich']) { renderFokusKats(); renderIchPflege(); }
+  if(sektOffen['tiere']) renderTiereListe();
+  if(sektOffen['arbeit']) renderArbeitInfo();
 }
 
 function localDateKey(){var d=today;return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
@@ -1580,8 +1468,18 @@ function taskMatchesFokus(t){
   }catch(e){}
 })();
 ladeImpuls(false);
-zeigePhase(getPhaseByTime());
-renderNaechste();
+ladeMindest();
+// Fokus-Status wiederherstellen (ohne Body zu öffnen)
+try {
+  var sf = localStorage.getItem('fokus_haupt') || '';
+  if(sf) {
+    aktiverFokus = sf;
+    var chips = document.querySelectorAll('.fokus-chip');
+    for(var ci=0;ci<chips.length;ci++){
+      if(chips[ci].textContent.indexOf(sf)!==-1) chips[ci].classList.add('aktiv');
+    }
+  }
+} catch(e) {}
 
 // ── MEINE AUFGABEN ──────────────────────────────────────────────
 var PHASE_LABELS={morgen:'🌅 Morgen',vormittag:'🌾 Unterwegs',nachhause:'🏡 Nach Hause',abend:'🌙 Abend',alle:'✦ Alle Phasen'};
@@ -1650,6 +1548,323 @@ function injectMaufgIntoPhase(item){
 }
 
 // ────────────────────────────────────────────────────────────────
+
+// ══════════════════════════════════════════════════════════
+// NEUE SEKT-LOGIK
+// ══════════════════════════════════════════════════════════
+
+var sektOffen = {};
+
+function toggleSekt(id) {
+  sektOffen[id] = !sektOffen[id];
+  var body = document.getElementById(id + 'Body');
+  var toggle = document.getElementById(id + 'Toggle');
+  if (!body || !toggle) return;
+  body.style.display = sektOffen[id] ? 'block' : 'none';
+  toggle.textContent = sektOffen[id] ? 'zuklappen ↑' : 'aufklappen ↓';
+  if (sektOffen[id]) {
+    if (id === 'morgen') renderMorgenRoutine();
+    if (id === 'ich') { renderFokusKats(); renderIchPflege(); }
+    if (id === 'tiere') renderTiereListe();
+    if (id === 'arbeit') { renderArbeitInfo(); renderArbeitCustom(); }
+    if (id === 'abend') renderAbendroutine();
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// MASTER-LISTE — alle Punkte mit ID und Standard-Sektion
+// ══════════════════════════════════════════════════════════
+var MASTER = [
+  {id:'m01', sekt:'morgen', name:"Euthyrox",                     note:"noch im Bett",                                zirkus:"Ich nehme Euthyrox, weil ICH will, dass mein Körper funktioniert.",             links:[{href:"Medikamente.html",label:"Medikamente"}]},
+  {id:'m02', sekt:'morgen', name:"Rückenübungen",                note:"noch im Bett",                                zirkus:"Ich mache Rückenübungen, weil ICH einen starken Körper haben will.",            links:[{href:"Ruecken.html",label:"Rücken"}]},
+  {id:'m03', sekt:'morgen', name:"Rudi — Magenschutz",           note:"erstes nach dem Aufstehen",                   zirkus:"Ich gebe Rudi seinen Magenschutz, weil ICH will, dass es ihm gut geht.",        links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."}]},
+  {id:'m04', sekt:'morgen', name:"Gewicht messen",               note:"nüchtern",                                    zirkus:"Ich wiege mich, weil ICH die Kontrolle haben will.",                             links:[{href:"Wiegen.html",label:"Gewicht"}]},
+  {id:'m05', sekt:'morgen', name:"Knirscherschiene raus",        note:"Kiefer entspannen",                           zirkus:"Ich nehme die Schiene raus, weil ICH will, dass mein Kiefer sich erholt.",      links:[{href:"Kiefer_Bruxismus.html",label:"Kieferübungen"}]},
+  {id:'m06', sekt:'morgen', name:"Wasser trinken",               note:"ein großes Glas",                             zirkus:"Ich trinke Wasser, weil ICH einen schönen Körper haben will.",                  links:[]},
+  {id:'m07', sekt:'morgen', name:"Lotte raus",                   note:"Lotte strahlt — und die Stadt auch 🐾",       zirkus:"Ich gehe mit Lotte, weil ICH eine gute Hunde-Mama sein will.",                  links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+  {id:'m08', sekt:'morgen', name:"Frühstück",                    note:"bewusst & ohne Zwang",                        zirkus:"Ich frühstücke, weil ICH gesund sein will.",                                    links:[{href:"daily-dozen-glp1.html",label:"Daily Dozen 🌿"}]},
+  {id:'m09', sekt:'morgen', name:"Rosenwurz",                    note:"zum Frühstück — Adaptogen & Stressschutz 🌿", zirkus:"Ich nehme Rosenwurz, weil ICH meinem Körper etwas Gutes tun will.",             links:[{href:"Medikamente.html",label:"Medikamente"}]},
+  {id:'m10', sekt:'morgen', name:"Rudi & Timmy füttern",         note:"Futter & Schmusezeit 🐱🐱",                   zirkus:"Ich füttere Rudi & Timmy, weil ICH will, dass es ihnen gut geht.",              links:[{href:"Katzen_Medikamente.html",label:"Medikamente"}]},
+  {id:'m11', sekt:'morgen', name:"Bad Früh",                     note:"FM4 oder Podcast 🎵",                         zirkus:"Ich mache mein Bad-Ritual, weil ICH gepflegt in den Tag gehen will.",           links:[{href:"Bad_Frueh.html",label:"Bad Früh"}]},
+  {id:'m12', sekt:'morgen', name:"Duschen",                      note:"warm & frisch in den Tag 🚿",                 zirkus:"Ich dusche, weil ICH mich frisch und lebendig fühlen will.",                    links:[]},
+  {id:'m13', sekt:'morgen', name:"Tiere — Medikamente (Morgen)", note:"Lotte + Rudi prüfen & geben",                 zirkus:"Ich gebe den Tieren ihre Medikamente, weil ICH will, dass sie gesund bleiben.", links:[{href:"Katzen_Medikamente.html",label:"Katzen-App"},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
+  {id:'i01', sekt:'ich',    name:"Taillen-Training 💪",          note:"täglich · Core, Rotation, Rücken",            zirkus:"Ich trainiere, weil ICH mich kräftig und dynamisch fühlen will.",             links:[{href:"Taillen_Training.html",label:"Training"},{href:"Aufwaermen.html",label:"Aufwärmen"},{href:"Beckenboden.html",label:"Beckenboden"}]},
+  {id:'i02', sekt:'ich',    name:"Duschen nach Training",        note:"frisch nach dem Training 🚿",                 zirkus:"Ich dusche, weil ICH mich danach frisch und gepflegt fühlen will.",             links:[]},
+  {id:'i03', sekt:'ich',    name:"Mittagessen",                  note:"bewusst & in Ruhe",                           zirkus:"Ich esse zu Mittag, weil ICH gesund und schlank sein will.",                   links:[{href:"daily-dozen-glp1.html",label:"Daily Dozen 🌿"}]},
+  {id:'i04', sekt:'ich',    name:"Yoga Nidra 🧘",                note:"20 Min. Tiefenentspannung",                   zirkus:"Ich mache Yoga Nidra, weil ICH will, dass mein Nervensystem zur Ruhe kommt.", links:[{href:"yoga-nidra.html",label:"App öffnen"}]},
+  {id:'i05', sekt:'ich',    name:"Atemübung 🫁",                 note:"4 sek ein · 6–8 sek aus · 5 Min.",            zirkus:"Ich atme bewusst, weil ICH will, dass mein Körper zur Ruhe kommt.",           links:[{href:"atemübung.html",label:"App öffnen"}]},
+  {id:'i06', sekt:'ich',    name:"Abendessen",                   note:"schön kochen, bewusst genießen",              zirkus:"Ich koche und esse, weil ICH gesund und schlank sein will.",                   links:[{href:"daily-dozen-glp1.html",label:"Daily Dozen 🌿"}]},
+  {id:'t01', sekt:'tiere',  name:"Lotte raus (Nachmittag)",      note:"schlendernd, echtes Runterkommen",            zirkus:"",                                                                               links:[{href:"Lotte_Runden.html",label:"Routen"}]},
+  {id:'t02', sekt:'tiere',  name:"Lotte — Futter Abend",         note:"Abendportion",                                zirkus:"",                                                                               links:[]},
+  {id:'t03', sekt:'tiere',  name:"Futter nachschauen",           note:"Vorrat prüfen, ggf. bestellen",               zirkus:"",                                                                               links:[{href:"Futter_Bestellplaner.html",label:"Bestellplaner"}]},
+  {id:'t04', sekt:'tiere',  name:"Medikamente prüfen",           note:"Vorrat Tiere & Menschen checken",             zirkus:"",                                                                               links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente.html",label:"Medikamente"}]},
+  {id:'a01', sekt:'abend',  name:"Katzen füttern",               note:"Rudi & Timmy — 18:00 🐱",                    zirkus:"Ich füttere die Katzen, weil ICH will, dass es ihnen gut geht.",              links:[]},
+  {id:'a02', sekt:'abend',  name:"Tiere — Medikamente (Abend)",  note:"Lotte + Rudi + Timmy Abendgabe 🐾🐱🐱",      zirkus:"Ich gebe allen Tieren ihre Abendmedikamente.",                                 links:[{href:"Katzen_Medikamente.html",label:"Katzen-Med."},{href:"Medikamente_Tiere.html",label:"Tiere"}]},
+  {id:'a03', sekt:'abend',  name:"Freizeit 🌸",                  note:"was auch immer sich gut anfühlt",             zirkus:"Ich ruhe mich aus, weil ICH mein Gehirn zur Ruhe kommen lassen will.",        links:[]},
+  {id:'a04', sekt:'abend',  name:"Bad Abend",                    note:"Loslassen, abschließen 🛁",                   zirkus:"Ich mache mein Abendbad, weil ICH damit etwas für mein Aussehen mache.",      links:[{href:"Bad_Abend.html",label:"Bad Abend"}]},
+  {id:'a05', sekt:'abend',  name:"Bett vorbereiten",             note:"Atorvastatin, Melatonin, Magnesium 🌿",       zirkus:"Ich bereite alles vor, weil ICH will, dass ich mich maximal erhole.",         links:[{href:"Medikamente.html",label:"Medikamente"}]},
+  {id:'a06', sekt:'abend',  name:"Handcreme & Fußcreme",         note:"kleine Abendpflege",                          zirkus:"Ich pflege Hände und Füße, weil ICH schön sein will.",                        links:[]},
+  {id:'a07', sekt:'abend',  name:"Lesen",                        note:"kein Handy — echtes Buch 📖",                 zirkus:"Ich lese, weil es mich intelligenter macht.",                                  links:[]},
+  {id:'a08', sekt:'abend',  name:"Schlafen",                     note:"früh genug, du weißt warum 🌙",               zirkus:"Ich schlafe, weil ICH am nächsten Tag gut aussehe und leistungsfähig bin.",   links:[]},
+];
+
+// ── Persistenz: Reihenfolge + Sekt-Zuordnung + Done-Status ──
+var LAYOUT_KEY = 'layout_v1';
+var DONE_KEY   = 'done_' + localDateKey();
+
+var layout = null; // [{id, sekt}, …] — Reihenfolge und Zuordnung
+var doneSet = {};  // {id: true}
+
+function loadLayout() {
+  try { layout = JSON.parse(localStorage.getItem(LAYOUT_KEY)); } catch(e) {}
+  if (!layout || layout.length !== MASTER.length) {
+    // Standardlayout aus MASTER erzeugen
+    layout = MASTER.map(function(t) { return {id: t.id, sekt: t.sekt}; });
+    saveLayout();
+  }
+}
+function saveLayout() {
+  try { localStorage.setItem(LAYOUT_KEY, JSON.stringify(layout)); } catch(e) {}
+}
+function loadDone() {
+  try { doneSet = JSON.parse(localStorage.getItem(DONE_KEY)) || {}; } catch(e) { doneSet = {}; }
+}
+function saveDone() {
+  try { localStorage.setItem(DONE_KEY, JSON.stringify(doneSet)); } catch(e) {}
+}
+
+loadLayout();
+loadDone();
+
+function getById(id) {
+  for (var i = 0; i < MASTER.length; i++) if (MASTER[i].id === id) return MASTER[i];
+  return null;
+}
+function getSektItems(sekt) {
+  return layout.filter(function(e) { return e.sekt === sekt; })
+               .map(function(e) { return getById(e.id); })
+               .filter(Boolean);
+}
+function getLayoutIdx(id) {
+  for (var i = 0; i < layout.length; i++) if (layout[i].id === id) return i;
+  return -1;
+}
+
+// ── Abhaken ──
+function toggleDone(id) {
+  doneSet[id] = !doneSet[id];
+  saveDone();
+  zeigeToast();
+  renderAll();
+}
+
+// ── Innerhalb Sektion verschieben ──
+function moveInSekt(id, dir) { // dir: -1 = hoch, +1 = runter
+  var sekt = null;
+  for (var k = 0; k < layout.length; k++) if (layout[k].id === id) { sekt = layout[k].sekt; break; }
+  var sektIds = layout.map(function(e,i){return e.sekt===sekt?i:-1;}).filter(function(i){return i>=0;});
+  var posInSekt = sektIds.indexOf(getLayoutIdx(id));
+  var swapPos = posInSekt + dir;
+  if (swapPos < 0 || swapPos >= sektIds.length) return;
+  var a = sektIds[posInSekt], b = sektIds[swapPos];
+  var tmp = layout[a]; layout[a] = layout[b]; layout[b] = tmp;
+  saveLayout();
+  renderAll();
+}
+
+// ── Sektion wechseln ──
+var SEKT_LABELS = {morgen:'🌅 Morgen', ich:'🌺 Ich', tiere:'🐾 Tiere & Haushalt', abend:'🌙 Abend'};
+var movingId = null;
+
+function openMoveTo(id) {
+  movingId = id;
+  var t = getById(id);
+  var cur = null;
+  for (var k=0;k<layout.length;k++) if(layout[k].id===id){cur=layout[k].sekt;break;}
+  var ov = document.getElementById('moveToOv');
+  document.getElementById('moveToName').textContent = t ? t.name : '';
+  var btns = document.getElementById('moveTobtns');
+  btns.innerHTML = '';
+  ['morgen','ich','tiere','abend'].forEach(function(s) {
+    var b = document.createElement('button');
+    b.className = 'moveto-btn' + (s === cur ? ' aktiv' : '');
+    b.textContent = SEKT_LABELS[s];
+    b.onclick = function() { moveTo(id, s); };
+    btns.appendChild(b);
+  });
+  ov.style.display = 'flex';
+}
+
+function moveTo(id, newSekt) {
+  for (var k=0;k<layout.length;k++) if(layout[k].id===id){ layout[k].sekt=newSekt; break; }
+  saveLayout();
+  document.getElementById('moveToOv').style.display = 'none';
+  movingId = null;
+  renderAll();
+}
+
+// ── Render ──
+var SEKT_CONFIG = [
+  {sekt:'morgen', listId:'morgenListe',    barId:'morgenBar', badgeId:'morgenBadge'},
+  {sekt:'ich',    listId:'ichPflegeListe', barId:null,        badgeId:null},
+  {sekt:'tiere',  listId:'tiereListe',     barId:null,        badgeId:'tiereBadge'},
+  {sekt:'abend',  listId:'abendListe',     barId:'abendBar',  badgeId:'abendBadge'},
+];
+
+function renderSekt(cfg) {
+  var el = document.getElementById(cfg.listId);
+  if (!el) return;
+  var items = getSektItems(cfg.sekt);
+  var done = 0;
+  var html = '';
+  items.forEach(function(t) {
+    var isDone = !!doneSet[t.id];
+    if (isDone) done++;
+    var linksHtml = '';
+    if (t.links && t.links.length) {
+      linksHtml = '<div class="mr-links">';
+      t.links.forEach(function(l) { linksHtml += '<a class="mr-link" href="' + l.href + '">' + l.label + ' ›</a>'; });
+      linksHtml += '</div>';
+    }
+    var zirkusHtml = t.zirkus ? '<div class="mr-zirkus">' + t.zirkus + '</div>' : '';
+    html += '<div class="mr-item' + (isDone ? ' done' : '') + '">'
+      + '<div class="mr-check" onclick="toggleDone(\'' + t.id + '\')"></div>'
+      + '<div style="flex:1;min-width:0;" onclick="toggleDone(\'' + t.id + '\')">'
+      +   '<div class="mr-name">' + t.name + '</div>'
+      +   '<div class="mr-note">' + t.note + '</div>'
+      +   zirkusHtml + linksHtml
+      + '</div>'
+      + '<div class="mr-move-col">'
+      +   '<button class="mr-arrow" onclick="moveInSekt(\'' + t.id + '\',-1)" title="höher">▲</button>'
+      +   '<button class="mr-arrow" onclick="moveInSekt(\'' + t.id + '\',1)"  title="tiefer">▼</button>'
+      +   '<button class="mr-sekt-btn" onclick="openMoveTo(\'' + t.id + '\')" title="Sektion wechseln">⇄</button>'
+      + '</div>'
+      + '</div>';
+  });
+  el.innerHTML = html;
+
+  // Custom Tasks anhängen (eigener Container)
+  var customContId = cfg.sekt + 'CustomListe';
+  var customEl = document.getElementById(customContId);
+  if (!customEl) {
+    customEl = document.createElement('div');
+    customEl.id = customContId;
+    el.parentNode.insertBefore(customEl, el.nextSibling);
+  }
+  var customDone = renderCustomTasks(cfg.sekt, customContId);
+  done += customDone;
+  var total = items.length + (customTasks[cfg.sekt] || []).length;
+
+  var pct = total > 0 ? Math.round(done / total * 100) : 0;
+  if (cfg.barId)   { var bar   = document.getElementById(cfg.barId);   if (bar)   bar.style.width = pct + '%'; }
+  if (cfg.badgeId) { var badge = document.getElementById(cfg.badgeId); if (badge) badge.textContent = done > 0 ? done + '/' + total + ' ✓' : ''; }
+}
+
+// Arbeit hat keine MASTER-Items, nur custom
+function renderArbeitCustom() {
+  var containerId = 'arbeitCustomListe';
+  var el = document.getElementById(containerId);
+  if (!el) {
+    el = document.createElement('div');
+    el.id = containerId;
+    var arbeitListe = document.getElementById('arbeitListe');
+    if (arbeitListe) arbeitListe.parentNode.insertBefore(el, arbeitListe.nextSibling);
+  }
+  renderCustomTasks('arbeit', containerId);
+}
+
+function renderAll() {
+  SEKT_CONFIG.forEach(function(cfg) {
+    if (sektOffen[cfg.sekt] || cfg.sekt === 'ich') renderSekt(cfg);
+  });
+  if (sektOffen['arbeit']) renderArbeitCustom();
+}
+
+function renderMorgenRoutine() { renderSekt(SEKT_CONFIG[0]); }
+function renderIchListe()      { renderSekt(SEKT_CONFIG[1]); }
+function renderTiereListe()    { renderSekt(SEKT_CONFIG[2]); }
+function renderAbendroutine()  { renderSekt(SEKT_CONFIG[3]); }
+function renderIchPflege()     { renderIchListe(); }
+
+// ── ARBEIT INFO ──
+function renderArbeitInfo() {
+  var el = document.getElementById('unterwegsInfo');
+  if (!el) return;
+  var uz = getUnterwegsZeit();
+  el.textContent = uz ? '🎒 Heute unterwegs: ' + uz.von + ' – ' + uz.bis + ' · ' + uz.dauer : '✦ Heute kein Unterricht';
+  el.style.display = 'block';
+}
+
+function toggleFokusBlock() {}
+
+// ── Custom Tasks (täglich, pro Sektion) ──
+var CUSTOM_KEY = 'custom_permanent';
+var customTasks = {};  // {sekt: [{id, name}, …]} — dauerhaft, kein Done hier
+try { customTasks = JSON.parse(localStorage.getItem(CUSTOM_KEY)) || {}; } catch(e) { customTasks = {}; }
+['morgen','ich','tiere','arbeit','abend'].forEach(function(s){ if(!customTasks[s]) customTasks[s]=[]; });
+
+function saveCustom() { try { localStorage.setItem(CUSTOM_KEY, JSON.stringify(customTasks)); } catch(e) {} }
+
+function addCustomTask(sekt) {
+  var inp = document.getElementById(sekt + 'Inp');
+  if (!inp) return;
+  var name = inp.value.trim();
+  if (!name) return;
+  customTasks[sekt].push({id: 'c_' + Date.now(), name: name});
+  saveCustom();
+  inp.value = '';
+  renderAll();
+  setTimeout(function(){ inp.focus(); }, 50);
+}
+
+function toggleCustomDone(sekt, id) {
+  doneSet[id] = !doneSet[id];
+  saveDone();
+  if (doneSet[id]) zeigeToast();
+  renderAll();
+}
+
+function deleteCustomTask(sekt, id) {
+  customTasks[sekt] = (customTasks[sekt]||[]).filter(function(t){return t.id!==id;});
+  saveCustom();
+  delete doneSet[id];
+  saveDone();
+  renderAll();
+}
+
+function moveCustom(sekt, id, dir) {
+  var list = customTasks[sekt] || [];
+  var idx = list.findIndex(function(t){return t.id===id;});
+  var to = idx + dir;
+  if (to < 0 || to >= list.length) return;
+  var tmp = list[idx]; list[idx] = list[to]; list[to] = tmp;
+  saveCustom();
+  renderAll();
+}
+
+function renderCustomTasks(sekt, containerId) {
+  var el = document.getElementById(containerId);
+  if (!el) return 0;
+  var list = customTasks[sekt] || [];
+  if (!list.length) { el.innerHTML = ''; return 0; }
+  var done = 0;
+  el.innerHTML = list.map(function(t) {
+    var isDone = !!doneSet[t.id];
+    if (isDone) done++;
+    return '<div class="mr-item' + (isDone?' done':'') + '">'
+      + '<div class="mr-check" onclick="toggleCustomDone(\'' + sekt + '\',\'' + t.id + '\')"></div>'
+      + '<div style="flex:1;min-width:0;" onclick="toggleCustomDone(\'' + sekt + '\',\'' + t.id + '\')">'
+      +   '<div class="mr-name">' + t.name + '</div>'
+      + '</div>'
+      + '<div class="mr-move-col">'
+      +   '<button class="mr-arrow" onclick="moveCustom(\'' + sekt + '\',\'' + t.id + '\',-1)">▲</button>'
+      +   '<button class="mr-arrow" onclick="moveCustom(\'' + sekt + '\',\'' + t.id + '\',1)">▼</button>'
+      +   '<button class="mr-arrow" style="color:var(--crimson);border-color:rgba(139,26,26,.2);" onclick="deleteCustomTask(\'' + sekt + '\',\'' + t.id + '\')">✕</button>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+  return done;
+}
 
 // ── MINDESTLINIE ──
 var MINDEST_KEY = 'mindest_v1';
